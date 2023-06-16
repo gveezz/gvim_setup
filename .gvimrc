@@ -1,0 +1,579 @@
+" vimrc version. vim 8.1
+let $VIMHOME = $HOME."/.vim"
+
+let g:popupBufferPattern = "Select %f (%n) from %p directory" 
+
+" let mapleader = ','
+ let g:NERDTreeMouseMode = 3
+ let g:NERDTreeShowLineNumbers = 0
+ let g:NERDTreeDirArrows = 1
+ let g:NERDTreeShowHidden = 1
+ let g:NERDTreeQuitOnOpen = 0
+ let g:NERDTreeChDirMode = 0
+" let g:ctrlp_clear_cache_on_exit = 1
+" let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
+" let g:AutoCloseOn = 1
+
+if v:version < 700 || exists('loaded_bclose') || &cp
+    finish
+ endif
+let loaded_bclose = 1
+
+colorscheme simozz4
+
+set insertmode
+set magic
+" set autochdir
+set nocompatible
+let skip_defaults_vim=1
+set noshowmode
+set viminfo=""
+set incsearch
+filetype plugin indent on
+set syntax=auto
+set timeout timeoutlen=10 ttimeoutlen=1
+" set updatetime=100
+" set tags=tags;/
+set noswapfile
+set autoread
+set autowrite
+set clipboard-=autoselect
+set guioptions-=m
+set guioptions-=T
+set guioptions-=e
+" set guioptions-=r
+set guioptions-=a
+set virtualedit=onemore
+set whichwrap=<,>,[,]
+set selection=exclusive
+set selectmode=mouse,key,cmd
+set keymodel=startsel,stopsel
+set shiftwidth=3
+set softtabstop=0
+set expandtab
+set tabstop=3
+"set autoindent
+set smartindent
+" set copyindent
+set smarttab
+set number
+set guifont=Monospace\ 12
+set background=dark
+set laststatus=2
+set statusline=%{GetMode()}\ %F\ %m\ %#StatusLineR#%r%*\ buff#%n\ (l:\ %l/%L\ \(%p%%),\ c:\ %c,\ B:\ %o\)
+set backspace=indent,eol,start
+set guicursor+=n:ver100-blinkoff0,i-c-v:ver25-blinkoff0
+" set splitbelow
+"set ignorecase
+set nocul      
+set formatoptions=tcj
+set mouse=a
+set mousehide
+set mouseshape=n:arrow,v:beam,i:beam
+set mousemodel=popup
+set lazyredraw
+set scrolloff=0
+set splitright
+set complete=.
+set complete+=b
+set complete+=k
+set completeopt+=menuone,preview
+set hidden
+set hlsearch
+set incsearch
+syntax enable
+" set textwidth=80
+" set wrapmargin=0
+" set columns=80
+" set linebreak
+set lines=35 columns=999
+set history=1000
+
+" --- CUSTOM FUNCTIONS
+function! Eatchar(pat)
+   let c = nr2char(getchar(0))
+   return (c =~ a:pat) ? '' : c
+endfunc
+
+function! ToLower()
+    let cursor_pos = getpos(".")
+    normal! viwu
+    call setpos(".", cursor_pos)
+endfunction
+
+function! ToUpper()
+    let cursor_pos = getpos(".")
+    normal! viwU
+    call setpos(".", cursor_pos)
+endfunction
+
+function! EchoYellowMsg(msg)
+  echohl StatusLineY
+  echo a:msg
+  echohl None
+endfunction
+
+function! ProfileStart()
+    :profile start profile.log
+    :profile func *
+    :profile file *
+endfunction
+
+function! ProfileStop()
+    :profile pause
+endfunction
+
+function! s:Log(eventName) abort
+  silent execute '!echo '.a:eventName.' >> log'
+endfunction
+
+function! PrintVimrcVersion()
+	":normal ! echo "g:vimrcv".<CR>
+	call EchoYellowMsg(g:vimrcv)
+endfunction
+
+function! EnterWinBuffer()
+    
+   if (&ft != 'help' && &ft != 'netrw' && &ft != 'nerdtree' && &buftype != 'terminal')
+       silent! lcd %:p:h | startinsert
+   else
+	    silent! stopinsert
+   endif
+	
+endfunction
+
+"function! CtrlPExec()
+"    stopinsert | CtrlP l:path
+"endfunction
+
+function! Explore()
+   silent! exec ":Explore|only<CR>"
+endfunction
+
+" indent file in one shot
+ function! Indent()
+     
+         let cursor_pos = getpos(".")
+         " indent
+         normal! gg=G
+         "normal! =
+         " return to cursor position
+         call setpos(".", cursor_pos)
+         " endif
+ 	
+endfunction 
+
+function! GuiSave() abort
+   
+    if (&ft == 'nerdtree')
+        call s:Warn("Hey dude, you're in nerdtree window...")
+    else
+        if empty(bufname(''))
+            browse confirm write
+        else
+            w!
+        endif
+     endif
+endfunction
+
+" function! GetActiveBuffers()
+"     let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
+"     let l:result = []
+"     for l:item in l:blist
+"         "skip unnamed buffers; also skip hidden buffers?
+"         if empty(l:item.name) || l:item.hidden
+"             continue
+"         endif
+"         call add(l:result, shellescape(l:item.name))
+"     endfor
+"     return l:result
+" endfunction
+
+function! PopupBufferList()
+   
+   let menuName = "BuffersMenu"
+   :aunmenu *
+   " All 'possible' buffers that may exist
+   let b_all = range(1, bufnr('$'))
+   " Unlisted ones
+   let b_unl = filter(b_all, 'buflisted(v:val)')
+   for nbuff in b_unl
+      let menuitem = substitute(bufname(nbuff), '\.', '\\.', 'g')
+      silent! :exec ":amenu ]".menuName.".".menuitem." :b ".string(nbuff)."<CR>"
+   endfor
+   silent! :exec ":popup ]".menuName
+
+endfunction
+
+function! GetMode()
+    let l:ms=mode()
+    if l:ms == 'n'
+
+	   :hi StatusLine guifg=#B0B0FF
+      return 'NORMAL  '
+
+   elseif l:ms == 'i'
+
+	   :hi StatusLine guifg=#00ff00
+      return 'INSERT  '
+
+   elseif l:ms == 'v' || l:ms == 'V'
+	   
+      :hi StatusLine guifg=#AF8FFF
+      return 'VISUAL  '
+
+   elseif l:ms == 's' || l:ms == 'S'
+	   
+      :hi StatusLine guifg=#AF8FFF 
+      return 'SELECT  '
+      
+   elseif l:ms == 'R' || l:ms == 'Rv'
+      return 'REPLACE '
+
+   elseif l:ms == 't'
+	   
+      :hi StatusLine guifg=#41DF25
+      return 'TERMINAL'
+
+   elseif l:ms == 'c'
+
+      :hi StatusLine guifg=#FF9300
+      return 'COMMAND '
+      
+   else
+      return l:ms
+   endif
+endfunction
+
+function! DeleteLineChars()
+   normal! ^d$
+endfunction
+
+function! DeleteLine() 
+   normal! dd
+endfunction
+
+function! DeleteWord()
+    
+   " detect if we are
+   if len(getline('.')[col('.')-1])
+      normal! dw
+   elseif match(getline('.'), '^\s*$') != -1
+      normal! bdw
+   endif
+    
+endfunction
+
+function! NerdTreeToggle()
+   
+   let l:winnr = winnr("$")
+   " if NERDTree is open
+   if &ft == 'netrw' || &ft == 'nerdtree'
+      " and it is not the only open window
+      if l:winnr > 1
+         " close NERDTree
+         silent! :NERDTreeClose
+      endif
+   else
+      " otherwise open it
+      silent! :NERDTree
+   endif
+
+endfunction 
+
+function! InComment()
+   
+   let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
+   if l:incomment >= 0
+      call EchoYellowMsg("In Comment")
+      return 1
+   else
+      return 0
+endfunction
+
+" function! Abbrev(match, replace)
+" 
+"    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
+"    if l:incomment <= 0
+"       return a:replace
+"    else
+"       return a:match
+"         
+" endfunction
+
+" function! IabbrevSnippet()
+"    
+"    let l:snippetStr = "snippet"
+"    let l:snippetsStr = l:snippetStr."s"
+"    let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
+"    
+"    if filereadable(l:ftSnipFile) > 0
+"       "echom "Snippet file".l:ftSnipFile." found"
+"       " exec "setlocal dict+=".l:ftdictpath
+"       for l:line in readfile(l:ftSnipFile, '', 100)
+"          "echom "line = ".line
+"          if stridx(line, l:snippetStr) == 0
+"             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
+"             if len(l:snippetToMatch) > 0
+"                exec ":iabbrev <silent> <buffer> ".l:snippetToMatch." ".l:snippetToMatch."<c-r>=EatcharTriggerSnippet('\s')<CR>"
+"             endif
+"          endif
+"       endfor
+"    endif
+" 
+" endfunction
+
+function! AddFtDict()
+      
+   let l:ftdictpath = $VIMHOME."/dictionary/".&ft.".txt"
+   
+   if filereadable(l:ftdictpath) > 0
+      exec "setlocal dict+=".l:ftdictpath
+   endif
+
+endfunction
+
+" inoremap
+inoremap <silent> <nowait> <ScrollWheelUp> <C-o>3k
+inoremap <silent> <nowait> <ScrollWheelDown> <C-o>3j
+inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" inoremap <silent> <nowait> <M-n> <C-o>:
+inoremap <silent> <nowait> <S-Del> <nop>
+inoremap <silent> <nowait> <C-kDivide> <C-o>/
+inoremap <silent> <nowait> <C-kPlus> <C-o>n
+inoremap <silent> <nowait> <C-kMinus> <C-o>N
+inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
+inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
+inoremap <silent> <nowait> <C-Right> <C-o>w
+inoremap <silent> <nowait> <C-Left> <C-o>b
+inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
+" show list of buffers
+inoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+" prompt find on command line
+inoremap <silent> <nowait> <C-f> <C-o>:promptfind<CR>
+" prompt find and replace pop up window
+inoremap <silent> <nowait> <C-g> <C-o>:promptrepl<CR>
+inoremap <silent> <nowait> <C-LeftMouse> <nop>
+inoremap <silent> <nowait> <C-RightMouse> <nop>
+" inoremap <expr> <PageUp> (line('.') != winline()) ? "<C-o><PageUp>" : "<C-o>1G"
+" close buffer and window
+" inoremap <silent> <nowait> <C-x> <C-o>:silent! Bclose!<CR>
+inoremap <silent> <nowait> <C-x> <C-o>:bdelete!<CR>
+
+" inoremap <silent> <nowait> <C-g> <C-o>:call CtrlPExec()<CR>
+" opens a new tab
+inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
+" goes to the next tab
+inoremap <silent> <nowait> <C-PageDown> <C-o>:tabnext<CR>
+" goes to the previous tab
+inoremap <silent> <nowait> <C-PageUp> <C-o>:tabprev<CR>
+
+inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
+inoremap <silent> <nowait> <C-k> <C-o>dd
+inoremap <silent> <nowait> <C-l> <C-o>:call DeleteLineChars()<CR>
+inoremap <silent> <nowait> <C-z> <C-o>u
+inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
+inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
+inoremap <silent> <nowait> <C-v> <C-o>"+P
+inoremap <silent> <nowait> <C-a> <Esc>ggVG
+inoremap <Home> <C-o>^
+inoremap <S-Home> <C-o>v^
+
+"inoremap <silent> <nowait> <M-n> <C-o>:enew<CR>
+inoremap <silent> <nowait> <M-v> <C-o><S-v>
+"inoremap <silent> <nowait> <M-x> <C-o>:close!<CR>
+" open pop up window to open a file (or create one)
+inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
+" create new empty buffer
+inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
+" Toggle NerdTree
+inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
+inoremap <silent> <nowait> <M-w> <C-o>:wincmd p<CR>
+" inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
+
+noremap <silent> <nowait> <M-w> :wincmd p<CR>
+nnoremap <silent> <nowait> k j
+nnoremap <silent> <nowait> j k
+nnoremap <silent> <nowait> <C-x> :bdelete!<CR>
+" nnoremap
+" nnoremap <silent> <nowait> <Esc> i
+" nnoremap <silent> <nowait> <End> $<Right>
+" nnoremap <silent> <nowait> <S-Del> <nop>
+" nnoremap <silent> <nowait> <C-LeftMouse> <nop>
+" nnoremap <silent> <nowait> <C-RightMouse> <nop>
+" nnoremap <silent> <nowait> <C-kPlus> v<C-a>
+" nnoremap <silent> <nowait> <C-kMinus> v<C-x>
+" nnoremap <expr> <PageUp> (line('.') != winline()) ? "<PageUp>" : "1G"
+" nnoremap <silent> <nowait> <M-x> :silent! Bclose!<CR>
+nnoremap <silent> <nowait> <M-b> :call PopupBufferList()<CR><Down>
+" nnoremap <silent> <nowait> n <Esc>gn
+" nnoremap <silent> <nowait> * <Esc>*gN
+" nnoremap <silent> <nowait> <kMultiply> <Esc>*gN
+" nnoremap <silent> <nowait> N <Esc>NgN
+" nnoremap <silent> <nowait> # <Esc>#gN
+" " nnoremap <silent> <nowait> <C-g> :call CtrlPExec()<CR>
+" nnoremap <silent> <nowait> <C-t> :tabnew<CR>
+" nnoremap <silent> <nowait> <C-Right> :tabnext<CR>
+" nnoremap <silent> <nowait> <C-Left> :tabprev<CR>
+" nnoremap <silent> <nowait> <C-Up> :call BetterBufferNext()<CR>
+" nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CRnnoremap <silent> <nowait> <M-Up> :wincmd k<CR>
+" nnoremap <silent> <nowait> <M-Up> :wincmd k<CR>
+" nnoremap <silent> <nowait> <M-Down> :wincmd j<CR>
+" nnoremap <silent> <nowait> <M-Left> :wincmd h<CR>
+" nnoremap <silent> <nowait> <M-Right> :wincmd l<CR>
+nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
+nnoremap <silent> <nowait> <C-k> dd
+nnoremap <silent> <nowait> <C-z> u
+nnoremap <silent> <nowait> <C-y> :redo<CR>
+" "nnoremap <silent> <nowait> <M-u>:call ToLower()<CR>
+" "nnoremap <silent> <nowait> <M-l>:call ToLower()<CR>
+" nnoremap <silent> <nowait> <C-j> :call Indent()<CR>
+" nnoremap <silent> <nowait> <C-v> "+P<Left>
+" nnoremap <silent> <nowait> <C-a> ggVG
+" nnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+" nnoremap <expr> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "v^" : "v0"
+" nnoremap <silent> <nowait> <Tab> >>
+" nnoremap <silent> <nowait> <S-Tab> <<
+" nnoremap <silent> <nowait> <C-PageDown> w
+" nnoremap <silent> <nowait> <C-PageUp> b
+" nnoremap <silent> <nowait> <C-Del> :call DeleteWord()<CR>
+" 
+nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
+" nnoremap <silent> <nowait> <C-e> <Esc>:enew!<CR>
+nnoremap <silent> <nowait> <M-e> :call NerdTreeToggle()<CR>
+" " prompt find on command line: 
+" nnoremap <silent> <nowait> <C-f> :promptfind<CR>
+" " prompt find and replace pop up window
+" nnoremap <silent> <nowait> <C-r> :promptrepl<CR>
+" 
+"cnoremap
+cnoremap <silent> <nowait> <S-Del> <nop>
+
+"snoremap
+snoremap <silent> <nowait> <M-v> <nop>
+snoremap <silent> <nowait> <Space> <Del>
+vnoremap <silent> <nowait> <C-Space> w
+snoremap <silent> <nowait> <Backspace> <Del>
+" vnoremap <silent> <nowait> <C-Backspace> b
+snoremap <silent> <nowait> <C-z> u
+snoremap <silent> <nowait> <C-k> dl
+snoremap <silent> <nowait> <C-x> :bdelete!<CR>
+snoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+vnoremap <silent> <nowait> <Tab> >gv
+vnoremap <silent> <nowait> <S-Tab> <gv
+vnoremap <silent> <nowait> <C-c> "+ygv
+vnoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-k> Vd
+
+"vnoremap
+" vnoremap <silent> <nowait> <Backspace> <Del>
+" vnoremap <silent> <nowait> <*> c
+" "vnoremap <silent> <nowait> <ScrollWheelUp> <Esc><ScrollWheelUp>
+" "vnoremap <silent> <nowait> <ScrollWheelDown> <Esc><ScrollWheelDown>
+" " vnoremap <silent> <nowait> <C-a> <C-a>gv
+" vnoremap <silent> <nowait> <C-x> <C-x>gv
+" vnoremap <silent> <nowait> n <Esc>gn
+" vnoremap <silent> <nowait> * <Esc>*gN
+" vnoremap <silent> <nowait> <kMultiply> <Esc>*gN
+" vnoremap <silent> <nowait> N <Esc>NgN
+" vnoremap <silent> <nowait> # <Esc>#gN
+" vnoremap <silent> <nowait> <C-k> dl
+" vnoremap <silent> <nowait> <C-l> :call DeleteLineChars()<CR>
+" vnoremap <silent> <nowait> <C-z> u
+" vnoremap <silent> <nowait> <C-y> :redo<CR>
+" vnoremap <silent> <nowait> <M-l> :call ToLower()<CR>
+" vnoremap <silent> <nowait> <M-u> :call ToUpper()<CR>
+" vnoremap <silent> <nowait> <C-j> :call Indent()<CR>
+" vnoremap <silent> <nowait> <C-c> "+ygv
+" vnoremap <silent> <nowait> <C-v> "+P
+" vnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+" vnoremap <silent> <nowait> <Tab> >gv
+" vnoremap <silent> <nowait> <S-Tab> <gv
+" "vnoremap <silent> <nowait> <M-n> :enew<CR>
+" vnoremap <silent> <nowait> <M-v> :vnew<CR>
+" vnoremap <silent> <nowait> <C-x> :close!<CR>
+
+" command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
+" command! Printvimrcv :call EchoYellowMsg('vimrc version '.g:vimrcv)
+" command! MakeTags :call MakeTags()
+
+"autocmd BufRead,BufNewFile * start
+"autocmd BufEnter NERD_tree_* | execute 'normal R'
+
+inoremap <silent> <nowait> <C-b> <nop>
+vnoremap <silent> <nowait> <C-b> <nop>
+
+augroup Files
+   autocmd FileType nerdtree noremap <silent> <buffer> <Esc> :wincmd p<CR>
+   autocmd FileType nerdtree stopinsert
+   autocmd FileType nerdtree nnoremap <silent> <buffer> <C-b> <nop>
+   autocmd FileType nerdtree nnoremap <silent> <buffer> <M-d> <nop> 
+   autocmd FileType nerdtree nnoremap <silent> <buffer> <C-x> <nop>
+   autocmd FileType netrw stopinsert
+   autocmd FileType netrw noremap <silent> <buffer> <Esc> <nop>
+   autocmd FileType help stopinsert
+   autocmd FileType help only
+augroup END
+
+augroup FileType
+   " autocmd * if &ft != "help" && &ft != nerdtree && &ft != netrw | call IabbrevSnippet() | endif
+   " autocmd * if &ft != "help" && &ft != nerdtree && &ft != netrw |  call AddFtDict() | endif
+augroup END
+
+augroup BufWinIn
+   autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
+   autocmd BufEnter,BufWinEnter,WinEnter * call EnterWinBuffer()
+   "autocmd BufNewFile,BufRead,BufWrite * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | silent! call IabbrevSnippet() | endif
+   autocmd BufNewFile,BufRead,BufWrite * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | silent! call AddFtDict() | endif
+augroup END
+
+augroup Insert
+   
+   " autocmd InsertCharPre * startinsert
+   autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
+   autocmd InsertEnter * hi Cursor guibg=#00ff00 
+   autocmd InsertLeave * hi Cursor guibg=#ffffff | :let @/=get(b:,'_search','')
+   
+augroup END
+
+augroup Vim
+   autocmd VimEnter * :NERDTree | wincmd p
+   autocmd VimEnter * if &ft != "nerdtree" | :NERDTree | endif | wincmd p | startinsert
+   autocmd VimEnter * if 0 == argc() | NERDTree | wincmd p | startinsert | endif
+   " open netrw if buffer is empty on entering Vim
+   " must detect input args
+   " autocmd VimEnter * if line('$') == 1 && getline(1) == '' | :call NerdTreeToggle() | endif
+   autocmd GUIEnter * call system("wmctrl -ir " . v:windowid . " -b add,fullscreen")
+augroup END
+
+augroup Verilog
+
+   autocmd!
+   autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
+   autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set syntax=verilog
+   autocmd BufNewFile,BufRead *.v,.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+   autocmd BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
+   autocmd BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
+   " autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf inoremap <buffer> <silent> <nowait> <M-c> <C-o>:norm 80i/<CR><Right>
+   " autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>
+      
+augroup END
+
+augroup Markdown
+   autocmd!
+   autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
+   
+   " autocmd BufNewFile,BufRead *.md,*.markdown inoremap <buffer> <silent> <nowait> <M-h> <C-o>:call MdToHtml()<CR>
+   " autocmd BufNewFile,BufRead *.md,*.markdown nnoremap <buffer> <silent> <nowait> <M-h> :call MdToHtml()<CR>
+   " autocmd BufNewFile,BufRead *.md,*.markdown inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call MdToPdf()<CR>
+   " autocmd BufNewFile,BufRead *.md,*.markdown nnoremap <buffer> <silent> <nowait> <M-p> :call MdToPdf()<CR>
+augroup END
+
+augroup Html
+   autocmd!
+   autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
+
+   " autocmd BufNewFile,BufRead *.html,*.htm inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call HtmlToPdf()<CR>
+   " autocmd BufNewFile,BufRead *.html,*.htm nnoremap <buffer> <silent> <nowait> <M-p> :call HtmlToPdf()<CR>
+augroup END
