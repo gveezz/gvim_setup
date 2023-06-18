@@ -344,7 +344,6 @@ inoremap <silent> <nowait> <C-kPlus> <C-o>n
 inoremap <silent> <nowait> <C-kMinus> <C-o>N
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
-inoremap <expr> <silent> <nowait> <Space> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Space>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
