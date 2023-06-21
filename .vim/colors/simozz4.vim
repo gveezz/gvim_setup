@@ -28,9 +28,13 @@ hi ModeMsg        term=bold  cterm=bold  gui=bold  guifg=White  guibg=Blue
 hi LineNr         term=underline  cterm=bold  ctermfg=darkcyan  guifg=Yellow
 hi Question       term=standout  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=Green
 hi Title          term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold  guifg=Magenta
-hi Visual         guifg=black guibg=#fff177 gui=bold
+" hi Visual         guifg=black guibg=#fff177 gui=bold
+hi Visual         guifg=black guibg=#467BFF gui=bold
 hi WarningMsg     term=standout  cterm=bold  ctermfg=black ctermbg=Yellow guifg=black guibg=Yellow
 hi Cursor         guifg=#f7aa1b  guibg=#0000ff cterm=bold
+hi nCursor        guibg=#024AFF cterm=bold
+hi link iCursor   Cursor
+hi vCursor        guibg=#F7FF02 cterm=bold
 hi Comment        term=bold  cterm=bold ctermfg=cyan  guifg=Yellow gui=bold
 hi Constant       term=underline  cterm=bold ctermfg=magenta  guifg=#ED762E gui=bold
 hi Special        term=bold  cterm=bold ctermfg=red  guifg=#f7aa1b gui=bold

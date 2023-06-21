@@ -77,7 +77,7 @@ set splitright
 set complete=.
 set complete+=b
 set complete+=k
-set completeopt+=menuone,preview
+set completeopt+=menu,preview
 set hidden
 set hlsearch
 set incsearch
@@ -334,6 +334,41 @@ function! AddFtDict()
 
 endfunction
 
+function! CleverTab()
+   
+   if pumvisible() == 0
+      if getline('.')[col('.') - 2] =~ '\w'
+         return "\<C-N>\<C-P>"
+      else
+         return "\<Tab>"
+      endif
+   else
+      return "\<C-N>"
+   endif
+
+endfunction
+
+function! FeedCompletePopUp()
+   
+   return "\<C-N>\<C-P>"
+
+endfunction
+
+function AutoCompleteInoremap()
+
+  let s:keysMappingDriven = [
+        \ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        \ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        \ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
+        \ '<BS>', ]
+  for key in s:keysMappingDriven
+    execute "inoremap <silent> <nowait> ".key." ".key."<C-r>=FeedCompletePopUp()<CR>"
+  endfor
+endfunction
+
 " inoremap
 inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
@@ -345,7 +380,9 @@ inoremap <silent> <nowait> <C-kDivide> <C-o>/
 inoremap <silent> <nowait> <C-kPlus> <C-o>n
 inoremap <silent> <nowait> <C-kMinus> <C-o>N
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
+" inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N><C-P>" : "<Tab>"
+" inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
+inoremap <expr> <silent> <nowait> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
@@ -359,11 +396,6 @@ inoremap <silent> <nowait> <C-g> <C-o>:promptrepl<CR>
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
 " inoremap <expr> <PageUp> (line('.') != winline()) ? "<C-o><PageUp>" : "<C-o>1G"
-" close buffer and window
-" inoremap <silent> <nowait> <C-x> <C-o>:silent! Bclose!<CR>
-inoremap <silent> <nowait> <C-x> <C-o>:bdelete!<CR>
-
-" inoremap <silent> <nowait> <C-g> <C-o>:call CtrlPExec()<CR>
 " opens a new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
 " goes to the next tab
@@ -383,24 +415,30 @@ inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <Home> <C-o>^
 inoremap <S-Home> <C-o>v^
 
+" create new empty buffer
+inoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
+inoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
+inoremap <silent> <nowait> <F4> <C-o>:close!<CR>
+
 "inoremap <silent> <nowait> <M-n> <C-o>:enew<CR>
 inoremap <silent> <nowait> <M-v> <C-o><S-v>
 "inoremap <silent> <nowait> <M-x> <C-o>:close!<CR>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
-" create new empty buffer
-inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
+
 " Toggle NerdTree
-inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
+inoremap <silent> <nowait> <F5> <C-o>:call NerdTreeToggle()<CR>
 inoremap <silent> <nowait> <M-Left> <C-o>:wincmd p<CR>
 inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 
+nnoremap <silent> <nowait> <F2> :enew!<CR>
+nnoremap <silent> <nowait> <F3> :delete!<CR>
+nnoremap <silent> <nowait> <F4> :close!<CR>
 noremap <silent> <nowait> <M-Left> :wincmd p<CR>
 noremap <silent> <nowait> <M-Right> :wincmd p<CR>
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
-nnoremap <silent> <nowait> <C-x> :bdelete!<CR>
 " nnoremap
 " nnoremap <silent> <nowait> <Esc> i
 " nnoremap <silent> <nowait> <End> $<Right>
@@ -446,7 +484,7 @@ nnoremap <silent> <nowait> <C-y> :redo<CR>
 " 
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
 " nnoremap <silent> <nowait> <C-e> <Esc>:enew!<CR>
-nnoremap <silent> <nowait> <M-e> :call NerdTreeToggle()<CR>
+nnoremap <silent> <nowait> <F5> :call NerdTreeToggle()<CR>
 " " prompt find on command line: 
 " nnoremap <silent> <nowait> <C-f> :promptfind<CR>
 " " prompt find and replace pop up window
@@ -457,6 +495,12 @@ cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
 
 "snoremap
+snoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
+snoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
+snoremap <silent> <nowait> <F4> <C-o>:close!<CR>
+vnoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
+vnoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
+vnoremap <silent> <nowait> <F4> <C-o>:close!<CR>
 snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
 vnoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
@@ -467,7 +511,7 @@ snoremap <silent> <nowait> <Backspace> <Del>
 vnoremap <silent> <nowait> <C-Backspace> b
 snoremap <silent> <nowait> <C-z> u
 snoremap <silent> <nowait> <C-k> dl
-snoremap <silent> <nowait> <C-x> :bdelete!<CR>
+
 snoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
@@ -482,7 +526,6 @@ vnoremap <silent> <nowait> <M-o> <nop>
 " "vnoremap <silent> <nowait> <ScrollWheelUp> <Esc><ScrollWheelUp>
 " "vnoremap <silent> <nowait> <ScrollWheelDown> <Esc><ScrollWheelDown>
 " " vnoremap <silent> <nowait> <C-a> <C-a>gv
-" vnoremap <silent> <nowait> <C-x> <C-x>gv
 " vnoremap <silent> <nowait> n <Esc>gn
 " vnoremap <silent> <nowait> * <Esc>*gN
 " vnoremap <silent> <nowait> <kMultiply> <Esc>*gN
@@ -520,10 +563,12 @@ augroup Files
    autocmd FileType nerdtree nnoremap <silent> <buffer> <C-b> <nop>
    autocmd FileType nerdtree nnoremap <silent> <buffer> <M-d> <nop> 
    autocmd FileType nerdtree nnoremap <silent> <buffer> <C-x> <nop>
-   autocmd FileType netrw stopinsert
-   autocmd FileType netrw noremap <silent> <buffer> <Esc> <nop>
+   "autocmd FileType netrw stopinsert
+  " autocmd FileType netrw noremap <silent> <buffer> <Esc> <nop>
    autocmd FileType help stopinsert
    autocmd FileType help only
+   autocmd FileType help noremap <silent> <buffer> <F1> :bd!<CR>
+   autocmd FileType help inoremap <silent> <buffer> <F1> <C-o>:bd!<CR>
 augroup END
 
 augroup FileType
@@ -544,11 +589,12 @@ augroup Insert
    autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
    autocmd InsertEnter * hi Cursor guibg=#00ff00 
    autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
-   
+  
 augroup END
 
 augroup Vim
    autocmd VimEnter * :NERDTree | wincmd p
+   autocmd VimEnter * call AutoCompleteInoremap()
    autocmd VimEnter * if &ft != "nerdtree" | :NERDTree | endif | wincmd p | startinsert
    autocmd VimEnter * if 0 == argc() | NERDTree | wincmd p | startinsert | endif
    " open netrw if buffer is empty on entering Vim
