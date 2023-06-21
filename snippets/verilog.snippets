@@ -1,0 +1,82 @@
+# if statement
+snippet if
+	if (${1}) begin
+		${0}
+	end
+# begin/end statements
+snippet begin
+	begin
+		${1}
+	end${0}
+# While statement
+snippet while
+	while (${1}) begin
+		${0}
+	end
+# Repeat Loop
+snippet repeat
+	repeat (${1}) begin
+		${0}
+	end
+# Case statement
+snippet case
+	case (${1:/* variable */})
+
+		${2:/* value */}: begin
+			${3}
+		end
+
+		default: begin
+			${4}
+		end
+	endcase
+# CaseZ statement
+snippet casez
+	casez (${1:/* variable */})
+		
+		${2:/* value */}: begin
+			${3}
+		end
+		
+		default: begin
+			${4}
+		end
+	endcase
+# Always block
+snippet always 
+	always begin
+		${0}
+	end
+# Module block
+snippet module
+	module ${1:/* module name */}
+	(
+		${2}
+	);
+		${0}
+	endmodule
+# For
+snippet for
+	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) begin
+		${4}
+	end
+# Forever
+snippet forever
+	forever begin
+		${0}
+	end
+# Function
+snippet function
+	function ${1:void} ${2:name}(${3});
+		${0}
+	endfunction: $2
+# Task
+snippet task
+	task ${1:name}(${2});
+		${0}
+	endtask: $1
+# Initial 
+snippet initial
+	initial begin
+		${0}
+	end

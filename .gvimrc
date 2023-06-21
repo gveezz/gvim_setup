@@ -62,7 +62,7 @@ set background=dark
 set laststatus=2
 set statusline=%{GetMode()}\ %F\ %m\ %#StatusLineR#%r%*\ buff#%n\ (l:\ %l/%L\ \(%p%%),\ c:\ %c,\ B:\ %o\)
 set backspace=indent,eol,start
-set guicursor+=n:ver100-blinkoff0,i-c-v:ver25-blinkoff0
+set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
 " set splitbelow
 "set ignorecase
 set nocul      
@@ -81,6 +81,7 @@ set completeopt+=menuone,preview
 set hidden
 set hlsearch
 set incsearch
+set timeoutlen=0
 syntax enable
 " set textwidth=80
 " set wrapmargin=0
@@ -334,10 +335,11 @@ function! AddFtDict()
 endfunction
 
 " inoremap
-inoremap <silent> <nowait> <ScrollWheelUp> <C-o>3k
-inoremap <silent> <nowait> <ScrollWheelDown> <C-o>3j
+inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
+inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <M-n> <C-o>:
+inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
 inoremap <silent> <nowait> <S-Del> <nop>
 inoremap <silent> <nowait> <C-kDivide> <C-o>/
 inoremap <silent> <nowait> <C-kPlus> <C-o>n
@@ -376,6 +378,7 @@ inoremap <silent> <nowait> <C-z> <C-o>u
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
 inoremap <silent> <nowait> <C-v> <C-o>"+P
+inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <Home> <C-o>^
 inoremap <S-Home> <C-o>v^
@@ -389,10 +392,12 @@ inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 " Toggle NerdTree
 inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
-inoremap <silent> <nowait> <M-w> <C-o>:wincmd p<CR>
+inoremap <silent> <nowait> <M-Left> <C-o>:wincmd p<CR>
+inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 
-noremap <silent> <nowait> <M-w> :wincmd p<CR>
+noremap <silent> <nowait> <M-Left> :wincmd p<CR>
+noremap <silent> <nowait> <M-Right> :wincmd p<CR>
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
 nnoremap <silent> <nowait> <C-x> :bdelete!<CR>
@@ -449,13 +454,17 @@ nnoremap <silent> <nowait> <M-e> :call NerdTreeToggle()<CR>
 " 
 "cnoremap
 cnoremap <silent> <nowait> <S-Del> <nop>
+cnoremap <nowait> <C-v> <C-r>"
 
 "snoremap
+snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
+snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
+vnoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
+vnoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
 snoremap <silent> <nowait> <M-v> <nop>
-snoremap <silent> <nowait> <Space> <Del>
 vnoremap <silent> <nowait> <C-Space> w
 snoremap <silent> <nowait> <Backspace> <Del>
-" vnoremap <silent> <nowait> <C-Backspace> b
+vnoremap <silent> <nowait> <C-Backspace> b
 snoremap <silent> <nowait> <C-z> u
 snoremap <silent> <nowait> <C-k> dl
 snoremap <silent> <nowait> <C-x> :bdelete!<CR>
@@ -465,6 +474,7 @@ vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
 vnoremap <silent> <nowait> <C-k> Vd
+vnoremap <silent> <nowait> <M-o> <nop>
 
 "vnoremap
 " vnoremap <silent> <nowait> <Backspace> <Del>
@@ -501,8 +511,8 @@ vnoremap <silent> <nowait> <C-k> Vd
 "autocmd BufRead,BufNewFile * start
 "autocmd BufEnter NERD_tree_* | execute 'normal R'
 
-inoremap <silent> <nowait> <C-b> <nop>
-vnoremap <silent> <nowait> <C-b> <nop>
+"inoremap <silent> <nowait> <C-b> <nop>
+"vnoremap <silent> <nowait> <C-b> <nop>
 
 augroup Files
    autocmd FileType nerdtree noremap <silent> <buffer> <Esc> :wincmd p<CR>
@@ -533,7 +543,7 @@ augroup Insert
    " autocmd InsertCharPre * startinsert
    autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
    autocmd InsertEnter * hi Cursor guibg=#00ff00 
-   autocmd InsertLeave * hi Cursor guibg=#ffffff | :let @/=get(b:,'_search','')
+   autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
    
 augroup END
 
