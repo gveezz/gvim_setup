@@ -10,14 +10,15 @@ let g:popupBufferPattern = "Select %f (%n) from %p directory"
  let g:NERDTreeShowHidden = 1
  let g:NERDTreeQuitOnOpen = 0
  let g:NERDTreeChDirMode = 0
+ let g:NERDTreeMinimalUI = 1
 " let g:ctrlp_clear_cache_on_exit = 1
 " let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 " let g:AutoCloseOn = 1
 
-if v:version < 700 || exists('loaded_bclose') || &cp
-    finish
- endif
-let loaded_bclose = 1
+" if v:version < 700 || exists('loaded_bclose') || &cp
+"     finish
+" endif
+" let loaded_bclose = 1
 
 colorscheme simozz4
 
@@ -53,7 +54,8 @@ set softtabstop=0
 set expandtab
 set tabstop=3
 "set autoindent
-set smartindent
+set smartindent 
+set cindent
 " set copyindent
 set smarttab
 set number
@@ -87,8 +89,8 @@ syntax enable
 " set wrapmargin=0
 " set columns=80
 " set linebreak
-set lines=35 columns=999
-set history=1000
+set columns=100
+" set history=1000
 
 " --- CUSTOM FUNCTIONS
 function! Eatchar(pat)
@@ -354,6 +356,19 @@ function! FeedCompletePopUp()
 
 endfunction
 
+function! PromptBufferOption()
+   
+   let l:char = input("buffer d(elete)/n(ew)/o(pen): ")
+   if l:char == 'd'
+      exec ":bd!"
+   elseif l:char == 'n'
+      exec ":enew!"
+   elseif l:char == 'o'
+      exec ":browse confirm e"
+   endif
+
+endfunction
+
 function AutoCompleteInoremap()
 
   let s:keysMappingDriven = [
@@ -361,9 +376,7 @@ function AutoCompleteInoremap()
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        \ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
-        \ '<BS>', ]
+        \ '/', '\' ]
   for key in s:keysMappingDriven
     execute "inoremap <silent> <nowait> ".key." ".key."<C-r>=FeedCompletePopUp()<CR>"
   endfor
@@ -376,13 +389,14 @@ inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <M-n> <C-o>:
 inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
 inoremap <silent> <nowait> <S-Del> <nop>
+inoremap <silent> <nowait> <C-kMultiply> <C-o>*
 inoremap <silent> <nowait> <C-kDivide> <C-o>/
 inoremap <silent> <nowait> <C-kPlus> <C-o>n
 inoremap <silent> <nowait> <C-kMinus> <C-o>N
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-" inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N><C-P>" : "<Tab>"
-" inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
-inoremap <expr> <silent> <nowait> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
+"inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N><C-P>" : "<Tab>"
+inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
+" inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
@@ -412,6 +426,7 @@ inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
 inoremap <silent> <nowait> <C-v> <C-o>"+P
 inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
+inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
 inoremap <Home> <C-o>^
 inoremap <S-Home> <C-o>v^
 
@@ -503,8 +518,8 @@ vnoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
 vnoremap <silent> <nowait> <F4> <C-o>:close!<CR>
 snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-vnoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
-vnoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
+"vnoremap <silent> <nowait> <ScrollWheelUp> <Esc><Up><Up><Up>
+"vnoremap <silent> <nowait> <ScrollWheelDown> <Esc><Down><Down><Down>
 snoremap <silent> <nowait> <M-v> <nop>
 vnoremap <silent> <nowait> <C-Space> w
 snoremap <silent> <nowait> <Backspace> <Del>
@@ -563,8 +578,10 @@ augroup Files
    autocmd FileType nerdtree nnoremap <silent> <buffer> <C-b> <nop>
    autocmd FileType nerdtree nnoremap <silent> <buffer> <M-d> <nop> 
    autocmd FileType nerdtree nnoremap <silent> <buffer> <C-x> <nop>
+   autocmd FileType nerdtree nmap <silent> <buffer> <Backspace> u<Up>
+   autocmd FileType nerdtree nmap <silent> <buffer> <Enter> o<Down>
    "autocmd FileType netrw stopinsert
-  " autocmd FileType netrw noremap <silent> <buffer> <Esc> <nop>
+   " autocmd FileType netrw noremap <silent> <buffer> <Esc> <nop>
    autocmd FileType help stopinsert
    autocmd FileType help only
    autocmd FileType help noremap <silent> <buffer> <F1> :bd!<CR>
@@ -600,7 +617,7 @@ augroup Vim
    " open netrw if buffer is empty on entering Vim
    " must detect input args
    " autocmd VimEnter * if line('$') == 1 && getline(1) == '' | :call NerdTreeToggle() | endif
-   autocmd GUIEnter * call system("wmctrl -ir " . v:windowid . " -b add,fullscreen")
+   " autocmd GUIEnter * call system("wmctrl -ir " . v:windowid . " -b add,fullscreen")
 augroup END
 
 augroup Verilog

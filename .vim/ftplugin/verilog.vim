@@ -1,3 +1,5 @@
+let b:verilog_indent_modules = 1
+
 function! AddLineComment()
     
    if len(getline('.')) > 0
