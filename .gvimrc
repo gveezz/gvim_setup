@@ -31,7 +31,8 @@ set noshowmode
 set viminfo=""
 set incsearch
 filetype plugin indent on
-set syntax=auto
+syntax enable
+"set syntax=auto
 set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
 " set tags=tags;/
@@ -194,6 +195,13 @@ endfunction
 
 function! PopupBufferList()
    
+   "let l:topline = line("w0")
+   "let l:botline = line("w$")
+   "let l:midline = float2nr((l:topline + l:botline)/2)
+   "let l:cpos = getpos(".")
+   "let l:cpos[1] = l:midline
+   "call setpos(".", l:cpos)
+   
    let menuName = "BuffersMenu"
    :aunmenu *
    " All 'possible' buffers that may exist
@@ -279,10 +287,14 @@ function! NerdTreeToggle()
       endif
    else
       " otherwise open it
-      silent! :NERDTree
+      if g:NERDTree.IsOpen() == 0
+         silent! :NERDTree
+      endif
    endif
 
-endfunction 
+endfunction
+
+
 
 function! InComment()
    
@@ -292,6 +304,99 @@ function! InComment()
       return 1
    else
       return 0
+endfunction
+
+" Command ':Bclose' executes ':bd' to delete buffer in current window.
+" The window will show the alternate buffer (Ctrl-^) if it exists,
+" or the previous buffer (:bp), or a blank buffer if no previous.
+" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
+" An optional argument can specify which buffer to close (name or number).
+function! s:Bclose(bang, buffer)
+       
+    if empty(a:buffer)
+        let btarget = bufnr('%')
+    elseif a:buffer =~ '^\d\+$'
+        let btarget = bufnr(str2nr(a:buffer))
+    else
+        let btarget = bufnr(a:buffer)
+    endif
+    
+    if btarget < 0
+        call s:Warn('No matching buffer for '.a:buffer)
+        return
+    endif
+    if empty(a:bang) && getbufvar(btarget, '&modified')
+        "call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+        Bclose!
+        return
+    endif
+    " Numbers of windows that view target buffer which we will delete.
+    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+    if !g:bclose_multiple && len(wnums) > 1
+        call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+        return
+    endif
+    let wcurrent = winnr()
+    for w in wnums
+        execute w.'wincmd w'
+        let prevbuf = bufnr('#')
+        if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+            buffer #
+        else
+            bprevious
+        endif
+        if btarget == bufnr('%')
+            " Numbers of listed buffers which are not the target to be deleted.
+            let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+            " Listed, not target, and not displayed.
+            let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+            " Take the first buffer, if any (could be more intelligent).
+            let bjump = (bhidden + blisted + [-1])[0]
+            if bjump > 0
+                execute 'buffer '.bjump
+            else
+                execute 'enew'.a:bang
+            endif
+        endif
+    endfor
+    execute 'bdelete'.a:bang.' '.btarget
+    execute wcurrent.'wincmd w'
+endfunction
+
+function! BetterBufferNext() abort
+
+  for b in range(bufnr('%')+1, bufnr('$'))
+    if buflisted(b) && bufwinnr(b)==-1
+      exe "normal! :b".b."\<cr>"
+      return
+    endif
+  endfor
+
+  for b in range(1, bufnr('%')-1)
+    if buflisted(b) && bufwinnr(b)==-1
+      exe "normal! :b".b."\<cr>"
+      return
+    endif
+  endfor
+
+endfunction
+
+function! BetterBufferPrev() abort
+
+  for b in range(bufnr('%')-1, 1, -1)
+    if buflisted(b) && bufwinnr(b)==-1
+      exe "normal! :b".b."\<cr>"
+      return
+    endif
+ endfor
+
+  for b in range(bufnr('$'), bufnr('%')+1, -1)
+    if buflisted(b) && bufwinnr(b)==-1
+      exe "normal! :b".b."\<cr>"
+      return
+    endif
+  endfor
+
 endfunction
 
 " function! Abbrev(match, replace)
@@ -358,9 +463,9 @@ endfunction
 
 function! PromptBufferOption()
    
-   let l:char = input("buffer d(elete)/n(ew)/o(pen): ")
-   if l:char == 'd'
-      exec ":bd!"
+   let l:char = input("buffer c(lose)/n(ew)/o(pen): ")
+   if l:char == 'c'
+      exec ":silent! Bclose!"
    elseif l:char == 'n'
       exec ":enew!"
    elseif l:char == 'o'
@@ -380,6 +485,13 @@ function AutoCompleteInoremap()
   for key in s:keysMappingDriven
     execute "inoremap <silent> <nowait> ".key." ".key."<C-r>=FeedCompletePopUp()<CR>"
   endfor
+endfunction
+
+function! GoToLine()
+
+   let l:line = input("Go to line: ")
+   exec ":".l:line
+   
 endfunction
 
 " inoremap
@@ -419,7 +531,7 @@ inoremap <silent> <nowait> <C-PageUp> <C-o>:tabprev<CR>
 
 inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 inoremap <silent> <nowait> <C-k> <C-o>dd
-inoremap <silent> <nowait> <C-l> <C-o>:call DeleteLineChars()<CR>
+inoremap <silent> <nowait> <M-l> <C-o>:call GoToLine()<CR>
 inoremap <silent> <nowait> <C-z> <C-o>u
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
@@ -431,9 +543,9 @@ inoremap <Home> <C-o>^
 inoremap <S-Home> <C-o>v^
 
 " create new empty buffer
-inoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
-inoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
-inoremap <silent> <nowait> <F4> <C-o>:close!<CR>
+"inoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
+"inoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
+"inoremap <silent> <nowait> <F4> <C-o>:close!<CR>
 
 "inoremap <silent> <nowait> <M-n> <C-o>:enew<CR>
 inoremap <silent> <nowait> <M-v> <C-o><S-v>
@@ -442,7 +554,7 @@ inoremap <silent> <nowait> <M-v> <C-o><S-v>
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 
 " Toggle NerdTree
-inoremap <silent> <nowait> <F5> <C-o>:call NerdTreeToggle()<CR>
+" inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
 inoremap <silent> <nowait> <M-Left> <C-o>:wincmd p<CR>
 inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
@@ -484,7 +596,7 @@ nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-k> dd
 nnoremap <silent> <nowait> <C-z> u
 nnoremap <silent> <nowait> <C-y> :redo<CR>
-" "nnoremap <silent> <nowait> <M-u>:call ToLower()<CR>
+" "nnoremap <silent> <nowait> <sM-u>:call ToLower()<CR>
 " "nnoremap <silent> <nowait> <M-l>:call ToLower()<CR>
 " nnoremap <silent> <nowait> <C-j> :call Indent()<CR>
 " nnoremap <silent> <nowait> <C-v> "+P<Left>
@@ -499,7 +611,7 @@ nnoremap <silent> <nowait> <C-y> :redo<CR>
 " 
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
 " nnoremap <silent> <nowait> <C-e> <Esc>:enew!<CR>
-nnoremap <silent> <nowait> <F5> :call NerdTreeToggle()<CR>
+" nnoremap <silent> <nowait> <M-w> :call NerdTreeToggle()<CR>
 " " prompt find on command line: 
 " nnoremap <silent> <nowait> <C-f> :promptfind<CR>
 " " prompt find and replace pop up window
@@ -571,6 +683,8 @@ vnoremap <silent> <nowait> <M-o> <nop>
 
 "inoremap <silent> <nowait> <C-b> <nop>
 "vnoremap <silent> <nowait> <C-b> <nop>
+
+command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup Files
    autocmd FileType nerdtree noremap <silent> <buffer> <Esc> :wincmd p<CR>
