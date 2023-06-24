@@ -48,7 +48,7 @@ set guioptions-=a
 set virtualedit=onemore
 set whichwrap=<,>,[,]
 set selection=exclusive
-set selectmode=mouse,key,cmd
+set selectmode=mouse,key
 set keymodel=startsel,stopsel
 set shiftwidth=3
 set softtabstop=0
@@ -70,7 +70,7 @@ set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-bli
 "set ignorecase
 set nocul      
 set formatoptions=tcj
-set mouse=a
+set mouse=ivn
 set mousehide
 set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
@@ -494,10 +494,25 @@ function! GoToLine()
    
 endfunction
 
+function! Esc()
+   
+   " do stuff I want to reset 
+   " when I press <Esc>
+   :MultieditReset
+   set nohlsearch
+endfunction
+
+let g:multiedit_mark_character = '^'
+let g:multiedit_mark_character_len = strlen(g:multiedit_mark_character)
+let g:multiedit_auto_restore = 1
+let g:multiedit_no_mappings = 1
+
 " inoremap
+inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
+inoremap <silent> <nowait> <M-i> <C-o>:Multiedit!<CR>
 inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-inoremap <silent> <nowait> <Esc> <C-o><Esc>
+inoremap <silent> <nowait> <Esc> <C-o>:call Esc()<CR><Esc>
 " inoremap <silent> <nowait> <M-n> <C-o>:
 inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
 inoremap <silent> <nowait> <S-Del> <nop>
@@ -518,7 +533,7 @@ inoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
 " prompt find on command line
 inoremap <silent> <nowait> <C-f> <C-o>:promptfind<CR>
 " prompt find and replace pop up window
-inoremap <silent> <nowait> <C-g> <C-o>:promptrepl<CR>
+inoremap <silent> <nowait> <M-f> <C-o>:promptrepl<CR>
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
 " inoremap <expr> <PageUp> (line('.') != winline()) ? "<C-o><PageUp>" : "<C-o>1G"
@@ -531,7 +546,7 @@ inoremap <silent> <nowait> <C-PageUp> <C-o>:tabprev<CR>
 
 inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 inoremap <silent> <nowait> <C-k> <C-o>dd
-inoremap <silent> <nowait> <M-l> <C-o>:call GoToLine()<CR>
+inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 inoremap <silent> <nowait> <C-z> <C-o>u
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
