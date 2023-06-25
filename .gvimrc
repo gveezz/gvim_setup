@@ -1,4 +1,3 @@
-" vimrc version. vim 8.1
 let $VIMHOME = $HOME."/.vim"
 
 let g:popupBufferPattern = "Select %f (%n) from %p directory" 
