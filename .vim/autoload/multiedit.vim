@@ -104,9 +104,9 @@ func! multiedit#start(bang, ...)
     let lastcol = b:first_region.col + b:first_region.len
     
     " delete inserted text marker 
-    for i in range(0, strlen(g:multiedit_mark_character))
-      call feedkeys("\<Backspace>")
-    endfor
+    " for i in range(0, strlen(g:multiedit_mark_character))
+    "   call feedkeys("\<Backspace>")
+    " endfor
 
     " If bang exists OR the first region is a marker, then clear it before
     " editing mode begins.
@@ -114,9 +114,11 @@ func! multiedit#start(bang, ...)
         " Remove the word and update the highlights
         let linetext = getline(b:first_region.line)
         if b:first_region.col == 1
-            let newline = g:multiedit_mark_character . linetext[(lastcol - 1):]
+            " let newline = g:multiedit_mark_character . linetext[(lastcol - 1):]
+            let newline = linetext[(lastcol - 1):]
         else
-            let newline = linetext[0:(b:first_region.col - 2)] . g:multiedit_mark_character . linetext[(lastcol - 1):]
+            " let newline = linetext[0:(b:first_region.col - 2)] . g:multiedit_mark_character . linetext[(lastcol - 1):]
+            let newline = linetext[0:(b:first_region.col - 2)] . linetext[(lastcol - 1):]
         endif
 
         call setline(b:first_region.line, newline)
@@ -150,7 +152,7 @@ func! multiedit#start(bang, ...)
 
         " Once you leave INSERT, apply changes and delete this augroup
         au InsertLeave * call multiedit#update(1) | call multiedit#maps(0) | call multiedit#triggerEndEvents() | au! multiedit
-
+        
         if g:multiedit_auto_reset == 1
             " Clear all regions once you exit insert mode
             au InsertLeave * call multiedit#reset()
