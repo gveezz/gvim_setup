@@ -521,7 +521,6 @@ function! PromptReplS()
 endfunction
 
 let g:multiedit_mark_character = '^'
-let g:multiedit_mark_character_len = strlen(g:multiedit_mark_character)
 let g:multiedit_auto_restore = 1
 let g:multiedit_no_mappings = 1
 
@@ -679,5 +678,3 @@ augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 augroup END
-
-
