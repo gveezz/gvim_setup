@@ -468,7 +468,8 @@ endfunction
 
 function! PromptBufferOption()
    
-   let l:char = input("buffer c(lose)/n(ew)/o(pen): ")
+   echom "buffer c(lose)/n(ew)/o(pen)/q(uit): "
+   let l:char = getcharstr()
    if l:char == 'c'
       exec ":silent! Bclose!"
    elseif l:char == 'n'
