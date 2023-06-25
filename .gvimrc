@@ -494,14 +494,6 @@ function! GoToLine()
    
 endfunction
 
-function! Esc()
-   
-   " do stuff I want to reset 
-   " when I press <Esc>
-   :MultieditReset
-   set nohlsearch
-endfunction
-
 function! PromptFindI()
    :promptfind
 endfunction
@@ -531,7 +523,7 @@ inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
 inoremap <silent> <nowait> <M-i> <C-o>:Multiedit!<CR>
 inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-inoremap <silent> <nowait> <Esc> <C-o>:call Esc()<CR><Esc>
+inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <M-n> <C-o>:
 inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
 inoremap <silent> <nowait> <S-Del> <nop>
