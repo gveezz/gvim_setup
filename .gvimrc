@@ -216,6 +216,14 @@ function! PopupBufferList()
 
 endfunction
 
+function! BufferList() range
+      
+   :ls
+   let l:buffnum = input("Select buffer # from list: ")
+   exec ":b ".l:buffnum
+
+endfunction
+
 function! GetMode()
     let l:ms=mode()
     if l:ms == 'n'
@@ -293,8 +301,6 @@ function! NerdTreeToggle()
    endif
 
 endfunction
-
-
 
 function! InComment()
    
@@ -540,7 +546,7 @@ inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
 inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
 " show list of buffers
-inoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+inoremap <silent> <nowait> <M-b> <C-o>:call BufferList()<CR>
 " prompt find on command line
 inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
 " prompt find and replace pop up window
@@ -585,7 +591,7 @@ noremap <silent> <nowait> <M-Left> :wincmd p<CR>
 noremap <silent> <nowait> <M-Right> :wincmd p<CR>
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
-nnoremap <silent> <nowait> <M-b> :call PopupBufferList()<CR><Down>
+nnoremap <silent> <nowait> <M-b> :call BufferList()<CR><Down>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-k> dd
 nnoremap <silent> <nowait> <C-z> u
@@ -613,7 +619,7 @@ snoremap <silent> <nowait> <C-z> u
 snoremap <silent> <nowait> <C-k> dl
 snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
 snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+snoremap <silent> <nowait> <M-b> <C-o>:call BufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
