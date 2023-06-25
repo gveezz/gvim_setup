@@ -104,7 +104,7 @@ func! multiedit#start(bang, ...)
     let lastcol = b:first_region.col + b:first_region.len
     
     " delete inserted text marker 
-    for i in range(g:multiedit_mark_character_len)
+    for i in range(0, strlen(g:multiedit_mark_character))
       call feedkeys("\<Backspace>")
     endfor
 
