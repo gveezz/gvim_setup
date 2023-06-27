@@ -1,3 +1,4 @@
+set cinkeys+=begin,end
 let b:verilog_indent_modules = 1
 
 function! AddLineComment()

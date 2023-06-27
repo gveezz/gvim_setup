@@ -1,4 +1,3 @@
-" vimrc version. vim 8.1
 let $VIMHOME = $HOME."/.vim"
 
 let g:popupBufferPattern = "Select %f (%n) from %p directory" 
@@ -80,7 +79,7 @@ set splitright
 set complete=.
 set complete+=b
 set complete+=k
-set completeopt+=menu,preview
+set completeopt+=menuone,preview
 set hidden
 set hlsearch
 set incsearch
@@ -216,6 +215,14 @@ function! PopupBufferList()
 
 endfunction
 
+function! BufferList() range
+      
+   :ls
+   let l:buffnum = input("Select buffer # from list: ")
+   exec ":b ".l:buffnum
+
+endfunction
+
 function! GetMode()
     let l:ms=mode()
     if l:ms == 'n'
@@ -293,8 +300,6 @@ function! NerdTreeToggle()
    endif
 
 endfunction
-
-
 
 function! InComment()
    
@@ -463,27 +468,31 @@ endfunction
 
 function! PromptBufferOption()
    
-   let l:char = input("buffer c(lose)/n(ew)/o(pen): ")
-   if l:char == 'c'
+   echom "buffer c(lose)/n(ew)/o(pen): "
+   let l:char = getchar()
+   if l:char == 99
+      " c
       exec ":silent! Bclose!"
-   elseif l:char == 'n'
+   elseif l:char == 110
+      " n
       exec ":enew!"
-   elseif l:char == 'o'
+   elseif l:char == 111
+      " o
       exec ":browse confirm e"
    endif
 
 endfunction
 
-function AutoCompleteInoremap()
+function! AutoCompleteInoremap()
 
   let s:keysMappingDriven = [
         \ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '/', '\' ]
+        \ '//', '\\' , '_' ]
   for key in s:keysMappingDriven
-    execute "inoremap <silent> <nowait> ".key." ".key."<C-r>=FeedCompletePopUp()<CR>"
+    execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
   endfor
 endfunction
 
@@ -532,15 +541,15 @@ inoremap <silent> <nowait> <C-kDivide> <C-o>/
 inoremap <silent> <nowait> <C-kPlus> <C-o>n
 inoremap <silent> <nowait> <C-kMinus> <C-o>N
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-"inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N><C-P>" : "<Tab>"
-inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
-" inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
+" inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
+"inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
+inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
 inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
 " show list of buffers
-inoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+inoremap <silent> <nowait> <C-l> <C-o>:call BufferList()<CR>
 " prompt find on command line
 inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
 " prompt find and replace pop up window
@@ -563,11 +572,9 @@ inoremap <silent> <nowait> <C-v> <C-o>"+P
 inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
-inoremap <Home> <C-o>^
-inoremap <S-Home> <C-o>v^
-
-" create new empty buffer
-
+inoremap <silent> <nowait> <Home> <C-o>^
+inoremap <silent> <nowait> <S-Home> <C-o>v^
+inoremap <silent> <nowait> <M-w> <C-o>:wincmd p<CR>
 inoremap <silent> <nowait> <M-v> <C-o><S-v>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
@@ -585,7 +592,7 @@ noremap <silent> <nowait> <M-Left> :wincmd p<CR>
 noremap <silent> <nowait> <M-Right> :wincmd p<CR>
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
-nnoremap <silent> <nowait> <M-b> :call PopupBufferList()<CR><Down>
+nnoremap <silent> <nowait> <C-l> :call BufferList()<CR><Down>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-k> dd
 nnoremap <silent> <nowait> <C-z> u
@@ -613,7 +620,7 @@ snoremap <silent> <nowait> <C-z> u
 snoremap <silent> <nowait> <C-k> dl
 snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
 snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <M-b> <C-o>:call PopupBufferList()<CR>
+snoremap <silent> <nowait> <C-l> <C-o>:call BufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
