@@ -526,6 +526,18 @@ let g:multiedit_auto_restore = 1
 let g:multiedit_no_mappings = 1
 
 " inoremap
+inoremap <silent> <nowait> <F2> <nop>
+inoremap <silent> <nowait> <F3> <nop>
+inoremap <silent> <nowait> <F4> <nop>
+inoremap <silent> <nowait> <F5> <nop>
+inoremap <silent> <nowait> <F6> <nop>
+inoremap <silent> <nowait> <F7> <nop>
+inoremap <silent> <nowait> <F8> <nop>
+inoremap <silent> <nowait> <F9> <nop>
+inoremap <silent> <nowait> <F9> <nop>
+inoremap <silent> <nowait> <F11> <nop>
+inoremap <silent> <nowait> <F12> <nop>
+inoremap <silent> <nowait> <F13> <nop>
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
 inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
@@ -574,22 +586,15 @@ inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
 inoremap <silent> <nowait> <Home> <C-o>^
 inoremap <silent> <nowait> <S-Home> <C-o>v^
-inoremap <silent> <nowait> <M-w> <C-o>:wincmd p<CR>
+inoremap <silent> <nowait> <M-w> <C-o><C-w>w
 inoremap <silent> <nowait> <M-v> <C-o><S-v>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
-
-" Toggle NerdTree
 " inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
-inoremap <silent> <nowait> <M-Left> <C-o>:wincmd p<CR>
-inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
-" inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 
-nnoremap <silent> <nowait> <F2> :enew!<CR>
-nnoremap <silent> <nowait> <F3> :delete!<CR>
-nnoremap <silent> <nowait> <F4> :close!<CR>
-noremap <silent> <nowait> <M-Left> :wincmd p<CR>
-noremap <silent> <nowait> <M-Right> :wincmd p<CR>
+nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
+" inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
+" inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
 nnoremap <silent> <nowait> <C-l> :call BufferList()<CR><Down>
@@ -598,18 +603,37 @@ nnoremap <silent> <nowait> <C-k> dd
 nnoremap <silent> <nowait> <C-z> u
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
+nnoremap <silent> <nowait> <M-w> <C-w>w
  
 "cnoremap
 cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
 
 "snoremap, vnoremap
-snoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
-snoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
-snoremap <silent> <nowait> <F4> <C-o>:close!<CR>
-vnoremap <silent> <nowait> <F2> <C-o>:enew!<CR>
-vnoremap <silent> <nowait> <F3> <C-o>:delete!<CR>
-vnoremap <silent> <nowait> <F4> <C-o>:close!<CR>
+snoremap <silent> <nowait> <F2> <nop>
+snoremap <silent> <nowait> <F3> <nop>
+snoremap <silent> <nowait> <F4> <nop>
+snoremap <silent> <nowait> <F5> <nop>
+snoremap <silent> <nowait> <F6> <nop>
+snoremap <silent> <nowait> <F7> <nop>
+snoremap <silent> <nowait> <F8> <nop>
+snoremap <silent> <nowait> <F9> <nop>
+snoremap <silent> <nowait> <F9> <nop>
+snoremap <silent> <nowait> <F11> <nop>
+snoremap <silent> <nowait> <F12> <nop>
+snoremap <silent> <nowait> <F13> <nop>
+vnoremap <silent> <nowait> <F2> <nop>
+vnoremap <silent> <nowait> <F3> <nop>
+vnoremap <silent> <nowait> <F4> <nop>
+vnoremap <silent> <nowait> <F5> <nop>
+vnoremap <silent> <nowait> <F6> <nop>
+vnoremap <silent> <nowait> <F7> <nop>
+vnoremap <silent> <nowait> <F8> <nop>
+vnoremap <silent> <nowait> <F9> <nop>
+vnoremap <silent> <nowait> <F9> <nop>
+vnoremap <silent> <nowait> <F11> <nop>
+vnoremap <silent> <nowait> <F12> <nop>
+vnoremap <silent> <nowait> <F13> <nop>
 snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
 snoremap <silent> <nowait> <M-v> <nop>
@@ -627,6 +651,8 @@ vnoremap <silent> <nowait> <C-c> "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
+snoremap <silent> <nowait> <M-w> <C-o><C-w>w
+snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave<CR>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
@@ -636,8 +662,10 @@ augroup BufWinIn
    autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
    " ensure NERDTree is always open
    autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" && g:NERDTree.IsOpen() != 1 | :NERDTree | endif
+   autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufAdd,BufCreate * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | silent! call AddFtDict() | endif
+
 augroup END
 
 augroup Insert
