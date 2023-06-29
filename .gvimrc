@@ -662,7 +662,7 @@ augroup BufWinIn
    autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
    " ensure NERDTree is always open
    autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" && g:NERDTree.IsOpen() != 1 | :NERDTree | endif
-   autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | startinsert | endif
+   autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | startinsert | else | stopinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufAdd,BufCreate * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | silent! call AddFtDict() | endif
 
