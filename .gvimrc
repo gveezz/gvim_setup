@@ -80,7 +80,7 @@ set complete=.
 set complete+=b
 set complete+=k
 set completeopt+=menuone,preview
-set hidden
+set nohidden
 set hlsearch
 set incsearch
 set timeoutlen=0
@@ -212,7 +212,7 @@ function! PopupBufferList()
       silent! :exec ":amenu ]".menuName.".".menuitem." :b ".string(nbuff)."<CR>"
    endfor
    silent! :exec ":popup ]".menuName
-
+   
 endfunction
 
 function! BufferList() range
@@ -473,9 +473,15 @@ function! PromptBufferOption()
    if l:char == 99
       " c
       exec ":silent! Bclose!"
+      if (winnr('$') > 2) 
+         exec ":silent! :close!"
+      endif
    elseif l:char == 110
       " n
       exec ":enew!"
+   elseif l:char == 111
+      " o
+      exec ":browse confirm e"
    elseif l:char == 111
       " o
       exec ":browse confirm e"
@@ -561,7 +567,7 @@ inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
 inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
 " show list of buffers
-inoremap <silent> <nowait> <C-l> <C-o>:call BufferList()<CR>
+inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 " prompt find on command line
 inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
 " prompt find and replace pop up window
@@ -597,7 +603,7 @@ nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
-nnoremap <silent> <nowait> <C-l> :call BufferList()<CR><Down>
+nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR><Down>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-k> dd
 nnoremap <silent> <nowait> <C-z> u
@@ -644,7 +650,7 @@ snoremap <silent> <nowait> <C-z> u
 snoremap <silent> <nowait> <C-k> dl
 snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
 snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <C-l> <C-o>:call BufferList()<CR>
+snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
@@ -659,12 +665,13 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
    
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
+   autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
-   autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" && g:NERDTree.IsOpen() != 1 | :NERDTree | endif
-   autocmd BufEnter * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | startinsert | else | stopinsert | endif
+   " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
+   autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
+   autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
-   autocmd BufAdd,BufCreate * if &ft != "help" && &ft != "nerdtree" && &ft != "netrw" | silent! call AddFtDict() | endif
+   autocmd BufAdd,BufCreate * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
 
 augroup END
 
@@ -678,11 +685,8 @@ augroup Insert
 augroup END
 
 augroup Vim
-   " open NERDTree when entering gvim
-   autocmd VimEnter * :NERDTree | wincmd p
-   " open NERDTree when entering gvim
+   autocmd VimEnter * :NERDTree | :wincmd p
    autocmd VimEnter * call AutoCompleteInoremap()
-   " autocmd VimEnter * if 0 == argc() | NERDTree | wincmd p | startinsert | endif
 augroup END
 
 augroup Verilog
