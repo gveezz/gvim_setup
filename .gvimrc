@@ -77,7 +77,6 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set complete=.
-set complete+=b
 set complete+=k
 set completeopt+=menuone,preview
 set nohidden
@@ -209,7 +208,7 @@ function! PopupBufferList()
    let b_unl = filter(b_all, 'buflisted(v:val)')
    for nbuff in b_unl
       let menuitem = substitute(bufname(nbuff), '\.', '\\.', 'g')
-      silent! :exec ":amenu ]".menuName.".".menuitem." :b ".string(nbuff)."<CR>"
+      silent! :exec ":amenu ]".menuName.".".menuitem." :b! ".string(nbuff)."<CR>"
    endfor
    silent! :exec ":popup ]".menuName
    
@@ -305,10 +304,12 @@ function! InComment()
    
    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
    if l:incomment >= 0
-      call EchoYellowMsg("In Comment")
+      call EchoYellowMsg("In Comment ".l:incomment)
       return 1
    else
+      call EchoYellowMsg("Not Comment ".l:incomment)
       return 0
+   endif
 endfunction
 
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
@@ -414,27 +415,27 @@ endfunction
 "         
 " endfunction
 
-" function! IabbrevSnippet()
-"    
-"    let l:snippetStr = "snippet"
-"    let l:snippetsStr = l:snippetStr."s"
-"    let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
-"    
-"    if filereadable(l:ftSnipFile) > 0
-"       "echom "Snippet file".l:ftSnipFile." found"
-"       " exec "setlocal dict+=".l:ftdictpath
-"       for l:line in readfile(l:ftSnipFile, '', 100)
-"          "echom "line = ".line
-"          if stridx(line, l:snippetStr) == 0
-"             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
-"             if len(l:snippetToMatch) > 0
-"                exec ":iabbrev <silent> <buffer> ".l:snippetToMatch." ".l:snippetToMatch."<c-r>=EatcharTriggerSnippet('\s')<CR>"
-"             endif
-"          endif
-"       endfor
-"    endif
-" 
-" endfunction
+function! IabbrevSnippet()
+   
+   let l:snippetStr = "snippet"
+   let l:snippetsStr = l:snippetStr."s"
+   let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
+   
+   if filereadable(l:ftSnipFile) > 0
+      "echom "Snippet file".l:ftSnipFile." found"
+      " exec "setlocal dict+=".l:ftdictpath
+      for l:line in readfile(l:ftSnipFile, '', 100)
+         "echom "line = ".line
+         if stridx(line, l:snippetStr) == 0
+            let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
+            if len(l:snippetToMatch) > 0
+               exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." InComment() ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
+            endif
+         endif
+      endfor
+   endif
+
+endfunction
 
 function! AddFtDict()
       
@@ -671,7 +672,8 @@ augroup BufWinIn
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
    autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
-   autocmd BufAdd,BufCreate * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
+   autocmd BufEnter,BufAdd,BufCreate,BufNewFile * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
+   " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
 
 augroup END
 
