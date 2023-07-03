@@ -16,5 +16,5 @@ silent! nunmap <2-LeftMouse>
 silent! nunmap <3-LeftMouse>
 silent! nunmap <4-LeftMouse>
 nnoremap <silent> <buffer> <2-LeftMouse> <CR>
-nnoremap <silent> <buffer> <3-LeftMouse> <nop>
-nnoremap <silent> <buffer> <4-LeftMouse> <nop>
+nmap <silent> <buffer> <3-LeftMouse> <2-LeftMouse>
+nmap <silent> <buffer> <4-LeftMouse> <4-LeftMouse>
