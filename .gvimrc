@@ -69,7 +69,7 @@ set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-bli
 "set ignorecase
 set nocul      
 set formatoptions=tcj
-set mouse=a
+set mouse=ivn
 set mousehide
 set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
@@ -166,17 +166,17 @@ endfunction
  	
 endfunction 
 
-function! GuiSave() abort
+function! GuiSave() range
    
     if (&ft == 'nerdtree')
-        call s:Warn("Hey dude, you're in nerdtree window...")
+        call EchoYellowMsg("Hey dude, you're in nerdtree window...")
     else
-        if empty(bufname(''))
+        if empty(bufname('%'))
             browse confirm write
         else
             w!
         endif
-     endif
+    endif
 endfunction
 
 " function! GetActiveBuffers()
@@ -468,7 +468,7 @@ endfunction
 
 function! PromptBufferOption()
    
-   echom "buffer c(lose)/n(ew)/o(pen): "
+   echom "buffer x/c(lose)/n(ew)/o(pen): "
    let l:char = getchar()
    if l:char == 99
       " c
@@ -496,7 +496,7 @@ function! AutoCompleteInoremap()
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '//', '\\' , '_' ]
+        \ '//', '\\' , '_', '<BS>' ]
   for key in s:keysMappingDriven
     execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
   endfor
@@ -658,7 +658,7 @@ vnoremap <silent> <nowait> <C-v> "+P
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
-snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave<CR>
+snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
