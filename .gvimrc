@@ -79,7 +79,7 @@ set splitright
 set complete=.
 set complete+=k
 set completeopt+=menuone,preview
-set nohidden
+set hidden
 set hlsearch
 set incsearch
 set timeoutlen=0
