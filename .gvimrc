@@ -693,6 +693,7 @@ augroup Insert
 augroup END
 
 augroup Vim
+   autocmd GuiEnter * winpos 1 1
    autocmd VimEnter * :NERDTree | :wincmd p
    autocmd VimEnter * call AutoCompleteInoremap()
 augroup END
