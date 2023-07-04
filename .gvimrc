@@ -3,13 +3,13 @@ let $VIMHOME = $HOME."/.vim"
 let g:popupBufferPattern = "Select %f (%n) from %p directory" 
 
 " let mapleader = ','
- let g:NERDTreeMouseMode = 3
- let g:NERDTreeShowLineNumbers = 0
- let g:NERDTreeDirArrows = 1
- let g:NERDTreeShowHidden = 1
- let g:NERDTreeQuitOnOpen = 0
- let g:NERDTreeChDirMode = 0
- let g:NERDTreeMinimalUI = 1
+let g:NERDTreeMouseMode = 3
+let g:NERDTreeShowLineNumbers = 0
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeChDirMode = 0
+let g:NERDTreeMinimalUI = 1
 " let g:ctrlp_clear_cache_on_exit = 1
 " let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 " let g:AutoCloseOn = 1
@@ -58,7 +58,7 @@ set smartindent
 set cindent
 " set copyindent
 set smarttab
-set number
+set number relativenumber
 set guifont=Monospace\ 12
 set background=dark
 set laststatus=2
