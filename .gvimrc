@@ -471,7 +471,7 @@ function! PromptBufferOption()
    
    echom "buffer x/c(lose)/n(ew)/o(pen): "
    let l:char = getchar()
-   if l:char == 99
+   if l:char == 99 || l:char == 120
       " c
       exec ":silent! Bclose!"
       if (winnr('$') > 2) 
@@ -480,9 +480,6 @@ function! PromptBufferOption()
    elseif l:char == 110
       " n
       exec ":enew!"
-   elseif l:char == 111
-      " o
-      exec ":browse confirm e"
    elseif l:char == 111
       " o
       exec ":browse confirm e"
@@ -528,6 +525,14 @@ function! PromptReplS()
    exec ":promptrepl ".l:sword
 endfunction
 
+function! ExecCmd()
+
+   let l:cmd = input(":")
+   exec ":".l:cmd
+
+endfunction
+
+
 let g:multiedit_mark_character = '^'
 let g:multiedit_auto_restore = 1
 let g:multiedit_no_mappings = 1
@@ -545,6 +550,7 @@ inoremap <silent> <nowait> <F9> <nop>
 inoremap <silent> <nowait> <F11> <nop>
 inoremap <silent> <nowait> <F12> <nop>
 inoremap <silent> <nowait> <F13> <nop>
+inoremap <silent> <nowait> <C-c> <C-o>:call ExecCmd()<CR>
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
 inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
