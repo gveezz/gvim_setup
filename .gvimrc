@@ -21,7 +21,7 @@ let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
 colorscheme simozz4
 
-set insertmode
+set relativenumber
 set magic
 " set autochdir
 set nocompatible
@@ -46,9 +46,9 @@ set guioptions-=e
 set guioptions+=a
 set virtualedit=onemore
 set whichwrap=<,>,[,]
-set selection=exclusive
-set selectmode=mouse,key
-set keymodel=startsel,stopsel
+" set selection=exclusive
+" set selectmode=mouse,key,cmd
+"set keymodel=startsel,stopsel
 set shiftwidth=3
 set softtabstop=0
 set expandtab
@@ -532,144 +532,16 @@ let g:multiedit_mark_character = '^'
 let g:multiedit_auto_restore = 1
 let g:multiedit_no_mappings = 1
 
-" inoremap
-inoremap <silent> <nowait> <F2> <nop>
-inoremap <silent> <nowait> <F3> <nop>
-inoremap <silent> <nowait> <F4> <nop>
-inoremap <silent> <nowait> <F5> <nop>
-inoremap <silent> <nowait> <F6> <nop>
-inoremap <silent> <nowait> <F7> <nop>
-inoremap <silent> <nowait> <F8> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F11> <nop>
-inoremap <silent> <nowait> <F12> <nop>
-inoremap <silent> <nowait> <F13> <nop>
-inoremap <silent> <nowait> <C-LeftMouse> <nop>
-inoremap <silent> <nowait> <C-RightMouse> <nop>
-inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
-inoremap <silent> <nowait> <M-i> <C-o>:Multiedit!<CR>
-inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
-inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-inoremap <silent> <nowait> <Esc> <C-o><Esc>
-" inoremap <silent> <nowait> <M-n> <C-o>:
-inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
-inoremap <silent> <nowait> <S-Del> <nop>
-inoremap <silent> <nowait> <C-kMultiply> <C-o>*
-inoremap <silent> <nowait> <C-kDivide> <C-o>/
-inoremap <silent> <nowait> <C-kPlus> <C-o>n
-inoremap <silent> <nowait> <C-kMinus> <C-o>N
-inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-" inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
-"inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
-inoremap <silent> <nowait> <C-Right> <C-o>w
-inoremap <silent> <nowait> <C-Left> <C-o>b
-inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
-" show list of buffers
-inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
-" prompt find on command line
-inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
-" prompt find and replace pop up window
-inoremap <silent> <nowait> <M-f> <C-o>:call PromptReplI()<CR>
-" inoremap <expr> <PageUp> (line('.') != winline()) ? "<C-o><PageUp>" : "<C-o>1G"
-" opens a new tab
-inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
-" goes to the next tab
-inoremap <silent> <nowait> <C-PageDown> <C-o>:tabnext<CR>
-" goes to the previous tab
-inoremap <silent> <nowait> <C-PageUp> <C-o>:tabprev<CR>
-
-inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
-inoremap <silent> <nowait> <C-k> <C-o>dd
-inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-inoremap <silent> <nowait> <C-z> <C-o>u
-inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
-inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
-inoremap <silent> <nowait> <C-v> <C-o>"+P
-inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
-inoremap <silent> <nowait> <C-a> <Esc>ggVG
-inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
-inoremap <silent> <nowait> <Home> <C-o>^
-inoremap <silent> <nowait> <S-Home> <C-o>v^
-inoremap <silent> <nowait> <M-w> <C-o><C-w>w
-inoremap <silent> <nowait> <M-v> <C-o><S-v>
-" open pop up window to open a file (or create one)
-inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
-" inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
-
-nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
-" inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
-" inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
-nnoremap <silent> <nowait> k j
-nnoremap <silent> <nowait> j k
-nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR><Down>
-nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
-nnoremap <silent> <nowait> <C-k> dd
-nnoremap <silent> <nowait> <C-z> u
-nnoremap <silent> <nowait> <C-y> :redo<CR>
-nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
-nnoremap <silent> <nowait> <M-w> <C-w>w
- 
-"cnoremap
-cnoremap <silent> <nowait> <S-Del> <nop>
-cnoremap <nowait> <C-v> <C-r>"
-
-"snoremap, vnoremap
-snoremap <silent> <nowait> <F2> <nop>
-snoremap <silent> <nowait> <F3> <nop>
-snoremap <silent> <nowait> <F4> <nop>
-snoremap <silent> <nowait> <F5> <nop>
-snoremap <silent> <nowait> <F6> <nop>
-snoremap <silent> <nowait> <F7> <nop>
-snoremap <silent> <nowait> <F8> <nop>
-snoremap <silent> <nowait> <F9> <nop>
-snoremap <silent> <nowait> <F9> <nop>
-snoremap <silent> <nowait> <F11> <nop>
-snoremap <silent> <nowait> <F12> <nop>
-snoremap <silent> <nowait> <F13> <nop>
-vnoremap <silent> <nowait> <F2> <nop>
-vnoremap <silent> <nowait> <F3> <nop>
-vnoremap <silent> <nowait> <F4> <nop>
-vnoremap <silent> <nowait> <F5> <nop>
-vnoremap <silent> <nowait> <F6> <nop>
-vnoremap <silent> <nowait> <F7> <nop>
-vnoremap <silent> <nowait> <F8> <nop>
-vnoremap <silent> <nowait> <F9> <nop>
-vnoremap <silent> <nowait> <F9> <nop>
-vnoremap <silent> <nowait> <F11> <nop>
-vnoremap <silent> <nowait> <F12> <nop>
-vnoremap <silent> <nowait> <F13> <nop>
-snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
-snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-snoremap <silent> <nowait> <M-v> <nop>
-vnoremap <silent> <nowait> <C-Space> w
-snoremap <silent> <nowait> <Backspace> <Del>
-vnoremap <silent> <nowait> <C-Backspace> b
-snoremap <silent> <nowait> <C-z> u
-snoremap <silent> <nowait> <C-k> dl
-snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
-snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
-vnoremap <silent> <nowait> <Tab> >gv
-vnoremap <silent> <nowait> <S-Tab> <gv
-vnoremap <silent> <nowait> <C-c> "+ygv
-vnoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-k> Vd
-vnoremap <silent> <nowait> <M-o> <nop>
-snoremap <silent> <nowait> <M-w> <C-o><C-w>w
-snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
-
-command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-
+inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 augroup BufWinIn
    
    " refresh directory listing if entering NERDTree
    autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
-   autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
+   " autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
    autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
