@@ -21,7 +21,7 @@ let g:NERDTreeMinimalUI = 1
 
 colorscheme simozz4
 
-set insertmode
+" set insertmode
 set magic
 " set autochdir
 set nocompatible
@@ -598,7 +598,8 @@ inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 inoremap <silent> <nowait> <C-z> <C-o>u
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
-inoremap <silent> <nowait> <C-v> <C-o>"+P
+"inoremap <silent> <nowait> <C-v> <C-o>"+P
+inoremap <silent> <nowait> <C-v> <c-r>+
 inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
@@ -666,8 +667,10 @@ snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
-snoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-v> "+p
+" snoremap <silent> <nowait> <C-v> "+P
+snoremap <silent> <nowait> <C-v> <c-r>+
+" vnoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-v> <c-r>+
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
@@ -681,7 +684,7 @@ augroup BufWinIn
    autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
    autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
-   autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
+   autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
    autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
@@ -700,7 +703,7 @@ augroup END
 
 augroup Vim
    autocmd GuiEnter * winpos 1 1
-   autocmd VimEnter * :NERDTree | :wincmd p
+   autocmd VimEnter * :NERDTree | :wincmd p | startinsert
    autocmd VimEnter * call AutoCompleteInoremap()
 augroup END
 
