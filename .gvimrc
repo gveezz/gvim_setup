@@ -277,12 +277,18 @@ endfunction
 function! DeleteWord()
     
    " detect if we are
-   if len(getline('.')[col('.')-1])
-      normal! dw
-   elseif match(getline('.'), '^\s*$') != -1
-      normal! bdw
+   " if len(getline('.')[col('.')-1:])
+   "    normal! dw
+   " elseif match(getline('.'), '^\s*$') != -1
+   "    normal! b|dw
+   " endif
+   "
+   if match(getline('.')[col('.')-1:], '^\s*$') != -1
+      normal! b
    endif
-    
+
+   normal! dw
+   
 endfunction
 
 function! NerdTreeToggle()
