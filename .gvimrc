@@ -598,9 +598,9 @@ inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 inoremap <silent> <nowait> <C-z> <C-o>u
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
-"inoremap <silent> <nowait> <C-v> <C-o>"+P
-inoremap <silent> <nowait> <C-v> <c-r>+
-inoremap <silent> <nowait> <C-b> <C-o>:put "+<CR>
+inoremap <silent> <nowait> <C-v> <C-o>"+P
+inoremap <silent> <nowait> <C-Space> <c-r>+
+" inoremap <silent> <nowait> <C-Space> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
 inoremap <silent> <nowait> <Home> <C-o>^
@@ -667,14 +667,13 @@ snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
-" snoremap <silent> <nowait> <C-v> "+P
-snoremap <silent> <nowait> <C-v> <c-r>+
-" vnoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-v> <c-r>+
+snoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-v> 5>"+PgvloWhd
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
+vnoremap <silent> <nowait> <C-Space> <C-o>:put "+<CR>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
