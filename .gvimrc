@@ -217,8 +217,12 @@ endfunction
 function! BufferList() range
       
    :ls
-   let l:buffnum = input("Select buffer # from list: ")
-   exec ":b ".l:buffnum
+   let l:cmd = input("Type a buffer cmd [d => delete]: ")
+   if stridx(l:cmd, 'd') == 0
+      exec ":b".l:cmd. " | :bnext"
+   else
+      exec ":b ".l:cmd
+   endif
 
 endfunction
 
@@ -574,6 +578,7 @@ inoremap <silent> <nowait> <C-Right> <C-o>w
 inoremap <silent> <nowait> <C-Left> <C-o>b
 inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
 " show list of buffers
+inoremap <silent> <nowait> <M-l> <C-o>:call BufferList()<CR>
 inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 " prompt find on command line
 inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
@@ -661,7 +666,8 @@ snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
-vnoremap <silent> <nowait> <C-v> "+P
+snoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-v> "+p
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
@@ -674,7 +680,7 @@ augroup BufWinIn
    " refresh directory listing if entering NERDTree
    autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
-   " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
+   autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | set insertmode | else | set noinsertmode | endif
    autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
