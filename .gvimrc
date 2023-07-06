@@ -674,12 +674,11 @@ vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
 snoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-v> 5>"+PgvloWhd
+vnoremap <silent> <nowait> <C-v> "+P
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
-vnoremap <silent> <nowait> <C-Space> <C-o>:put "+<CR>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
@@ -717,7 +716,7 @@ augroup Verilog
    autocmd!
    autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
    autocmd BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog
-   autocmd BufNewFile,BufRead *.v,.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+   autocmd BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
    autocmd BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
    autocmd BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
       
