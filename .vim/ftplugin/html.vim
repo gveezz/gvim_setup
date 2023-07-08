@@ -1,9 +1,14 @@
+augroup Html
+   autocmd!
+   autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
+augroup END
+
 function! MdToPdf()
-   
+
    let l:convProg = "pandoc"
    let l:cFileName = expand("%")
    let l:cFileNameNoExt = expand("%:r")
-   
+
    if executable(l:convProg) == 1
       exec ":!".l:convProg." -f markdown-implicit_figures -t latex ".l:cFileName." -o ".l:cFileNameNoExt.".pdf"
       echom "Converted"

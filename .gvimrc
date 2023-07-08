@@ -712,11 +712,11 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
+   " autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
    autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
-   autocmd BufEnter NERD_tree_*, | stopinsert
+   " autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
@@ -738,23 +738,23 @@ augroup Vim
    autocmd VimEnter * call AutoCompleteInoremap()
 augroup END
 
-augroup Verilog
+" augroup Verilog
+"
+"    autocmd!
+"    autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
+"    autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog
+"    autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+"    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
+"    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
+"
+" augroup END
 
-   autocmd!
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
+" augroup Markdown
+"    autocmd!
+"    autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
+" augroup END
 
-augroup END
-
-augroup Markdown
-   autocmd!
-   autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
-augroup END
-
-augroup Html
-   autocmd!
-   autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
-augroup END
+" augroup Html
+"    autocmd!
+"    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
+" augroup END
