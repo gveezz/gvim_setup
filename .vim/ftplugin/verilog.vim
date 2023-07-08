@@ -1,3 +1,4 @@
+autocmd BufEnter * startinsert
 autocmd BufEnter,BufNewFile,BufRead,BufWritePost *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
    autocmd BufEnter,BufNewFile,BufRead,BufWritePost *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog
    autocmd BufEnter,BufNewFile,BufRead,BufWritePost *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif

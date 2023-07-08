@@ -134,15 +134,15 @@ function! PrintVimrcVersion()
 	call EchoYellowMsg(g:vimrcv)
 endfunction
 
-function! EnterWinBuffer()
-
-   if (&ft != 'help' && &ft != 'netrw' && &ft != 'nerdtree' && &buftype != 'terminal')
-       silent! lcd %:p:h | startinsert
-   else
-	    silent! stopinsert
-   endif
-
-endfunction
+" function! EnterWinBuffer()
+"
+"    if (&ft != 'help' && &ft != 'netrw' && &ft != 'nerdtree' && &buftype != 'terminal')
+"        silent! lcd %:p:h | startinsert
+"    else
+" 	    silent! stopinsert
+"    endif
+"
+" endfunction
 
 "function! CtrlPExec()
 "    stopinsert | CtrlP l:path
@@ -167,11 +167,11 @@ endfunction
 
 function! GuiSave() range
 
-   let l:cpos = getpos('.')
+   " let l:cpos = getpos('.')
    if (&ft == 'nerdtree')
      call EchoYellowMsg("Hey dude, you're in nerdtree window...")
    else
-     :%s/\s*$//g
+     " :%s/\s*$//g
      if empty(bufname('%'))
          browse confirm write
      else
@@ -179,7 +179,7 @@ function! GuiSave() range
      endif
    endif
 
-   call cursor(l:cpos[1], l:cpos[2])
+   " call cursor(l:cpos[1], l:cpos[2])
 
 endfunction
 
@@ -547,21 +547,41 @@ function! ExecCmd()
 
 endfunction
 
-function! AdvPage()
+function! RePage()
+
+   let l:winheight = winheight('.')
+   let l:firstvline = line('w0')
+   let l:bufirstline = 1
+
+   if (l:firstvline - l:bufirstline) >= l:winheight
+      let l:linejmp = l:winheight - float2nr(ceil(l:winheight/2))
+   else
+      let l:linejmp = (line('.') - l:bufirstline)
+   endif
+
+   exec "-".l:linejmp
+
+endfunction
+
+function! AvPage()
 
    let l:winheight = winheight('.')
    let l:lastvline = line('w$')
-   let l:bufflastline = line('$')
+   let l:buflastline = line('$')
 
-   if (l:lastvline + l:winheight) > l:bufflastline
-      let l:linejmp = (l:bufflastline - l:lastvline)
+   " if (l:lastvline + l:winheight) > l:buflastline
+   "    let l:linejmp = (l:buflastline - l:lastvline)
+   " else
+   "    let l:linejmp = l:winheight
+   " endif
+   if (l:buflastline - l:lastvline) >= l:winheight
+      let l:linejmp = l:winheight + float2nr(ceil(l:winheight/2))
+      " float2nr(ceil(l:winheight/2))
    else
-      let l:linejmp = l:winheight
+      let l:linejmp = (l:buflastline - l:lastvline)
    endif
 
-   " echom l:linejmp | 0.5sleep
    exec "+".l:linejmp
-
 
 endfunction
 
@@ -639,7 +659,8 @@ inoremap <silent> <nowait> <M-v> <C-o><S-v>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 " inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
-inoremap <silent> <nowait> <PageDown> <C-o>:call AdvPage()<CR>
+inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
+inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 
 " nnoremap
 nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
@@ -654,8 +675,8 @@ nnoremap <silent> <nowait> <C-z> u
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
 nnoremap <silent> <nowait> <M-w> <C-w>w
-nnoremap <silent> <nowait> <PageDown> :call AdvPage()<CR>
-
+nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
+nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
 "cnoremap
 cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
@@ -705,8 +726,8 @@ vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
-snoremap <silent> <nowait> <PageDown> <C-o>:call AdvPage()<CR>
-
+snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
+snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
@@ -720,7 +741,7 @@ augroup BufWinIn
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
-
+   " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
 augroup END
 
 augroup Insert

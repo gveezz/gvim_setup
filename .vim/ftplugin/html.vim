@@ -1,3 +1,4 @@
+autocmd BufEnter * startinsert
 autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 
 
