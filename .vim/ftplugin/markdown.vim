@@ -1,7 +1,4 @@
-augroup Markdown
-   autocmd!
-   autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
-augroup END
+autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
 
 function! MdToPdf()
 

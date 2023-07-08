@@ -53,7 +53,7 @@ set shiftwidth=3
 set softtabstop=0
 set expandtab
 set tabstop=3
-"set autoindent
+" set autoindent
 set smartindent
 set cindent
 " set copyindent
@@ -66,7 +66,7 @@ set statusline=%{GetMode()}\ %F\ %m\ %#StatusLineR#%r%*\ buff#%n\ (l:\ %l/%L\ \(
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
 " set splitbelow
-"set ignorecase
+" set ignorecase
 set nocul
 set formatoptions=tcj
 set mouse=ivn
@@ -718,7 +718,7 @@ augroup BufWinIn
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
    " autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
-   autocmd BufEnter,BufAdd,BufCreate,BufNewFile * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | call AddFtDict() | endif
+   autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
 
 augroup END
