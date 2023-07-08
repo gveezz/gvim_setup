@@ -167,11 +167,11 @@ endfunction
 
 function! GuiSave() range
 
-   let l:cpos = getpos('.')
+   " let l:cpos = getpos('.')
    if (&ft == 'nerdtree')
      call EchoYellowMsg("Hey dude, you're in nerdtree window...")
    else
-     :%s/\s*$//g
+     " :%s/\s*$//g
      if empty(bufname('%'))
          browse confirm write
      else
@@ -179,7 +179,7 @@ function! GuiSave() range
      endif
    endif
 
-   call cursor(l:cpos[1], l:cpos[2])
+   " call cursor(l:cpos[1], l:cpos[2])
 
 endfunction
 
@@ -720,7 +720,7 @@ augroup BufWinIn
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
-
+   autocmd BufWritePre * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
 augroup END
 
 augroup Insert
