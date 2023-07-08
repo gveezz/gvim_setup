@@ -1,6 +1,6 @@
 let $VIMHOME = $HOME."/.vim"
 
-let g:popupBufferPattern = "Select %f (%n) from %p directory" 
+let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
 " let mapleader = ','
 let g:NERDTreeMouseMode = 3
@@ -54,7 +54,7 @@ set softtabstop=0
 set expandtab
 set tabstop=3
 "set autoindent
-set smartindent 
+set smartindent
 set cindent
 " set copyindent
 set smarttab
@@ -67,7 +67,7 @@ set backspace=indent,eol,start
 set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
 " set splitbelow
 "set ignorecase
-set nocul      
+set nocul
 set formatoptions=tcj
 set mouse=ivn
 set mousehide
@@ -135,13 +135,13 @@ function! PrintVimrcVersion()
 endfunction
 
 function! EnterWinBuffer()
-    
+
    if (&ft != 'help' && &ft != 'netrw' && &ft != 'nerdtree' && &buftype != 'terminal')
        silent! lcd %:p:h | startinsert
    else
 	    silent! stopinsert
    endif
-	
+
 endfunction
 
 "function! CtrlPExec()
@@ -154,7 +154,7 @@ endfunction
 
 " indent file in one shot
  function! Indent()
-     
+
          let cursor_pos = getpos(".")
          " indent
          normal! gg=G
@@ -162,21 +162,24 @@ endfunction
          " return to cursor position
          call setpos(".", cursor_pos)
          " endif
- 	
-endfunction 
+
+endfunction
 
 function! GuiSave() range
-   
-    if (&ft == 'nerdtree')
-        call EchoYellowMsg("Hey dude, you're in nerdtree window...")
-    else
-        :%s/\s*$//g
-        if empty(bufname('%'))
-            browse confirm write
-        else
-            w!
-        endif
-    endif
+
+   let l:cpos = getpos('.')
+   if (&ft == 'nerdtree')
+     call EchoYellowMsg("Hey dude, you're in nerdtree window...")
+   else
+     :%s/\s*$//g
+     if empty(bufname('%'))
+         browse confirm write
+     else
+         w!
+     endif
+   endif
+
+   call cursor(l:cpos[1], l:cpos[2])
 
 endfunction
 
@@ -194,14 +197,14 @@ endfunction
 " endfunction
 
 function! PopupBufferList()
-   
+
    "let l:topline = line("w0")
    "let l:botline = line("w$")
    "let l:midline = float2nr((l:topline + l:botline)/2)
    "let l:cpos = getpos(".")
    "let l:cpos[1] = l:midline
    "call setpos(".", l:cpos)
-   
+
    let menuName = "BuffersMenu"
    :aunmenu *
    " All 'possible' buffers that may exist
@@ -213,11 +216,11 @@ function! PopupBufferList()
       silent! :exec ":amenu ]".menuName.".".menuitem." :b! ".string(nbuff)."<CR>"
    endfor
    silent! :exec ":popup ]".menuName
-   
+
 endfunction
 
 function! BufferList() range
-      
+
    :ls
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    if stridx(l:cmd, 'd') == 0
@@ -241,20 +244,20 @@ function! GetMode()
       return 'INSERT  '
 
    elseif l:ms == 'v' || l:ms == 'V'
-	   
+
       :hi StatusLine guifg=#AF8FFF
       return 'VISUAL  '
 
    elseif l:ms == 's' || l:ms == 'S'
-	   
-      :hi StatusLine guifg=#AF8FFF 
+
+      :hi StatusLine guifg=#AF8FFF
       return 'SELECT  '
-      
+
    elseif l:ms == 'R' || l:ms == 'Rv'
       return 'REPLACE '
 
    elseif l:ms == 't'
-	   
+
       :hi StatusLine guifg=#41DF25
       return 'TERMINAL'
 
@@ -262,7 +265,7 @@ function! GetMode()
 
       :hi StatusLine guifg=#FF9300
       return 'COMMAND '
-      
+
    else
       return l:ms
    endif
@@ -272,12 +275,12 @@ function! DeleteLineChars()
    normal! ^d$
 endfunction
 
-function! DeleteLine() 
+function! DeleteLine()
    normal! dd
 endfunction
 
 function! DeleteWord()
-    
+
    " detect if we are
    " if len(getline('.')[col('.')-1:])
    "    normal! dw
@@ -290,11 +293,11 @@ function! DeleteWord()
    endif
 
    normal! dw
-   
+
 endfunction
 
 function! NerdTreeToggle()
-   
+
    let l:winnr = winnr("$")
    " if NERDTree is open
    if &ft == 'netrw' || &ft == 'nerdtree'
@@ -313,7 +316,7 @@ function! NerdTreeToggle()
 endfunction
 
 function! InComment()
-   
+
    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
    if l:incomment >= 0
       call EchoYellowMsg("In Comment ".l:incomment)
@@ -330,7 +333,7 @@ endfunction
 " Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
 " An optional argument can specify which buffer to close (name or number).
 function! s:Bclose(bang, buffer)
-       
+
     if empty(a:buffer)
         let btarget = bufnr('%')
     elseif a:buffer =~ '^\d\+$'
@@ -338,7 +341,7 @@ function! s:Bclose(bang, buffer)
     else
         let btarget = bufnr(a:buffer)
     endif
-    
+
     if btarget < 0
         call s:Warn('No matching buffer for '.a:buffer)
         return
@@ -418,21 +421,21 @@ function! BetterBufferPrev() abort
 endfunction
 
 " function! Abbrev(match, replace)
-" 
+"
 "    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
 "    if l:incomment <= 0
 "       return a:replace
 "    else
 "       return a:match
-"         
+"
 " endfunction
 
 function! IabbrevSnippet()
-   
+
    let l:snippetStr = "snippet"
    let l:snippetsStr = l:snippetStr."s"
    let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
-   
+
    if filereadable(l:ftSnipFile) > 0
       "echom "Snippet file".l:ftSnipFile." found"
       " exec "setlocal dict+=".l:ftdictpath
@@ -450,9 +453,9 @@ function! IabbrevSnippet()
 endfunction
 
 function! AddFtDict()
-      
+
    let l:ftdictpath = $VIMHOME."/dictionary/".&ft.".txt"
-   
+
    if filereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath
    endif
@@ -460,7 +463,7 @@ function! AddFtDict()
 endfunction
 
 function! CleverTab()
-   
+
    if pumvisible() == 0
       if getline('.')[col('.') - 2] =~ '\w'
          return "\<C-N>\<C-P>"
@@ -474,19 +477,19 @@ function! CleverTab()
 endfunction
 
 function! FeedCompletePopUp()
-   
+
    return "\<C-N>\<C-P>"
 
 endfunction
 
 function! PromptBufferOption()
-   
+
    echom "buffer x/c(lose)/n(ew)/o(pen): "
    let l:char = getchar()
    if l:char == 99 || l:char == 120
       " c
       exec ":silent! Bclose!"
-      if (winnr('$') > 2) 
+      if (winnr('$') > 2)
          exec ":silent! :close!"
       endif
    elseif l:char == 110
@@ -516,7 +519,7 @@ function! GoToLine()
 
    let l:line = input("Go to line: ")
    exec ":".l:line
-   
+
 endfunction
 
 function! PromptFindI()
@@ -541,6 +544,24 @@ function! ExecCmd()
 
    let l:cmd = input(":")
    exec ":".l:cmd
+
+endfunction
+
+function! AdvPage()
+
+   let l:winheight = winheight('.')
+   let l:lastvline = line('w$')
+   let l:bufflastline = line('$')
+
+   if (l:lastvline + l:winheight) > l:bufflastline
+      let l:linejmp = (l:bufflastline - l:lastvline)
+   else
+      let l:linejmp = l:winheight
+   endif
+
+   " echom l:linejmp | 0.5sleep
+   exec "+".l:linejmp
+
 
 endfunction
 
@@ -604,7 +625,7 @@ inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 inoremap <silent> <nowait> <C-k> <C-o>dd
 inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 inoremap <silent> <nowait> <C-z> <C-o>u
-inoremap <silent> <nowait> <C-y> <C-o>:redo<CR> 
+inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
 inoremap <silent> <nowait> <C-v> <C-o>"+P
 inoremap <silent> <nowait> <C-Space> <c-r>+
@@ -618,7 +639,9 @@ inoremap <silent> <nowait> <M-v> <C-o><S-v>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 " inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
+inoremap <silent> <nowait> <PageDown> <C-o>:call AdvPage()<CR>
 
+" nnoremap
 nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
 " inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
@@ -631,7 +654,8 @@ nnoremap <silent> <nowait> <C-z> u
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
 nnoremap <silent> <nowait> <M-w> <C-w>w
- 
+nnoremap <silent> <nowait> <PageDown> :call AdvPage()<CR>
+
 "cnoremap
 cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
@@ -681,11 +705,12 @@ vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
+snoremap <silent> <nowait> <PageDown> <C-o>:call AdvPage()<CR>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
-   
+
    " refresh directory listing if entering NERDTree
    autocmd BufEnter * if (&ft == "nerdtree") | silent! execute 'normal R' | endif
    " ensure NERDTree is always open
@@ -699,12 +724,12 @@ augroup BufWinIn
 augroup END
 
 augroup Insert
-   
+
    " autocmd InsertCharPre * startinsert
    autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
-   autocmd InsertEnter * hi Cursor guibg=#00ff00 
+   autocmd InsertEnter * hi Cursor guibg=#00ff00
    autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
-  
+
 augroup END
 
 augroup Vim
@@ -721,7 +746,7 @@ augroup Verilog
    autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
-      
+
 augroup END
 
 augroup Markdown
