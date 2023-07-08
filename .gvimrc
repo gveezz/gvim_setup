@@ -742,6 +742,7 @@ augroup BufWinIn
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
+
 augroup END
 
 augroup Insert
