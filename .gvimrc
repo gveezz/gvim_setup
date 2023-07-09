@@ -21,7 +21,7 @@ let g:NERDTreeMinimalUI = 1
 
 colorscheme simozz4
 
-set insertmode
+" set insertmode
 set magic
 " set autochdir
 set nocompatible
@@ -749,7 +749,7 @@ augroup BufWinIn
    " ensure NERDTree is always open
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
-   autocmd BufEnter NERD_tree_*, | stopinsert
+   autocmd WinEnter,BufEnter NERD_tree_* | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
@@ -774,8 +774,7 @@ augroup END
 augroup Verilog
 
    autocmd!
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set textwidth=80 | set wrapmargin=0 | set linebreak
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog
+   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
    autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
