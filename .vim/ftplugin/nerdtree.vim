@@ -1,5 +1,3 @@
-autocmd BufEnter * stopinsert | silent! execute 'normal R'
-
 nnoremap <silent> <buffer> i <nop>
 nnoremap <silent> <nowait> <buffer> <Esc> <C-w>w
 nnoremap <silent> <buffer> <C-b> <nop>

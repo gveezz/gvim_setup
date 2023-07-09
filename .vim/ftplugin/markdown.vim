@@ -1,6 +1,3 @@
-autocmd BufEnter * startinsert
-autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
-
 function! MdToPdf()
 
    let l:convProg = "pandoc"

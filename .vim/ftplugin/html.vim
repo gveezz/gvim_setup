@@ -1,7 +1,3 @@
-autocmd BufEnter * startinsert
-autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
-
-
 function! MdToPdf()
 
    let l:convProg = "pandoc"

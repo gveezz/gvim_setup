@@ -1,1 +1,2 @@
-autocmd BufEnter * stopinsert
+
+
