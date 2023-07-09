@@ -7,7 +7,7 @@ let g:NERDTreeMouseMode = 3
 let g:NERDTreeShowLineNumbers = 0
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeChDirMode = 0
 let g:NERDTreeMinimalUI = 1
 " let g:ctrlp_clear_cache_on_exit = 1
@@ -591,7 +591,7 @@ let g:multiedit_auto_restore = 1
 let g:multiedit_no_mappings = 1
 
 " inoremap
-inoremap <silent> <nowait> <F2> <nop>
+inoremap <silent> <nowait> <F2> <C-o>:NERDTreeToggle<CR>
 inoremap <silent> <nowait> <F3> <nop>
 inoremap <silent> <nowait> <F4> <nop>
 inoremap <silent> <nowait> <F5> <nop>
@@ -663,6 +663,18 @@ inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
 inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 
 " nnoremap
+noremap <silent> <nowait> <F2> :NERDTreeToggle<CR>
+inoremap <silent> <nowait> <F3> <nop>
+inoremap <silent> <nowait> <F4> <nop>
+inoremap <silent> <nowait> <F5> <nop>
+inoremap <silent> <nowait> <F6> <nop>
+inoremap <silent> <nowait> <F7> <nop>
+inoremap <silent> <nowait> <F8> <nop>
+inoremap <silent> <nowait> <F9> <nop>
+inoremap <silent> <nowait> <F9> <nop>
+inoremap <silent> <nowait> <F11> <nop>
+inoremap <silent> <nowait> <F12> <nop>
+inoremap <silent> <nowait> <F13> <nop>
 nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
 " inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
@@ -682,7 +694,7 @@ cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
 
 "snoremap, vnoremap
-snoremap <silent> <nowait> <F2> <nop>
+snoremap <silent> <nowait> <F2> <C-o>:NERDTreeToggle<CR>
 snoremap <silent> <nowait> <F3> <nop>
 snoremap <silent> <nowait> <F4> <nop>
 snoremap <silent> <nowait> <F5> <nop>
@@ -735,9 +747,8 @@ augroup BufWinIn
    " refresh directory listing if entering NERDTree
    autocmd BufEnter * if (&ft == "nerdtree") | silent! exec 'R' | endif
    " ensure NERDTree is always open
-   autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
+   " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
-   autocmd BufEnter,Win
    autocmd BufEnter NERD_tree_*, | stopinsert
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
@@ -756,7 +767,7 @@ augroup END
 
 augroup Vim
    autocmd GuiEnter * winpos 1 1
-   autocmd VimEnter * :NERDTree | :wincmd p | startinsert
+   " autocmd VimEnter * :NERDTree | :wincmd p | startinsert
    autocmd VimEnter * call AutoCompleteInoremap()
 augroup END
 
