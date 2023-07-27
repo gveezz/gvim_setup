@@ -745,7 +745,7 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter * if (&ft == "nerdtree") | silent! exec 'R' | endif
+   autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
    " ensure NERDTree is always open
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
