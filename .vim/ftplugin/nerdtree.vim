@@ -1,5 +1,10 @@
 nnoremap <silent> <buffer> i <nop>
 nnoremap <silent> <nowait> <buffer> <Esc> <C-w>w
+
+silent! nunmap <F11>
+nnoremap <silent> <buffer> i <nop>
+"nnoremap <silent> <nowait> <buffer> <Esc> <C-w>w
+nnoremap <silent> <buffer> <Esc> :NERDTreeClose<CR>
 nnoremap <silent> <buffer> <C-b> <nop>
 nnoremap <silent> <buffer> <C-l> <nop>
 nnoremap <silent> <buffer> <M-d> <nop>

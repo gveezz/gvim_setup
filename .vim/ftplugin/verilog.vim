@@ -1,4 +1,4 @@
-set cinkeys+=begin,end
+" set cinkeys+=begin,#
 let b:verilog_indent_modules = 1
 
 function! AddLineComment()
@@ -23,7 +23,7 @@ function! AlignComment()
 
    :'<,'>Tab /\/\/
 
-endfunction
+endfunctio
 
 function! AlignDeclarations()
 
@@ -40,6 +40,13 @@ function! AlignParams()
 
 endfunction
 
+function! AlignIoInstance()
+
+   :'<,'>Tab /(/l0
+   :'<,'>Tab /)/l0
+
+endfunction
+
 function! PromptAlign()
 
    return input("Prompt the alignment char sequence:Tab /")
@@ -49,9 +56,11 @@ endfunction
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>'<<End>
 snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call AlignComment()<CR>'<<End>
-inoremap <buffer> <nowait> <M-t> <C-o>:Tab/<C-R>=PromptAlign()<CR>
-snoremap <buffer> <nowait> <M-t> <C-o>:Tab/<C-R>=PromptAlign()<CR>
+inoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
+snoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
 inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>
 snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>
 inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
 snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
+snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call AlignIoInstance()<CR>
+

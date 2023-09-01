@@ -20,19 +20,19 @@ let g:NERDTreeMinimalUI = 1
 " let loaded_bclose = 1
 
 colorscheme simozz4
-
+helptags ~/.vim/doc
 " set insertmode
 set magic
-" set autochdir
+set autochdir
 set nocompatible
 let skip_defaults_vim=1
 set noshowmode
 set viminfo=""
 set incsearch
-filetype plugin indent on
+filetype plugin on
 syntax enable
-"set syntax=auto
-" set timeout timeoutlen=10 ttimeoutlen=1
+" set syntax=auto
+set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
 " set tags=tags;/
 set noswapfile
@@ -47,7 +47,7 @@ set guioptions+=a
 set virtualedit=onemore
 set whichwrap=<,>,[,]
 set selection=exclusive
-set selectmode=mouse,key
+set selectmode=key,mouse
 set keymodel=startsel,stopsel
 set shiftwidth=3
 set softtabstop=0
@@ -58,7 +58,8 @@ set smartindent
 set cindent
 " set copyindent
 set smarttab
-set number relativenumber
+set number 
+set relativenumber
 set guifont=Monospace\ 12
 set background=dark
 set laststatus=2
@@ -69,7 +70,8 @@ set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-bli
 " set ignorecase
 set nocul
 set formatoptions=tcj
-set mouse=ivn
+set mouse=inv
+" set mousefocus
 set mousehide
 set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
@@ -90,6 +92,14 @@ syntax enable
 " set linebreak
 set columns=100
 " set history=1000
+set wc=<Tab>
+"set wildmode=longest,list,full
+"set wildmenu
+"set wildoptions=tagfile
+
+" word separators
+set iskeyword-=.
+set iskeyword-=_
 
 " --- CUSTOM FUNCTIONS
 function! Eatchar(pat)
@@ -162,11 +172,21 @@ endfunction
          " return to cursor position
          call setpos(".", cursor_pos)
          " endif
+function! Indent()
+
+   let cursor_pos = getpos(".")
+   " indent
+   normal! gg=G
+   "normal! =
+   " return to cursor position
+   call setpos(".", cursor_pos)
+   " endif
 
 endfunction
 
 function! GuiSave() range
 
+   
    " let l:cpos = getpos('.')
    if (&ft == 'nerdtree')
      call EchoYellowMsg("Hey dude, you're in nerdtree window...")
@@ -509,7 +529,7 @@ function! AutoCompleteInoremap()
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '//', '\\' , '_', '<BS>' ]
+        \ '//', '\\' , '_']
   for key in s:keysMappingDriven
     execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
   endfor
@@ -519,6 +539,15 @@ function! GoToLine()
 
    let l:line = input("Go to line: ")
    exec ":".l:line
+
+endfunction
+
+function! PromptHelp()
+
+   let l:helpstr = input("Help: ")
+   if len(l:helpstr) != 0
+      exec ":h ".l:helpstr
+   endif
 
 endfunction
 
@@ -560,6 +589,14 @@ function! RePage()
    endif
 
    exec "-".l:linejmp
+      " let l:linejmp = l:winheight - float2nr(ceil(l:winheight/2))
+      call feedkeys("\<PageUp>", "n")
+   else
+      let l:linejmp = (line('.') - l:bufirstline)
+      exec "-".l:linejmp
+   endif
+
+   " exec "-".l:linejmp:..
 
 endfunction
 
@@ -582,6 +619,19 @@ function! AvPage()
    endif
 
    exec "+".l:linejmp
+      " let l:linejmp = l:winheight + float2nr(ceil(l:winheight/2))
+      " float2nr(ceil(l:winheight/2))
+      call feedkeys("\<PageDown>", "n")
+   else
+      if (l:buflastline != l:lastvline)
+         let l:linejmp = (l:buflastline - l:lastvline)
+         exec "+".l:linejmp
+      else
+          exec ":".l:buflastline
+      endif
+   endif
+
+   "exec "+".l:linejmp
 
 endfunction
 
@@ -593,6 +643,7 @@ let g:multiedit_no_mappings = 1
 " inoremap
 inoremap <silent> <nowait> <F2> <C-o>:NERDTreeToggle<CR>
 inoremap <silent> <nowait> <F3> <nop>
+inoremap <silent> <nowait> <F3> <C-o><C-w>w
 inoremap <silent> <nowait> <F4> <nop>
 inoremap <silent> <nowait> <F5> <nop>
 inoremap <silent> <nowait> <F6> <nop>
@@ -600,10 +651,12 @@ inoremap <silent> <nowait> <F7> <nop>
 inoremap <silent> <nowait> <F8> <nop>
 inoremap <silent> <nowait> <F9> <nop>
 inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F11> <nop>
+inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=190<CR>" : "<C-o>:set columns=100<CR>"
 inoremap <silent> <nowait> <F12> <nop>
 inoremap <silent> <nowait> <F13> <nop>
-inoremap <silent> <nowait> <C-c> <C-o>:call ExecCmd()<CR>
+" jump before the first non-blank of the current line
+inoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
+inoremap <silent> <nowait> <C-c> <C-o>:
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
 inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
@@ -611,8 +664,11 @@ inoremap <silent> <nowait> <M-i> <C-o>:Multiedit!<CR>
 inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
 inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" inoremap <silent> <nowait> <C-Enter> <Esc>
+inoremap <expr> <silent> <nowait> <Space> strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$' ? "<Tab>" : "<Space>"
 " inoremap <silent> <nowait> <M-n> <C-o>:
-inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
+" inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
+inoremap <silent> <nowait> <C-Del> <C-o>dw
 inoremap <silent> <nowait> <S-Del> <nop>
 inoremap <silent> <nowait> <C-kMultiply> <C-o>*
 inoremap <silent> <nowait> <C-kDivide> <C-o>/
@@ -620,11 +676,11 @@ inoremap <silent> <nowait> <C-kPlus> <C-o>n
 inoremap <silent> <nowait> <C-kMinus> <C-o>N
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 " inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
-"inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
+" inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
-inoremap <silent> <nowait> <C-Right> <C-o>w
-inoremap <silent> <nowait> <C-Left> <C-o>b
+" inoremap <silent> <nowait> <C-Right> <C-o>w
+" inoremap <silent> <nowait> <C-Left> <C-o>ge<Right>
 inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
 " show list of buffers
 inoremap <silent> <nowait> <M-l> <C-o>:call BufferList()<CR>
@@ -637,10 +693,10 @@ inoremap <silent> <nowait> <M-f> <C-o>:call PromptReplI()<CR>
 " opens a new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
 " goes to the next tab
-inoremap <silent> <nowait> <C-PageDown> <C-o>:tabnext<CR>
+inoremap <silent> <nowait> <M-Right> <C-o>:tabnext<CR>
 " goes to the previous tab
-inoremap <silent> <nowait> <C-PageUp> <C-o>:tabprev<CR>
-
+inoremap <silent> <nowait> <M-Left> <C-o>:tabprev<CR>
+" inoremap <expr> <silent> <nowait> <C-s> pumvisible() ? "<Esc>" : "<C-o>:call GuiSave()<CR>"
 inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 inoremap <silent> <nowait> <C-k> <C-o>dd
 inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
@@ -649,13 +705,19 @@ inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
 inoremap <silent> <nowait> <C-v> <C-o>"+P
 inoremap <silent> <nowait> <C-Space> <c-r>+
+" inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
+inoremap <silent> <nowait> <C-v> <C-o>"+P
+inoremap <silent> <nowait> <C-V> <c-r>+
 " inoremap <silent> <nowait> <C-Space> <C-o>:put "+<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
 inoremap <silent> <nowait> <Home> <C-o>^
 inoremap <silent> <nowait> <S-Home> <C-o>v^
 inoremap <silent> <nowait> <M-w> <C-o><C-w>w
-inoremap <silent> <nowait> <M-v> <C-o><S-v>
+" start visual block mode 
+inoremap <silent> <nowait> <M-v> <C-o><C-v>
+" start visual line mode
+inoremap <silent> <nowait> <C-M-v> <C-o><S-v>
 " open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 " inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
@@ -680,6 +742,32 @@ nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
 " inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
 nnoremap <silent> <nowait> k j
 nnoremap <silent> <nowait> j k
+inoremap <silent> <nowait> <MiddleMouse> <nop>
+inoremap <silent> <nowait> <C-S-Right> <S-Right>e
+inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
+inoremap <silent> <nowait> <C-Down> <C-o>:call BetterBufferNext()<CR>
+inoremap <silent> <nowait> <C-h> <C-o>:call PromptHelp()<CR>
+
+" nnoremap
+nnoremap <silent> <nowait> <Esc> :set insertmode<CR>
+nnoremap <silent> <nowait> <F2> :NERDTreeToggle<CR>
+nnoremap <silent> <nowait> <F3> <C-w>w
+nnoremap <silent> <nowait> <F4> <nop>
+nnoremap <silent> <nowait> <F5> <nop>
+nnoremap <silent> <nowait> <F6> <nop>
+nnoremap <silent> <nowait> <F7> <nop>
+nnoremap <silent> <nowait> <F8> <nop>
+nnoremap <silent> <nowait> <F9> <nop>
+nnoremap <silent> <nowait> <F9> <nop>
+nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=190<CR>" : "<C-o>:set columns=100<CR>"
+nnoremap <silent> <nowait> <F12> <nop>
+nnoremap <silent> <nowait> <F13> <nop>
+nnoremap <silent> <nowait> <M-w> <C-w>w
+
+nnoremap <silent> <nowait> <Up> k
+nnoremap <silent> <nowait> <Down> j
+nnoremap <silent> <nowait> <Left> l
+nnoremap <silent> <nowait> <Right> h
 nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR><Down>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-k> dd
@@ -689,6 +777,14 @@ nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
 nnoremap <silent> <nowait> <M-w> <C-w>w
 nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
 nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
+nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
+nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
+nnoremap <silent> <nowait> <MiddleMouse> <nop>
+nnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+nnoremap <silent> <nowait> <C-Up> :call BetterBufferPrev()<CR>
+nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CR>
+nnoremap <silent> <nowait> <C-h> :call PromptHelp()<CR>
+
 "cnoremap
 cnoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <nowait> <C-v> <C-r>"
@@ -716,19 +812,46 @@ vnoremap <silent> <nowait> <F8> <nop>
 vnoremap <silent> <nowait> <F9> <nop>
 vnoremap <silent> <nowait> <F9> <nop>
 vnoremap <silent> <nowait> <F11> <nop>
+" visual and select
+vnoremap <silent> <nowait> <F2> <Esc><C-o>:NERDTreeToggle<CR>
+vnoremap <silent> <nowait> <F3> <Esc><C-w>w
+vnoremap <silent> <nowait> <F4> <Esc>
+vnoremap <silent> <nowait> <F5> <Esc>
+vnoremap <silent> <nowait> <F6> <Esc>
+vnoremap <silent> <nowait> <F7> <Esc>
+vnoremap <silent> <nowait> <F8> <Esc>
+vnoremap <silent> <nowait> <F9> <Esc>
+vnoremap <silent> <nowait> <F9> <Esc>
+vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=190<CR>" : "<Esc>:set columns=100<CR>"
 vnoremap <silent> <nowait> <F12> <nop>
-vnoremap <silent> <nowait> <F13> <nop>
-snoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
-snoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
-snoremap <silent> <nowait> <M-v> <nop>
+
+snoremap <silent> <nowait> <F2> <Esc><C-o>:NERDTreeToggle<CR>
+snoremap <silent> <nowait> <F3> <Esc><C-w>w
+snoremap <silent> <nowait> <F4> <Esc>
+snoremap <silent> <nowait> <F5> <Esc>
+snoremap <silent> <nowait> <F6> <Esc>
+snoremap <silent> <nowait> <F7> <Esc>
+snoremap <silent> <nowait> <F8> <Esc>
+snoremap <silent> <nowait> <F9> <Esc>
+snoremap <silent> <nowait> <F9> <Esc>
+snoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=190<CR>" : "<Esc>:set columns=100<CR>"
+snoremap <silent> <nowait> <F12> <nop>
+
+xnoremap <silent> <nowait> <Up> k
+xnoremap <silent> <nowait> <Down> j
+xnoremap <silent> <nowait> <Left> h
+xnoremap <silent> <nowait> <Right> l
+xnoremap <silent> <nowait> <ScrollWheelUp>   <Esc><Up><Up><Up>
+xnoremap <silent> <nowait> <ScrollWheelDown> <Esc><Down><Down><Down>
+snoremap <silent> <nowait> <ScrollWheelUp>   <Esc><Up><Up><Up>
+snoremap <silent> <nowait> <ScrollWheelDown> <Esc><Down><Down><Down>
+vnoremap <silent> <nowait> <M-v> <nop>
 vnoremap <silent> <nowait> <C-Space> w
-snoremap <silent> <nowait> <Backspace> <Del>
+xnoremap <silent> <nowait> <Backspace> d
+snoremap <silent> <nowait> <Backspace> d
 vnoremap <silent> <nowait> <C-Backspace> b
-snoremap <silent> <nowait> <C-z> u
-snoremap <silent> <nowait> <C-k> dl
-snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
-snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
+vnoremap <silent> <nowait> <C-z> u
+vnoremap <silent> <nowait> <C-k> dl
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
@@ -740,6 +863,22 @@ snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
 snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
 snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
+" snoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> <C-k> Vd
+vnoremap <silent> <nowait> <M-o> <nop>
+" snoremap <silent> <nowait> <M-w> <C-o><C-w>w
+vnoremap <silent> <nowait> <C-s> <nop>
+vnoremap <silent> <nowait> <MiddleMouse> <nop>
+
+snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
+snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
+snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
+snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
+snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
+
+vnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
@@ -750,10 +889,18 @@ augroup BufWinIn
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
    autocmd WinEnter,BufEnter NERD_tree_* | stopinsert
+   autocmd BufEnter NERD_tree_* set noinsertmode | silent! execute 'normal R'
+   " ensure NERDTree is always open
+   " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
+   " autocmd BufEnter * if ((&ft != "help") && (&ft != "nerdtree") && (&ft != "netrw")) | :NERDTree | :wincmd p | endif
+   autocmd BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | if (mode() != 'i') | set insertmode | nohlsearch | endif | endif
+   autocmd BufEnter NERD_tree_*,help* set noinsertmode
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
    " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
+   " autocmd WinEnter,BufWinEnter,BufEnter NERD_tree_* set noinsertmode
+   autocmd WinLeave * set nohlsearch
 augroup END
 
 augroup Insert
@@ -768,6 +915,12 @@ augroup END
 augroup Vim
    autocmd GuiEnter * winpos 1 1
    " autocmd VimEnter * :NERDTree | :wincmd p | startinsert
+augroup END <C-o>
+
+augroup Vim
+   autocmd GuiEnter * winpos 100 50
+   " autocmd VimEnter * if argc() == 0 | :NERDTree | set noinsertmode | endif
+   " autocmd VimEnter * if isdirectory(bufname('%')) | :NERDTree | set noinsertmode | endif
    autocmd VimEnter * call AutoCompleteInoremap()
 augroup END
 
@@ -776,6 +929,8 @@ augroup Verilog
    autocmd!
    autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
    autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
+   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
 

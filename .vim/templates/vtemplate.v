@@ -18,9 +18,11 @@ module <module_name>
 (
    // <Interface name>
    // -- inputs
-   <input_name>,
+   Reset_n,
+   SClk,
+   DataIn,
    //--  outputs
-   <output_name>
+   DataOut
 );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,8 +42,10 @@ module <module_name>
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-input <input_name>;         // description comment
-output <output_name>;       // description comment
+input  Reset_n; // comment here
+input  SClk;    // comment here
+input  DataIn;  // comment here
+output DataOut; // comment here
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal parameters (localparams)
@@ -51,7 +55,7 @@ output <output_name>;       // description comment
 // Registered outputs
 ////////////////////////////////////////////////////////////////////////////////
 
-reg <output_name>;
+reg DataOut;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Virtually registered output (combinational regs)
@@ -77,8 +81,8 @@ reg <output_name>;
 // Module description
 ////////////////////////////////////////////////////////////////////////////////
 
-always @(posedge clk or negedge reset_n) begin
-   if (!reset_n) begin 
+always @(posedge SClk or negedge Reset_n) begin
+   if (!Reset_n) begin 
       // handle async reset logic here
    end else begin
       // handle sync clk logic here
