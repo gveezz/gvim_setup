@@ -162,16 +162,6 @@ function! Explore()
    silent! exec ":Explore|only<CR>"
 endfunction
 
-" indent file in one shot
- function! Indent()
-
-         let cursor_pos = getpos(".")
-         " indent
-         normal! gg=G
-         "normal! =
-         " return to cursor position
-         call setpos(".", cursor_pos)
-         " endif
 function! Indent()
 
    let cursor_pos = getpos(".")
