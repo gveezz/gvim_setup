@@ -1,8 +1,14 @@
-let $VIMHOME = $HOME."/.vim"
+let $VIMHOME = "/home/".$USER."/.vim/"
+
+" if version >= 700 && version < 800
+"    let $VIMRUNTIME = $HOME."/.vim74/"
+" elseif version >= 800 && version < 900
+"    let $VIMRUNTIME = $HOME."/.vim82/"
+" endif
 
 let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
-" let mapleader = ','
+let mapleader = ','
 let g:NERDTreeMouseMode = 3
 let g:NERDTreeShowLineNumbers = 0
 let g:NERDTreeDirArrows = 1
@@ -10,22 +16,57 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeChDirMode = 0
 let g:NERDTreeMinimalUI = 1
-" let g:ctrlp_clear_cache_on_exit = 1
-" let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
-" let g:AutoCloseOn = 1
+let g:NERDTreeHijackNetrw=1
+let g:NERDTreeAutoDeleteBuffer=1
+
+let g:indentLine_enabled = 1
+let g:indentLine_faster = 1
+
+" hide netrw menu
+" let g:netrw_banner = 0
+" tree listing
+" let g:netrw_liststyle = 0
+" open files in new tab
+" let g:netrw_browse_split = 0
+" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+" let g:netrw_fastbrowse = 0
+
+" let g:vim_current_word#enabled = 1
+" " Twins of word under cursor:
+" let g:vim_current_word#highlight_twins = 1
+" " The word under cursor:
+" let g:vim_current_word#highlight_current_word = 1
+" let g:vim_current_word#highlight_delay = 0
+" let g:vim_current_word#highlight_only_in_focused_window = 1
+"
+" let g:NERDTreeMapActivateNode='o'
+" let g:NERDTreeMapOpenInTab='o'
+let g:ctrlp_clear_cache_on_exit = 1
+let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
+let g:AutoCloseOn = 1
 
 " if v:version < 700 || exists('loaded_bclose') || &cp
 "     finish
 " endif
 " let loaded_bclose = 1
+"
+let b:did_indent = 1
+let skip_defaults_vim=1
 
-colorscheme simozz4
+let g:indentLine_enabled = 1
+let g:indentLine_setColors = 1
+" let g:indentLine_defaultGroup = 'SpecialKey'
+let g:indentLine_color_gui = '#AAAAAA'
+let g:indentLine_char_list = ['|']
+
 helptags ~/.vim/doc
-" set insertmode
+set runtimepath^=$VIMRUNTIME
+set helpfile=$VIMRUNTIME/doc/help.txt
+set nocompatible
+colorscheme simozz4
+"set insertmode
 set magic
 set autochdir
-set nocompatible
-let skip_defaults_vim=1
 set noshowmode
 set viminfo=""
 set incsearch
@@ -38,41 +79,51 @@ set timeout timeoutlen=10 ttimeoutlen=1
 set noswapfile
 set autoread
 set autowrite
-set clipboard=autoselect
+set clipboard=unnamed
+set guioptions+=a
 set guioptions-=m
 set guioptions-=T
 set guioptions-=e
-" set guioptions-=r
 set guioptions+=a
+set guioptions+=h
+set guioptions+=b
+set guioptions+=r
+" set guioptions=-l
 set virtualedit=onemore
 set whichwrap=<,>,[,]
 set selection=exclusive
-set selectmode=key,mouse
+set selectmode=mouse,key
 set keymodel=startsel,stopsel
 set shiftwidth=3
 set softtabstop=0
 set expandtab
 set tabstop=3
 " set autoindent
-set smartindent
-set cindent
+" set smartindent
+" set cindent
 " set copyindent
+set noautoindent
+set nosmartindent
+set nocindent
+set indentexpr=
 set smarttab
-set number 
-set relativenumber
-set guifont=Monospace\ 12
+set number
+" set relativenumber
+set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
-set statusline=%{GetMode()}\ %F\ %m\ %#StatusLineR#%r%*\ buff#%n\ (l:\ %l/%L\ \(%p%%),\ c:\ %c,\ B:\ %o\)
+set showcmd
+" set statusline=%{GetMode()}\ %F\ %m\ %#StatusLine#%r%*\ BUFF#%n\ WIN#%{winnr()}\ (L:\ %l/%L\ \(%p%%),\ C:\ %c,\ BYTES:\ %o\)
+set statusline=%{GetMode()}\ %F\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)
 set backspace=indent,eol,start
-set guicursor=n:ver100-blinkoff0-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
+set guicursor=n:ver25-blinkon500-blinkoff500-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
 " set splitbelow
-" set ignorecase
+set ignorecase
 set nocul
 set formatoptions=tcj
-set mouse=inv
-" set mousefocus
+set mouse=a
 set mousehide
+" set mousefocus
 set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
 set lazyredraw
@@ -81,25 +132,34 @@ set splitright
 set complete=.
 set complete+=k
 set completeopt+=menuone,preview
-set hidden
+" set hidden
 set hlsearch
 set incsearch
 set timeoutlen=0
 syntax enable
-" set textwidth=80
 " set wrapmargin=0
 " set columns=80
 " set linebreak
-set columns=100
+" set wrap
+" set linebreak
+" note trailing space at end of next line
+" set columns=999
+" set lines=51
 " set history=1000
-set wc=<Tab>
-"set wildmode=longest,list,full
-"set wildmenu
-"set wildoptions=tagfile
+" set wc=<Tab>
+" set wildmode=longest,list,full
+set wildmenu
+" set wildoptions=tagfile
+set tabline=%!MyTabLine()
+set showtabline=2
+set guitablabel=%{GuiTabLabel()}
+" set splitbelow
+set splitright
+" tab sball
+" set guiheadroom=0
+set equalalways
 
-" word separators
-set iskeyword-=.
-set iskeyword-=_
+let g:bclose_multiple = 1
 
 " --- CUSTOM FUNCTIONS
 function! Eatchar(pat)
@@ -121,6 +181,12 @@ endfunction
 
 function! EchoYellowMsg(msg)
   echohl StatusLineY
+  echo a:msg
+  echohl None
+endfunction
+
+function! EchoWarnMsg(msg)
+  echohl WarningMsg
   echo a:msg
   echohl None
 endfunction
@@ -158,10 +224,77 @@ endfunction
 "    stopinsert | CtrlP l:path
 "endfunction
 
-function! Explore()
-   silent! exec ":Explore|only<CR>"
+function! GuiTabLabel()
+	  let label = ''
+	  let bufnrlist = tabpagebuflist(v:lnum)
+
+	  " Add '+' if one of the buffers in the tab page is modified
+	  for bufnr in bufnrlist
+	    if getbufvar(bufnr, "&modified")
+	      let label = '+'
+	      break
+	    endif
+	  endfor
+
+	  " Append the number of windows in the tab page if more than one
+	  let wincount = tabpagewinnr(v:lnum, '$')
+	  if wincount > 1
+	    let label .= 'w('.wincount.')'
+	  endif
+	  if label != ''
+	    let label .= ' '
+	  endif
+
+	  " Append the buffer name
+     let &guitabtooltip = fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]), ":p")
+     return label . fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]),  ":t")
 endfunction
 
+function! MyTabLine()
+	  let s = ''
+	  for i in range(tabpagenr('$'))
+	    " select the highlighting
+	    if i + 1 == tabpagenr()
+	      let s .= '%#TabLineSel#'
+	    else
+	      let s .= '%#TabLine#'
+	    endif
+
+	    " set the tab page number (for mouse clicks)
+	    let s .= '%' . (i + 1) . 'T'
+
+	    " the label is made by MyTabLabel()
+	    let s .= ' %{MyTabLabel(' . (i + 1) . ')} |'
+	  endfor
+
+	  " after the last tab fill with TabLineFill and reset tab page nr
+	  let s .= '%#TabLineFill#%T'
+
+	  " right-align the label to close the current tab page
+	  if tabpagenr('$') > 1
+	    let s .= '%=%#TabLineFill#%999Xx'
+	  endif
+
+	  return s
+endfunction
+
+function! MyTabLabel(n)
+   let buflist = tabpagebuflist(a:n)
+   let winnr = tabpagewinnr(a:n)
+   return fnamemodify(bufname(buflist[winnr - 1]), ":t")
+endfunction
+
+function! TestTabBuflist()
+
+   let tabn = tabpagenr()
+
+   let buflist = tabpagebuflist(tabn)
+   echom join(bufname(buflist))
+   " let winnr = tabpagewinnr(tabn)
+   " return bufname(buflist[winnr - 1])
+endfunction
+
+" indent file in one shot
 function! Indent()
 
    let cursor_pos = getpos(".")
@@ -176,37 +309,47 @@ endfunction
 
 function! GuiSave() range
 
-   
-   " let l:cpos = getpos('.')
    if (&ft == 'nerdtree')
-     call EchoYellowMsg("Hey dude, you're in nerdtree window...")
+      call EchoYellowMsg("Hey dude, you're in nerdtree window...")
    else
      " :%s/\s*$//g
-     if empty(bufname('%'))
+      if empty(bufname('%'))
          browse confirm write
-     else
-         w!
-     endif
+      else
+         :w!
+      endif
+      " :
    endif
 
-   " call cursor(l:cpos[1], l:cpos[2])
+   :IndentLinesReset
 
 endfunction
 
-" function! GetActiveBuffers()
-"     let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
-"     let l:result = []
-"     for l:item in l:blist
-"         "skip unnamed buffers; also skip hidden buffers?
-"         if empty(l:item.name) || l:item.hidden
-"             continue
-"         endif
-"         call add(l:result, shellescape(l:item.name))
-"     endfor
-"     return l:result
-" endfunction
+function! AdjustFontSize(amount)
 
-function! PopupBufferList()
+   let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+   let s:minfontsize = 6
+   let s:maxfontsize = 16
+
+   let fontname = substitute(&guifont, s:pattern, '\1', '')
+   let cursize = substitute(&guifont, s:pattern, '\2', '')
+   let newsize = cursize + a:amount
+   if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
+   let newfont = fontname . newsize
+   let &guifont = newfont
+   endif
+
+endfunction
+
+function! LargerFont()
+  call AdjustFontSize(1)
+endfunction
+
+function! SmallerFont()
+  call AdjustFontSize(-1)
+endfunction
+
+function! ClearBufferList()
 
    "let l:topline = line("w0")
    "let l:botline = line("w$")
@@ -215,30 +358,52 @@ function! PopupBufferList()
    "let l:cpos[1] = l:midline
    "call setpos(".", l:cpos)
 
-   let menuName = "BuffersMenu"
-   :aunmenu *
    " All 'possible' buffers that may exist
    let b_all = range(1, bufnr('$'))
    " Unlisted ones
    let b_unl = filter(b_all, 'buflisted(v:val)')
    for nbuff in b_unl
-      let menuitem = substitute(bufname(nbuff), '\.', '\\.', 'g')
-      silent! :exec ":amenu ]".menuName.".".menuitem." :b! ".string(nbuff)."<CR>"
+      silent! :exec "bd! ".nbuff
    endfor
-   silent! :exec ":popup ]".menuName
 
 endfunction
 
-function! BufferList() range
+function! BufferList()
 
-   :ls
+   let l:b_all = range(1, bufnr('$'))
+
+   " Unlisted ones
+   let l:b_unl = filter(l:b_all, 'buflisted(v:val)')
+   for l:nbuff in l:b_unl
+      let l:menuitem = bufname(nbuff)
+      echohl StatusLineY
+      echon "[".l:nbuff."] "
+      echohl None
+      echohl StatusLineW
+      echon l:menuitem." ---> "
+      echohl None
+      echohl StatusLineY
+      echon "[".l:nbuff."]\n"
+      echohl None
+
+      " echom "[".l:nbuff."] ".l:menuitem
+   endfor
+   echohl None
+
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    if stridx(l:cmd, 'd') == 0
       exec ":b".l:cmd. " | :bnext"
+   elseif stridx(l:cmd, '*') == 0
+      exec ":%bwipeout!"
    else
       exec ":b ".l:cmd
    endif
+endfunction
 
+function! TabsList()
+   :tabs
+   let l:cmd = input("Type a tab #: ")
+   silent! exec ":tabn ".l:cmd
 endfunction
 
 function! GetMode()
@@ -310,7 +475,7 @@ function! NerdTreeToggle()
 
    let l:winnr = winnr("$")
    " if NERDTree is open
-   if &ft == 'netrw' || &ft == 'nerdtree'
+   if (&ft == 'nerdtree')
       " and it is not the only open window
       if l:winnr > 1
          " close NERDTree
@@ -320,6 +485,8 @@ function! NerdTreeToggle()
       " otherwise open it
       if g:NERDTree.IsOpen() == 0
          silent! :NERDTree
+      " else
+      "    silent! :NERDTreeClose
       endif
    endif
 
@@ -344,63 +511,63 @@ endfunction
 " An optional argument can specify which buffer to close (name or number).
 function! s:Bclose(bang, buffer)
 
-    if empty(a:buffer)
-        let btarget = bufnr('%')
-    elseif a:buffer =~ '^\d\+$'
-        let btarget = bufnr(str2nr(a:buffer))
-    else
-        let btarget = bufnr(a:buffer)
-    endif
+   if empty(a:buffer)
+       let btarget = bufnr('%')
+   elseif a:buffer =~ '^\d\+$'
+       let btarget = bufnr(str2nr(a:buffer))
+   else
+       let btarget = bufnr(a:buffer)
+   endif
 
-    if btarget < 0
-        call s:Warn('No matching buffer for '.a:buffer)
-        return
-    endif
-    if empty(a:bang) && getbufvar(btarget, '&modified')
-        "call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
-        Bclose!
-        return
-    endif
-    " Numbers of windows that view target buffer which we will delete.
-    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
-    if !g:bclose_multiple && len(wnums) > 1
-        call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
-        return
-    endif
-    let wcurrent = winnr()
-    for w in wnums
-        execute w.'wincmd w'
-        let prevbuf = bufnr('#')
-        if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
-            buffer #
-        else
-            bprevious
-        endif
-        if btarget == bufnr('%')
-            " Numbers of listed buffers which are not the target to be deleted.
-            let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-            " Listed, not target, and not displayed.
-            let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-            " Take the first buffer, if any (could be more intelligent).
-            let bjump = (bhidden + blisted + [-1])[0]
-            if bjump > 0
-                execute 'buffer '.bjump
-            else
-                execute 'enew'.a:bang
-            endif
-        endif
-    endfor
-    execute 'bdelete'.a:bang.' '.btarget
-    execute wcurrent.'wincmd w'
+   if btarget < 0
+       call s:Warn('No matching buffer for '.a:buffer)
+       return
+   endif
+   if empty(a:bang) && getbufvar(btarget, '&modified')
+       "call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+       Bclose!
+       return
+   endif
+   " Numbers of windows that view target buffer which we will delete.
+   let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+   if !g:bclose_multiple && len(wnums) > 1
+       call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+       return
+   endif
+   let wcurrent = winnr()
+   for w in wnums
+       execute w.'wincmd w'
+       let prevbuf = bufnr('#')
+       if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+           buffer #
+       else
+           bprevious
+       endif
+       if btarget == bufnr('%')
+           " Numbers of listed buffers which are not the target to be deleted.
+           let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+           " Listed, not target, and not displayed.
+           let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+           " Take the first buffer, if any (could be more intelligent).
+           let bjump = (bhidden + blisted + [-1])[0]
+           if bjump > 0
+               execute 'buffer '.bjump
+           else
+               execute 'enew'.a:bang
+           endif
+       endif
+   endfor
+   execute 'bdelete'.a:bang.' '.btarget
+   execute wcurrent.'wincmd w'
 endfunction
 
 function! BetterBufferNext() abort
 
-  for b in range(bufnr('%')+1, bufnr('$'))
-    if buflisted(b) && bufwinnr(b)==-1
-      exe "normal! :b".b."\<cr>"
+   for b in range(bufnr('%')+1, bufnr('$'))
+      if buflisted(b) && bufwinnr(b)==-1
+         exe "normal! :b".b."\<cr>"
       return
-    endif
+   endif
   endfor
 
   for b in range(1, bufnr('%')-1)
@@ -439,6 +606,16 @@ endfunction
 "       return a:match
 "
 " endfunction
+"
+
+function! LineAsSnippetOrComment(snippetToMatch)
+
+   let l:snipN = len(split(getline('.'), a:snippetToMatch))
+   let l:commIdx = stridx(getline('.')[:col('.')-1], '//')
+   let l:ret = (l:snipN > 0) || (l:commIdx >= 0)
+   return l:ret
+
+endfunction
 
 function! IabbrevSnippet()
 
@@ -447,14 +624,14 @@ function! IabbrevSnippet()
    let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
 
    if filereadable(l:ftSnipFile) > 0
-      "echom "Snippet file".l:ftSnipFile." found"
+      " echom "Snippet file".l:ftSnipFile." found"
       " exec "setlocal dict+=".l:ftdictpath
       for l:line in readfile(l:ftSnipFile, '', 100)
-         "echom "line = ".line
+         " echom "line = ".line
          if stridx(line, l:snippetStr) == 0
             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
             if len(l:snippetToMatch) > 0
-               exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." InComment() ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
+               exec "silent! :iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." LineAsSnippetOrComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
             endif
          endif
       endfor
@@ -472,44 +649,42 @@ function! AddFtDict()
 
 endfunction
 
-function! CleverTab()
+" function! CleverTab()
+"
+"    if pumvisible() == 0
+"       if getline('.')[col('.') - 2] =~ '\w'
+"          return "\<C-N>\<C-P>"
+"       else
+"          return "\<Tab>"
+"       endif
+"    else
+"       return "\<C-N>"
+"    endif
+"
+" endfunction
 
-   if pumvisible() == 0
-      if getline('.')[col('.') - 2] =~ '\w'
-         return "\<C-N>\<C-P>"
-      else
-         return "\<Tab>"
-      endif
-   else
-      return "\<C-N>"
-   endif
-
-endfunction
+" function! PromptBufferOption()
+"
+"    echom "buffer x/c(lose)/n(ew)/o(pen): "
+"    let l:char = getchar()
+"    if l:char == 99 || l:char == 120
+"       " c
+"       exec ":silent! Bclose!"
+"       if (winnr('$') > 2)
+"          exec ":silent! :close!"
+"       endif
+"    elseif l:char == 110
+"       " n
+"       exec ":enew!"
+"    elseif l:char == 111
+"       " o
+"       exec ":browse confirm e"
+"    endif
+"
+" endfunction
 
 function! FeedCompletePopUp()
-
    return "\<C-N>\<C-P>"
-
-endfunction
-
-function! PromptBufferOption()
-
-   echom "buffer x/c(lose)/n(ew)/o(pen): "
-   let l:char = getchar()
-   if l:char == 99 || l:char == 120
-      " c
-      exec ":silent! Bclose!"
-      if (winnr('$') > 2)
-         exec ":silent! :close!"
-      endif
-   elseif l:char == 110
-      " n
-      exec ":enew!"
-   elseif l:char == 111
-      " o
-      exec ":browse confirm e"
-   endif
-
 endfunction
 
 function! AutoCompleteInoremap()
@@ -519,44 +694,287 @@ function! AutoCompleteInoremap()
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '//', '\\' , '_']
+        \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '//', '\\' , '_']
   for key in s:keysMappingDriven
-    execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
+    silent! execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
   endfor
 endfunction
 
+" function! GoToLine()
+"
+"    let l:col = col('.')
+"    let l:line = input("Go to line: ")
+"    if (stridx(l:line, '+') == 0) || (stridx(l:line, '-') == 0)
+"       exec ":".l:line
+"    else
+"       call cursor(l:line, l:col)
+"    endif
+"
+" endfunction
+
 function! GoToLine()
 
-   let l:line = input("Go to line: ")
-   exec ":".l:line
+   let l:line = line('.')
+   let l:col = col('.')
+
+   let l:idx = 0
+   let l:strIn = ""
+   let l:cInEnter = 13
+   let l:cInEsc = 27
+   let l:cIn = 0
+   echon "Line: ".l:strIn
+
+   while l:cIn != l:cInEnter
+      let l:cIn = getchar()
+      let l:cInCh = nr2char(l:cIn)
+
+      " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
+      if l:cIn =~# '\d'
+         let l:strIn = l:strIn.l:cInCh
+         let l:idx = l:idx + 1
+      elseif l:cIn == "\<Backspace>"
+         if l:idx > 0
+            let l:idx = l:idx - 1
+            let l:strIn = strpart(l:strIn, 0, l:idx)
+         else
+            let l:idx = 0
+            let l:strIn = ""
+         endif
+      endif
+
+      if l:cIn != l:cInEsc
+         if strlen(l:strIn) > 0
+            call cursor(str2nr(l:strIn), l:col)
+         else
+            call cursor(1, l:col)
+         endif
+
+         redraw!
+         echon "Line: ".l:strIn
+      else
+         let l:cIn = l:cInEnter
+         call cursor(l:line, l:col)
+      endif
+   endwhile
 
 endfunction
 
-function! PromptHelp()
+" function! GoToLineCol()
+"
+"    let l:cLine = line('.')
+"    let l:cCol = col('.')
+"    let l:nLine = l:cLine
+"    let l:nCol = l:cCol
+"
+"    call inputrestore()
+"    let l:inStr = input("Go to [l (.),c]: ")
+"    call inputsave()
+"
+"    if len(l:inStr) == 0
+"       return
+"    endif
+"
+"    let l:splitStr = split(l:inStr, ",")
+"    let l:lineStr = l:splitStr[0]
+"    let l:colStr = l:cCol
+"    if len(l:splitStr) > 1
+"       let l:colStr = l:splitStr[1]
+"    endif
+"
+"    "echom "splitStr: ".join(l:splitStr) | sleep
+"    "echom "len splitStr: ".len(l:splitStr) | sleep
+"    "echom "Line: ".l:splitStr[0]." - Col: ".l:splitStr[1] | sleep
+"
+"    let l:nLine = l:cLine
+"    let l:nCol = l:cCol
+"
+"    if stridx(l:lineStr, '+') == 0
+"       let l:nLine = l:cLine + l:lineStr[1:]
+"    elseif stridx(l:lineStr, '-') == 0
+"       let l:nLine = l:cLine - l:lineStr[1:]
+"    elseif l:lineStr == '.'
+"       let l:nLine = l:cLine
+"    else
+"       let l:nLine = l:lineStr
+"    endif
+"
+"    if stridx(l:colStr, '+') == 0
+"       let l:nCol = l:cCol + l:colStr[1:]
+"    elseif stridx(l:colStr, '-') == 0
+"       let l:nCol = l:cCol - l:colStr[1:]
+"    elseif l:nCol == '.'
+"       let l:nCol = l:cCol
+"    elseif l:nCol == '$'
+"       let l:nCol = col('$')
+"    else
+"       let l:nCol = l:colStr
+"    endif
+"
+"    call cursor(l:nLine, l:nCol)
+" endfunction
 
-   let l:helpstr = input("Help: ")
-   if len(l:helpstr) != 0
-      exec ":h ".l:helpstr
-   endif
+" function! GoToCol()
+"
+"    let l:line = line('.')
+"    let l:col = input("Go to column: ")
+"    call cursor(l:line, l:col)
+"
+" endfunction
 
+" function! PromptHelp()
+"
+"    let l:helpstr = input("Help: ")
+"    if len(l:helpstr) != 0
+"       exec ":h ".l:helpstr
+"    endif
+"
+" endfunction
+
+" function! PromptFindI()
+"    :promptfind
+" endfunction
+
+" function! PromptReplI()
+"    :promptrepl
+" endfunction
+
+" pending interactive implementation
+" function! PromptFindI()
+"
+"    call inputrestore()
+"    let l:sword = input("[F] Find: ")
+"    call inputsave()
+"    echom l:sword
+"    silent! call search(l:sword, 'w')
+"
+" endfunction
+
+function! TestGetChar()
+   let l:c = 0
+   let l:cInEsc = 27
+   let l:cIn = 0
+   while l:cIn != l:cInEsc
+      let l:cIn = getchar()
+      echom "l:cIn = ".l:cIn." = nr2char(".l:cIn.") = ". nr2char(l:cIn)
+   endwhile
 endfunction
 
 function! PromptFindI()
-   :promptfind
+
+   let l:line = line('.')
+   let l:col = col('.')
+   let l:idx = 0
+   let l:strIn = ""
+   let l:cInEnter = 13
+   let l:cInEsc = 27
+   let l:cInCtrlV = 22
+   let l:cIn = 0
+
+   echon "[F] Find: "
+   " set hlsearch
+   while l:cIn != l:cInEnter
+
+      let l:cIn = getchar()
+      let l:cInCh = nr2char(l:cIn)
+
+      " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
+      if l:cIn == "\<Backspace>"
+         if l:idx > 0
+            let l:idx = l:idx - 1
+            let l:strIn = strpart(l:strIn, 0, l:idx)
+         else
+            let l:idx = 0
+            let l:strIn = ""
+         endif
+      elseif l:cIn == l:cInCtrlV
+         let l:strIn = l:strIn.@*
+         let l:idx = l:idx + strlen(@*)
+      else
+         let l:strIn = l:strIn.l:cInCh
+         let l:idx = l:idx + 1
+      endif
+
+      if l:cIn != l:cInEsc
+
+         if strlen(l:strIn) > 0
+            call search(l:strIn, 'wcz')
+            silent! exec ":match Search /".l:strIn."/"
+         endif
+
+         redraw!
+         echon "[F] Find: ".l:strIn
+
+      else
+         silent! exec ":match Search //"
+         let l:cIn = l:cInEnter
+         call cursor(l:line, l:col)
+         redraw!
+      endif
+   endwhile
+   " set nohlsearch
 endfunction
 
+" pending interactive implementation
+function! PromptReplExctI()
+   call inputrestore()
+   let l:cLine = line('.')
+   let l:cCol = col('.')
+   let l:sword = input("[F/R exct] Find: ")
+   let l:rword = input("[F/R exct] Repl: ")
+   call inputsave()
+   if len(l:rword) > 0
+      silent! exec ":%s/\\<".l:sword."\\>/".l:rword."/g"
+   endif
+   call cursor(l:cLine, l:cCol)
+endfunction
+
+" pending interactive implementation
 function! PromptReplI()
-   :promptrepl
+   call inputrestore()
+   let l:cLine = line('.')
+   let l:cCol = col('.')
+   let l:sword = input("[F/R] Find: ")
+   let l:rword = input("[F/R] Repl: ")
+   call inputsave()
+   if len(l:rword) > 0
+      silent! exec ":%s/".l:sword."/".l:rword."/g"
+   endif
+   call cursor(l:cLine, l:cCol)
 endfunction
 
+" pending interactive implementation
 function! PromptFindS()
    let l:sword = @*
-   exec ":promptfind ".l:sword
+   echom "[F] Find: ".l:sword
+   call search(l:sword, 'wcz')
+endfunction
+
+function! PromptReplExctS()
+   let l:cLine = line('.')
+   let l:cCol = col('.')
+   let l:sword = @*
+   echom "[F/R] Find: ".l:sword
+   call inputrestore()
+   let l:rword = input("[F/R exct] Repl: ")
+   call inputsave()
+   if len(l:rword) > 0
+      silent! exec ":%s/\\<".l:sword."\\>/".l:rword."/g"
+   endif
+   call cursor(l:cLine, l:cCol)
 endfunction
 
 function! PromptReplS()
+   let l:cLine = line('.')
+   let l:cCol = col('.')
    let l:sword = @*
-   exec ":promptrepl ".l:sword
+   echom "[F/R] Find: ".l:sword
+   call inputrestore()
+   let l:rword = input("[F/R] Repl: ")
+   call inputsave()
+   if len(l:rword) > 0
+      silent! exec ":%s/".l:sword."/".l:rword."/g"
+   endif
+   call cursor(l:cLine, l:cCol)
 endfunction
 
 function! ExecCmd()
@@ -568,359 +986,569 @@ endfunction
 
 function! RePage()
 
+   let l:cLine = line('.')
+   let l:cCol = col('.')
    let l:winheight = winheight('.')
    let l:firstvline = line('w0')
-   let l:bufirstline = 1
+   let l:bfirstline = 1
 
-   if (l:firstvline - l:bufirstline) >= l:winheight
-      let l:linejmp = l:winheight - float2nr(ceil(l:winheight/2))
+   if (l:firstvline - l:bfirstline) >= l:winheight
+      call cursor(l:cLine - l:winheight, l:cCol)
+      silent! z.
    else
-      let l:linejmp = (line('.') - l:bufirstline)
+      let l:linejmp = (line('.') - l:bfirstline)
+      call cursor(l:cLine - l:linejmp, l:cCol)
    endif
-
-   exec "-".l:linejmp
-      " let l:linejmp = l:winheight - float2nr(ceil(l:winheight/2))
-      call feedkeys("\<PageUp>", "n")
-   else
-      let l:linejmp = (line('.') - l:bufirstline)
-      exec "-".l:linejmp
-   endif
-
-   " exec "-".l:linejmp:..
 
 endfunction
 
 function! AvPage()
 
+   let l:cLine = line('.')
+   let l:cCol = col('.')
    let l:winheight = winheight('.')
    let l:lastvline = line('w$')
-   let l:buflastline = line('$')
+   let l:blastline = line('$')
 
-   " if (l:lastvline + l:winheight) > l:buflastline
-   "    let l:linejmp = (l:buflastline - l:lastvline)
-   " else
-   "    let l:linejmp = l:winheight
-   " endif
-   if (l:buflastline - l:lastvline) >= l:winheight
-      let l:linejmp = l:winheight + float2nr(ceil(l:winheight/2))
-      " float2nr(ceil(l:winheight/2))
+   if (l:blastline - l:lastvline) >= l:winheight
+      call cursor(l:cLine + l:winheight, l:cCol)
+      silent! z.
    else
-      let l:linejmp = (l:buflastline - l:lastvline)
+      call cursor(l:blastline, l:cCol)
    endif
-
-   exec "+".l:linejmp
-      " let l:linejmp = l:winheight + float2nr(ceil(l:winheight/2))
-      " float2nr(ceil(l:winheight/2))
-      call feedkeys("\<PageDown>", "n")
-   else
-      if (l:buflastline != l:lastvline)
-         let l:linejmp = (l:buflastline - l:lastvline)
-         exec "+".l:linejmp
-      else
-          exec ":".l:buflastline
-      endif
-   endif
-
-   "exec "+".l:linejmp
 
 endfunction
 
+function! GotoTab()
+   $tabmove
+   let bufnr = tabpagebuflist()[0]
+   let tabnr = tabpagenr()
+   for tabindex in range(1, tabpagenr('$'))
+      if tabnr == tabindex
+         continue
+      endif
+      let bufnrs = tabpagebuflist(tabindex)
+      let bufindex = index(bufnrs, bufnr)
+      if bufindex >= 0
+         execute "tabn" .. tabindex
+         execute "tabclose" .. tabnr
+         break
+      endif
+   endfor
+endfunction
 
-let g:multiedit_mark_character = '^'
-let g:multiedit_auto_restore = 1
-let g:multiedit_no_mappings = 1
+function! GoToFirstWin()
 
-" inoremap
-inoremap <silent> <nowait> <F2> <C-o>:NERDTreeToggle<CR>
-inoremap <silent> <nowait> <F3> <nop>
-inoremap <silent> <nowait> <F3> <C-o><C-w>w
-inoremap <silent> <nowait> <F4> <nop>
-inoremap <silent> <nowait> <F5> <nop>
-inoremap <silent> <nowait> <F6> <nop>
-inoremap <silent> <nowait> <F7> <nop>
-inoremap <silent> <nowait> <F8> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=190<CR>" : "<C-o>:set columns=100<CR>"
-inoremap <silent> <nowait> <F12> <nop>
-inoremap <silent> <nowait> <F13> <nop>
-" jump before the first non-blank of the current line
-inoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
-inoremap <silent> <nowait> <C-c> <C-o>:
-inoremap <silent> <nowait> <C-LeftMouse> <nop>
-inoremap <silent> <nowait> <C-RightMouse> <nop>
-inoremap <silent> <nowait> <M-q> <C-o>:MultieditAddMark i<CR>
-inoremap <silent> <nowait> <M-i> <C-o>:Multiedit!<CR>
-inoremap <silent> <nowait> <ScrollWheelUp> <Up><Up><Up>
-inoremap <silent> <nowait> <ScrollWheelDown> <Down><Down><Down>
+   exec "normal! 1\<C-w>w"
+
+endfunction
+
+function! GoToLastWin()
+
+   let l:lastWin = winnr('$')
+   silent! exec "normal! ".l:lastWin."\<C-w>w"
+
+endfunction
+
+function! GoToPrevWin()
+
+   let l:currWin = winnr()
+   if l:currWin > 1
+      let l:prevWin = l:currWin-1
+      exec "normal! ".l:prevWin."\<C-w>w"
+   endif
+
+endfunction
+
+function! GoToNextWin()
+
+   let l:currWin = winnr()
+   let l:nextWin = l:currWin
+   if l:currWin < winnr('$')
+      let l:nextWin = l:currWin+1
+      silent! exec "normal! ".l:nextWin."\<C-w>w"
+   end
+
+endfunction
+
+function! IsBlank( bufnr )
+    return (empty(bufname(a:bufnr)) &&
+    \ getbufvar(a:bufnr, '&modified') == 0 &&
+    \ empty(getbufvar(a:bufnr, '&buftype'))
+    \)
+endfunction
+
+function! ExistOtherBuffers( targetBufNr )
+    return ! empty(filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != a:targetBufNr'))
+endfunction
+
+function! IsEmptyVim()
+    let l:currentBufNr = bufnr('')
+    return IsBlank(l:currentBufNr) && ! ExistOtherBuffers(l:currentBufNr)
+endfunction
+
+function! CloseBuffer()
+
+   let l:ret = 0
+   if tabpagenr('$') > 1
+      " if winnr('$') > 1
+      "    silent! :bd!
+      " else
+      "    silent! :bd!
+      "    silent! :tabclose!
+      " endif
+      silent! :bd!
+   else
+      if winnr('$') == 1 && line('$') == 1 && getline('.') == ''
+         if IsEmptyVim()
+            call EchoWarnMsg('Last win empty buffer, q to quit')
+            if nr2char(getchar()) == 'q'
+               silent! :q
+            endif
+         else
+            silent! :bd!
+         endif
+      else
+         silent! :bd!
+      endif
+   endif
+
+endfunction
+
+" Increase or descrease guifont using mouse
+inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
+" inoremap <silent> <nowait> <C-RightRelease> <C-o>:call LargerFont()<CR>
+inoremap <silent> <nowait> <C-ScrollWheelDown> <C-o>:call SmallerFont()<CR>
+" inoremap <silent> <nowait> <C-LeftRelease> <C-o>:call SmallerFont()<CR>
+nnoremap <silent> <nowait> <C-ScrollWheelUp> :call LargerFont() <CR>
+" nnoremap <silent> <nowait> <C-RightRelease> :call LargerFont()<CR>
+nnoremap <silent> <nowait> <C-ScrollWheelDown> :call SmallerFont()<CR>
+" nnoremap <silent> <nowait> <C-LeftRelease> :call SmallerFont()<CR>
+
+" Scroll bar right
+inoremap <silent> <nowait> <M-PageUp> <C-o>10zh
+nnoremap <silent> <nowait> <M-PageUp> 10zh
+xnoremap <silent> <nowait> <M-PageUp> 10zh
+inoremap <silent> <nowait> <C-M-ScrollWheelUp> <C-o>10zh
+nnoremap <silent> <nowait> <C-M-ScrollWheelUp> 10zh
+snoremap <silent> <nowait> <C-M-ScrollWheelUp> <C-o>10zh
+
+" Scroll bar left
+inoremap <silent> <nowait> <M-PageDown> <C-o>10zl
+nnoremap <silent> <nowait> <M-PageDown> 10zl
+xnoremap <silent> <nowait> <M-PageDown> 10zl
+inoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
+nnoremap <silent> <nowait> <C-M-ScrollWheelDown> 10zl
+snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
+
+" C-o: goes to normal mode if insert mode. This makes less likely
+" to accidentally jump from insert and normal mode
+inoremap <silent> <nowait> <C-o> <Esc>
+nnoremap <silent> <nowait> <C-o> <nop>
+
+" Esc: return to normal mode if insert mode, or viceversa
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
-" inoremap <silent> <nowait> <C-Enter> <Esc>
-inoremap <expr> <silent> <nowait> <Space> strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$' ? "<Tab>" : "<Space>"
-" inoremap <silent> <nowait> <M-n> <C-o>:
-" inoremap <expr> <silent> <nowait> <Del> ((match(getline('.')[col('.'):], '\s*$') == 0) && (len(getline('.')[col('.'):]) > 0)) ? "<C-o>dw<Del>" : "<Del>"
-inoremap <silent> <nowait> <C-Del> <C-o>dw
-inoremap <silent> <nowait> <S-Del> <nop>
-inoremap <silent> <nowait> <C-kMultiply> <C-o>*
-inoremap <silent> <nowait> <C-kDivide> <C-o>/
-inoremap <silent> <nowait> <C-kPlus> <C-o>n
-inoremap <silent> <nowait> <C-kMinus> <C-o>N
-inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-" inoremap <expr> <silent> <nowait> <Tab> getline('.')[col('.') - 2] =~ '\w' ? "<C-N>" : "<Tab>"
-" inoremap <silent> <nowait> <Tab> <C-r>=CleverTab()<CR>
-inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
-inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
-" inoremap <silent> <nowait> <C-Right> <C-o>w
-" inoremap <silent> <nowait> <C-Left> <C-o>ge<Right>
-inoremap <silent> <nowait> <C-Backspace> <C-o>:call DeleteWord()<CR>
-" show list of buffers
-inoremap <silent> <nowait> <M-l> <C-o>:call BufferList()<CR>
-inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
-" prompt find on command line
-inoremap <silent> <nowait> <C-f> <C-o>:call PromptFindI()<CR>
-" prompt find and replace pop up window
-inoremap <silent> <nowait> <M-f> <C-o>:call PromptReplI()<CR>
-" inoremap <expr> <PageUp> (line('.') != winline()) ? "<C-o><PageUp>" : "<C-o>1G"
-" opens a new tab
-inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
-" goes to the next tab
-inoremap <silent> <nowait> <M-Right> <C-o>:tabnext<CR>
-" goes to the previous tab
-inoremap <silent> <nowait> <M-Left> <C-o>:tabprev<CR>
-" inoremap <expr> <silent> <nowait> <C-s> pumvisible() ? "<Esc>" : "<C-o>:call GuiSave()<CR>"
-inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
-inoremap <silent> <nowait> <C-k> <C-o>dd
-inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-inoremap <silent> <nowait> <C-z> <C-o>u
-inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
-inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
-inoremap <silent> <nowait> <C-v> <C-o>"+P
-inoremap <silent> <nowait> <C-Space> <c-r>+
-" inoremap <silent> <nowait> <C-j> <C-o>:call Indent()<CR>
-inoremap <silent> <nowait> <C-v> <C-o>"+P
-inoremap <silent> <nowait> <C-V> <c-r>+
-" inoremap <silent> <nowait> <C-Space> <C-o>:put "+<CR>
-inoremap <silent> <nowait> <C-a> <Esc>ggVG
-inoremap <nowait> <C-q> <C-o>:call PromptBufferOption()<CR>
-inoremap <silent> <nowait> <Home> <C-o>^
-inoremap <silent> <nowait> <S-Home> <C-o>v^
-inoremap <silent> <nowait> <M-w> <C-o><C-w>w
-" start visual block mode 
-inoremap <silent> <nowait> <M-v> <C-o><C-v>
-" start visual line mode
-inoremap <silent> <nowait> <C-M-v> <C-o><S-v>
-" open pop up window to open a file (or create one)
-inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
-" inoremap <silent> <nowait> <M-e> <C-o>:call NerdTreeToggle()<CR>
-inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
-inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
+nnoremap <silent> <nowait> <Esc> i
+if v:version >= 800
+   tnoremap <silent> <nowait> <Esc> <C-\><C-n>
+endif
 
-" nnoremap
-noremap <silent> <nowait> <F2> :NERDTreeToggle<CR>
-inoremap <silent> <nowait> <F3> <nop>
-inoremap <silent> <nowait> <F4> <nop>
-inoremap <silent> <nowait> <F5> <nop>
-inoremap <silent> <nowait> <F6> <nop>
+" M-n: go to normal mode from insert mode
+" inoremap <silent> <nowait> <M-n> <Esc>
+
+" C-e: open new empty buffer
+inoremap <silent> <nowait> <C-e> <C-o>:vnew!<CR>
+nnoremap <silent> <nowait> <C-e> :vnew!<CR>
+vnoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
+" snoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
+
+" C-d: open netrw vertical
+" inoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
+" nnoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
+" vnoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+" snoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+" inoremap <silent> <nowait> <C-,> <C-o>:Texplore<C-o>:$tabmove<CR>
+" nnoremap <silent> <nowait> <C-,> :Texplore<CR><C-o>:$tabmove<CR>
+" vnoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
+" snoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
+
+" C-d: open NERDTree
+inoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
+nnoremap <silent> <nowait> <C-d> :call NerdTreeToggle()<CR>
+vnoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
+snoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
+
+" C-h: open netrw horizontal split
+" inoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<C-o>:Texplore!<CR>" : "<C-o>:Hexplore!<CR>"
+" nnoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? ":Texplore!<CR>" : ":Hexplore!<CR>"
+" vnoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Texplore!<CR>" : "<Esc><C-o>:Hexplore!<CR>"
+" snoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Texplore!<CR>" : "<Esc><C-o>:Hexplore!<CR>"
+
+" F1-F12 mappings
+inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
+nnoremap <silent> <nowait> <F2> :call LargerFont()<CR>
+
+" F3: switch to next window
+inoremap <silent> <nowait> <F3> <C-o>:call SmallerFont()<CR>
+nnoremap <silent> <nowait> <F3> :call SmallerFont()<CR>
+
+" F4: open file to diff side by side
+inoremap <silent> <nowait> <F4> <C-o>:browse confirm vert diffsplit<CR>
+nnoremap <silent> <nowait> <F4> <C-o>:browse confirm vert diffsplit<CR>
+
+" S-F4: diffoff
+inoremap <silent> <nowait> <S-F4> <C-o>:diffoff<CR>
+nnoremap <silent> <nowait> <S-F4> <C-o>:diffoff<CR>
+
+" F5: increase vertical resize by 5 units
+inoremap <silent> <nowait> <F5> <C-o>:vertical resize +5<CR>
+nnoremap <silent> <nowait> <F5> :vertical resize +5<CR>
+
+" S-F5: descrease vertical resize by 5 units
+inoremap <silent> <nowait> <S-F5> <C-o>:vertical resize -5<CR>
+nnoremap <silent> <nowait> <S-F5> :vertical resize -5<CR>
+
+" F6: Turn off hlsearch highlight
+inoremap <silent> <nowait> <F6> <C-o>:set nohlsearch<CR>
+nnoremap <silent> <nowait> <F6> :set nohlsearch<CR>
+
+" F7 to F9 <nop>
 inoremap <silent> <nowait> <F7> <nop>
-inoremap <silent> <nowait> <F8> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F9> <nop>
-inoremap <silent> <nowait> <F11> <nop>
-inoremap <silent> <nowait> <F12> <nop>
-inoremap <silent> <nowait> <F13> <nop>
-nnoremap <silent> <nowait> <M-w> <C-o><C-w>w
-" inoremap <silent> <nowait> <M-Right> <C-o>:wincmd p<CR>
-" inoremap <expr> <M-t> bufexists('!/bin/bash') == 0 ? "<C-o>:terminal!<CR>" : ""
-nnoremap <silent> <nowait> k j
-nnoremap <silent> <nowait> j k
-inoremap <silent> <nowait> <MiddleMouse> <nop>
-inoremap <silent> <nowait> <C-S-Right> <S-Right>e
-inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
-inoremap <silent> <nowait> <C-Down> <C-o>:call BetterBufferNext()<CR>
-inoremap <silent> <nowait> <C-h> <C-o>:call PromptHelp()<CR>
-
-" nnoremap
-nnoremap <silent> <nowait> <Esc> :set insertmode<CR>
-nnoremap <silent> <nowait> <F2> :NERDTreeToggle<CR>
-nnoremap <silent> <nowait> <F3> <C-w>w
-nnoremap <silent> <nowait> <F4> <nop>
-nnoremap <silent> <nowait> <F5> <nop>
-nnoremap <silent> <nowait> <F6> <nop>
 nnoremap <silent> <nowait> <F7> <nop>
+inoremap <silent> <nowait> <F8> <nop>
 nnoremap <silent> <nowait> <F8> <nop>
+inoremap <silent> <nowait> <F9> <nop>
+inoremap <silent> <nowait> <F9> <nop>
 nnoremap <silent> <nowait> <F9> <nop>
-nnoremap <silent> <nowait> <F9> <nop>
-nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=190<CR>" : "<C-o>:set columns=100<CR>"
+inoremap <silent> <nowait> <F10> <nop>
+nnoremap <silent> <nowait> <F10> <nop>
+inoremap <silent> <nowait> <F12> <nop>
 nnoremap <silent> <nowait> <F12> <nop>
-nnoremap <silent> <nowait> <F13> <nop>
-nnoremap <silent> <nowait> <M-w> <C-w>w
-
-nnoremap <silent> <nowait> <Up> k
-nnoremap <silent> <nowait> <Down> j
-nnoremap <silent> <nowait> <Left> l
-nnoremap <silent> <nowait> <Right> h
-nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR><Down>
-nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
-nnoremap <silent> <nowait> <C-k> dd
-nnoremap <silent> <nowait> <C-z> u
-nnoremap <silent> <nowait> <C-y> :redo<CR>
-nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
-nnoremap <silent> <nowait> <M-w> <C-w>w
-nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
-nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
-nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
-nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
-nnoremap <silent> <nowait> <MiddleMouse> <nop>
-nnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
-nnoremap <silent> <nowait> <C-Up> :call BetterBufferPrev()<CR>
-nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CR>
-nnoremap <silent> <nowait> <C-h> :call PromptHelp()<CR>
-
-"cnoremap
-cnoremap <silent> <nowait> <S-Del> <nop>
-cnoremap <nowait> <C-v> <C-r>"
-
-"snoremap, vnoremap
-snoremap <silent> <nowait> <F2> <C-o>:NERDTreeToggle<CR>
-snoremap <silent> <nowait> <F3> <nop>
-snoremap <silent> <nowait> <F4> <nop>
-snoremap <silent> <nowait> <F5> <nop>
-snoremap <silent> <nowait> <F6> <nop>
-snoremap <silent> <nowait> <F7> <nop>
-snoremap <silent> <nowait> <F8> <nop>
-snoremap <silent> <nowait> <F9> <nop>
-snoremap <silent> <nowait> <F9> <nop>
-snoremap <silent> <nowait> <F11> <nop>
-snoremap <silent> <nowait> <F12> <nop>
-snoremap <silent> <nowait> <F13> <nop>
-vnoremap <silent> <nowait> <F2> <nop>
-vnoremap <silent> <nowait> <F3> <nop>
-vnoremap <silent> <nowait> <F4> <nop>
-vnoremap <silent> <nowait> <F5> <nop>
-vnoremap <silent> <nowait> <F6> <nop>
-vnoremap <silent> <nowait> <F7> <nop>
-vnoremap <silent> <nowait> <F8> <nop>
-vnoremap <silent> <nowait> <F9> <nop>
-vnoremap <silent> <nowait> <F9> <nop>
-vnoremap <silent> <nowait> <F11> <nop>
-" visual and select
-vnoremap <silent> <nowait> <F2> <Esc><C-o>:NERDTreeToggle<CR>
-vnoremap <silent> <nowait> <F3> <Esc><C-w>w
-vnoremap <silent> <nowait> <F4> <Esc>
-vnoremap <silent> <nowait> <F5> <Esc>
-vnoremap <silent> <nowait> <F6> <Esc>
 vnoremap <silent> <nowait> <F7> <Esc>
 vnoremap <silent> <nowait> <F8> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
-vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=190<CR>" : "<Esc>:set columns=100<CR>"
+"vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
 vnoremap <silent> <nowait> <F12> <nop>
-
-snoremap <silent> <nowait> <F2> <Esc><C-o>:NERDTreeToggle<CR>
-snoremap <silent> <nowait> <F3> <Esc><C-w>w
-snoremap <silent> <nowait> <F4> <Esc>
-snoremap <silent> <nowait> <F5> <Esc>
-snoremap <silent> <nowait> <F6> <Esc>
 snoremap <silent> <nowait> <F7> <Esc>
 snoremap <silent> <nowait> <F8> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
-snoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=190<CR>" : "<Esc>:set columns=100<CR>"
+" snoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
 snoremap <silent> <nowait> <F12> <nop>
 
+" C-j: open terminal with gvim 8*
+inoremap <silent> <nowait> <C-j> <C-o>:bel terminal<CR>
+nnoremap <silent> <nowait> <C-j> :bel terminal<CR>
+
+" F11: toggle full screen
+inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=100<CR>"
+nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=100<CR>"
+
+" <Home>: jump before the first non-blank of the current line
+inoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
+nnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+
+" C-c: command line mode
+inoremap <silent> <nowait> <C-c> <C-o>:
+nnoremap <silent> <nowait> <C-c> :
+
+inoremap <silent> <nowait> <C-LeftMouse> <nop>
+inoremap <silent> <nowait> <C-RightMouse> <nop>
+nnoremap <silent> <nowait> <C-LeftMouse> <nop>
+nnoremap <silent> <nowait> <C-RightMouse> <nop>
+
+" S-Del
+inoremap <silent> <nowait> <S-Del> <nop>
+cnoremap <silent> <nowait> <S-Del> <nop>
+
+" Enter: trigger snippet completitio if pumvisible, Enter otherwise
+inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+" Enter: add new line in normal mode
+" nnoremap <silent> <nowait> <CR> i<Enter><Esc>
+
+" Backspace: behave as in normal mode
+nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
+
+" Tab: advance completition selection if pumvisible, Tab otherwise
+inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
+
+" S-Tab: de-advance completition selection if pumvisible, inverse Tab otherwise
+inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
+
+" M-l: show tab files list
+inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
+nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
+
+" C-n: find next occurrence of word
+inoremap <silent> <nowait> <C-n> <C-o>*
+nnoremap <silent> <nowait> <C-n> *
+
+" C-b: find previous occurrence of word
+inoremap <silent> <nowait> <C-b> <C-o>#
+nnoremap <silent> <nowait> <C-b> #
+
+inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+nnoremap <nowait> <C-l> :call BufferList()<CR>
+vnoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+
+" C-f: prompt find
+inoremap <nowait> <C-f> <Esc>/
+nnoremap <nowait> <C-f> /
+snoremap <nowait> <C-f> <Esc><Esc>/<C-r>*
+xnoremap <nowait> <C-f> <Esc>/<C-r>*
+cnoremap <silent> <nowait> <C-f> <nop>
+
+" M-r: prompt replace
+inoremap <nowait> <M-f> <C-o>:call PromptReplI()<CR>
+nnoremap <nowait> <M-f> :call PromptReplI()<CR>
+snoremap <nowait> <M-f> <C-o>:call PromptReplS()<CR>
+
+" M-r: prompt replace exact match
+inoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctI()<CR>
+snoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctS()<CR>
+
+" C-s: save
+inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
+nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
+xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
+
+" C-k: delete line
+inoremap <silent> <nowait> <C-k> <C-o>dd
+nnoremap <silent> <nowait> <C-k> dd
+vnoremap <silent> <nowait> <C-k> dl
+
+" C-g: go to line and column
+inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
+nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+
+" C-z: undo changes
+inoremap <silent> <nowait> <C-z> <C-o>u
+nnoremap <silent> <nowait> <C-z> u
+
+" C-y: redo changes
+inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
+nnoremap <silent> <nowait> <C-y> :redo<CR>
+
+" C-v: Paste
+inoremap <nowait> <C-v> <C-o>"+P
+nnoremap <nowait> <C-v> "+P
+cnoremap <nowait> <C-v> <C-r>+
+
+" MiddleMouse: paste as well
+" inoremap <silent> <nowait> <MiddleMouse> <C-o>"+P
+" nnoremap <silent> <nowait> <MiddleMouse> "+P
+" xnoremap <silent> <nowait> <MiddleMouse> <nop>
+inoremap <silent> <nowait> <MiddleMouse> <nop>
+nnoremap <silent> <nowait> <MiddleMouse> <nop>
+vnoremap <silent> <nowait> <MiddleMouse> <nop>
+
+
+" M-v: block paste
+inoremap <silent> <nowait> <M-v> <c-r>+
+
+" C-Space: start visual block mode
+inoremap <silent> <nowait> <C-Space> <C-o><C-v>
+nnoremap <silent> <nowait> <C-Space> i
+vnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() == "V" ? "<Esc>" : "v"
+
+" C-a: select all
+inoremap <silent> <nowait> <C-a> <Esc>ggVG
+nnoremap <silent> <nowait> <C-a> ggVG
+
+" M-w: switch to the next window
+inoremap <silent> <nowait> <M-w> <C-o><C-w>w
+" M-p: switch to the previous window
+inoremap <silent> <nowait> <M-q> <C-o><C-w>p
+
+" M-Up: switch to the upper window
+inoremap <silent> <nowait> <M-Up> <C-o><C-w><Up>
+nnoremap <silent> <nowait> <M-Up> <C-w><Up>
+
+" M-Right: switch to the upper window
+inoremap <silent> <nowait> <M-Up> <C-o><C-w><Right>
+nnoremap <silent> <nowait> <M-Up> <C-w><Right>
+
+" M-Down
+inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
+nnoremap <silent> <nowait> <M-Down> <C-w><Down>
+
+" M-Left: switch to the upper window
+inoremap <silent> <nowait> <M-Up> <C-o><C-w><Left>
+nnoremap <silent> <nowait> <M-Up> <C-w><Left>
+
+" M-Right: switch to next window or tab
+inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR><C-o>:call GoToLastWin()<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>:call GoToLastWin()<CR>"
+if v:version >= 800
+   tnoremap <expr> <silent> <nowait> <C-PageUp> <nop>
+endif
+
+" M-Left: switch to previous window or tab
+inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR><C-o>:call GoToFirstWin()<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
+if v:version >= 800
+   tnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
+endif
+
+" M-o: open pop up window to open a file (or create one)
+inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
+nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
+
+" Better advance or reverse page
+inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
+nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
+inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
+nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
+
+" C-Right: forward word movement
+inoremap <expr> <silent> <nowait> <C-Right> getline('.')[col('.')-1] == ' ' ? "<C-o>w" : "<C-o>e<Right>"
+nnoremap <expr> <silent> <nowait> <C-Right> getline('.')[col('.')-1] == ' ' ? "w" : "e<Right>"
+" C-Left: Backward word movement
+inoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "<C-o>ge<Right>" : "<C-o>b"
+nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge<Right>" : "b"
+
+" C-x: close current buffer
+" inoremap <expr> <silent> <nowait> <C-x> tabpagenr('$') > 1 ? winnr('$') > 1 ? "<C-o>:bw! <CR>" : "<C-o>:tabclose!<CR>" : "<Esc>:call EchoWarnMsg('Last window, Alt+F4 to quit')<CR>"
+inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
+" nnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 && line('$') == 1 && getline('.') == '' ? ":bd!<CR>" : winnr('$') > 1 ? ":bd!<CR>" : ":tabclose!<CR>"
+nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
+if v:version >= 800
+   tnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 ? "exit<CR>" : winnr('$') > 1 ? "exit<CR>" : ":tabclose!<CR>"
+endif
+
+inoremap <silent> <nowait> <M-x> <C-o>:close!<CR>
+nnoremap <silent> <nowait> <M-x> :close!<CR>
+xnoremap <silent> <nowait> <M-x> <Esc>:close!<CR>
+
+" C-t: open new tab
+inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
+nnoremap <silent> <nowait> <C-t> :tabnew<CR>
+
+" C-Del
+inoremap <silent> <nowait> <C-Del> <C-o>dw
+nnoremap <silent> <nowait> <C-Del> dw
+
+" C-Backspace
+inoremap <silent> <nowait> <C-Backspace> <C-o>db
+nnoremap <silent> <nowait> <C-Backspace> db
+
+" End: go to end of line
+nnoremap <silent> <nowait> <End> $<Right>
+vnoremap <silent> <nowait> <End> $
+
+" <ScrollWheelUp> <ScrollWheelDown>
+inoremap <silent> <nowait> <ScrollWheelUp> <C-o>10k
+inoremap <silent> <nowait> <ScrollWheelDown> <C-o>10j
+nnoremap <silent> <nowait> <ScrollWheelUp> 10k
+nnoremap <silent> <nowait> <ScrollWheelDown> 10j
+xnoremap <silent> <nowait> <ScrollWheelUp> <Esc>10k
+xnoremap <silent> <nowait> <ScrollWheelDown> <Esc>10j
+vnoremap <silent> <nowait> <M-v> <nop>
 xnoremap <silent> <nowait> <Up> k
 xnoremap <silent> <nowait> <Down> j
 xnoremap <silent> <nowait> <Left> h
 xnoremap <silent> <nowait> <Right> l
-xnoremap <silent> <nowait> <ScrollWheelUp>   <Esc><Up><Up><Up>
-xnoremap <silent> <nowait> <ScrollWheelDown> <Esc><Down><Down><Down>
-snoremap <silent> <nowait> <ScrollWheelUp>   <Esc><Up><Up><Up>
-snoremap <silent> <nowait> <ScrollWheelDown> <Esc><Down><Down><Down>
-vnoremap <silent> <nowait> <M-v> <nop>
-vnoremap <silent> <nowait> <C-Space> w
+" vnoremap <silent> <nowait> <C-Space> w
 xnoremap <silent> <nowait> <Backspace> d
 snoremap <silent> <nowait> <Backspace> d
 vnoremap <silent> <nowait> <C-Backspace> b
 vnoremap <silent> <nowait> <C-z> u
-vnoremap <silent> <nowait> <C-k> dl
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
-snoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-v> "+P
-vnoremap <silent> <nowait> <C-k> Vd
-vnoremap <silent> <nowait> <M-o> <nop>
-snoremap <silent> <nowait> <M-w> <C-o><C-w>w
-snoremap <silent> <nowait> <C-s> <Esc><C-o>:call GuiSave()<CR>
-snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
-snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
-" snoremap <silent> <nowait> <C-v> "+P
+vnoremap <silent> <nowait> y "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 " snoremap <silent> <nowait> <M-w> <C-o><C-w>w
-vnoremap <silent> <nowait> <C-s> <nop>
-vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
-snoremap <silent> <nowait> <C-f> <C-o>:call PromptFindS()<CR>
-snoremap <silent> <nowait> <M-f> <C-o>:call PromptReplS()<CR>
-snoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
 snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
 snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 
+" Enclose word by {} [] () "" if visual selected
+xnoremap <silent> <nowait> [ di[<C-r><C-o>*]
+xnoremap <silent> <nowait> { di{<C-r><C-o>*}
+xnoremap <silent> <nowait> ( di(<C-r><C-o>*)
+xnoremap <silent> <nowait> " "<C-r><C-o>*"
+
+" Enclose word by {} [] () "" if selected
+snoremap <silent> <nowait> { {<C-r><C-o>*}
+snoremap <silent> <nowait> [ [<C-r><C-o>*]
+snoremap <silent> <nowait> ( (<C-r><C-o>*)
+snoremap <silent> <nowait> " "<C-r><C-o>*"
+
 vnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+snoremap <expr> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
+
+" C-S-Right/Left: select word under cursor
+inoremap <silent> <nowait> <C-S-Right> <S-Right>e<C-g>
+inoremap <silent> <nowait> <C-S-Left>  <S-Left>b<C-g>
+vnoremap <expr> <silent> <nowait> <C-S-Right> getline('.')[col('.')-1] == ' ' ? "w" : "e"
+vnoremap <expr> <silent> <nowait> <C-S-Left> getline('.')[col('.')-2] == ' ' ? "gel" : "b"
+
+" highlight the visual selection after pressing enter.
+"" snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
+"" vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter NERD_tree_* | silent! execute 'normal R'
-   " ensure NERDTree is always open
-   " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
-   autocmd WinEnter,BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | startinsert | else | stopinsert | endif
-   autocmd WinEnter,BufEnter NERD_tree_* | stopinsert
-   autocmd BufEnter NERD_tree_* set noinsertmode | silent! execute 'normal R'
+   autocmd BufEnter,BufRead NERD_tree_* stopinsert | silent! execute 'normal R'
+   " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")
+   autocmd BufEnter,BufRead help* stopinsert
+   autocmd BufEnter,BufRead netrw* stopinsert
    " ensure NERDTree is always open
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    " autocmd BufEnter * if ((&ft != "help") && (&ft != "nerdtree") && (&ft != "netrw")) | :NERDTree | :wincmd p | endif
-   autocmd BufEnter * if (&ft != "help" && &ft != "nerdtree" && &ft != "netrw") | if (mode() != 'i') | set insertmode | nohlsearch | endif | endif
-   autocmd BufEnter NERD_tree_*,help* set noinsertmode
+   " autocmd BufEnter * if (&ft != "help" && &ft != "netrw" && (&ft != "nerdtree")) | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
-   " autocmd BufAdd,BufCreate,BufNewFile * call IabbrevSnippet()
+
+   autocmd BufAdd * call IabbrevSnippet()
+   " autocmd BufEnter * if (&ft != "nerdtree") | wincmd T | endif
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
-   " autocmd WinEnter,BufWinEnter,BufEnter NERD_tree_* set noinsertmode
-   autocmd WinLeave * set nohlsearch
+   " autocmd WinNew,WinLeave * exec "normal! \<C-w>="
+   " autocmd BufCreate,BufDelete * exec "normal! \<C-w>="
 augroup END
 
 augroup Insert
-
+   autocmd!
    " autocmd InsertCharPre * startinsert
-   autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
+   " autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
+   autocmd InsertEnter * echo '' | set cul | :set nohlsearch
    autocmd InsertEnter * hi Cursor guibg=#00ff00
-   autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
+   " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
+   autocmd InsertLeave * :set hlsearch
+   autocmd InsertLeave * hi Cursor guibg=#FFE800
 
 augroup END
 
 augroup Vim
-   autocmd GuiEnter * winpos 1 1
-   " autocmd VimEnter * :NERDTree | :wincmd p | startinsert
-augroup END <C-o>
-
-augroup Vim
-   autocmd GuiEnter * winpos 100 50
+   autocmd!
+   autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
+   autocmd BufWritePost,BufNewFile,BufRead *.vim set filetype=vim
    " autocmd VimEnter * if argc() == 0 | :NERDTree | set noinsertmode | endif
    " autocmd VimEnter * if isdirectory(bufname('%')) | :NERDTree | set noinsertmode | endif
    autocmd VimEnter * call AutoCompleteInoremap()
+   " autocmd FileType netrw setlocal relativenumber
+   autocmd TabNew * :$tabmove
+   " autocmd TabLeave * if winnr('$') == 1 && &ft == "nerdtree" | silent! :NERDTreeClose | :tabclose | endif
+
 augroup END
 
 augroup Verilog
 
    autocmd!
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams*.sv if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+   " autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
+   autocmd BufWritePost,BufNewFile,BufRead *.v,*vbkp*,*.vams,*.vh,*.vinc,*.vf set filetype=verilog
+   autocmd BufWritePost,BufNewFile,BufRead *.sv*,*.svh*,*.svinc,*.svf set filetype=verilog
+   " | setlocal iskeyword-=_
+   " autocmd BufReadPost * silent! :%s/\s\+$//g
+   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.sv* if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
 
@@ -935,3 +1563,4 @@ augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 augroup END
+

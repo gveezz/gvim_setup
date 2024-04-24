@@ -1,11 +1,11 @@
-function! MdToPdf()
+function! HtmlToPdf()
 
    let l:convProg = "pandoc"
    let l:cFileName = expand("%")
    let l:cFileNameNoExt = expand("%:r")
 
    if executable(l:convProg) == 1
-      exec ":!".l:convProg." -f markdown-implicit_figures -t latex ".l:cFileName." -o ".l:cFileNameNoExt.".pdf"
+      exec ":!".l:convProg." -f html -t latex ".l:cFileName." -o ".l:cFileNameNoExt.".pdf"
       echom "Converted"
    else
       call EchoYellowMsg(l:convProg." not installed")

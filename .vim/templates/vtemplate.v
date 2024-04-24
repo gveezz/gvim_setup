@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-//              Copyright 2023 by KDPOF. All right reserved.
+//              Copyright 2024 by KDPOF. All right reserved.
 ////////////////////////////////////////////////////////////////////////////////
 // Component: <Component name here>
-// Date     : $Date: $ 
+// Date     : $Date: $
 // Version  : $Revision: $
 // Author   : SAZ
 // Summary  : <Component summary here>
@@ -11,18 +11,23 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-// Headers include 
+// Headers include
 ////////////////////////////////////////////////////////////////////////////////
 
-module <module_name>
+module module_name
 (
-   // <Interface name>
+   // System interface
    // -- inputs
-   Reset_n,
    SClk,
-   DataIn,
-   //--  outputs
-   DataOut
+   Reset_n,
+   SyncRst,
+   // Data interface
+   // --inputs
+   IDataVal,
+   IData,
+   // --outputs
+   ODataVal,
+   OData
 );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,10 +47,13 @@ module <module_name>
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-input  Reset_n; // comment here
-input  SClk;    // comment here
-input  DataIn;  // comment here
-output DataOut; // comment here
+input  SClk;     // comment here
+input  Reset_n;  // comment here
+input  SyncRst;  // comment here
+input  IDataVal; // comment here
+input  IData;    // comment here
+output ODataVal; // comment here
+output OData;    // comment here
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal parameters (localparams)
@@ -55,7 +63,8 @@ output DataOut; // comment here
 // Registered outputs
 ////////////////////////////////////////////////////////////////////////////////
 
-reg DataOut;
+reg ODataVal;
+reg OData;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Virtually registered output (combinational regs)
@@ -82,13 +91,18 @@ reg DataOut;
 ////////////////////////////////////////////////////////////////////////////////
 
 always @(posedge SClk or negedge Reset_n) begin
-   if (!Reset_n) begin 
-      // handle async reset logic here
+   if (!Reset_n) begin
+      ODataVal <= 0;
+      OData    <= 0;
    end else begin
       // handle sync clk logic here
+
+      if (SyncRst) begin
+         ODataVal <= 0;
+         OData    <= 0;
+      end
    end
 end
 
 endmodule
-
 
