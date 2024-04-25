@@ -63,7 +63,7 @@ helptags ~/.vim/doc
 set runtimepath^=$VIMRUNTIME
 set helpfile=$VIMRUNTIME/doc/help.txt
 set nocompatible
-colorscheme simozz4
+colorscheme simozz
 "set insertmode
 set magic
 set autochdir
@@ -407,40 +407,27 @@ function! TabsList()
 endfunction
 
 function! GetMode()
-    let l:ms=mode()
-    if l:ms == 'n'
-
-	   :hi StatusLine guifg=#B0B0FF
+   let l:ms=mode()
+   if l:ms == 'n'
+	   ":hi StatusLine guifg=#B0B0FF
       return 'NORMAL  '
-
    elseif l:ms == 'i'
-
-	   :hi StatusLine guifg=#00ff00
+	   ":hi StatusLine guifg=#00ff00
       return 'INSERT  '
-
    elseif l:ms == 'v' || l:ms == 'V'
-
-      :hi StatusLine guifg=#AF8FFF
+      ":hi StatusLine guifg=#AF8FFF
       return 'VISUAL  '
-
    elseif l:ms == 's' || l:ms == 'S'
-
-      :hi StatusLine guifg=#AF8FFF
+      ":hi StatusLine guifg=#AF8FFF
       return 'SELECT  '
-
    elseif l:ms == 'R' || l:ms == 'Rv'
       return 'REPLACE '
-
    elseif l:ms == 't'
-
-      :hi StatusLine guifg=#41DF25
+      ":hi StatusLine guifg=#41DF25
       return 'TERMINAL'
-
    elseif l:ms == 'c'
-
       :hi StatusLine guifg=#FF9300
       return 'COMMAND '
-
    else
       return l:ms
    endif
