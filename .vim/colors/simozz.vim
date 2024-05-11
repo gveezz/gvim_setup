@@ -20,7 +20,8 @@ hi SpecialKey             term=bold cterm=bold  ctermfg=darkred  guifg=#cc0000 g
 hi NonText                term=bold cterm=bold  ctermfg=darkred  gui=bold  guifg=#cc0000
 hi Directory              term=bold cterm=bold  ctermfg=brown  guifg=Yellow
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red
-hi Search                 term=reverse  ctermfg=white  ctermbg=red  guifg=white  guibg=Green
+hi IncSearch              term=reverse  ctermfg=white  ctermbg=red  guifg=Green  guibg=white
+hi Search                 guibg=white guifg=#000000 guifg=black gui=bold
 hi MoreMsg                term=bold  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=SeaGreen
 hi ModeMsg                term=bold  cterm=bold  gui=bold  guifg=White  guibg=Blue
 hi LineNr                 term=underline  cterm=bold  ctermfg=darkcyan  guifg=Yellow
@@ -62,7 +63,6 @@ hi StatusLineP            ctermfg=15  guifg=#eb58ff guibg=#222222 gui=bold cterm
 hi Pmenu                  ctermbg=15  guifg=#AAAAAA guibg=#323232 gui=bold
 hi PmenuSel               ctermbg=15  guifg=#000000 gui=bold
 hi ColorColumn            ctermbg=15  guibg=#6F6F6F
-hi link IncSearch         Visual
 hi link String            Special
 hi link Character         Special
 hi link Number            PreProc

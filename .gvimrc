@@ -1,23 +1,17 @@
-let $VIMHOME = "/home/".$USER."/.vim/"
-
-" if version >= 700 && version < 800
-"    let $VIMRUNTIME = $HOME."/.vim74/"
-" elseif version >= 800 && version < 900
-"    let $VIMRUNTIME = $HOME."/.vim82/"
-" endif
+let $VIMHOME = $HOME."/.vim/"
+if version >= 700 && version < 800
+   let $VIMRUNTIME = $HOME."/.vim74/"
+   set runtimepath^=$VIMRUNTIME
+   set helpfile=$VIMRUNTIME/doc/help.txt
+elseif version >= 800 && version < 900
+   let $VIMRUNTIME = $HOME."/.vim82/"
+   set runtimepath^=$VIMRUNTIME
+   set helpfile=$VIMRUNTIME/doc/help.txt
+endif
 
 let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
 let mapleader = ','
-let g:NERDTreeMouseMode = 3
-let g:NERDTreeShowLineNumbers = 0
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeChDirMode = 0
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeHijackNetrw=1
-let g:NERDTreeAutoDeleteBuffer=1
 
 let g:indentLine_enabled = 1
 let g:indentLine_faster = 1
@@ -28,7 +22,7 @@ let g:indentLine_faster = 1
 " let g:netrw_liststyle = 0
 " open files in new tab
 " let g:netrw_browse_split = 0
-" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+" let g:netrw_buf10jsettings = 'noma nomod nu nobl nowrap ro'
 " let g:netrw_fastbrowse = 0
 
 " let g:vim_current_word#enabled = 1
@@ -60,8 +54,6 @@ let g:indentLine_color_gui = '#AAAAAA'
 let g:indentLine_char_list = ['|']
 
 helptags ~/.vim/doc
-set runtimepath^=$VIMRUNTIME
-set helpfile=$VIMRUNTIME/doc/help.txt
 set nocompatible
 colorscheme simozz
 "set insertmode
@@ -88,6 +80,7 @@ set guioptions+=a
 set guioptions+=h
 set guioptions+=b
 set guioptions+=r
+set guioptions+=e
 " set guioptions=-l
 set virtualedit=onemore
 set whichwrap=<,>,[,]
@@ -108,7 +101,7 @@ set nocindent
 set indentexpr=
 set smarttab
 set number
-" set relativenumber
+set relativenumber
 set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
@@ -117,8 +110,7 @@ set showcmd
 set statusline=%{GetMode()}\ %F\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)
 set backspace=indent,eol,start
 set guicursor=n:ver25-blinkon500-blinkoff500-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
-" set splitbelow
-set ignorecase
+set noignorecase
 set nocul
 set formatoptions=tcj
 set mouse=a
@@ -129,8 +121,8 @@ set mousemodel=popup
 set lazyredraw
 set scrolloff=0
 set splitright
-set complete=.
-set complete+=k
+set splitbelow
+set complete=.,k,t,i
 set completeopt+=menuone,preview
 " set hidden
 set hlsearch
@@ -158,14 +150,15 @@ set splitright
 " tab sball
 " set guiheadroom=0
 set equalalways
+" set iskeyword+=10,33-47,92-95
 
 let g:bclose_multiple = 1
 
-" --- CUSTOM FUNCTIONS
+" CUSTOM FUNCTIONS
 function! Eatchar(pat)
    let c = nr2char(getchar(0))
    return (c =~ a:pat) ? '' : c
-endfunc
+endfunction
 
 function! ToLower()
     let cursor_pos = getpos(".")
@@ -407,27 +400,41 @@ function! TabsList()
 endfunction
 
 function! GetMode()
-   let l:ms=mode()
-   if l:ms == 'n'
+    let l:ms=mode()
+    if l:ms == 'n'
+
 	   ":hi StatusLine guifg=#B0B0FF
       return 'NORMAL  '
+
    elseif l:ms == 'i'
+
 	   ":hi StatusLine guifg=#00ff00
       return 'INSERT  '
+
    elseif l:ms == 'v' || l:ms == 'V'
+
       ":hi StatusLine guifg=#AF8FFF
       return 'VISUAL  '
+
    elseif l:ms == 's' || l:ms == 'S'
+
       ":hi StatusLine guifg=#AF8FFF
       return 'SELECT  '
+
    elseif l:ms == 'R' || l:ms == 'Rv'
+      
       return 'REPLACE '
+
    elseif l:ms == 't'
+
       ":hi StatusLine guifg=#41DF25
       return 'TERMINAL'
+
    elseif l:ms == 'c'
-      :hi StatusLine guifg=#FF9300
+
+      ":hi StatusLine guifg=#FF9300
       return 'COMMAND '
+
    else
       return l:ms
    endif
@@ -1076,30 +1083,52 @@ endfunction
 
 function! CloseBuffer()
 
-   let l:ret = 0
-   if tabpagenr('$') > 1
-      " if winnr('$') > 1
-      "    silent! :bd!
-      " else
-      "    silent! :bd!
-      "    silent! :tabclose!
-      " endif
-      silent! :bd!
-   else
-      if winnr('$') == 1 && line('$') == 1 && getline('.') == ''
-         if IsEmptyVim()
-            call EchoWarnMsg('Last win empty buffer, q to quit')
-            if nr2char(getchar()) == 'q'
-               silent! :q
-            endif
-         else
-            silent! :bd!
-         endif
-      else
-         silent! :bd!
+   if IsEmptyVim()
+      call EchoWarnMsg('Last win empty buffer, q to quit')
+      if nr2char(getchar()) == 'q'
+         silent! :q
       endif
+   else
+      silent! :bw!
    endif
 
+endfunction
+
+function! HighlightSearch(timer)
+    if (g:firstCall)
+        let g:originalStatusLineHLGroup = execute("hi StatusLine")
+        let g:firstCall = 0
+    endif
+    if (exists("g:searching") && g:searching)
+        let searchString = getcmdline()
+        if searchString == "" 
+            let searchString = "."
+        endif
+        let newBG = search(searchString) != 0 ? "green" : "red"
+        if searchString == "."
+            set whichwrap+=h
+            normal h
+            set whichwrap-=h
+        endif
+        execute("hi StatusLine ctermfg=" . newBG)
+        let g:highlightTimer = timer_start(50, 'HighlightSearch')
+        let g:searchString = searchString
+    else
+        let originalBG = matchstr(g:originalStatusLineHLGroup, 'ctermfg=\zs[^ ]\+')
+        execute("hi StatusLine ctermfg=" . originalBG)
+        if exists("g:highlightTimer")
+            call timer_stop(g:highlightTimer)
+            call HighlightCursorMatch()
+        endif
+    endif
+endfunction
+
+function! HighlightCursorMatch() 
+    try
+        let l:patt = '\%#'
+        if &ic | let l:patt = '\c' . l:patt | endif
+        exec 'match IncSearch /' . l:patt . g:searchString . '/'
+    endtry
 endfunction
 
 " Increase or descrease guifont using mouse
@@ -1130,7 +1159,7 @@ snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
 
 " C-o: goes to normal mode if insert mode. This makes less likely
 " to accidentally jump from insert and normal mode
-inoremap <silent> <nowait> <C-o> <Esc>
+inoremap <silent> <nowait> <C-o> <Esc>l
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
@@ -1271,6 +1300,9 @@ nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
 inoremap <silent> <nowait> <C-n> <C-o>*
 nnoremap <silent> <nowait> <C-n> *
 
+nnoremap <silent> <nowait> n n:call HighlightCursorMatch()<CR>
+nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
+
 " C-b: find previous occurrence of word
 inoremap <silent> <nowait> <C-b> <C-o>#
 nnoremap <silent> <nowait> <C-b> #
@@ -1283,8 +1315,8 @@ snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 " C-f: prompt find
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-snoremap <nowait> <C-f> <Esc><Esc>/<C-r>*
-xnoremap <nowait> <C-f> <Esc>/<C-r>*
+snoremap <nowait> <C-f> <Esc><Esc>:call HighlightCursorMatch()<CR>/<C-r>*
+xnoremap <nowait> <C-f> <Esc>:call HighlightCursorMatch()<CR>/<C-r>*
 cnoremap <silent> <nowait> <C-f> <nop>
 
 " M-r: prompt replace
@@ -1369,14 +1401,14 @@ nnoremap <silent> <nowait> <M-Up> <C-w><Left>
 inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR><C-o>:call GoToLastWin()<CR>"
 nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>:call GoToLastWin()<CR>"
 if v:version >= 800
-   tnoremap <expr> <silent> <nowait> <C-PageUp> <nop>
+   tnoremap <silent> <nowait> <C-PageUp> <C-\><C-n>
 endif
 
 " M-Left: switch to previous window or tab
 inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR><C-o>:call GoToFirstWin()<CR>"
 nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
 if v:version >= 800
-   tnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
+   tnoremap <silent> <nowait> <C-PageDown> <C-\><C-n>
 endif
 
 " M-o: open pop up window to open a file (or create one)
@@ -1430,8 +1462,9 @@ inoremap <silent> <nowait> <ScrollWheelUp> <C-o>10k
 inoremap <silent> <nowait> <ScrollWheelDown> <C-o>10j
 nnoremap <silent> <nowait> <ScrollWheelUp> 10k
 nnoremap <silent> <nowait> <ScrollWheelDown> 10j
-xnoremap <silent> <nowait> <ScrollWheelUp> <Esc>10k
-xnoremap <silent> <nowait> <ScrollWheelDown> <Esc>10j
+xnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
+xnoremap <silent> <nowait> <ScrollWheelDown> <Esc>
+
 vnoremap <silent> <nowait> <M-v> <nop>
 xnoremap <silent> <nowait> <Up> k
 xnoremap <silent> <nowait> <Down> j
@@ -1484,14 +1517,14 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter,BufRead NERD_tree_* stopinsert | silent! execute 'normal R'
+   autocmd BufEnter,BufRead NERD_tree_* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
    " ensure NERDTree is always open
    " autocmd BufEnter * if ((&ft != "help" && &ft != "nerdtree" && &ft != "netrw") && g:NERDTree.IsOpen() == 0) | :NERDTree | :wincmd p | endif
    " autocmd BufEnter * if ((&ft != "help") && (&ft != "nerdtree") && (&ft != "netrw")) | :NERDTree | :wincmd p | endif
-   " autocmd BufEnter * if (&ft != "help" && &ft != "netrw" && (&ft != "nerdtree")) | startinsert | endif
+   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "nerdtree")) | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
 
@@ -1507,6 +1540,7 @@ augroup Insert
    " autocmd InsertCharPre * startinsert
    " autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
    autocmd InsertEnter * echo '' | set cul | :set nohlsearch
+   autocmd InsertLeave,WinLeave * echo '' | set nocul
    autocmd InsertEnter * hi Cursor guibg=#00ff00
    " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
    autocmd InsertLeave * :set hlsearch
@@ -1527,19 +1561,18 @@ augroup Vim
 
 augroup END
 
-augroup Verilog
-
-   autocmd!
-   " autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*vbkp*,*.vams,*.vh,*.vinc,*.vf set filetype=verilog
-   autocmd BufWritePost,BufNewFile,BufRead *.sv*,*.svh*,*.svinc,*.svf set filetype=verilog
-   " | setlocal iskeyword-=_
-   " autocmd BufReadPost * silent! :%s/\s\+$//g
-   autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.sv* if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
-
-augroup END
+" augroup Verilog
+" 
+"    autocmd!
+"    " autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
+"    autocmd BufWritePost,BufNewFile,BufRead *.v,*vbkp*,*.vams,*.vh,*.vinc,*.vf set filetype=verilog
+"    autocmd BufWritePost,BufNewFile,BufRead *.sv*,*.svh*,*.svinc,*.svf set filetype=verilog
+"    " autocmd BufReadPost * silent! :%s/\s\+$//g
+"    autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.sv* if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
+"    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
+"    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
+" 
+" augroup END
 
 augroup Markdown
    autocmd!
@@ -1550,4 +1583,11 @@ augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 augroup END
+
+augroup betterSeachHighlighting
+    autocmd!
+    autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
+    autocmd CmdlineLeave * let g:searching = 0
+augroup END
+
 

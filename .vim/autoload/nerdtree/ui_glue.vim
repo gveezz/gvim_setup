@@ -14,12 +14,18 @@ function! nerdtree#ui_glue#createDefaultBindings() abort
     " call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': 'Bookmark', 'callback': s.'activateBookmark' })
     " call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': 'all', 'callback': s.'activateAll' })
 
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s . 'handleMiddleMouse' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s.'handleLeftClick' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'DirNode', 'callback': s.'activateDirNode' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'FileNode', 'callback': s.'activateFileNode' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'Bookmark', 'callback': s.'activateBookmark' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s.'activateAll' })
+    " call NERDTreeAddKeyMap({ 'key': '<Right>', 'scope': 'all', 'callback': s.'activateFileNode' })
+    " call NERDTreeAddKeyMap({ 'key': '<Right>', 'scope': 'all', 'callback': s.'activateFileNode' })
+    " call NERDTreeAddKeyMap({ 'key': '<C-Right>', 'scope': 'FileNode', 'callback': s.'openInNewTab' })
+    " call NERDTreeAddKeyMap({ 'key': '<S-Down>', 'scope': 'FileNode', 'callback': s.'openHSplit' })
+    " call NERDTreeAddKeyMap({ 'key': '<S-Down>', 'scope': 'FileNode', 'callback': s.'openHSplit' })
+
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s . 'handleMiddleMouse' })
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s.'handleLeftClick' })
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'DirNode', 'callback': s.'activateDirNode' })
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'FileNode', 'callback': s.'activateFileNode' })
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'Bookmark', 'callback': s.'activateBookmark' })
+    " call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': 'all', 'callback': s.'activateAll' })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCustomOpen, 'scope':'FileNode', 'callback': s.'customOpenFile'})
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCustomOpen, 'scope':'DirNode', 'callback': s.'customOpenDir'})
@@ -147,11 +153,14 @@ function! s:activateDirNode(directoryNode, ...) abort
     endif
 
     call a:directoryNode.activate((a:0 > 0) ? a:1 : {})
+    call s:chRoot(a:directoryNode)
+    call feedkeys("\<Down>")
 endfunction
 
 "FUNCTION: s:activateFileNode() {{{1
 "handle the user activating a tree node
 function! s:activateFileNode(node) abort
+    " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
     if winnr('$') == 1
         " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
         call a:node.activate({'reuse': 'all', 'where': 'p'})
@@ -529,12 +538,12 @@ endfunction
 
 " FUNCTION: s:openHSplit(target) {{{1
 function! s:openHSplit(target) abort
-    call a:target.activate({'where': 'h', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    call a:target.activate({'reuse': 'all', 'where': 'h', 'keepopen': !nerdtree#closeTreeOnOpen()})
 endfunction
 
 " FUNCTION: s:openVSplit(target) {{{1
 function! s:openVSplit(target) abort
-    call a:target.activate({'where': 'v', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    call a:target.activate({'reuse': 'all', 'where': 'v', 'keepopen': !nerdtree#closeTreeOnOpen()})
 endfunction
 
 "FUNCTION: s:openHSplitBookmark(bookmark) {{{1
@@ -566,7 +575,7 @@ endfunction
 
 " FUNCTION: s:openInNewTab(target) {{{1
 function! s:openInNewTab(target) abort
-    let l:opener = g:NERDTreeOpener.New(a:target.path, {'where': 't', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    let l:opener = g:NERDTreeOpener.New(a:target.path, {'reuse': 'all', 'where': 't', 'keepopen': !nerdtree#closeTreeOnOpen()})
     call l:opener.open(a:target)
 endfunction
 
