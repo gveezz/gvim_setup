@@ -1,13 +1,13 @@
-let $VIMHOME = $HOME."/.vim/"
-if version >= 700 && version < 800
-   let $VIMRUNTIME = $HOME."/.vim74/"
-   set runtimepath^=$VIMRUNTIME
-   set helpfile=$VIMRUNTIME/doc/help.txt
-elseif version >= 800 && version < 900
-   let $VIMRUNTIME = $HOME."/.vim82/"
-   set runtimepath^=$VIMRUNTIME
-   set helpfile=$VIMRUNTIME/doc/help.txt
-endif
+let $VIMHOME = $HOME."/.vim"
+" if version >= 700 && version < 800
+"    let $VIMRUNTIME = $HOME."/.vim74/"
+"    set runtimepath^=$VIMRUNTIME
+"    set helpfile=$VIMRUNTIME/doc/help.txt
+" elseif version >= 800 && version < 900
+"    let $VIMRUNTIME = $HOME."/.vim82/"
+"    set runtimepath^=$VIMRUNTIME
+"    set helpfile=$VIMRUNTIME/doc/help.txt
+" endif
 
 let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
@@ -602,12 +602,16 @@ endfunction
 " endfunction
 "
 
-function! LineAsSnippetOrComment(snippetToMatch)
+function! InComment()
+
+   return (stridx(getline('.')[:col('.')-1], '//') >= 0)
+
+endfunction
+
+function! SnippetInComment(snippetToMatch)
 
    let l:snipN = len(split(getline('.'), a:snippetToMatch))
-   let l:commIdx = stridx(getline('.')[:col('.')-1], '//')
-   let l:ret = (l:snipN > 0) || (l:commIdx >= 0)
-   return l:ret
+   return ((l:snipN > 0) && (InComment() >= 0))
 
 endfunction
 
@@ -625,7 +629,7 @@ function! IabbrevSnippet()
          if stridx(line, l:snippetStr) == 0
             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
             if len(l:snippetToMatch) > 0
-               exec "silent! :iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." LineAsSnippetOrComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
+               exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." SnippetInComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
             endif
          endif
       endfor
@@ -1279,7 +1283,9 @@ inoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <silent> <nowait> <S-Del> <nop>
 
 " Enter: trigger snippet completitio if pumvisible, Enter otherwise
-inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+" inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+" Enter: trigger snippet completitio if pumvisible, Enter otherwise
+inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() == 0)) ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 " Enter: add new line in normal mode
 " nnoremap <silent> <nowait> <CR> i<Enter><Esc>
 
@@ -1526,9 +1532,9 @@ augroup BufWinIn
    " autocmd BufEnter * if ((&ft != "help") && (&ft != "nerdtree") && (&ft != "netrw")) | :NERDTree | :wincmd p | endif
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "nerdtree")) | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
-   autocmd BufEnter,BufAdd,BufCreate,BufNewFile * call AddFtDict()
+   autocmd BufAdd,BufCreate,BufNewFile * call AddFtDict()
 
-   autocmd BufAdd * call IabbrevSnippet()
+   autocmd BufEnter * call IabbrevSnippet()
    " autocmd BufEnter * if (&ft != "nerdtree") | wincmd T | endif
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
    " autocmd WinNew,WinLeave * exec "normal! \<C-w>="

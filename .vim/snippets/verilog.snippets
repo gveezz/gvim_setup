@@ -13,6 +13,10 @@ snippet while
 	while (${1}) begin
 		${0}
 	end
+snippet do
+	do begin
+		${0}
+	end while(${1});
 # Repeat Loop
 snippet repeat
 	repeat (${1}) begin
@@ -39,8 +43,8 @@ snippet casez
 		end
 	endcase
 # Always block
-snippet always 
-	always begin
+snippet always
+	always ${1} begin
 		${0}
 	end
 # Module block
