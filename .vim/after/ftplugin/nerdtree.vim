@@ -29,11 +29,11 @@ nnoremap <silent> <buffer> <C-b> <nop>
 nnoremap <silent> <buffer> <C-l> <nop>
 nnoremap <silent> <buffer> <M-d> <nop>
 nmap <silent> <buffer> <Backspace> u
-nmap <silent> <buffer> <Left> u
-nmap <silent> <buffer> <Right> o
-nmap <silent> <buffer> <S-Right> s
-nmap <silent> <buffer> <C-Right> t
-nmap <silent> <buffer> <S-Down> i
+" nmap <silent> <buffer> <Left> u
+" nmap <silent> <buffer> <Right> o
+" nmap <silent> <buffer> <S-Right> s
+" nmap <silent> <buffer> <C-Right> t
+" nmap <silent> <buffer> <S-Down> i
 nmap <silent> <buffer> <C-c> C
 
 silent! nunmap <CR>

@@ -153,21 +153,21 @@ function! s:activateDirNode(directoryNode, ...) abort
     endif
 
     call a:directoryNode.activate((a:0 > 0) ? a:1 : {})
-    call s:chRoot(a:directoryNode)
-    call feedkeys("\<Down>")
+    " call s:chRoot(a:directoryNode)
+    " call feedkeys("\<Down>")
 endfunction
 
 "FUNCTION: s:activateFileNode() {{{1
 "handle the user activating a tree node
 function! s:activateFileNode(node) abort
-    " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
-    if winnr('$') == 1
-        " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
-        call a:node.activate({'reuse': 'all', 'where': 'p'})
-    else
-        " call a:node.activate({'reuse': 'all', 'where': 't', 'keepopen': !nerdtree#closeTreeOnOpen()})
-        call a:node.activate({'reuse': 'all', 'where': 't'})
-    end
+    call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    " if winnr('$') == 1
+    "     " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    "     call a:node.activate({'reuse': 'all', 'where': 'p'})
+    " else
+    "     " call a:node.activate({'reuse': 'all', 'where': 't', 'keepopen': !nerdtree#closeTreeOnOpen()})
+    "     call a:node.activate({'reuse': 'all', 'where': 't'})
+    " end
 endfunction
 
 "FUNCTION: s:activateBookmark(bookmark) {{{1

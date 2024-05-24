@@ -152,7 +152,8 @@ set splitright
 set equalalways
 " set iskeyword+=10,33-47,92-95
 
-let g:bclose_multiple = 1
+let g:bclose_multiple = 0
+let g:searchString = ""
 
 " CUSTOM FUNCTIONS
 function! Eatchar(pat)
@@ -527,6 +528,9 @@ function! s:Bclose(bang, buffer)
    if !g:bclose_multiple && len(wnums) > 1
        call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
        return
+   else
+      " if the buffer is open only once, unload it completely from memory
+      :bw!
    endif
    let wcurrent = winnr()
    for w in wnums
@@ -560,15 +564,15 @@ function! BetterBufferNext() abort
    for b in range(bufnr('%')+1, bufnr('$'))
       if buflisted(b) && bufwinnr(b)==-1
          exe "normal! :b".b."\<cr>"
-      return
-   endif
+         return
+      endif
   endfor
 
   for b in range(1, bufnr('%')-1)
-    if buflisted(b) && bufwinnr(b)==-1
-      exe "normal! :b".b."\<cr>"
-      return
-    endif
+      if buflisted(b) && bufwinnr(b)==-1
+         exe "normal! :b".b."\<cr>"
+         return
+      endif
   endfor
 
 endfunction
@@ -629,6 +633,7 @@ function! IabbrevSnippet()
          if stridx(line, l:snippetStr) == 0
             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
             if len(l:snippetToMatch) > 0
+               echom "l:snippetToMatch = ".l:snippetToMatch
                exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." SnippetInComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
             endif
          endif
@@ -1478,7 +1483,7 @@ xnoremap <silent> <nowait> <Left> h
 xnoremap <silent> <nowait> <Right> l
 " vnoremap <silent> <nowait> <C-Space> w
 xnoremap <silent> <nowait> <Backspace> d
-snoremap <silent> <nowait> <Backspace> d
+" snoremap <silent> <nowait> <Backspace> d
 vnoremap <silent> <nowait> <C-Backspace> b
 vnoremap <silent> <nowait> <C-z> u
 vnoremap <silent> <nowait> <Tab> >gv
@@ -1534,7 +1539,7 @@ augroup BufWinIn
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufAdd,BufCreate,BufNewFile * call AddFtDict()
 
-   autocmd BufEnter * call IabbrevSnippet()
+   " autocmd BufEnter * call IabbrevSnippet()
    " autocmd BufEnter * if (&ft != "nerdtree") | wincmd T | endif
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
    " autocmd WinNew,WinLeave * exec "normal! \<C-w>="
