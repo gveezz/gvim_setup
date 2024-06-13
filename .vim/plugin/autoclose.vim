@@ -128,7 +128,7 @@ endfunction
 
 function! s:SetVEAll()
     let s:save_ve = &ve
-    set ve=all
+    set ve=onemore
     return ""
 endfunction
 

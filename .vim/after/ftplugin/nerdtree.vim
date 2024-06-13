@@ -9,11 +9,11 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeHijackNetrw=1
+" let g:NERDTreeHijackNetrw=1
 let g:NERDTreeAutoDeleteBuffer=1
 
-let g:NERDTreeMapChRoot = "<Right>"
-let g:NERDTreeMapChRoot += "<Left>"
+" let g:NERDTreeMapChRoot = "<Right>"
+" let g:NERDTreeMapChRoot += "<Left>"
 "let g:NERDTreeMapChRoot += "o"
 
 "nnoremap <silent> <buffer> i <nop>
@@ -28,6 +28,10 @@ nmap <silent> <buffer> <C-x> :close!<CR>
 nnoremap <silent> <buffer> <C-b> <nop>
 nnoremap <silent> <buffer> <C-l> <nop>
 nnoremap <silent> <buffer> <M-d> <nop>
+
+nmap <silent> <buffer> <C-t> t
+nmap <silent> <buffer> <C-v> s
+nmap <silent> <buffer> <C-s> i
 nmap <silent> <buffer> <Backspace> u
 " nmap <silent> <buffer> <Left> u
 " nmap <silent> <buffer> <Right> o

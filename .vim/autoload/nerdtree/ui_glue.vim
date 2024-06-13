@@ -160,14 +160,17 @@ endfunction
 "FUNCTION: s:activateFileNode() {{{1
 "handle the user activating a tree node
 function! s:activateFileNode(node) abort
+        
     call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
-    " if winnr('$') == 1
+    
+    " let l:lastWinNr = winnr('$')
+    " let l:lastWinBufNr = winbufnr(l:lastWinNr)if (l:lastWinNr == 2) && (empty(bufname(l:lastWinBufNr)) == 1) && (getbufvar(l:lastWinBufNr, '&modified') == 0) && (empty(getbufvar(l:lastWinBufNr, '&buftype')) == 1)
     "     " call a:node.activate({'reuse': 'all', 'where': 'p', 'keepopen': !nerdtree#closeTreeOnOpen()})
     "     call a:node.activate({'reuse': 'all', 'where': 'p'})
     " else
     "     " call a:node.activate({'reuse': 'all', 'where': 't', 'keepopen': !nerdtree#closeTreeOnOpen()})
     "     call a:node.activate({'reuse': 'all', 'where': 't'})
-    " end
+    " endif
 endfunction
 
 "FUNCTION: s:activateBookmark(bookmark) {{{1
