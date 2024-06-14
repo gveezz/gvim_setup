@@ -12,6 +12,8 @@ let $VIMHOME = $HOME."/.vim"
 let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
 let mapleader = ','
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_cmd='CtrlP :pwd'
 
 let g:indentLine_enabled = 1
 let g:indentLine_faster = 1
@@ -52,6 +54,9 @@ let g:indentLine_setColors = 1
 " let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_color_gui = '#AAAAAA'
 let g:indentLine_char_list = ['|']
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 helptags ~/.vim/doc
 set nocompatible
@@ -102,12 +107,12 @@ set indentexpr=
 set smarttab
 set number
 set relativenumber
-set guifont=Monospace\ 10
+set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set showcmd
 " set statusline=%{GetMode()}\ %F\ %m\ %#StatusLine#%r%*\ BUFF#%n\ WIN#%{winnr()}\ (L:\ %l/%L\ \(%p%%),\ C:\ %c,\ BYTES:\ %o\)
-set statusline=%{GetMode()}\ %F\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)
+set statusline=%f\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)\ %{GetMode()}
 set backspace=indent,eol,start
 set guicursor=n:ver25-blinkon500-blinkoff500-nCursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
 set noignorecase
@@ -140,7 +145,7 @@ syntax enable
 " set history=1000
 " set wc=<Tab>
 " set wildmode=longest,list,full
-set wildmenu
+" set wildmenu
 " set wildoptions=tagfile
 set tabline=%!MyTabLine()
 set showtabline=2
@@ -341,6 +346,50 @@ endfunction
 
 function! SmallerFont()
   call AdjustFontSize(-1)
+endfunction
+
+" function! PopupBufferList()
+"    
+"    let l:menuName = "BuffersList"
+"    silent! exec ":aunmenu ".l:menuName
+"    " All 'possible' buffers that may exist
+"    let l:b_all = range(1, bufnr('$'))
+"    " Unlisted ones
+"    let l:b_unl = filter(l:b_all, 'buflisted(v:val)')
+"    for l:nbuff in l:b_unl
+"       let l:menuitem = substitute(bufname(l:nbuff), '\.', '\\.', 'g')
+"       :exec ":amenu ]".l:menuName.".".l:menuitem." :b ".string(l:nbuff)."<CR>"
+"    endfor
+"    :exec ":popup ]".l:menuName
+"    
+" endfunction
+
+function! JumpToTabWin(tabn, winn)
+   silent! exec a:tabn."tabn"
+   silent! exec "normal! ".a:winn."\<C-w>w"
+endfunction
+
+function! PopupBufferList()
+   
+   let l:menuName = "BList"
+   silent! exec ":aunmenu ".l:menuName
+   
+   for l:t_idx in range(1, tabpagenr('$'))
+      let l:buf_list = tabpagebuflist(l:t_idx)
+      for l:idx in range(0, (len(l:buf_list)-1))
+         " windows are numbered from 1 to winnr('$')
+         let l:w_idx = l:idx+1
+         let l:menuitem = substitute(fnamemodify(bufname(l:buf_list[l:idx]), ':p:t'), '\.', '\\.', 'g')
+         let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
+         if empty(l:menuitem)
+            let l:menuitem = 'NoName'
+         endif
+         exec ":amenu ".l:menuName.".".l:menuitem." :call JumpToTabWin(".l:t_idx.",".l:w_idx.")<CR>"
+      endfor
+   endfor
+
+   :exec ":popup ".l:menuName
+   
 endfunction
 
 function! ClearBufferList()
@@ -759,7 +808,7 @@ function! GoToLine()
          call cursor(l:line, l:col)
       endif
    endwhile
-
+   
 endfunction
 
 " function! GoToLineCol()
@@ -1091,6 +1140,9 @@ function! IsEmptyVim()
 endfunction
 
 function! CloseBuffer()
+   
+   let l:b_name = bufname()
+   let l:b_count = 0
 
    if IsEmptyVim()
       call EchoWarnMsg('Last win empty buffer, q to quit')
@@ -1098,6 +1150,20 @@ function! CloseBuffer()
          silent! :q
       endif
    else
+      for l:t_idx in range(1, tabpagenr('$'))
+         let l:buf_list = tabpagebuflist(l:t_idx)
+         for l:b_i in range(0, (len(l:buf_list)-1))
+            if bufname(l:buf_list[l:b_i]) == l:b_name
+               let l:b_count = l:b_count + 1
+            endif
+         endfor
+      endfor
+   endif
+
+   if l:b_count > 1 && l:w_num > 1
+      " just close the window of the duplicated buffer
+      silent! :close
+   else 
       silent! :bw!
    endif
 
@@ -1182,10 +1248,13 @@ endif
 " inoremap <silent> <nowait> <M-n> <Esc>
 
 " C-e: open new empty buffer
-inoremap <silent> <nowait> <C-e> <C-o>:vnew!<CR>
-nnoremap <silent> <nowait> <C-e> :vnew!<CR>
-vnoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
-" snoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
+inoremap <silent> <nowait> <C-n> <C-o>:vnew!<CR>
+nnoremap <silent> <nowait> <C-n> :vnew!<CR>
+vnoremap <silent> <nowait> <C-n> <Esc>:vnew!<CR>
+
+inoremap <silent> <nowait> <C-M-n> <C-o>:new!<CR>
+nnoremap <silent> <nowait> <C-M-n> :new!<CR>
+vnoremap <silent> <nowait> <C-M-n> <Esc>:vnew!<CR>
 
 " C-d: open netrw vertical
 " inoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
@@ -1307,27 +1376,40 @@ inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
 nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
 
-" C-n: find next occurrence of word
-inoremap <silent> <nowait> <C-n> <C-o>*
-nnoremap <silent> <nowait> <C-n> *
+inoremap <silent> <nowait> <C-.> <C-o>*
+nnoremap <silent> <nowait> <C-.> *
 
-nnoremap <silent> <nowait> n n:call HighlightCursorMatch()<CR>
-nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
+inoremap <silent> <nowait> <C-,> <C-o>#
+nnoremap <silent> <nowait> <C-,> #
 
-" C-b: find previous occurrence of word
-inoremap <silent> <nowait> <C-b> <C-o>#
-nnoremap <silent> <nowait> <C-b> #
+" C-n: find next occurrence of previous search
+"inoremap <silent> <nowait> <C-n> <C-o>*
+"nnoremap <silent> <nowait> <C-n> *
+
+"nnoremap <silent> <nowait> n n:call HighlightCursorMatch()<CR>
+"nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
+
+" C-b: pop up buffer list
+inoremap <silent> <nowait> <C-b> <C-o>:call PopupBufferList()<CR>
+nnoremap <silent> <nowait> <C-b> :call PopupBufferList()<CR>
+vnoremap <silent> <nowait> <C-b> <Esc>:call PopupBufferList()<CR>
+
 
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 nnoremap <nowait> <C-l> :call BufferList()<CR>
 vnoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 
+" C-p: CtrlP
+inoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
+nnoremap <nowait> <C-p> :CtrlP .<CR>
+vnoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
+
 " C-f: prompt find
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-snoremap <nowait> <C-f> <Esc><Esc>:call HighlightCursorMatch()<CR>/<C-r>*
-xnoremap <nowait> <C-f> <Esc>:call HighlightCursorMatch()<CR>/<C-r>*
+snoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn   
+xnoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn
 cnoremap <silent> <nowait> <C-f> <nop>
 
 " M-r: prompt replace
@@ -1342,6 +1424,7 @@ snoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctS()<CR>
 " C-s: save
 inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
+cnoremap <silent> <nowait> <C-s> <Esc>
 xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
 
 " C-k: delete line
@@ -1509,6 +1592,7 @@ snoremap <silent> <nowait> { {<C-r><C-o>*}
 snoremap <silent> <nowait> [ [<C-r><C-o>*]
 snoremap <silent> <nowait> ( (<C-r><C-o>*)
 snoremap <silent> <nowait> " "<C-r><C-o>*"
+snoremap <silent> <nowait> < <<C-r><C-o>*>
 
 vnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
 snoremap <expr> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
@@ -1520,15 +1604,14 @@ vnoremap <expr> <silent> <nowait> <C-S-Right> getline('.')[col('.')-1] == ' ' ? 
 vnoremap <expr> <silent> <nowait> <C-S-Left> getline('.')[col('.')-2] == ' ' ? "gel" : "b"
 
 " highlight the visual selection after pressing enter.
-"" snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
-"" vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
-
+"snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
+" vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter,BufRead NERD_tree_* stopinsert | silent! :NERDTreeRefreshRoot
+   autocmd BufEnter,BufRead NERD_tree_tab* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
@@ -1550,9 +1633,8 @@ augroup Insert
    autocmd!
    " autocmd InsertCharPre * startinsert
    " autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
-   autocmd InsertEnter * echo '' | set cul | :set nohlsearch
+   autocmd InsertEnter * echo '' | set cul | hi Cursor guibg=#00ff00 | set nohlsearch
    autocmd InsertLeave,WinLeave * echo '' | set nocul
-   autocmd InsertEnter * hi Cursor guibg=#00ff00
    " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
    autocmd InsertLeave * :set hlsearch
    autocmd InsertLeave * hi Cursor guibg=#FFE800
@@ -1561,7 +1643,8 @@ augroup END
 
 augroup Vim
    autocmd!
-   autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
+   " autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
+   " autocmd VimEnter * if bufname('.') == '' | :NERDTree | only | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vim set filetype=vim
    " autocmd VimEnter * if argc() == 0 | :NERDTree | set noinsertmode | endif
    " autocmd VimEnter * if isdirectory(bufname('%')) | :NERDTree | set noinsertmode | endif
@@ -1595,10 +1678,10 @@ augroup Html
    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 augroup END
 
-augroup betterSeachHighlighting
-    autocmd!
-    autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
-    autocmd CmdlineLeave * let g:searching = 0
-augroup END
+" augroup betterSeachHighlighting
+"     autocmd!
+"     autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
+"     autocmd CmdlineLeave * let g:searching = 0
+" augroup END
 
 
