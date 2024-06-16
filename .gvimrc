@@ -92,11 +92,11 @@ set whichwrap=<,>,[,]
 set selection=exclusive
 set selectmode=mouse,key
 set keymodel=startsel,stopsel
-set shiftwidth=3
 set softtabstop=0
 set expandtab
-set tabstop=3
-" set autoindent
+set autoindent
+" set tabstop=3
+" set shiftwidth=&ts
 " set smartindent
 " set cindent
 " set copyindent
