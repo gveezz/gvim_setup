@@ -96,7 +96,7 @@ set shiftwidth=3
 set softtabstop=0
 set expandtab
 set tabstop=3
-" set autoindent
+set autoindent
 " set smartindent
 " set cindent
 " set copyindent
