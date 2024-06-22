@@ -1,4 +1,3 @@
-stopinsert
 setlocal number 
 setlocal relativenumber
 

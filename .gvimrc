@@ -37,6 +37,7 @@ let g:indentLine_faster = 1
 "
 " let g:NERDTreeMapActivateNode='o'
 " let g:NERDTreeMapOpenInTab='o'
+let g:NERDTreeQuitOnOpen=1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 let g:AutoCloseOn = 1
@@ -95,14 +96,11 @@ set keymodel=startsel,stopsel
 set softtabstop=0
 set expandtab
 set autoindent
-" set tabstop=3
-" set shiftwidth=&ts
-" set smartindent
-" set cindent
-" set copyindent
-set noautoindent
-set nosmartindent
-set nocindent
+set smartindent
+set cindent
+set copyindent
+set tabstop=3
+set shiftwidth=3
 set indentexpr=
 set smarttab
 set number
@@ -129,7 +127,7 @@ set splitright
 set splitbelow
 set complete=.,k,t,i
 set completeopt+=menuone,preview
-" set hidden
+set hidden
 set hlsearch
 set incsearch
 set timeoutlen=0
@@ -156,6 +154,7 @@ set splitright
 " set guiheadroom=0
 set equalalways
 " set iskeyword+=10,33-47,92-95
+" set cursorlineopt=line
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -348,14 +347,14 @@ function! SmallerFont()
   call AdjustFontSize(-1)
 endfunction
 
-" function! PopupBufferList()
+" function! PopupBufferList2()
 "    
 "    let l:menuName = "BuffersList"
 "    silent! exec ":aunmenu ".l:menuName
 "    " All 'possible' buffers that may exist
 "    let l:b_all = range(1, bufnr('$'))
 "    " Unlisted ones
-"    let l:b_unl = filter(l:b_all, 'buflisted(v:val)')
+"    let l:b_unl = filter(l:b_all, '!buflisted(v:val)')
 "    for l:nbuff in l:b_unl
 "       let l:menuitem = substitute(bufname(l:nbuff), '\.', '\\.', 'g')
 "       :exec ":amenu ]".l:menuName.".".l:menuitem." :b ".string(l:nbuff)."<CR>"
@@ -1142,6 +1141,7 @@ endfunction
 function! CloseBuffer()
    
    let l:b_name = bufname()
+   let l:w_num = winnr('$')
    let l:b_count = 0
 
    if IsEmptyVim()
@@ -1162,7 +1162,7 @@ function! CloseBuffer()
 
    if l:b_count > 1 && l:w_num > 1
       " just close the window of the duplicated buffer
-      silent! :close
+      silent! :close!
    else 
       silent! :bw!
    endif
@@ -1267,10 +1267,10 @@ vnoremap <silent> <nowait> <C-M-n> <Esc>:vnew!<CR>
 " snoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
 
 " C-d: open NERDTree
-inoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
-nnoremap <silent> <nowait> <C-d> :call NerdTreeToggle()<CR>
-vnoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
-snoremap <silent> <nowait> <C-d> <C-o>:call NerdTreeToggle()<CR>
+inoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+nnoremap <silent> <nowait> <C-d> :NERDTreeToggle<CR>
+vnoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+snoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
 
 " C-h: open netrw horizontal split
 " inoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<C-o>:Texplore!<CR>" : "<C-o>:Hexplore!<CR>"
@@ -1373,14 +1373,14 @@ inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 
 " M-l: show tab files list
-inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
-nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
+" inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
+" nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
 
-inoremap <silent> <nowait> <C-.> <C-o>*
-nnoremap <silent> <nowait> <C-.> *
+inoremap <silent> <nowait> <C-n> <C-o>*
+nnoremap <silent> <nowait> <C-n> *
 
-inoremap <silent> <nowait> <C-,> <C-o>#
-nnoremap <silent> <nowait> <C-,> #
+inoremap <silent> <nowait> <C-b> <C-o>#
+nnoremap <silent> <nowait> <C-b> #
 
 " C-n: find next occurrence of previous search
 "inoremap <silent> <nowait> <C-n> <C-o>*
@@ -1389,16 +1389,15 @@ nnoremap <silent> <nowait> <C-,> #
 "nnoremap <silent> <nowait> n n:call HighlightCursorMatch()<CR>
 "nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
 
-" C-b: pop up buffer list
-inoremap <silent> <nowait> <C-b> <C-o>:call PopupBufferList()<CR>
-nnoremap <silent> <nowait> <C-b> :call PopupBufferList()<CR>
-vnoremap <silent> <nowait> <C-b> <Esc>:call PopupBufferList()<CR>
+" C-l: pop up buffer list
+inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
+nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR>
+vnoremap <silent> <nowait> <C-l> <Esc>:call PopupBufferList()<CR>
 
-
-inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
-nnoremap <nowait> <C-l> :call BufferList()<CR>
-vnoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
-snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+" inoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
+" nnoremap <nowait> <C-M-l> :call BufferList()<CR>
+" vnoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
+" snoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
 
 " C-p: CtrlP
 inoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
@@ -1410,7 +1409,7 @@ inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 snoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn   
 xnoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn
-cnoremap <silent> <nowait> <C-f> <nop>
+cnoremap <silent> <nowait> <C-f> <C-c>
 
 " M-r: prompt replace
 inoremap <nowait> <M-f> <C-o>:call PromptReplI()<CR>
@@ -1572,8 +1571,16 @@ vnoremap <silent> <nowait> <C-z> u
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
+if v:version >= 800
+   tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
+endif
+
 vnoremap <silent> <nowait> y "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
+if v:version >= 800
+   tnoremap <silent> <nowait> <C-v> <C-\><C-n><C-W>"+<C-\><C-n>
+endif
+
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 " snoremap <silent> <nowait> <M-w> <C-o><C-w>w
@@ -1611,7 +1618,7 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter,BufRead NERD_tree_tab* stopinsert | silent! :NERDTreeRefreshRoot
+   autocmd BufEnter,BufRead NERD_tree* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
@@ -1621,7 +1628,6 @@ augroup BufWinIn
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "nerdtree")) | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
    autocmd BufAdd,BufCreate,BufNewFile * call AddFtDict()
-
    " autocmd BufEnter * call IabbrevSnippet()
    " autocmd BufEnter * if (&ft != "nerdtree") | wincmd T | endif
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
@@ -1633,11 +1639,10 @@ augroup Insert
    autocmd!
    " autocmd InsertCharPre * startinsert
    " autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
-   autocmd InsertEnter * echo '' | set cul | hi Cursor guibg=#00ff00 | set nohlsearch
-   autocmd InsertLeave,WinLeave * echo '' | set nocul
+   autocmd InsertEnter * echo '' | set cul | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555 | set nohlsearch
+   " autocmd InsertLeave,WinLeave * echo '' | set nocul
    " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
-   autocmd InsertLeave * :set hlsearch
-   autocmd InsertLeave * hi Cursor guibg=#FFE800
+   autocmd InsertLeave * set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#0000AA
 
 augroup END
 

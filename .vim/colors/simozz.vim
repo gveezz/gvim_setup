@@ -43,6 +43,8 @@ hi Type                   term=underline  cterm=bold ctermfg=lightgreen  gui=bol
 hi Error                  term=reverse  ctermfg=darkcyan  ctermbg=black  guifg=#ffffff  guibg=#ff0000
 hi Todo                   term=standout  ctermfg=black  ctermbg=darkcyan  guifg=Blue  guibg=Yellow
 hi CursorLine             term=underline  guibg=#555555 gui=bold cterm=bold ctermfg=white ctermbg=black
+hi CursorLineI            term=underline  guibg=#555555 gui=bold cterm=bold ctermfg=white ctermbg=black
+hi CursorLineN            term=underline  guibg=#0000FF gui=bold cterm=bold ctermfg=white ctermbg=black
 hi CursorColumn           term=underline  guibg=#AAAAAA gui=bold cterm=bold ctermfg=white ctermbg=black
 hi CursorLineNR           ctermfg=red guibg=#222222 guifg=#00ff00
 hi MatchParen             term=reverse  ctermfg=blue guibg=Blue
