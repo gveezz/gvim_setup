@@ -1250,29 +1250,26 @@ endif
 " inoremap <silent> <nowait> <M-n> <Esc>
 
 " C-e: open new empty buffer
-inoremap <silent> <nowait> <C-n> <C-o>:vnew!<CR>
-nnoremap <silent> <nowait> <C-n> :vnew!<CR>
-vnoremap <silent> <nowait> <C-n> <Esc>:vnew!<CR>
+inoremap <silent> <nowait> <C-e> <C-o>:vnew!<CR>
+nnoremap <silent> <nowait> <C-e> :vnew!<CR>
+vnoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
 
-inoremap <silent> <nowait> <C-M-n> <C-o>:new!<CR>
-nnoremap <silent> <nowait> <C-M-n> :new!<CR>
-vnoremap <silent> <nowait> <C-M-n> <Esc>:vnew!<CR>
+inoremap <silent> <nowait> <C-M-e> <C-o>:new!<CR>
+nnoremap <silent> <nowait> <C-M-e> :new!<CR>
+vnoremap <silent> <nowait> <C-M-e> <Esc>:vnew!<CR>
 
-" <C-LeftRelease>C-d: open netrw vertical
+" C-d: open netrw vertical
 inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
 nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
 vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
 snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-" inoremap <silent> <nowait> <C-,> <C-o>:Texplore<C-o>:$tabmove<CR>
-" nnoremap <silent> <nowait> <C-,> :Texplore<CR><C-o>:$tabmove<CR>
-" vnoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
-" snoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
 
-" C-d: open NERDTree
-" inoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
-" nnoremap <silent> <nowait> <C-d> :NERDTreeToggle<CR>
-" vnoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
-" snoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+" C-h: open netrw horizontally
+inoremap <silent> <nowait> <C-h> <C-o>:Hexplore<CR>
+nnoremap <silent> <nowait> <C-h> :Hexplore<CR>
+vnoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
+snoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
+
 
 " C-h: open netrw horizontal split
 " inoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<C-o>:Texplore!<CR>" : "<C-o>:Hexplore!<CR>"
