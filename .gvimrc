@@ -19,13 +19,13 @@ let g:indentLine_enabled = 1
 let g:indentLine_faster = 1
 
 " hide netrw menu
-" let g:netrw_banner = 0
+let g:netrw_banner = 0
 " tree listing
-" let g:netrw_liststyle = 0
+let g:netrw_liststyle = 0
 " open files in new tab
-" let g:netrw_browse_split = 0
-" let g:netrw_buf10jsettings = 'noma nomod nu nobl nowrap ro'
-" let g:netrw_fastbrowse = 0
+let g:netrw_browse_split = 0
+let g:netrw_buf10jsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_fastbrowse = 0
 
 " let g:vim_current_word#enabled = 1
 " " Twins of word under cursor:
@@ -37,7 +37,7 @@ let g:indentLine_faster = 1
 "
 " let g:NERDTreeMapActivateNode='o'
 " let g:NERDTreeMapOpenInTab='o'
-let g:NERDTreeQuitOnOpen=1
+" let g:NERDTreeQuitOnOpen=1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 let g:AutoCloseOn = 1
@@ -154,7 +154,7 @@ set splitright
 " set guiheadroom=0
 set equalalways
 " set iskeyword+=10,33-47,92-95
-" set cursorlineopt=line
+set cursorline
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -417,7 +417,9 @@ function! BufferList()
    " Unlisted ones
    let l:b_unl = filter(l:b_all, 'buflisted(v:val)')
    for l:nbuff in l:b_unl
-      let l:menuitem = bufname(nbuff)
+      " let l:menuitem = bufname(nbuff)
+      let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
+      let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
       echohl StatusLineY
       echon "[".l:nbuff."] "
       echohl None
@@ -514,26 +516,25 @@ function! DeleteWord()
 
 endfunction
 
-function! NerdTreeToggle()
-
-   let l:winnr = winnr("$")
-   " if NERDTree is open
-   if (&ft == 'nerdtree')
-      " and it is not the only open window
-      if l:winnr > 1
-         " close NERDTree
-         silent! :NERDTreeClose
-      endif
-   else
-      " otherwise open it
-      if g:NERDTree.IsOpen() == 0
-         silent! :NERDTree
-      " else
-      "    silent! :NERDTreeClose
-      endif
-   endif
-
-endfunction
+" function! NerdTreeToggle()
+" 
+"    let l:winnr = winnr("$")
+"    " if NERDTree is open
+"    if (&ft == 'nerdtree')
+"       " and it is not the only open window
+"       if l:winnr > 1
+"          " close NERDTree
+"          silent! :NERDTreeClose
+"       endif
+"    else
+"       " otherwise open it
+"       if g:NERDTree.IsOpen() == 0
+"          silent! :NERDTree
+"       " else
+"       "    silent! :NERDTreeClose
+"       endif
+"    endif
+" endfunction
 
 function! InComment()
 
@@ -1238,6 +1239,7 @@ inoremap <silent> <nowait> <C-o> <Esc>l
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
+inoremap <silent> <nowait> <C-.> <C-o>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 nnoremap <silent> <nowait> <Esc> i
 if v:version >= 800
@@ -1256,21 +1258,21 @@ inoremap <silent> <nowait> <C-M-n> <C-o>:new!<CR>
 nnoremap <silent> <nowait> <C-M-n> :new!<CR>
 vnoremap <silent> <nowait> <C-M-n> <Esc>:vnew!<CR>
 
-" C-d: open netrw vertical
-" inoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
-" nnoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
-" vnoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-" snoremap <expr> <silent> <nowait> <C-.> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+" <C-LeftRelease>C-d: open netrw vertical
+inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
+nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
+vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
 " inoremap <silent> <nowait> <C-,> <C-o>:Texplore<C-o>:$tabmove<CR>
 " nnoremap <silent> <nowait> <C-,> :Texplore<CR><C-o>:$tabmove<CR>
 " vnoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
 " snoremap <silent> <nowait> <C-,> <Esc><C-o>:Texplore!<CR><C-o>:$tabmove<CR>
 
 " C-d: open NERDTree
-inoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
-nnoremap <silent> <nowait> <C-d> :NERDTreeToggle<CR>
-vnoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
-snoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+" inoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+" nnoremap <silent> <nowait> <C-d> :NERDTreeToggle<CR>
+" vnoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
+" snoremap <silent> <nowait> <C-d> <C-o>:NERDTreeToggle<CR>
 
 " C-h: open netrw horizontal split
 " inoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<C-o>:Texplore!<CR>" : "<C-o>:Hexplore!<CR>"
@@ -1618,7 +1620,7 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 augroup BufWinIn
 
    " refresh directory listing if entering NERDTree
-   autocmd BufEnter,BufRead NERD_tree* stopinsert | silent! :NERDTreeRefreshRoot
+   " autocmd BufEnter,BufRead NERD_tree* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
@@ -1639,7 +1641,7 @@ augroup Insert
    autocmd!
    " autocmd InsertCharPre * startinsert
    " autocmd InsertEnter * echo '' | set cul | :let b:_search=@/|let @/=''
-   autocmd InsertEnter * echo '' | set cul | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555 | set nohlsearch
+   autocmd InsertEnter * set nohlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555
    " autocmd InsertLeave,WinLeave * echo '' | set nocul
    " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
    autocmd InsertLeave * set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#0000AA
