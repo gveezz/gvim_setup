@@ -9,9 +9,11 @@ let $VIMHOME = $HOME."/.vim"
 "    set helpfile=$VIMRUNTIME/doc/help.txt
 " endif
 
-let g:popupBufferPattern = "Select %f (%n) from %p directory"
+" let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
 let mapleader = ','
+
+let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cmd='CtrlP :pwd'
 
@@ -24,21 +26,11 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 " open files in new tab
 let g:netrw_browse_split = 0
-let g:netrw_buf10jsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_fastbrowse = 0
+let g:netrw_list_hide = '^\./$'
+let g:netrw_hide = 1
 
-" let g:vim_current_word#enabled = 1
-" " Twins of word under cursor:
-" let g:vim_current_word#highlight_twins = 1
-" " The word under cursor:
-" let g:vim_current_word#highlight_current_word = 1
-" let g:vim_current_word#highlight_delay = 0
-" let g:vim_current_word#highlight_only_in_focused_window = 1
-"
-" let g:NERDTreeMapActivateNode='o'
-" let g:NERDTreeMapOpenInTab='o'
-" let g:NERDTreeQuitOnOpen=1
-let g:ctrlp_clear_cache_on_exit = 1
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 let g:AutoCloseOn = 1
 
@@ -149,7 +141,7 @@ set tabline=%!MyTabLine()
 set showtabline=2
 set guitablabel=%{GuiTabLabel()}
 " set splitbelow
-set splitright
+" set splitright
 " tab sball
 " set guiheadroom=0
 set equalalways
@@ -1250,13 +1242,12 @@ endif
 " inoremap <silent> <nowait> <M-n> <Esc>
 
 " C-e: open new empty buffer
-inoremap <silent> <nowait> <C-e> <C-o>:vnew!<CR>
-nnoremap <silent> <nowait> <C-e> :vnew!<CR>
-vnoremap <silent> <nowait> <C-e> <Esc>:vnew!<CR>
-
-inoremap <silent> <nowait> <C-M-e> <C-o>:new!<CR>
-nnoremap <silent> <nowait> <C-M-e> :new!<CR>
-vnoremap <silent> <nowait> <C-M-e> <Esc>:vnew!<CR>
+inoremap <silent> <nowait> <C-n> <C-o>:vnew!<CR>
+nnoremap <silent> <nowait> <C-n> :vnew!<CR>
+vnoremap <silent> <nowait> <C-n> <Esc>:vnew!<CR>
+inoremap <silent> <nowait> <M-n> <C-o>:new!<CR>
+nnoremap <silent> <nowait> <M-n> :new!<CR>
+vnoremap <silent> <nowait> <M-n> <Esc>:vnew!<CR>
 
 " C-d: open netrw vertical
 inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
@@ -1269,13 +1260,6 @@ inoremap <silent> <nowait> <C-h> <C-o>:Hexplore<CR>
 nnoremap <silent> <nowait> <C-h> :Hexplore<CR>
 vnoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
 snoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
-
-
-" C-h: open netrw horizontal split
-" inoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<C-o>:Texplore!<CR>" : "<C-o>:Hexplore!<CR>"
-" nnoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? ":Texplore!<CR>" : ":Hexplore!<CR>"
-" vnoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Texplore!<CR>" : "<Esc><C-o>:Hexplore!<CR>"
-" snoremap <expr> <silent> <nowait> <C-h> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Texplore!<CR>" : "<Esc><C-o>:Hexplore!<CR>"
 
 " F1-F12 mappings
 inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
@@ -1375,11 +1359,11 @@ inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
 " inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
 " nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
 
-inoremap <silent> <nowait> <C-n> <C-o>*
-nnoremap <silent> <nowait> <C-n> *
+inoremap <silent> <nowait> <C-ç> <C-o>*
+nnoremap <silent> <nowait> <C-ç> *
 
-inoremap <silent> <nowait> <C-b> <C-o>#
-nnoremap <silent> <nowait> <C-b> #
+inoremap <silent> <nowait> <C-´> <C-o>#
+nnoremap <silent> <nowait> <C-´> #
 
 " C-n: find next occurrence of previous search
 "inoremap <silent> <nowait> <C-n> <C-o>*
@@ -1528,10 +1512,6 @@ nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
 if v:version >= 800
    tnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 ? "exit<CR>" : winnr('$') > 1 ? "exit<CR>" : ":tabclose!<CR>"
 endif
-
-inoremap <silent> <nowait> <M-x> <C-o>:close!<CR>
-nnoremap <silent> <nowait> <M-x> :close!<CR>
-xnoremap <silent> <nowait> <M-x> <Esc>:close!<CR>
 
 " C-t: open new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
