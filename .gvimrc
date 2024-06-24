@@ -1256,10 +1256,10 @@ vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "
 snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
 
 " C-h: open netrw horizontally
-inoremap <silent> <nowait> <C-h> <C-o>:Hexplore<CR>
-nnoremap <silent> <nowait> <C-h> :Hexplore<CR>
-vnoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
-snoremap <silent> <nowait> <C-h> <Esc><C-o>:Hexplore<CR>
+inoremap <silent> <nowait> <C-e> <C-o>:Hexplore<CR>
+nnoremap <silent> <nowait> <C-e> :Hexplore<CR>
+vnoremap <silent> <nowait> <C-e> <Esc><C-o>:Hexplore<CR>
+snoremap <silent> <nowait> <C-e> <Esc><C-o>:Hexplore<CR>
 
 " F1-F12 mappings
 inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
@@ -1353,17 +1353,17 @@ nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 
 " S-Tab: de-advance completition selection if pumvisible, inverse Tab otherwise
-inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-P>" : "<C-d>"
+inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
 
 " M-l: show tab files list
 " inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
 " nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
 
-inoremap <silent> <nowait> <C-ç> <C-o>*
-nnoremap <silent> <nowait> <C-ç> *
+inoremap <silent> <nowait> <C-}> <C-o>*
+nnoremap <silent> <nowait> <C-}> *
 
-inoremap <silent> <nowait> <C-´> <C-o>#
-nnoremap <silent> <nowait> <C-´> #
+inoremap <silent> <nowait> <C-{> <C-o>#
+nnoremap <silent> <nowait> <C-{> #
 
 " C-n: find next occurrence of previous search
 "inoremap <silent> <nowait> <C-n> <C-o>*
