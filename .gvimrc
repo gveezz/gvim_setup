@@ -1232,6 +1232,8 @@ nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
 inoremap <silent> <nowait> <C-.> <C-o>
+inoremap <silent> <nowait> <C-S-Space> <C-o>:stopinsert<CR>
+
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 nnoremap <silent> <nowait> <Esc> i
 if v:version >= 800
@@ -1254,6 +1256,7 @@ inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "
 nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
 vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
 snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+cnoremap <silent> <nowait> <C-d> <C-c>
 
 " C-h: open netrw horizontally
 inoremap <silent> <nowait> <C-e> <C-o>:Hexplore<CR>
