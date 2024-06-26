@@ -85,7 +85,7 @@ endfunction
 function! AlignAssignment() range
 
    " silent! :'<,'>Tab /<=/
-   silent! :'<,'>EasyAlign /<=/ {'lm':1,'rm':1}
+   silent! :'<,'>g/</EasyAlign /<=/ {'lm':1,'rm':1}
    " silent! :'<,'>s/\a<=/\a <=/g
    " silent! :'<,'>Tab /=/l1
    silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
