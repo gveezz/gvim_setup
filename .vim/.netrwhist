@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/sazzalin/customdev/dsp_rtl/fir/hdl/fir'
+let g:netrw_dirhist_0='/home/sazzalin/customdev/dsp_rtl/fir/hdl'
+let g:netrw_dirhist_9='/home/sazzalin/customdev/dsp_rtl/fir'
 let g:netrw_dirhist_8='/home/sazzalin/prj/pcie/soc/rtl/pcie_srdi_mgpo'
 let g:netrw_dirhist_7='/home/sazzalin/prj/pcie/soc/rtl'
 let g:netrw_dirhist_6='/home/sazzalin/prj/pcie/soc/rtl/pcie_srdi_mgpo'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_5='/home/sazzalin/prj/pcie/soc/rtl'
 let g:netrw_dirhist_4='/home/sazzalin/prj/pcie/soc'
 let g:netrw_dirhist_3='/home/sazzalin/prj/pcie/soc/rtl'
 let g:netrw_dirhist_2='/home/sazzalin/prj/pcie/soc/rtl/pcie_bit_swp'
-let g:netrw_dirhist_1='/home/sazzalin/prj/pcie/soc/rtl/pcie_crc'
-let g:netrw_dirhist_0='/home/sazzalin/prj/pcie/soc/rtl'
-let g:netrw_dirhist_9='/home/sazzalin/prj/pcie/soc/rtl/pcie_bit_swp'

@@ -51,7 +51,7 @@ function! AlignComment() range
 
    " silent! :'<,'>Tab /\/\/
    silent! :'<,'>EasyAlign /\s\/\// {'lm':1,'rm':1}
-
+   silent! :'<,'>s/\s\+\/\// \/\//g
 endfunction
 
 function! AlignDeclarations()
@@ -89,7 +89,6 @@ function! AlignAssignment() range
    " silent! :'<,'>s/\a<=/\a <=/g
    " silent! :'<,'>Tab /=/l1
    silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
-   silent! :'<,'>s/\s=/=/g
    " silent! :'<,'>s/=\d/= /g
 endfunction
 
