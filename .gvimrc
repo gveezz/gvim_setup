@@ -1240,6 +1240,9 @@ if v:version >= 800
    tnoremap <silent> <nowait> <Esc> <C-\><C-n>
 endif
 
+" C-b:
+inoremap <nowait> <C-b> <C-o>:b 
+noremap <nowait> <C-b> :b 
 " M-n: go to normal mode from insert mode
 " inoremap <silent> <nowait> <M-n> <Esc>
 
@@ -1509,9 +1512,9 @@ nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge
 
 " C-x: close current buffer
 " inoremap <expr> <silent> <nowait> <C-x> tabpagenr('$') > 1 ? winnr('$') > 1 ? "<C-o>:bw! <CR>" : "<C-o>:tabclose!<CR>" : "<Esc>:call EchoWarnMsg('Last window, Alt+F4 to quit')<CR>"
-inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
+inoremap <silent> <nowait> <C-x> <C-o>:close!<CR>
 " nnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 && line('$') == 1 && getline('.') == '' ? ":bd!<CR>" : winnr('$') > 1 ? ":bd!<CR>" : ":tabclose!<CR>"
-nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
+nnoremap <silent> <nowait> <C-x> :close!<CR>
 if v:version >= 800
    tnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 ? "exit<CR>" : winnr('$') > 1 ? "exit<CR>" : ":tabclose!<CR>"
 endif
@@ -1599,6 +1602,7 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 
 augroup BufWinIn
 
+   autocmd!
    " refresh directory listing if entering NERDTree
    " autocmd BufEnter,BufRead NERD_tree* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")

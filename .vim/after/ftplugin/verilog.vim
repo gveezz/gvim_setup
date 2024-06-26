@@ -41,57 +41,42 @@ function! AddMultiLineComment()
 
    
    silent! :'<,'>v/\/\//s/$/ \/\/ /g
-   silent! :'<,'>v/\/\//Tab /\/\//l1
-   silent! :'<,'>v/\/\//s/$/ /g
+   " silent! :'<,'>v/\/\//Tab /\/\//l1
+   silent! :'<,'>EasyAlign /\s\/\// {'lm':1,'rm':0}
+   " silent! :'<,'>v/\/\//s/$/ /g
 
 endfunction
 
 function! AlignComment() range
 
-   silent! :'<,'>Tab /\/\/
+   " silent! :'<,'>Tab /\/\/
+   silent! :'<,'>EasyAlign /\s\/\// {'lm':1,'rm':1}
 
 endfunction
 
 function! AlignDeclarations()
 
    silent! :'<,'>s# \+# #g
-   silent! :'<,'>Tab /\s\a/l0
-   silent! :'<,'>Tab /\/\/
+   " silent! :'<,'>Tab /\s\a/l0
+   silent! :'<,'>EasyAlign /\s\a/ {'lm':0,'rm':0}
+   " silent! :'<,'>Tab /\/\/
+   silent! :'<,'>EasyAlign /\/\// {'lm':0,'rm':0}
 
 endfunction
 
 function! AlignParams()
 
    silent! :'<,'>s# \+# #g
-   :'<,'>Tab /\s[A-Z]/l0
-   :'<,'>Tab /=
+   " :'<,'>Tab /\s[A-Z]/l0
+   silent! :'<,'>EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}
+   " :'<,'>Tab /=
+   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
 
 endfunction
 
 function! AlignIoInstance() range
-   
-   " let l:fsline = line("'<")
-   " let l:lsline = line("'>")
-   " let l:list = [0]
-   " 
-   " for l:line in range(l:fsline, l:lsline)
-   "    let l:idx = stridx(getline(l:line), '(')
-   "    call add(l:list, l:idx)
-   " endfor 
-   " 
-   " let l:maxidx = max(l:list)
-   " " echom "( idx = ".l:maxidx | 0.5sleep
-   " for l:line in range(l:fsline, l:lsline)
-   "    let l:idx = stridx(getline(l:line), '(')
-   "    let l:idxdiff = (l:maxidx-l:idx)
-   "    silent! exec ":v/\/\//Tab /(/l".l:idxdiff
-   " endfor 
-   " let l:curidx = stridx(getline('.'), '(')
-   " let l:idxdiff = l:maxidx-l:curidx
-   " :'<,'>exec "v/\/\//Tab /(/".l:idxdiff
-      
-   :'<,'>v/\/\//Tab /(/l0
-   ":'<,'>Tab /)/l0
+
+   silent! :'<,'>EasyAlign /(/ {'lm':0,'rm':0}
    silent! :'<,'>v/\/\//s/\s*)/)/g
    silent! ;'<,'>v/\/\//s/\s\+$//g
 
@@ -99,10 +84,13 @@ endfunction
 
 function! AlignAssignment() range
 
-    silent! :'<,'>Tab /<=/
-    silent! :'<,'>Tab /=
-    silent! :'<,'>s/\s=/=/g
-
+   " silent! :'<,'>Tab /<=/
+   silent! :'<,'>EasyAlign /<=/ {'lm':1,'rm':1}
+   " silent! :'<,'>s/\a<=/\a <=/g
+   " silent! :'<,'>Tab /=/l1
+   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
+   silent! :'<,'>s/\s=/=/g
+   " silent! :'<,'>s/=\d/= /g
 endfunction
 
 function! RplcSemicolonToDot()
@@ -137,7 +125,8 @@ function! FormatIoInstance() range
    silent! ;'<,'>v/\/\//s/\s\+$//g
    silent! :'<,'>v/\/\//s/,$/( ),/g
    silent! :'<,'>v/\/\/\|,/normal! A( )
-   silent! :'<,'>v/\/\//Tab /(/l0
+   " silent! :'<,'>v/\/\//Tab /(/l0
+   silent! :'<,'>EasyAlign /(/ {'lm':0,'rm':0}
    
 endfunction
 
