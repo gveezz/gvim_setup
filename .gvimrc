@@ -1153,11 +1153,19 @@ function! CloseBuffer()
       endfor
    endif
 
-   if l:b_count > 1 && l:w_num > 1
-      " just close the window of the duplicated buffer
+   " if we have a duplicated buffer,
+   " just close the window
+   if l:b_count > 1
+      echo "Duplicated buffer"
       silent! :close!
-   else 
-      silent! :bw!
+   else
+      if l:t_num > 1 || l:w_num > 1
+         echo "l:t_num > 1 || l:w_num > 1"
+         silent! :close!
+      elseif l:w_num == 1
+         echo "l:w_num == 1"
+         silent! :bw!
+      endif
    endif
 
 endfunction
@@ -1255,10 +1263,10 @@ nnoremap <silent> <nowait> <M-n> :new!<CR>
 vnoremap <silent> <nowait> <M-n> <Esc>:vnew!<CR>
 
 " C-d: open netrw vertical
-inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
-nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L"
-vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Texplore<CR><C-w>L"
+nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Texplore<CR><C-w>L"
+vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Texplore<CR><C-w>L"
+snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Texplore<CR><C-w>L"
 cnoremap <silent> <nowait> <C-d> <C-c>
 
 " C-h: open netrw horizontally
