@@ -129,12 +129,6 @@ function! FormatIoInstance() range
    
 endfunction
 
-function! PromptAlign()
-
-   return input("Prompt the alignment char sequence:Tab /")
-
-endfunction
-
 function! MultiLineComment() range
    silent! :'<,'>normal! I// 
 endfunction
@@ -149,9 +143,9 @@ xnoremap <buffer> <silent> <nowait> <M-7> :call AlignComment()<CR>'<<End>
 snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call AlignAssignment()<CR>'<<End>
 xnoremap <buffer> <silent> <nowait> <M-a> :call AlignAssignment()<CR>'<<End>
 
-inoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
-snoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
-xnoremap <buffer> <nowait> <M-t> :Tab /<C-R>=PromptAlign()<CR>
+" inoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
+" snoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
+" xnoremap <buffer> <nowait> <M-t> :Tab /<C-R>=PromptAlign()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End>
 snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End>
