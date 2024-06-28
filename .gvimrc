@@ -673,7 +673,7 @@ function! IabbrevSnippet()
          " echom "line = ".line
          if stridx(line, l:snippetStr) == 0
             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
-            if len(l:snippetToMatch) > 0
+            if len(l:snippetToMatch) > 0 && stridx(l:snippetToMatch, '#') < 0
                echom "l:snippetToMatch = ".l:snippetToMatch
                exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." SnippetInComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
             endif
@@ -1135,6 +1135,7 @@ function! CloseBuffer()
    
    let l:b_name = bufname()
    let l:w_num = winnr('$')
+   let l:t_num = tabpagenr('$')
    let l:b_count = 0
 
    if IsEmptyVim()
@@ -1143,7 +1144,7 @@ function! CloseBuffer()
          silent! :q
       endif
    else
-      for l:t_idx in range(1, tabpagenr('$'))
+      for l:t_idx in range(1, l:t_num)
          let l:buf_list = tabpagebuflist(l:t_idx)
          for l:b_i in range(0, (len(l:buf_list)-1))
             if bufname(l:buf_list[l:b_i]) == l:b_name
@@ -1167,6 +1168,13 @@ function! CloseBuffer()
          silent! :bw!
       endif
    endif
+
+   " if l:t_num || (l:b_count > 1 && l:w_num > 1)
+   "    " just close the window of the duplicated buffer
+   "    silent! :close
+   " else 
+   "    silent! :bw!
+   " endif
 
 endfunction
 
@@ -1244,9 +1252,6 @@ inoremap <silent> <nowait> <C-S-Space> <C-o>:stopinsert<CR>
 
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 nnoremap <silent> <nowait> <Esc> i
-if v:version >= 800
-   tnoremap <silent> <nowait> <Esc> <C-\><C-n>
-endif
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
@@ -1329,8 +1334,6 @@ snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F12> <nop>
 
 " C-j: open terminal with gvim 8*
-inoremap <silent> <nowait> <C-j> <C-o>:bel terminal<CR>
-nnoremap <silent> <nowait> <C-j> :bel terminal<CR>
 
 " F11: toggle full screen
 inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=100<CR>"
@@ -1441,8 +1444,10 @@ inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 
 " C-v: Paste
-inoremap <nowait> <C-v> <C-o>"+P
-nnoremap <nowait> <C-v> "+P
+inoremap <silent> <nowait> <C-v> <C-o>"+P
+nnoremap <silent> <nowait> <C-v> "+P
+xnoremap <silent> <nowait> <C-v> "+P
+snoremap <silent> <nowait> <C-v> <C-o>:exec "silent! "+P"<CR>
 cnoremap <nowait> <C-v> <C-r>+
 
 " MiddleMouse: paste as well
@@ -1490,16 +1495,10 @@ nnoremap <silent> <nowait> <M-Up> <C-w><Left>
 " M-Right: switch to next window or tab
 inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR><C-o>:call GoToLastWin()<CR>"
 nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>:call GoToLastWin()<CR>"
-if v:version >= 800
-   tnoremap <silent> <nowait> <C-PageUp> <C-\><C-n>
-endif
 
 " M-Left: switch to previous window or tab
 inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR><C-o>:call GoToFirstWin()<CR>"
 nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
-if v:version >= 800
-   tnoremap <silent> <nowait> <C-PageDown> <C-\><C-n>
-endif
 
 " M-o: open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
@@ -1520,16 +1519,15 @@ nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge
 
 " C-x: close current buffer
 " inoremap <expr> <silent> <nowait> <C-x> tabpagenr('$') > 1 ? winnr('$') > 1 ? "<C-o>:bw! <CR>" : "<C-o>:tabclose!<CR>" : "<Esc>:call EchoWarnMsg('Last window, Alt+F4 to quit')<CR>"
-inoremap <silent> <nowait> <C-x> <C-o>:close!<CR>
+inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
 " nnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 && line('$') == 1 && getline('.') == '' ? ":bd!<CR>" : winnr('$') > 1 ? ":bd!<CR>" : ":tabclose!<CR>"
-nnoremap <silent> <nowait> <C-x> :close!<CR>
-if v:version >= 800
-   tnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 ? "exit<CR>" : winnr('$') > 1 ? "exit<CR>" : ":tabclose!<CR>"
-endif
+nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
 
 " C-t: open new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
 nnoremap <silent> <nowait> <C-t> :tabnew<CR>
+snoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
+vnoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
 
 " C-Del
 inoremap <silent> <nowait> <C-Del> <C-o>dw
@@ -1564,15 +1562,9 @@ vnoremap <silent> <nowait> <C-z> u
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 vnoremap <silent> <nowait> <C-c> "+ygv
-if v:version >= 800
-   tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
-endif
 
 vnoremap <silent> <nowait> y "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
-if v:version >= 800
-   tnoremap <silent> <nowait> <C-v> <C-\><C-n><C-W>"+<C-\><C-n>
-endif
 
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
@@ -1637,7 +1629,6 @@ augroup Insert
    " autocmd InsertLeave,WinLeave * echo '' | set nocul
    " autocmd InsertLeave * hi Cursor guibg=#FFE800 | :let @/=get(b:,'_search','')
    autocmd InsertLeave * set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#0000AA
-
 augroup END
 
 augroup Vim
@@ -1654,19 +1645,6 @@ augroup Vim
 
 augroup END
 
-" augroup Verilog
-" 
-"    autocmd!
-"    " autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.vh,*.vinc,*.vf,*.sv,*.svh,*.svinc,*.svf set filetype=verilog | set textwidth=80 | set wrapmargin=0 | set linebreak
-"    autocmd BufWritePost,BufNewFile,BufRead *.v,*vbkp*,*.vams,*.vh,*.vinc,*.vf set filetype=verilog
-"    autocmd BufWritePost,BufNewFile,BufRead *.sv*,*.svh*,*.svinc,*.svf set filetype=verilog
-"    " autocmd BufReadPost * silent! :%s/\s\+$//g
-"    autocmd BufWritePost,BufNewFile,BufRead *.v,*.vams,*.sv* if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vtemplate.v | endif
-"    autocmd BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r$VIMHOME/templates/vhtemplate.v | endif
-"    autocmd BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $VIMHOME/templates/vinctemplate.v | endif
-" 
-" augroup END
-
 augroup Markdown
    autocmd!
    autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
@@ -1676,11 +1654,5 @@ augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
 augroup END
-
-" augroup betterSeachHighlighting
-"     autocmd!
-"     autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
-"     autocmd CmdlineLeave * let g:searching = 0
-" augroup END
 
 
