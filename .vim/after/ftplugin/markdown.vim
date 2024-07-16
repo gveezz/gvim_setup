@@ -1,3 +1,5 @@
+let b:table_mode_corner = '|'
+
 function! MdToPdf()
 
    let l:convProg = "pandoc"

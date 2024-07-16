@@ -21,7 +21,7 @@ hi NonText                term=bold cterm=bold  ctermfg=darkred  gui=bold  guifg
 hi Directory              term=bold cterm=bold  ctermfg=brown  guifg=Yellow
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red
 hi IncSearch              term=reverse  ctermfg=white  ctermbg=red  guifg=Green  guibg=white
-hi Search                 guibg=white guifg=#000000 guifg=black gui=bold
+hi Search                 guibg=white guifg=#000000 guibg=#00ff00 gui=bold
 hi MoreMsg                term=bold  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=SeaGreen
 hi ModeMsg                term=bold  cterm=bold  gui=bold  guifg=White  guibg=Blue
 hi LineNr                 term=underline  cterm=bold  ctermfg=darkcyan  guifg=Yellow

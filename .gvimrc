@@ -27,9 +27,10 @@ let g:netrw_liststyle = 0
 " open files in new tab
 let g:netrw_browse_split = 0
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-let g:netrw_fastbrowse = 0
+let g:netrw_fastbrowse = 1
 let g:netrw_list_hide = '^\./$'
 let g:netrw_hide = 1
+let g:netrw_dirhistmax = 0
 
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 let g:AutoCloseOn = 1
@@ -81,7 +82,7 @@ set guioptions+=r
 set guioptions+=e
 " set guioptions=-l
 set virtualedit=onemore
-set whichwrap=<,>,[,]
+set whichwrap=<,>,[,],b,s
 set selection=exclusive
 set selectmode=mouse,key
 set keymodel=startsel,stopsel
@@ -147,6 +148,8 @@ set guitablabel=%{GuiTabLabel()}
 set equalalways
 " set iskeyword+=10,33-47,92-95
 set cursorline
+
+set switchbuf=usetab
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -397,7 +400,7 @@ function! ClearBufferList()
    " Unlisted ones
    let b_unl = filter(b_all, 'buflisted(v:val)')
    for nbuff in b_unl
-      silent! :exec "bd! ".nbuff
+      silent! :exec "bw! ".nbuff
    endfor
 
 endfunction
@@ -645,7 +648,6 @@ endfunction
 "       return a:match
 "
 " endfunction
-"
 
 function! InComment()
 
@@ -874,13 +876,13 @@ endfunction
 "
 " endfunction
 
-" function! PromptFindI()
-"    :promptfind
-" endfunction
+function! PromptFindI()
+   :promptfind
+endfunction
 
-" function! PromptReplI()
-"    :promptrepl
-" endfunction
+function! PromptReplI()
+   :promptrepl
+endfunction
 
 " pending interactive implementation
 " function! PromptFindI()
@@ -1157,16 +1159,17 @@ function! CloseBuffer()
    " if we have a duplicated buffer,
    " just close the window
    if l:b_count > 1
-      echo "Duplicated buffer"
+      " echo "Duplicated buffer"
       silent! :close!
    else
-      if l:t_num > 1 || l:w_num > 1
-         echo "l:t_num > 1 || l:w_num > 1"
-         silent! :close!
-      elseif l:w_num == 1
-         echo "l:w_num == 1"
-         silent! :bw!
-      endif
+      silent! :bw!
+      " if l:t_num > 1 || l:w_num > 1
+      "    " echo "l:t_num > 1 || l:w_num > 1"
+      "    silent! :close!
+      " elseif l:w_num == 1
+      "    " echo "l:w_num == 1"
+      "    silent! :bw!
+      " endif
    endif
 
    " if l:t_num || (l:b_count > 1 && l:w_num > 1)
@@ -1215,7 +1218,8 @@ function! HighlightCursorMatch()
     endtry
 endfunction
 
-" Increase or descrease guifont using mouse
+map <silent> <nowait> <Leader>t :TableModeEnable<CR>
+
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
 " inoremap <silent> <nowait> <C-RightRelease> <C-o>:call LargerFont()<CR>
 inoremap <silent> <nowait> <C-ScrollWheelDown> <C-o>:call SmallerFont()<CR>
@@ -1267,12 +1271,18 @@ inoremap <silent> <nowait> <M-n> <C-o>:new!<CR>
 nnoremap <silent> <nowait> <M-n> :new!<CR>
 vnoremap <silent> <nowait> <M-n> <Esc>:vnew!<CR>
 
-" C-d: open netrw vertical
-inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Texplore<CR><C-w>L"
-nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Texplore<CR><C-w>L"
-vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Texplore<CR><C-w>L"
-snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Texplore<CR><C-w>L"
+" C-d: open netrw in a new tab 
+inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : winnr('$') == 1 ? "<C-o>:Vexplore!<CR><C-w>L" : "<C-o>:Texplore<CR><C-w>L"
+nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : winnr('$') == 1 ? ":Vexplore!<CR><C-w>L" : ":Texplore<CR><C-w>L"
+vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : winnr('$') == 1 ? "<Esc><C-o>:Vexplore!<CR><C-w>L" : "<Esc><C-o>:Texplore!<CR><C-w>L"
+snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : winnr('$') == 1 ? "<Esc><C-o>:Vexplore!<CR><C-w>L" : "<Esc><C-o>:Texplore!<CR><C-w>L"
 cnoremap <silent> <nowait> <C-d> <C-c>
+
+inoremap <silent> <nowait> <M-d> <C-o>:Vexplore!<CR><C-w>L"
+nnoremap <silent> <nowait> <M-d> :Vexplore!<CR>
+vnoremap <silent> <nowait> <M-d> <Esc><C-o>:Vexplore!<CR><C-w>L"
+snoremap <silent> <nowait> <M-d> <Esc><C-o>:Vexplore!<CR><C-w>L"
+cnoremap <silent> <nowait> <M-d> <C-c>
 
 " C-h: open netrw horizontally
 inoremap <silent> <nowait> <C-e> <C-o>:Hexplore<CR>
@@ -1364,7 +1374,7 @@ inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() =
 " nnoremap <silent> <nowait> <CR> i<Enter><Esc>
 
 " Backspace: behave as in normal mode
-nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
+" nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
@@ -1390,9 +1400,9 @@ nnoremap <silent> <nowait> <C-{> #
 "nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
 
 " C-l: pop up buffer list
-inoremap <silent> <nowait> <C-l> <C-o>:call PopupBufferList()<CR>
-nnoremap <silent> <nowait> <C-l> :call PopupBufferList()<CR>
-vnoremap <silent> <nowait> <C-l> <Esc>:call PopupBufferList()<CR>
+inoremap <silent> <nowait> <C-l> <C-o>:call quickui#tools#list_buffer('tabedit')<CR>
+nnoremap <silent> <nowait> <C-l> :call quickui#tools#list_buffer('tabedit')<CR>
+vnoremap <silent> <nowait> <C-l> <Esc>:call quickui#tools#list_buffer('tabedit')<CR>
 
 " inoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
 " nnoremap <nowait> <C-M-l> :call BufferList()<CR>
@@ -1407,14 +1417,16 @@ vnoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
 " C-f: prompt find
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-snoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn   
-xnoremap <nowait> <C-f> <Esc><C-c>:/<C-r>*/<CR>ggnn
+vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
 cnoremap <silent> <nowait> <C-f> <C-c>
 
-" M-r: prompt replace
-inoremap <nowait> <M-f> <C-o>:call PromptReplI()<CR>
-nnoremap <nowait> <M-f> :call PromptReplI()<CR>
-snoremap <nowait> <M-f> <C-o>:call PromptReplS()<CR>
+inoremap <nowait> <C-S-f> <Esc>?
+nnoremap <nowait> <C-S-f> ?
+
+" C-r: prompt replace
+inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
+nnoremap <nowait> <C-r> :call PromptReplI()<CR>
+snoremap <nowait> <C-r> <C-o>:call PromptReplS()<CR>
 
 " M-r: prompt replace exact match
 inoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctI()<CR>
@@ -1423,7 +1435,7 @@ snoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctS()<CR>
 " C-s: save
 inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
 nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
-cnoremap <silent> <nowait> <C-s> <Esc>
+cnoremap <silent> <nowait> <C-s> <C-c><C-o>:call GuiSave()<CR>
 xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
 
 " C-k: delete line
@@ -1436,18 +1448,21 @@ inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
 
 " C-z: undo changes
-inoremap <silent> <nowait> <C-z> <C-o>u
-nnoremap <silent> <nowait> <C-z> u
+inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
+nnoremap <silent> <nowait> <C-z> :undo<CR>
+snoremap <silent> <nowait> <C-z> <Esc><C-c>:undo<CR>
+vnoremap <silent> <nowait> <C-z> <Esc><C-c>:undo<CR>
 
 " C-y: redo changes
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 nnoremap <silent> <nowait> <C-y> :redo<CR>
+xnoremap <silent> <nowait> <C-z> <Esc>:redo<CR>
 
 " C-v: Paste
-inoremap <silent> <nowait> <C-v> <C-o>"+P
-nnoremap <silent> <nowait> <C-v> "+P
-xnoremap <silent> <nowait> <C-v> "+P
-snoremap <silent> <nowait> <C-v> <C-o>:exec "silent! "+P"<CR>
+inoremap <silent> <nowait> <C-v> <C-r><C-o>+
+nnoremap <silent> <nowait> <C-v> <C-r><C-o>+
+xnoremap <silent> <nowait> <C-v> <C-r><C-o>+
+snoremap <silent> <nowait> <C-v> <C-r><C-o>+
 cnoremap <nowait> <C-v> <C-r>+
 
 " MiddleMouse: paste as well
@@ -1458,47 +1473,52 @@ inoremap <silent> <nowait> <MiddleMouse> <nop>
 nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
-
 " M-v: block paste
-inoremap <silent> <nowait> <M-v> <c-r>+
+inoremap <silent> <nowait> <M-v> <C-r><C-o>+
 
 " C-Space: start visual block mode
-inoremap <silent> <nowait> <C-Space> <C-o><C-v>
+" <LeftMouse><LeftMouse>
+inoremap <silent> <nowait> <C-Space> <C-o>viw
 nnoremap <silent> <nowait> <C-Space> i
-vnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() == "V" ? "<Esc>" : "v"
+xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<Esc>" : "v"
+
 
 " C-a: select all
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 nnoremap <silent> <nowait> <C-a> ggVG
 
-" M-w: switch to the next window
-inoremap <silent> <nowait> <M-w> <C-o><C-w>w
-" M-p: switch to the previous window
-inoremap <silent> <nowait> <M-q> <C-o><C-w>p
+" " M-w: switch to the next window
+" inoremap <silent> <nowait> <M-w> <C-o><C-w>w
+" " M-p: switch to the previous window
+" inoremap <silent> <nowait> <M-q> <C-o><C-w>p
+" 
+" " M-Up: switch to the upper window
+" inoremap <silent> <nowait> <M-Up> <C-o><C-w><Up>
+" nnoremap <silent> <nowait> <M-Up> <C-w><Up>
+" 
+" " M-Right: switch to the upper window
+" inoremap <silent> <nowait> <M-Up> <C-o><C-w><Right>
+" nnoremap <silent> <nowait> <M-Up> <C-w><Right>
+" 
+" " M-Down
+" inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
+" nnoremap <silent> <nowait> <M-Down> <C-w><Down>
+" 
+" " M-Up: switch to the upper window
+" inoremap <silent> <nowait> <M-Up> <C-o><C-w><Left>
+" nnoremap <silent> <nowait> <M-Up> <C-w><Left>
 
-" M-Up: switch to the upper window
-inoremap <silent> <nowait> <M-Up> <C-o><C-w><Up>
-nnoremap <silent> <nowait> <M-Up> <C-w><Up>
+" C-PageUpt: switch to next window or tab
+inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>"
+xnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<Esc>:call GoToPrevWin()<CR>" : "<Esc>:tabprev<CR>"
+cnoremap <silent> <nowait> <C-PageUp> <C-c>
 
-" M-Right: switch to the upper window
-inoremap <silent> <nowait> <M-Up> <C-o><C-w><Right>
-nnoremap <silent> <nowait> <M-Up> <C-w><Right>
-
-" M-Down
-inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
-nnoremap <silent> <nowait> <M-Down> <C-w><Down>
-
-" M-Left: switch to the upper window
-inoremap <silent> <nowait> <M-Up> <C-o><C-w><Left>
-nnoremap <silent> <nowait> <M-Up> <C-w><Left>
-
-" M-Right: switch to next window or tab
-inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR><C-o>:call GoToLastWin()<CR>"
-nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>:call GoToLastWin()<CR>"
-
-" M-Left: switch to previous window or tab
-inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR><C-o>:call GoToFirstWin()<CR>"
-nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>:call GoToFirstWin()<CR>"
+" C-PageDown: switch to previous window or tab
+inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<Esc>:call GoToNextWin()<CR>" : "<Esc>:tabnext<CR>"
+cnoremap <silent> <nowait> <C-PageDown> <C-c>
 
 " M-o: open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
@@ -1539,7 +1559,8 @@ nnoremap <silent> <nowait> <C-Backspace> db
 
 " End: go to end of line
 nnoremap <silent> <nowait> <End> $<Right>
-vnoremap <silent> <nowait> <End> $
+snoremap <silent> <nowait> <End> <Esc>$
+xnoremap <silent> <nowait> <End> $
 
 " <ScrollWheelUp> <ScrollWheelDown>
 inoremap <silent> <nowait> <ScrollWheelUp> <C-o>10k
