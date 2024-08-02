@@ -28,6 +28,7 @@ hi LineNr                 term=underline  cterm=bold  ctermfg=darkcyan  guifg=Ye
 hi Question               term=standout  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=Green
 hi Title                  term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold  guifg=Magenta
 hi Visual                 guifg=black guibg=#467BFF guifg=#000000 gui=bold
+hi HighCW                 guifg=black guibg=#feffa0 guifg=#000000 gui=bold
 hi WarningMsg             term=standout  cterm=bold  ctermfg=black ctermbg=Yellow guifg=black guibg=Yellow
 hi Cursor                 guifg=#f7aa1b  guibg=#0000ff cterm=bold
 hi nCursor                guibg=#E4E5E5 cterm=bold
@@ -53,7 +54,7 @@ hi TabLineFill            term=bold,reverse  cterm=bold ctermfg=lightblue ctermb
 hi TabLineSel             term=reverse  ctermfg=white ctermbg=lightblue guifg=white guibg=blue
 hi Underlined             term=underline cterm=bold,underline ctermfg=lightblue guifg=lightblue guibg=#222222 gui=bold,underline
 hi Ignore                 ctermfg=black ctermbg=black guifg=black guibg=black
-hi StatusLine             ctermfg=15  guifg=#00ff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold
+hi StatusLine             ctermfg=15  guifg=black guibg=yellow gui=bold ctermbg=239 cterm=bold
 hi StatusLineG            ctermfg=15  guifg=#00ff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
 hi StatusLineNC           ctermfg=249 guifg=#000000 guibg=#AAAAAA gui=bold ctermbg=239 cterm=bold
 hi StatusLineR            ctermfg=15  guifg=#ff0000 guibg=#222222 gui=bold ctermbg=239 cterm=bold 

@@ -344,10 +344,10 @@ function! quickui#tools#preview_tag(tagname)
 		call quickui#utils#errmsg('E484: Can not open file '.filename)
 		return 2
 	endif
-	if !has_key(taginfo, 'line')
-		call quickui#utils#errmsg('Error: no "line" information in your tags, regenerate with -n')
-		return 3
-	endif
+	" if !has_key(taginfo, 'line')
+	" 	call quickui#utils#errmsg('Error: no "line" information in your tags, regenerate with -n')
+	" 	return 3
+	" endif
 	let text = '('.(ptag.index + 1).'/'.len(ptag.taglist).')'
 	let opts = {'cursor':taginfo.line, 'title':text}
 	call quickui#preview#open(filename, opts)

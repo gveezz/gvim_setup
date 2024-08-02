@@ -1,2 +1,2 @@
-noremap <silent> <buffer> <F1> :bd!<CR>
-nmap <silent> <buffer> <Esc> :bd!<CR>
+noremap <silent> <buffer> <F1> :bw!<CR>
+noremap <silent> <buffer> <Esc> :bw!<CR>

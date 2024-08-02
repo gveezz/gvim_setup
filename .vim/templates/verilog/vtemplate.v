@@ -96,8 +96,6 @@ always @(posedge SClk or negedge Reset_n) begin
       ODataVal <= 0;
       OData    <= 0;
    end else begin
-      // handle sync clk logic here
-
       if (SyncRst) begin
          ODataVal <= 0;
          OData    <= 0;
