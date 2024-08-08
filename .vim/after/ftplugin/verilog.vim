@@ -125,7 +125,7 @@ function! FormatIoInstance() range
    silent! :'<,'>v/\/\//s/,$/( ),/g
    silent! :'<,'>v/\/\/\|,/normal! A( )
    " silent! :'<,'>v/\/\//Tab /(/l0
-   silent! :'<,'>EasyAlign /(/ {'lm':0,'rm':0}
+   silent! :'<,'>EasyAlign /(/ {'lm':0, 'rm':0}
    
 endfunction
 
@@ -181,3 +181,8 @@ xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance()<CR>
 inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
+
+" C-j: toggle code folding
+inoremap <silent> <nowait> <C-j> <C-o>zf/end<CR>
+nnoremap <silent> <nowait> <C-j> zf/end<CR>
+vnoremap <silent> <nowait> <C-j> <Esc><C-c>zf/end<CR><Esc>

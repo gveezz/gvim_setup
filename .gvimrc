@@ -10,7 +10,7 @@
 
 " let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
-let mapleader = ','
+let mapleader = '\'
 
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_working_path_mode = 'ra'
@@ -98,7 +98,7 @@ set shiftwidth=3
 set indentexpr=
 set smarttab
 set number
-set relativenumber
+" set relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
@@ -152,6 +152,9 @@ set cursorline
 
 set bufhidden=wipe
 set switchbuf=useopen
+
+set foldmethod=manual
+set foldlevelstart=1
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -421,11 +424,15 @@ function! BufferList()
       echon "[".l:nbuff."] "
       echohl None
       echohl StatusLineW
-      echon l:menuitem." ---> "
+      " echon l:menuitem."\t\t\t".fnamemodify(bufname(nbuff), ':p:h')
+      echon fnamemodify(bufname(nbuff), ':p:h')."/"
       echohl None
-      echohl StatusLineY
-      echon "[".l:nbuff."]\n"
+      echohl StatusLineG
+      echon l:menuitem."\n"
       echohl None
+      " echohl StatusLineY
+      " echon "[".l:nbuff."]\n"
+      " echohl None
 
       " echom "[".l:nbuff."] ".l:menuitem
    endfor
@@ -1162,65 +1169,105 @@ function! IsEmptyVim()
     return IsBlank(l:currentBufNr) && ! ExistOtherBuffers(l:currentBufNr)
 endfunction
 
-function! CloseBuffer()
-   
-   let l:b_name = bufname()
-   let l:w_num = winnr('$')
-   let l:t_num = tabpagenr('$')
-   let l:b_count = 0
-
-   if IsEmptyVim()
-      call EchoWarnMsg('Last win empty buffer, q to quit')
-      if nr2char(getchar()) == 'q'
-         silent! :q
-      endif
+function! IsEmptyBuffer()
+   if (line('$') == 1 && getline('.') == '') || wordcount()['words'] == 0
+      return 1
    else
-      for l:t_idx in range(1, l:t_num)
-         let l:buf_list = tabpagebuflist(l:t_idx)
-         for l:b_i in range(0, (len(l:buf_list)-1))
-            if bufname(l:buf_list[l:b_i]) == l:b_name
-               let l:b_count = l:b_count + 1
-            endif
-         endfor
-      endfor
+      return 0
    endif
+endfunction
 
-   " if we have a duplicated buffer,
-   " just close the window
-   if l:b_count > 1
-      if &ft == 'netrw' || (line('.') == 1 && getline('.') == '')
+function! CloseBuffer()
+
+   if tabpagenr('$') > 1 || winnr('$') > 1
+      if IsEmptyBuffer() == 1
          silent! :bw!
       else
-         " echo "Duplicated buffer"
          silent! :close!
       endif
    else
-      silent! :bw!
-      " if l:t_num > 1 || l:w_num > 1
-      "    " echo "l:t_num > 1 || l:w_num > 1"
-      "    silent! :close!
-      " elseif l:w_num == 1
-      "    " echo "l:w_num == 1"
-      "    silent! :bw!
-      " endif
+      if IsEmptyBuffer()
+         call EchoWarnMsg('Last win empty buffer, q to quit')
+         if nr2char(getchar()) == 'q'
+            silent! :q
+         endif
+      else 
+         silent! :bw!
+      endif
    endif
-
-   call DeleteHiddenBuffers()
-
-   " if l:t_num || (l:b_count > 1 && l:w_num > 1)
-   "    " just close the window of the duplicated buffer
-   "    silent! :close
-   " else 
-   "    silent! :bw!
-   " endif
-
+   
 endfunction
+
+" function! CloseBuffer()
+"    
+"    let l:b_name = bufname()
+"    let l:w_num = winnr('$')
+"    let l:t_num = tabpagenr('$')
+"    let l:b_count = 0
+"    let l:btot = 0
+" 
+"    if IsEmptyVim()
+"       call EchoWarnMsg('Last win empty buffer, q to quit')
+"       if nr2char(getchar()) == 'q'
+"          silent! :q
+"       endif
+"    else
+"       for l:t_idx in range(1, l:t_num)
+"          let l:buf_list = tabpagebuflist(l:t_idx)
+"          for l:b_i in range(0, (len(l:buf_list)-1))
+"             if bufname(l:buf_list[l:b_i]) == l:b_name
+"                let l:b_count = l:b_count + 1
+"             endif
+" 
+"             let l:btot = l:btot + 1
+"          endfor
+"       endfor
+"    endif
+" 
+"    " if we have a duplicated buffer,
+"    " just close the window
+"    if l:btot == 1
+"       call EchoWarnMsg('Last win empty buffer, q to quit')
+"       if nr2char(getchar()) == 'q'
+"          silent! :q
+"       endif
+"    else 
+"       if l:b_count > 1
+"          if &ft == 'netrw' || (line('.') == 1 && getline('.') == '')
+"             silent! :bw!
+"             silent! :close!
+"          else
+"             " echo "Duplicated buffer"
+"             silent! :close!
+"          endif
+"       else
+"          silent! :bw!
+"          " if l:t_num > 1 || l:w_num > 1
+"          "    " echo "l:t_num > 1 || l:w_num > 1"
+"          "    silent! :close!
+"          " elseif l:w_num == 1
+"          "    " echo "l:w_num == 1"
+"          "    silent! :bw!
+"          " endif
+"       endif
+"    endif
+" 
+"    call DeleteHiddenBuffers()
+" 
+"    " if l:t_num || (l:b_count > 1 && l:w_num > 1)
+"    "    " just close the window of the duplicated buffer
+"    "    silent! :close
+"    " else 
+"    "    silent! :bw!
+"    " endif
+" 
+" endfunction
 
 function DeleteHiddenBuffers()
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-        silent execute 'bwipeout' buf
+        silent execute ':bw!' buf
     endfor
 endfunction
 
@@ -1280,10 +1327,6 @@ nnoremap <silent> <nowait> <C-ScrollWheelUp> :call LargerFont() <CR>
 nnoremap <silent> <nowait> <C-ScrollWheelDown> :call SmallerFont()<CR>
 " nnoremap <silent> <nowait> <C-LeftRelease> :call SmallerFont()<CR>
 
-inoremap <silent> <nowait> <C-]> <C-o>:TlistOpen<CR>
-nnoremap <silent> <nowait> <C-]> :TlistOpen<CR>
-vnoremap <silent> <nowait> <C-]> <Esc><C-c>:TlistOpen<CR>
-
 " Scroll bar right
 inoremap <silent> <nowait> <M-PageUp> <C-o>10zh
 nnoremap <silent> <nowait> <M-PageUp> 10zh
@@ -1307,10 +1350,11 @@ nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
 inoremap <silent> <nowait> <C-.> <C-o>
-inoremap <silent> <nowait> <C-S-Space> <C-o>:stopinsert<CR>
 
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 nnoremap <silent> <nowait> <Esc> i
+
+inoremap <silent> <nowait> <C-w> <C-o><C-w>
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
@@ -1318,34 +1362,19 @@ noremap <nowait> <C-b> :b
 " M-n: go to normal mode from insert mode
 " inoremap <silent> <nowait> <M-n> <Esc>
 
-" C-e: open new empty buffer
-inoremap <silent> <nowait> <C-n> <C-o>:vnew!<CR>
-nnoremap <silent> <nowait> <C-n> :vnew!<CR>
-vnoremap <silent> <nowait> <C-n> <Esc>:vnew!<CR>
-inoremap <silent> <nowait> <M-n> <C-o>:new!<CR>
-nnoremap <silent> <nowait> <M-n> :new!<CR>
-vnoremap <silent> <nowait> <M-n> <Esc>:vnew!<CR>
-
-" C-d: open netrw in a vertical split
-inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
-nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L" 
-vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-cnoremap <silent> <nowait> <C-d> <C-c>
+" " C-d: open netrw in a vertical split
+" inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
+" nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L" 
+" vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+" snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
+" cnoremap <silent> <nowait> <C-d> <C-c>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-e> <C-o>:Explore!<CR><C-w>L
-nnoremap <silent> <nowait> <C-e> :Explore!<CR><C-w>L
-vnoremap <silent> <nowait> <C-e> <Esc><C-o>:Explore!<CR><C-w>L
-snoremap <silent> <nowait> <C-e> <Esc><C-o>:Explore!<CR><C-w>L
-cnoremap <silent> <nowait> <C-e> <C-c>
-
-" C-h: open netrw horizontally
-inoremap <silent> <nowait> <M-d> <C-o>:Hexplore<CR>
-nnoremap <silent> <nowait> <M-d> :Hexplore<CR>
-vnoremap <silent> <nowait> <M-d> <Esc><C-o>:Hexplore<CR>
-snoremap <silent> <nowait> <M-d> <Esc><C-o>:Hexplore<CR>
-cnoremap <silent> <nowait> <M-d> <C-c>
+inoremap <silent> <nowait> <C-d> <C-o>:Explore!<CR>
+nnoremap <silent> <nowait> <C-d> :Explore!<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
+cnoremap <silent> <nowait> <C-d> <C-c>
 
 " F1-F12 mappings
 inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
@@ -1407,10 +1436,13 @@ nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=9
 " <Home>: jump before the first non-blank of the current line
 inoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
 nnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+vnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
+snoremap <expr> <silent> <nowait> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
 
 " C-c: command line mode
-inoremap <nowait> <C-c> <C-o>:
-nnoremap <nowait> <C-c> :
+inoremap <nowait> <M-x> <C-o>:
+nnoremap <nowait> <M-x> :
+vnoremap <nowait> <M-x> <Esc><C-c>:
 
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
@@ -1455,9 +1487,9 @@ nnoremap <silent> <nowait> <C-´> #
 "nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
 
 " C-l: pop up buffer list
-inoremap <silent> <nowait> <C-l> <C-o>:call quickui#tools#list_buffer('tabedit')<CR>
-nnoremap <silent> <nowait> <C-l> :call quickui#tools#list_buffer('tabedit')<CR>
-vnoremap <silent> <nowait> <C-l> <Esc>:call quickui#tools#list_buffer('tabedit')<CR>
+"inoremap <silent> <nowait> <C-l> <C-o>:call quickui#tools#list_buffer('tabedit')<CR>
+"nnoremap <silent> <nowait> <C-l> :call quickui#tools#list_buffer('tabedit')<CR>
+"vnoremap <silent> <nowait> <C-l> <Esc>:call quickui#tools#list_buffer('tabedit')<CR>
 
 " inoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
 " nnoremap <nowait> <C-M-l> :call BufferList()<CR>
@@ -1477,6 +1509,12 @@ cnoremap <silent> <nowait> <C-f> <C-c>
 
 inoremap <nowait> <C-S-f> <Esc>?
 nnoremap <nowait> <C-S-f> ?
+
+" C-l: prompt replace
+inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+nnoremap <nowait> <C-l> :call BufferList()<CR>
+snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+cnoremap <silent> <nowait> <C-r> <C-c>
 
 " C-r: prompt replace
 inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
@@ -1546,7 +1584,7 @@ nnoremap <silent> <nowait> <C-a> ggVG
 " M-Up: switch to the upper window
 inoremap <silent> <nowait> <M-Up> <C-o><C-w><Up>
 nnoremap <silent> <nowait> <M-Up> <C-w><Up>
-xnoremap <silent> <nowait> <M-Right> <Esc><C-w><Up>
+xnoremap <silent> <nowait> <M-Up> <Esc><C-w><Up>
 
 " " M-Left: switch to the upper window
 inoremap <silent> <nowait> <M-Left> <C-o><C-w><Left>
@@ -1560,7 +1598,17 @@ xnoremap <silent> <nowait> <M-Right> <Esc><C-w><Right>
 " M-Down
 inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
 nnoremap <silent> <nowait> <M-Down> <C-w><Down>
-xnoremap <silent> <nowait> <M-Right> <Esc><C-w><Down>
+xnoremap <silent> <nowait> <M-Down> <Esc><C-w><Down>
+
+" M-v
+inoremap <silent> <nowait> <C-n> <C-o>:vnew<CR>
+nnoremap <silent> <nowait> <C-n> :vnew<CR>
+xnoremap <silent> <nowait> <C-n> <Esc><C-o>:vnew<CR>
+
+" M-s
+inoremap <silent> <nowait> <C-M-n> <C-o>:new<CR>
+nnoremap <silent> <nowait> <C-M-n> :new<CR>
+xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:new<CR>
 
 " C-PageUp: switch to next window or tab
 " inoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
@@ -1613,7 +1661,7 @@ inoremap <silent> <nowait> <C-Del> <C-o>dw
 nnoremap <silent> <nowait> <C-Del> dw
 
 " C-Backspace
-" inoremap <silent> <nowait> <C-Backspace> <C-o>db
+inoremap <silent> <nowait> <C-Backspace> <C-o>db
 nnoremap <silent> <nowait> <C-Backspace> db
 
 " End: go to end of line
@@ -1666,9 +1714,6 @@ snoremap <silent> <nowait> ( (<C-r><C-o>*)
 snoremap <silent> <nowait> " "<C-r><C-o>*"
 snoremap <silent> <nowait> < <<C-r><C-o>*>
 
-vnoremap <expr> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
-snoremap <expr> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
-
 vnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
 snoremap <silent> <nowait> <ScrollWheelUp> <Esc>
 vnoremap <silent> <nowait> <ScrollWheelDown> <Esc>
@@ -1719,6 +1764,8 @@ augroup END
 
 augroup Vim
    autocmd!
+   " do not autofold when opening a file
+   autocmd BufWinEnter * normal zi
    " autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
    " autocmd VimEnter * if bufname('.') == '' | :NERDTree | only | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vim set filetype=vim

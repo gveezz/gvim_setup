@@ -1,4 +1,4 @@
 augroup Netrw
    autocmd!
-   autocmd FileType netrw setl bufhidden=wipe
+   autocmd FileType netrw stopinsert | setl bufhidden=wipe
 augroup END

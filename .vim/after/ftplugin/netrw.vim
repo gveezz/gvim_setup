@@ -1,8 +1,7 @@
-stopinsert
 " set number
 " set relativenumber
-nmap <silent> <buffer> <nowait> <C-d> :bw!<CR>
-nmap <silent> <buffer> <nowait> <Esc> :bw!<CR>
+nmap <silent> <buffer> <nowait> <C-d> <C-6>
+nmap <silent> <buffer> <nowait> <Esc> <C-6>
 nmap <silent> <buffer> <nowait> <Space> t
 nmap <silent> <buffer> <nowait> <C-Space> v
 nmap <silent> <buffer> <nowait> <Backspace> -
