@@ -32,7 +32,8 @@ let g:netrw_list_hide = '^\./$'
 let g:netrw_hide = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_winsize = 25
-let g:netrw_preview   = 1
+let g:netrw_preview = 1
+le g:netrw_altfile = 1
 
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
 let g:AutoCloseOn = 1
@@ -82,7 +83,7 @@ set guioptions+=b
 set guioptions+=r
 set guioptions+=e
 " set guioptions=-l
-set virtualedit=onemore
+set virtualedit=block
 set whichwrap=<,>,[,],b,s
 set selection=exclusive
 set selectmode=mouse,key
@@ -235,9 +236,9 @@ function! GuiTabLabel()
 	  endfor
 
 	  " Append the number of windows in the tab page if more than one
-	  let wincount = tabpagewinnr(v:lnum, '$')
-	  if wincount > 1
-	    let label .= 'w('.wincount.')'
+	  let l:wincount = tabpagewinnr(v:lnum, '$')
+	  if l:wincount > 1
+	    let label .= 'w('.l:wincount.')'
 	  endif
 	  if label != ''
 	    let label .= ' '
@@ -636,14 +637,14 @@ function! BetterBufferNext() abort
 
    for b in range(bufnr('%')+1, bufnr('$'))
       if buflisted(b) && bufwinnr(b)==-1
-         exe "normal! :b".b."\<cr>"
+         silent! exe "normal! :b".b."\<cr>"
          return
       endif
   endfor
 
   for b in range(1, bufnr('%')-1)
       if buflisted(b) && bufwinnr(b)==-1
-         exe "normal! :b".b."\<cr>"
+         silent! exe "normal! :b".b."\<cr>"
          return
       endif
   endfor
@@ -654,14 +655,14 @@ function! BetterBufferPrev() abort
 
   for b in range(bufnr('%')-1, 1, -1)
     if buflisted(b) && bufwinnr(b)==-1
-      exe "normal! :b".b."\<cr>"
+      silent! exe "normal! :b".b."\<cr>"
       return
     endif
  endfor
 
   for b in range(bufnr('$'), bufnr('%')+1, -1)
     if buflisted(b) && bufwinnr(b)==-1
-      exe "normal! :b".b."\<cr>"
+      silent! exe "normal! :b".b."\<cr>"
       return
     endif
   endfor
@@ -824,7 +825,9 @@ function! GoToLine()
             call cursor(1, l:col)
          endif
 
+         silent! zz
          redraw!
+         
          echon "Line: ".l:strIn
       else
          let l:cIn = l:cInEnter
@@ -1198,6 +1201,16 @@ function! CloseBuffer()
    
 endfunction
 
+" Return hex string equivalent to given decimal string or number.
+"function! Dec2hex(arg)
+"  return printf('%x', a:arg + 0)
+"endfunction
+
+" Return number equivalent to given hex string ('0x' is optional).
+"function! Hex2dec(arg)
+"  return (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
+"endfunction
+
 " function! CloseBuffer()
 "    
 "    let l:b_name = bufname()
@@ -1314,6 +1327,10 @@ function! HighlightWordUnderCursor()
     else 
         match none 
     endif
+endfunction
+
+function! ConvBase(base)
+   return string(str2nr(getreg('*'), a:base))
 endfunction
 
 map <silent> <nowait> <Leader>t :TableModeEnable<CR>
@@ -1443,6 +1460,7 @@ snoremap <expr> <silent> <nowait> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "
 inoremap <nowait> <M-x> <C-o>:
 nnoremap <nowait> <M-x> :
 vnoremap <nowait> <M-x> <Esc><C-c>:
+tnoremap <silent> <nowait> <Esc> <C-\><C-n>
 
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
@@ -1504,7 +1522,7 @@ vnoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
 " C-f: prompt find
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
+vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR><Esc>
 cnoremap <silent> <nowait> <C-f> <C-c>
 
 inoremap <nowait> <C-S-f> <Esc>?
@@ -1557,6 +1575,7 @@ inoremap <silent> <nowait> <C-v> <C-r><C-o>+
 nnoremap <silent> <nowait> <C-v> <C-r><C-o>+
 xnoremap <silent> <nowait> <C-v> <C-r><C-o>+
 snoremap <silent> <nowait> <C-v> <C-r><C-o>+
+tnoremap <silent> <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
 
 " MiddleMouse: paste as well
@@ -1637,6 +1656,17 @@ nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
 inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
 
+" C-Up: 
+inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
+nnoremap <silent> <nowait> <C-Up> :call BetterBufferPrev()<CR>
+vnoremap <silent> <nowait> <C-Up> <Esc><C-o>:call BetterBufferPrev()<CR>
+
+" C-Down:
+inoremap <silent> <nowait> <C-Down> <C-o>:call BetterBufferNext()<CR>
+nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CR>
+vnoremap <silent> <nowait> <C-Down> <Esc><C-o>:call BetterBufferNext()<CR>
+
+
 " C-Right: forward word movement
 inoremap <expr> <silent> <nowait> <C-Right> getline('.')[col('.')-1] == ' ' ? "<C-o>w" : "<C-o>e<Right>"
 nnoremap <expr> <silent> <nowait> <C-Right> getline('.')[col('.')-1] == ' ' ? "w" : "e<Right>"
@@ -1649,6 +1679,8 @@ nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge
 inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
 " nnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 && line('$') == 1 && getline('.') == '' ? ":bd!<CR>" : winnr('$') > 1 ? ":bd!<CR>" : ":tabclose!<CR>"
 nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
+vnoremap <silent> <nowait> <C-x> <Esc><C-o>:call CloseBuffer()<CR>
+tnoremap <silent> <nowait> <C-x> exit<CR>
 
 " C-t: open new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
@@ -1689,7 +1721,9 @@ vnoremap <silent> <nowait> <C-Backspace> b
 vnoremap <silent> <nowait> <C-z> u
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
+
 vnoremap <silent> <nowait> <C-c> "+ygv
+tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
 
 vnoremap <silent> <nowait> y "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
@@ -1743,7 +1777,7 @@ augroup BufWinIn
    " autocmd BufEnter * if ((&ft != "help") && (&ft != "nerdtree") && (&ft != "netrw")) | :NERDTree | :wincmd p | endif
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "nerdtree")) | startinsert | endif
    " Add dictionary for current filetype when adding the buffer or creating it
-   autocmd BufAdd,BufCreate,BufNewFile * call AddFtDict()
+   autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
    " autocmd BufEnter * call IabbrevSnippet()
    " autocmd BufEnter * if (&ft != "nerdtree") | wincmd T | endif
    " autocmd BufEnter * let cpos = getpos('.') | :%s/\s*$//g | call cursor(cpos[1], cpos[2])
@@ -1768,25 +1802,25 @@ augroup Vim
    autocmd BufWinEnter * normal zi
    " autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
    " autocmd VimEnter * if bufname('.') == '' | :NERDTree | only | endif
-   autocmd BufWritePost,BufNewFile,BufRead *.vim set filetype=vim
+   autocmd BufWritePost,BufNewFile,BufRead *.vim silent! set filetype=vim
    " autocmd VimEnter * if argc() == 0 | :NERDTree | set noinsertmode | endif
    " autocmd VimEnter * if isdirectory(bufname('%')) | :NERDTree | set noinsertmode | endif
    autocmd VimEnter * call AutoCompleteInoremap()
    " autocmd FileType netrw setlocal relativenumber
    autocmd TabNew * :$tabmove
    " autocmd TabLeave * if winnr('$') == 1 && &ft == "nerdtree" | silent! :NERDTreeClose | :tabclose | endif
-   autocmd CmdwinEnter,ModeChanged * call UpdateCursorLineMode()
-   autocmd CursorMoved,CursorMovedI * call HighlightWordUnderCursor()
+   autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorLineMode()
+   autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
 augroup Markdown
    autocmd!
-   autocmd BufNewFile,BufRead *.md,*markdown set filetype=markdown
+   autocmd BufNewFile,BufRead *.md,*markdown silent! set filetype=markdown
 augroup END
 
 augroup Html
    autocmd!
-   autocmd BufNewFile,BufRead *.html,*.htm set filetype=html
+   autocmd BufNewFile,BufRead *.html,*.htm silent! set filetype=html
 augroup END
 
 
