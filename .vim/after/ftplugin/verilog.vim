@@ -50,8 +50,8 @@ endfunction
 function! AlignComment() range
 
    " silent! :'<,'>Tab /\/\/
-   silent! :'<,'>EasyAlign /\s\/\// {'lm':1,'rm':1}
-   silent! :'<,'>s/\s\+\/\// \/\//g
+   silent! :'<,'>EasyAlign /\s\/\// {'lm':0, 'rm':1}
+   silent! :'<,'>s/\s\+\/\/\s+/ \/\/ /g
 endfunction
 
 function! AlignDeclarations()
