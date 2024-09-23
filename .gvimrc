@@ -154,7 +154,7 @@ set equalalways
 " set iskeyword+=10,33-47,92-95
 set cursorline
 
-set bufhidden=wipe
+set bufhidden=unload
 set switchbuf=useopen
 
 set foldmethod=manual
@@ -1833,7 +1833,7 @@ augroup Vim
    " autocmd FileType netrw setlocal relativenumber
    autocmd TabNew * :$tabmove
    " autocmd TabLeave * if winnr('$') == 1 && &ft == "nerdtree" | silent! :NERDTreeClose | :tabclose | endif
-autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorLineMode()
+   autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorLineMode()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
