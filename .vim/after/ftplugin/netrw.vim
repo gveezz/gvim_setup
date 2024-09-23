@@ -10,3 +10,5 @@ nmap <silent> <nowait> <buffer> <nowait> <PageUp> 3k
 nmap <silent> <nowait> <buffer> <nowait> <PageDown> 3j
 nmap <silent> <nowait> <buffer> <2-leftmouse> <CR>
 nmap <silent> <nowait> <buffer> <C-s> <nop>
+nmap <silent> <nowait> <buffer> <Left> -
+nmap <silent> <nowait> <buffer> <Right> <CR>

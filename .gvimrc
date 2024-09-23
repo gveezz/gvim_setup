@@ -56,7 +56,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 helptags ~/.vim/doc
-set nocompatible
+set nocompatible  
 colorscheme simozz
 "set insertmode
 set magic
@@ -83,7 +83,7 @@ set guioptions+=b
 set guioptions+=r
 set guioptions+=e
 " set guioptions=-l
-set virtualedit=block
+set virtualedit=onemore
 set whichwrap=<,>,[,],b,s
 set selection=exclusive
 set selectmode=mouse,key
@@ -91,13 +91,14 @@ set keymodel=startsel,stopsel
 set softtabstop=0
 set expandtab
 set autoindent
-set smartindent
-set cindent
-set copyindent
+" set smartindent
+" set cindent
+" set copyindent
 set tabstop=3
+set softtabstop=0
 set shiftwidth=3
 set indentexpr=
-set smarttab
+" set smarttab
 set number
 " set relativenumber
 set guifont=Monospace\ 11
@@ -127,6 +128,8 @@ set hlsearch
 set incsearch
 set timeoutlen=0
 syntax enable
+set textwidth=80
+set colorcolumn=81
 " set wrapmargin=0
 " set columns=80
 " set linebreak
@@ -501,15 +504,17 @@ function! UpdateCursorLineMode()
    let l:mode = mode()
 
    if l:mode == 'i'
-      set nohlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555
+      set hlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555
    elseif l:mode == 'n'
       set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#0000AA
    elseif l:mode == 'c'
       set hlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#ffa556
    elseif l:mode == 'r'
-      set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
+      " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
+      set hlsearch | hi Cursor guibg=#FFE800 | 
    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
-      set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
+      " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
+      set hlsearch | hi Cursor guibg=#FFE800
    else
       set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#fffea0
    endif
@@ -1322,11 +1327,13 @@ function! HighlightCursorMatch()
 endfunction
 
 function! HighlightWordUnderCursor()
-    if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
-        exec 'match' 'HighCW' '/\V\<'.expand('<cword>').'\>/' 
-    else 
-        match none 
-    endif
+   
+   if getline(".")[col(".")-1] !~# '[[:blank:]]' 
+      exec 'match HighCW /\<'.expand('<cword>').'\>/'
+   else 
+      match none 
+   endif
+   
 endfunction
 
 function! ConvBase(base)
@@ -1387,6 +1394,13 @@ noremap <nowait> <C-b> :b
 " cnoremap <silent> <nowait> <C-d> <C-c>
 
 " C-d: open netrw in a new tab 
+" inoremap <silent> <nowait> <M-t> <C-o>:Texplore<CR>
+" nnoremap <silent> <nowait> <M-t> :Texplore<CR>
+" vnoremap <silent> <nowait> <M-t> <Esc><C-o>:Texplore<CR>
+" snoremap <silent> <nowait> <M-t> <Esc><C-o>:Texplore<CR>
+" cnoremap <silent> <nowait> <M-t> <C-c>
+
+" C-d: open netrw in a new tab 
 inoremap <silent> <nowait> <C-d> <C-o>:Explore!<CR>
 nnoremap <silent> <nowait> <C-d> :Explore!<CR>
 vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
@@ -1422,7 +1436,7 @@ inoremap <silent> <nowait> <F6> <C-o>:set nohlsearch<CR>
 nnoremap <silent> <nowait> <F6> :set nohlsearch<CR>
 
 " F7 to F9 <nop>
-inoremap <silent> <nowait> <F7> <nop>
+inoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
 nnoremap <silent> <nowait> <F7> <nop>
 inoremap <silent> <nowait> <F8> <nop>
 nnoremap <silent> <nowait> <F8> <nop>
@@ -1433,13 +1447,13 @@ inoremap <silent> <nowait> <F10> <nop>
 nnoremap <silent> <nowait> <F10> <nop>
 inoremap <silent> <nowait> <F12> <nop>
 nnoremap <silent> <nowait> <F12> <nop>
-vnoremap <silent> <nowait> <F7> <Esc>
+vnoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
 vnoremap <silent> <nowait> <F8> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 "vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
 vnoremap <silent> <nowait> <F12> <nop>
-snoremap <silent> <nowait> <F7> <Esc>
+snoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
 snoremap <silent> <nowait> <F8> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
@@ -1519,10 +1533,20 @@ inoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
 nnoremap <nowait> <C-p> :CtrlP .<CR>
 vnoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
 
-" C-f: prompt find
+" function! SearchV()
+" 
+"    let l:cw = expand('<cword>')
+"    call search(l:cw, 'n')
+"    
+" endfunction
+" 
+" " C-f: prompt find
+" imap <nowait> <2-LeftRelease> <C-o>:call SearchV()<CR>
+
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR><Esc>
+vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
+vnoremap <nowait> <C-S-f> <Esc><C-c>/\<<C-r>*\>/<CR>
 cnoremap <silent> <nowait> <C-f> <C-c>
 
 inoremap <nowait> <C-S-f> <Esc>?
@@ -1587,7 +1611,7 @@ nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
 " M-v: block paste
-inoremap <silent> <nowait> <M-v> <C-r><C-o>+
+inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
 " <LeftMouse><LeftMouse>
@@ -1809,7 +1833,7 @@ augroup Vim
    " autocmd FileType netrw setlocal relativenumber
    autocmd TabNew * :$tabmove
    " autocmd TabLeave * if winnr('$') == 1 && &ft == "nerdtree" | silent! :NERDTreeClose | :tabclose | endif
-   autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorLineMode()
+autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorLineMode()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
