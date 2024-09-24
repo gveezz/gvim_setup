@@ -33,10 +33,11 @@ let g:netrw_hide = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
-le g:netrw_altfile = 1
+let g:netrw_altfile = 1
 
 let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
-let g:AutoCloseOn = 1
+let g:AutoCloseOn = 0
+let g:loaded_AutoClose = 1
 
 " if v:version < 700 || exists('loaded_bclose') || &cp
 "     finish
@@ -51,9 +52,6 @@ let g:indentLine_setColors = 1
 " let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_color_gui = '#AAAAAA'
 let g:indentLine_char_list = ['|']
-
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
 helptags ~/.vim/doc
 set nocompatible  
@@ -504,19 +502,19 @@ function! UpdateCursorLineMode()
    let l:mode = mode()
 
    if l:mode == 'i'
-      set hlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#555555
+      set hlsearch | hi CursorLine guibg=#555555 | hi Cursor guibg=#00ff00
    elseif l:mode == 'n'
-      set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#0000AA
+            set hlsearch | hi CursorLine  guibg=#0000AA | hi Cursor guibg=#FFE800
    elseif l:mode == 'c'
-      set hlsearch | hi Cursor guibg=#00ff00 | hi CursorLine guibg=#ffa556
-   elseif l:mode == 'r'
+      set hlsearch | hi CursorLine guibg=#ffa556
+   elseif l:mode == 'R' || l:mode == 'Rc'
       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
-      set hlsearch | hi Cursor guibg=#FFE800 | 
+      set hlsearch | hi CursorLine guibg=#fec800 | hi Cursor guibg=#ff0000
    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
-      set hlsearch | hi Cursor guibg=#FFE800
+      set hlsearch
    else
-      set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#fffea0
+      set nohlsearch | hi CursorLine guibg=#fffea0
    endif
    
 endfunction
@@ -1380,6 +1378,10 @@ nnoremap <silent> <nowait> <Esc> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 
+" inoremap <silent> <nowait> { {}<Left>
+" inoremap <silent> <nowait> ( ()<Left>
+" inoremap <silent> <nowait> [ []<Left>
+
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
 noremap <nowait> <C-b> :b 
@@ -1501,47 +1503,24 @@ inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
 " S-Tab: de-advance completition selection if pumvisible, inverse Tab otherwise
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
 
-" M-l: show tab files list
-" inoremap <silent> <nowait> <M-l> <C-o>:call TabsList()<CR>
-" nnoremap <silent> <nowait> <M-l> :call TabsList()<CR>
+inoremap <silent> <nowait> <C-Enter> <C-o>*
+nnoremap <silent> <nowait> <C-Enter> *
 
-inoremap <silent> <nowait> <C-ç> <C-o>*
-nnoremap <silent> <nowait> <C-ç> *
+inoremap <silent> <nowait> <C-M-Enter> <C-o>#
+nnoremap <silent> <nowait> <C-M-Enter> #
 
-inoremap <silent> <nowait> <C-´> <C-o>#
-nnoremap <silent> <nowait> <C-´> #
+" C-v: Paste
+inoremap <silent> <nowait> <C-v> <C-r><C-o>+
+nnoremap <silent> <nowait> <C-v> <C-r><C-o>+
+xnoremap <silent> <nowait> <C-v> <C-r><C-o>+
+snoremap <silent> <nowait> <C-v> <C-r><C-o>+
+tnoremap <silent> <nowait> <C-v> <C-W>"+
+cnoremap <silent> <nowait> <C-v> <C-r>+
 
-" C-n: find next occurrence of previous search
-"inoremap <silent> <nowait> <C-n> <C-o>*
-"nnoremap <silent> <nowait> <C-n> *
+" C-M-v: CtrlP
+inoremap <silent> <nowait> <C-M-v> <Esc>:put "+<CR>
+nnoremap <silent> <nowait> <C-M-v> :put "+<CR>
 
-"nnoremap <silent> <nowait> n n:call HighlightCursorMatch()<CR>
-"nnoremap <silent> <nowait> N N:call HighlightCursorMatch()<CR>
-
-" C-l: pop up buffer list
-"inoremap <silent> <nowait> <C-l> <C-o>:call quickui#tools#list_buffer('tabedit')<CR>
-"nnoremap <silent> <nowait> <C-l> :call quickui#tools#list_buffer('tabedit')<CR>
-"vnoremap <silent> <nowait> <C-l> <Esc>:call quickui#tools#list_buffer('tabedit')<CR>
-
-" inoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
-" nnoremap <nowait> <C-M-l> :call BufferList()<CR>
-" vnoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
-" snoremap <nowait> <C-M-l> <C-o>:call BufferList()<CR>
-
-" C-p: CtrlP
-inoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
-nnoremap <nowait> <C-p> :CtrlP .<CR>
-vnoremap <nowait> <C-p> <Esc>:CtrlP .<CR>
-
-" function! SearchV()
-" 
-"    let l:cw = expand('<cword>')
-"    call search(l:cw, 'n')
-"    
-" endfunction
-" 
-" " C-f: prompt find
-" imap <nowait> <2-LeftRelease> <C-o>:call SearchV()<CR>
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
@@ -1594,13 +1573,6 @@ inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 xnoremap <silent> <nowait> <C-z> <Esc>:redo<CR>
 
-" C-v: Paste
-inoremap <silent> <nowait> <C-v> <C-r><C-o>+
-nnoremap <silent> <nowait> <C-v> <C-r><C-o>+
-xnoremap <silent> <nowait> <C-v> <C-r><C-o>+
-snoremap <silent> <nowait> <C-v> <C-r><C-o>+
-tnoremap <silent> <nowait> <C-v> <C-W>"+
-cnoremap <nowait> <C-v> <C-r>+
 
 " MiddleMouse: paste as well
 " inoremap <silent> <nowait> <MiddleMouse> <C-o>"+P

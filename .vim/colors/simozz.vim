@@ -28,9 +28,9 @@ hi LineNr                 term=underline  cterm=bold  ctermfg=darkcyan  guifg=Ye
 hi Question               term=standout  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=Green
 hi Title                  term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold  guifg=Magenta
 hi Visual                 guifg=black guibg=#467BFF guifg=#000000 gui=bold
-hi HighCW                 guifg=black guibg=#bce7aa guifg=#000000 gui=bold
+hi HighCW                 guifg=black guibg=#b8b8b8 guifg=#000000 gui=bold
 hi WarningMsg             term=standout  cterm=bold  ctermfg=black ctermbg=Yellow guifg=black guibg=Yellow
-hi Cursor                 guifg=#f7aa1b  guibg=#0000ff cterm=bold
+hi Cursor                 guifg=#1be611  guibg=#0000ff cterm=bold
 hi nCursor                guibg=#E4E5E5 cterm=bold
 hi link iCursor           Cursor
 hi vCursor                guibg=#024AFF guifg=#000000 cterm=bold
