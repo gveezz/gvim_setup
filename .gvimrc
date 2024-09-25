@@ -98,7 +98,7 @@ set shiftwidth=3
 set indentexpr=
 " set smarttab
 set number
-" set relativenumber
+set relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
@@ -127,14 +127,14 @@ set incsearch
 set timeoutlen=0
 syntax enable
 set textwidth=80
-set colorcolumn=81
+set colorcolumn=80
 " set wrapmargin=0
 " set columns=80
 " set linebreak
 " set wrap
 " set linebreak
 " note trailing space at end of next line
-" set columns=999
+set columns=169
 " set lines=51
 " set history=1000
 " set wc=<Tab>
@@ -779,66 +779,66 @@ function! AutoCompleteInoremap()
   endfor
 endfunction
 
-" function! GoToLine()
-"
-"    let l:col = col('.')
-"    let l:line = input("Go to line: ")
-"    if (stridx(l:line, '+') == 0) || (stridx(l:line, '-') == 0)
-"       exec ":".l:line
-"    else
-"       call cursor(l:line, l:col)
-"    endif
-"
-" endfunction
-
 function! GoToLine()
 
-   let l:line = line('.')
    let l:col = col('.')
+   let l:line = input("Go to line: ")
+   if (stridx(l:line, '+') == 0) || (stridx(l:line, '-') == 0)
+      exec ":".l:line
+   else
+      call cursor(l:line, l:col)
+   endif
 
-   let l:idx = 0
-   let l:strIn = ""
-   let l:cInEnter = 13
-   let l:cInEsc = 27
-   let l:cIn = 0
-   echon "Line: ".l:strIn
-
-   while l:cIn != l:cInEnter
-      let l:cIn = getchar()
-      let l:cInCh = nr2char(l:cIn)
-
-      " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
-      if l:cIn =~# '\d'
-         let l:strIn = l:strIn.l:cInCh
-         let l:idx = l:idx + 1
-      elseif l:cIn == "\<Backspace>"
-         if l:idx > 0
-            let l:idx = l:idx - 1
-            let l:strIn = strpart(l:strIn, 0, l:idx)
-         else
-            let l:idx = 0
-            let l:strIn = ""
-         endif
-      endif
-
-      if l:cIn != l:cInEsc
-         if strlen(l:strIn) > 0
-            call cursor(str2nr(l:strIn), l:col)
-         else
-            call cursor(1, l:col)
-         endif
-
-         silent! zz
-         redraw!
-         
-         echon "Line: ".l:strIn
-      else
-         let l:cIn = l:cInEnter
-         call cursor(l:line, l:col)
-      endif
-   endwhile
-   
 endfunction
+
+" function! GoToLine()
+" 
+"    let l:line = line('.')
+"    let l:col = col('.')
+" 
+"    let l:idx = 0
+"    let l:strIn = ""
+"    let l:cInEnter = 13
+"    let l:cInEsc = 27
+"    let l:cIn = 0
+"    echon "Line: ".l:strIn
+" 
+"    while l:cIn != l:cInEnter
+"       let l:cIn = getchar()
+"       let l:cInCh = nr2char(l:cIn)
+" 
+"       " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
+"       if l:cIn =~# '\d'
+"          let l:strIn = l:strIn.l:cInCh
+"          let l:idx = l:idx + 1
+"       elseif l:cIn == "\<Backspace>"
+"          if l:idx > 0
+"             let l:idx = l:idx - 1
+"             let l:strIn = strpart(l:strIn, 0, l:idx)
+"          else
+"             let l:idx = 0
+"             let l:strIn = ""
+"          endif
+"       endif
+" 
+"       if l:cIn != l:cInEsc
+"          if strlen(l:strIn) > 0
+"             call cursor(str2nr(l:strIn), l:col)
+"          else
+"             call cursor(1, l:col)
+"          endif
+" 
+"          silent! zz
+"          redraw!
+"          
+"          echon "Line: ".l:strIn
+"       else
+"          let l:cIn = l:cInEnter
+"          call cursor(l:line, l:col)
+"       endif
+"    endwhile
+"    
+" endfunction
 
 " function! GoToLineCol()
 "
@@ -1373,10 +1373,13 @@ nnoremap <silent> <nowait> <C-o> <nop>
 " Esc: return to normal mode if insert mode, or viceversa
 inoremap <silent> <nowait> <C-.> <C-o>
 
-inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" nnoremap <silent> <nowait> <Esc> i
+
+inoremap <expr> <silent> <nowait> <Esc> col('.')==1 ? "<Esc>" : "<Esc><Right>"
 nnoremap <silent> <nowait> <Esc> i
 
-inoremap <silent> <nowait> <C-w> <C-o><C-w>
+inoremap <silent> <nowait> <C-w> <C-o><C-w><C-w><C-w>
 
 " inoremap <silent> <nowait> { {}<Left>
 " inoremap <silent> <nowait> ( ()<Left>
@@ -1438,7 +1441,8 @@ inoremap <silent> <nowait> <F6> <C-o>:set nohlsearch<CR>
 nnoremap <silent> <nowait> <F6> :set nohlsearch<CR>
 
 " F7 to F9 <nop>
-inoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+" noremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+inoremap <silent> <nowait> <F7> <nop>
 nnoremap <silent> <nowait> <F7> <nop>
 inoremap <silent> <nowait> <F8> <nop>
 nnoremap <silent> <nowait> <F8> <nop>
@@ -1449,13 +1453,15 @@ inoremap <silent> <nowait> <F10> <nop>
 nnoremap <silent> <nowait> <F10> <nop>
 inoremap <silent> <nowait> <F12> <nop>
 nnoremap <silent> <nowait> <F12> <nop>
-vnoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+" vnoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+vnoremap <silent> <nowait> <F7> <nop>
 vnoremap <silent> <nowait> <F8> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 "vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
 vnoremap <silent> <nowait> <F12> <nop>
-snoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+" snoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
+snoremap <silent> <nowait> <F7> <nop>
 snoremap <silent> <nowait> <F8> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
@@ -1491,36 +1497,33 @@ cnoremap <silent> <nowait> <S-Del> <nop>
 " inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 " Enter: trigger snippet completitio if pumvisible, Enter otherwise
 inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() == 0)) ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-" Enter: add new line in normal mode
-" nnoremap <silent> <nowait> <CR> i<Enter><Esc>
 
 " Backspace: behave as in normal mode
 " nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
+nnoremap <silent> <nowait> <Tab> >>
 
 " S-Tab: de-advance completition selection if pumvisible, inverse Tab otherwise
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
+nnoremap <silent> <nowait> <S-Tab> <<
 
 inoremap <silent> <nowait> <C-Enter> <C-o>*
+nnoremap <silent> <nowait> n *
 nnoremap <silent> <nowait> <C-Enter> *
 
 inoremap <silent> <nowait> <C-M-Enter> <C-o>#
+nnoremap <silent> <nowait> N #
 nnoremap <silent> <nowait> <C-M-Enter> #
 
 " C-v: Paste
-inoremap <silent> <nowait> <C-v> <C-r><C-o>+
-nnoremap <silent> <nowait> <C-v> <C-r><C-o>+
-xnoremap <silent> <nowait> <C-v> <C-r><C-o>+
-snoremap <silent> <nowait> <C-v> <C-r><C-o>+
-tnoremap <silent> <nowait> <C-v> <C-W>"+
-cnoremap <silent> <nowait> <C-v> <C-r>+
-
-" C-M-v: CtrlP
-inoremap <silent> <nowait> <C-M-v> <Esc>:put "+<CR>
-nnoremap <silent> <nowait> <C-M-v> :put "+<CR>
-
+inoremap <nowait> <C-v> <C-r><C-o>+
+nnoremap <nowait> <C-v> <C-r><C-o>+
+xnoremap <nowait> <C-v> <C-r><C-o>+
+snoremap <nowait> <C-v> <C-r><C-o>+
+tnoremap <nowait> <C-v> <C-W>"+
+cnoremap <nowait> <C-v> <C-r>+
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
@@ -1538,10 +1541,10 @@ snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 cnoremap <silent> <nowait> <C-r> <C-c>
 
 " C-r: prompt replace
-inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
-nnoremap <nowait> <C-r> :call PromptReplI()<CR>
-snoremap <nowait> <C-r> <C-o>:call PromptReplS()<CR>
-cnoremap <silent> <nowait> <C-r> <C-c>
+" inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
+" nnoremap <nowait> <C-r> :call PromptReplI()<CR>
+" snoremap <nowait> <C-r> <C-o>:call PromptReplS()<CR>
+" cnoremap <silent> <nowait> <C-r> <C-c>
 
 " M-r: prompt replace exact match
 " inoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctI()<CR>
@@ -1615,12 +1618,12 @@ inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
 nnoremap <silent> <nowait> <M-Down> <C-w><Down>
 xnoremap <silent> <nowait> <M-Down> <Esc><C-w><Down>
 
-" M-v
+" C-n
 inoremap <silent> <nowait> <C-n> <C-o>:vnew<CR>
 nnoremap <silent> <nowait> <C-n> :vnew<CR>
 xnoremap <silent> <nowait> <C-n> <Esc><C-o>:vnew<CR>
 
-" M-s
+" C-M-n
 inoremap <silent> <nowait> <C-M-n> <C-o>:new<CR>
 nnoremap <silent> <nowait> <C-M-n> :new<CR>
 xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:new<CR>
@@ -1653,14 +1656,14 @@ inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
 
 " C-Up: 
-inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
-nnoremap <silent> <nowait> <C-Up> :call BetterBufferPrev()<CR>
-vnoremap <silent> <nowait> <C-Up> <Esc><C-o>:call BetterBufferPrev()<CR>
+" inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
+" nnoremap <silent> <nowait> <C-Up> :call BetterBufferPrev()<CR>
+" vnoremap <silent> <nowait> <C-Up> <Esc><C-o>:call BetterBufferPrev()<CR>
 
 " C-Down:
-inoremap <silent> <nowait> <C-Down> <C-o>:call BetterBufferNext()<CR>
-nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CR>
-vnoremap <silent> <nowait> <C-Down> <Esc><C-o>:call BetterBufferNext()<CR>
+" inoremap <silent> <nowait> <C-Down> <C-o>:call BetterBufferNext()<CR>
+" nnoremap <silent> <nowait> <C-Down> :call BetterBufferNext()<CR>
+" vnoremap <silent> <nowait> <C-Down> <Esc><C-o>:call BetterBufferNext()<CR>
 
 
 " C-Right: forward word movement
