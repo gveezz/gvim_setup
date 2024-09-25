@@ -65,7 +65,7 @@ set incsearch
 filetype plugin on
 syntax enable
 " set syntax=auto
-set timeout timeoutlen=10 ttimeoutlen=1
+" set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
 " set tags=tags;/
 set noswapfile
@@ -119,7 +119,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,k,t,i
+set complete=.,k,t,i,w,b
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -129,13 +129,12 @@ syntax enable
 set textwidth=80
 set colorcolumn=80
 " set wrapmargin=0
-" set columns=80
 " set linebreak
 " set wrap
 " set linebreak
 " note trailing space at end of next line
-set columns=169
-" set lines=51
+set columns=171
+set lines=51
 " set history=1000
 " set wc=<Tab>
 " set wildmode=longest,list,full
@@ -1378,6 +1377,7 @@ inoremap <silent> <nowait> <C-.> <C-o>
 
 inoremap <expr> <silent> <nowait> <Esc> col('.')==1 ? "<Esc>" : "<Esc><Right>"
 nnoremap <silent> <nowait> <Esc> i
+nnoremap <silent> <nowait> <C-c> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w><C-w><C-w>
 
@@ -1458,19 +1458,22 @@ vnoremap <silent> <nowait> <F7> <nop>
 vnoremap <silent> <nowait> <F8> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
 vnoremap <silent> <nowait> <F9> <Esc>
-"vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
+"vnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=171<CR>"
 vnoremap <silent> <nowait> <F12> <nop>
 " snoremap <silent> <nowait> <F7> <C-o>:set relativenumber!<CR>
 snoremap <silent> <nowait> <F7> <nop>
 snoremap <silent> <nowait> <F8> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F9> <Esc>
-" snoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=100<CR>"
+" snoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<Esc>:set columns=999<CR>" : "<Esc>:set columns=171<CR>"
 snoremap <silent> <nowait> <F12> <nop>
 
 " F11: toggle full screen
-inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=100<CR>"
-nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=100<CR>"
+inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
+nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
+
+inoremap <silent> <nowait> { {
+inoremap <silent> <nowait> } }
 
 " <Home>: jump before the first non-blank of the current line
 inoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
@@ -1509,13 +1512,22 @@ nnoremap <silent> <nowait> <Tab> >>
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
 nnoremap <silent> <nowait> <S-Tab> <<
 
-inoremap <silent> <nowait> <C-Enter> <C-o>*
-nnoremap <silent> <nowait> n *
-nnoremap <silent> <nowait> <C-Enter> *
+inoremap <silent> <nowait> <C-Enter> <C-o>*<C-o>zz
+nnoremap <silent> <nowait> n *zz
+nnoremap <silent> <nowait> <C-Enter> *zz
 
-inoremap <silent> <nowait> <C-M-Enter> <C-o>#
-nnoremap <silent> <nowait> N #
-nnoremap <silent> <nowait> <C-M-Enter> #
+inoremap <silent> <nowait> <C-M-Enter> <C-o>#<C-o>zz
+nnoremap <silent> <nowait> N #zz
+nnoremap <silent> <nowait> <C-M-Enter> #zz
+
+inoremap <nowait> <C-f> <Esc>/
+nnoremap <nowait> <C-f> /
+vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
+vnoremap <nowait> <C-S-f> <Esc><C-c>/\<<C-r>*\>/<CR>
+cnoremap <silent> <nowait> <C-f> <C-c>
+
+inoremap <nowait> <C-M-Backspace> <C-o>?<CR><C-o>zz
+nnoremap <nowait> <C-M-Backspace> ?<CR><C-o>zz
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
@@ -1524,15 +1536,6 @@ xnoremap <nowait> <C-v> <C-r><C-o>+
 snoremap <nowait> <C-v> <C-r><C-o>+
 tnoremap <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
-
-inoremap <nowait> <C-f> <Esc>/
-nnoremap <nowait> <C-f> /
-vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
-vnoremap <nowait> <C-S-f> <Esc><C-c>/\<<C-r>*\>/<CR>
-cnoremap <silent> <nowait> <C-f> <C-c>
-
-inoremap <nowait> <C-S-f> <Esc>?
-nnoremap <nowait> <C-S-f> ?
 
 " C-l: prompt replace
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
