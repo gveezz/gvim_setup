@@ -16,6 +16,18 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
+function! Fold()
+   
+   call search('begin')
+   let l:stline = line('.')+1
+   call search('end')
+   let l:fnline = line('.')-1
+   silent! exec ":".l:stline.",".l:fnline."fold"
+   silent! exec ":".l:stline
+   normal! zz
+
+endfunction
+
 function! AdjVTemplate ()
 
    let l:currYear = strftime('%Y')
@@ -186,3 +198,8 @@ xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
 inoremap <silent> <nowait> <C-j> <C-o>zf/end<CR>
 nnoremap <silent> <nowait> <C-j> zf/end<CR>
 vnoremap <silent> <nowait> <C-j> <Esc><C-c>zf/end<CR><Esc>
+
+" C-j: toggle code fol=ding
+inoremap <buffer> <silent> <nowait> <C-j> <C-o>:call Fold()<CR>
+nnoremap <buffer> <silent> <nowait> <C-j> :call Fold()<CR>
+vnoremap <buffer> <silent> <nowait> <C-j> <Esc><C-c>:call Fold()<CR>

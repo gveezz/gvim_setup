@@ -154,8 +154,9 @@ set cursorline
 set bufhidden=unload
 set switchbuf=useopen
 
+set showmatch
 set foldmethod=manual
-set foldlevelstart=1
+set foldenable
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -320,7 +321,7 @@ function! GuiSave() range
       " :
    endif
 
-   :IndentLinesReset
+   " :IndentLinesReset
 
 endfunction
 
@@ -1087,6 +1088,7 @@ function! AvPage()
    let l:cLine = line('.')
    let l:cCol = col('.')
    let l:winheight = winheight('.')
+
    let l:lastvline = line('w$')
    let l:blastline = line('$')
 
@@ -1512,22 +1514,26 @@ nnoremap <silent> <nowait> <Tab> >>
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
 nnoremap <silent> <nowait> <S-Tab> <<
 
-inoremap <silent> <nowait> <C-Enter> <C-o>*<C-o>zz
-nnoremap <silent> <nowait> n *zz
-nnoremap <silent> <nowait> <C-Enter> *zz
+inoremap <silent> <nowait> <C-Enter> <C-o>n
+nnoremap <silent> <nowait> <C-Enter> n
 
-inoremap <silent> <nowait> <C-M-Enter> <C-o>#<C-o>zz
-nnoremap <silent> <nowait> N #zz
-nnoremap <silent> <nowait> <C-M-Enter> #zz
+inoremap <silent> <nowait> <C-M-Enter> <C-o>#
+nnoremap <silent> <nowait> <C-M-Enter> #
 
 inoremap <nowait> <C-f> <Esc>/
+" inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
 nnoremap <nowait> <C-f> /
-vnoremap <nowait> <C-f> <Esc><C-c>/<C-r>*/<CR>
-vnoremap <nowait> <C-S-f> <Esc><C-c>/\<<C-r>*\>/<CR>
-cnoremap <silent> <nowait> <C-f> <C-c>
+" nnoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "/<C-r>/<CR>" : "/"
+" vnoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', getreg("*"))<CR>
+xnoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR>
+xnoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
+snoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
+snoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
+" cnoremap <expr> <silent> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<C-c>/<C-r>/<CR>" : "<C-c>:call EchoWarnMsg('Empty search')<CR>"
+cnoremap <silent> <nowait> <C-f> <C-c>/<C-r>/<CR>
 
-inoremap <nowait> <C-M-Backspace> <C-o>?<CR><C-o>zz
-nnoremap <nowait> <C-M-Backspace> ?<CR><C-o>zz
+vnoremap <nowait> <C-S-f> <C-o>?<CR>
+nnoremap <nowait> <C-M-Backspace> ?<CR>
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
@@ -1541,7 +1547,7 @@ cnoremap <nowait> <C-v> <C-r>+
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 nnoremap <nowait> <C-l> :call BufferList()<CR>
 snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
-cnoremap <silent> <nowait> <C-r> <C-c>
+
 
 " C-r: prompt replace
 " inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
@@ -1704,10 +1710,10 @@ snoremap <silent> <nowait> <End> <Esc>$
 xnoremap <silent> <nowait> <End> $
 
 " <ScrollWheelUp> <ScrollWheelDown>
-inoremap <silent> <nowait> <ScrollWheelUp> <C-o>10k
-inoremap <silent> <nowait> <ScrollWheelDown> <C-o>10j
-nnoremap <silent> <nowait> <ScrollWheelUp> 10k
-nnoremap <silent> <nowait> <ScrollWheelDown> 10j
+inoremap <silent> <nowait> <ScrollWheelUp> <ScrollWheelUp><ScrollWheelUp><ScrollWheelUp>
+inoremap <silent> <nowait> <ScrollWheelDown> <ScrollWheelDown><ScrollWheelDown><ScrollWheelDown>
+nnoremap <silent> <nowait> <ScrollWheelUp> <ScrollWheelUp><ScrollWheelUp><ScrollWheelUp>
+nnoremap <silent> <nowait> <ScrollWheelDown> <ScrollWheelDown><ScrollWheelDown><ScrollWheelDown>
 xnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
 xnoremap <silent> <nowait> <ScrollWheelDown> <Esc>
 
@@ -1800,8 +1806,8 @@ augroup END
 
 augroup Vim
    autocmd!
+   autocmd BufRead,BufWritePost * :IndentLinesReset
    " do not autofold when opening a file
-   autocmd BufWinEnter * normal zi
    " autocmd VimEnter * if bufname('.') == '' && line('.') == 1 && getline('.') == '' | :NERDTree | only | endif
    " autocmd VimEnter * if bufname('.') == '' | :NERDTree | only | endif
    autocmd BufWritePost,BufNewFile,BufRead *.vim silent! set filetype=vim
@@ -1824,5 +1830,4 @@ augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm silent! set filetype=html
 augroup END
-
 
