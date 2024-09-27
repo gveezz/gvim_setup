@@ -159,7 +159,7 @@ set foldenable
 set foldmethod=indent
 set foldnestmax=20
 set foldcolumn=5
-
+set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 set cpoptions+=u
 
 let g:bclose_multiple = 0
@@ -1544,8 +1544,8 @@ vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
 
 " C-j: toggle code fol=ding
-inoremap <silent> <nowait> <C-.> <C-o>zc
-nnoremap <silent> <nowait> <C-.> zc
+inoremap <expr> <silent> <nowait> <C-.> (foldclosed(line('.')) == -1) ? "<C-o>zc" : "<C-o>zo"
+nnoremap <expr> <silent> <nowait> <C-.> (foldclosed(line('.')) == -1) ? "zc" : "zo"
 xnoremap <silent> <nowait> <C-.> <Esc><C-c>zF
 snoremap <silent> <nowait> <C-.> <C-o>zF
 
@@ -1845,5 +1845,11 @@ augroup END
 augroup Html
    autocmd!
    autocmd BufNewFile,BufRead *.html,*.htm silent! set filetype=html
+augroup END
+
+augroup AutoFoldColumn
+  au!
+  " Or whatever autocmd-events you want
+  au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
 augroup END
 

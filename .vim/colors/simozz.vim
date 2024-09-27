@@ -66,6 +66,8 @@ hi StatusLineP            ctermfg=15  guifg=#eb58ff guibg=#222222 gui=bold cterm
 hi Pmenu                  ctermbg=15  guifg=#AAAAAA guibg=#323232 gui=bold
 hi PmenuSel               ctermbg=15  guifg=#000000 gui=bold
 hi ColorColumn            ctermbg=15  guibg=#6F6F6F
+hi Folded                 guibg=#222222 guifg=#1fff00 gui=bold ctermbg=239 cterm=bold ctermfg=15
+hi FoldColumn             guibg=#222222 guifg=#1fff00 gui=bold ctermbg=239 cterm=bold ctermfg=15
 hi link String            Special
 hi link Character         Special
 hi link Number            PreProc
