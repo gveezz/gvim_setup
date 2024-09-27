@@ -16,64 +16,68 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-function! Fold()
-   
-   let l:diff = 0
-   let l:cLine = line('.')
-   let l:itLine = l:cLine
-   let l:lastLine = line('$')
-   
-   while l:itLine != l:lastLine
-
-      let l:beginCnt = count(getline(l:itLine), 'begin')
-      let l:beginIdx = stridx(getline(l:itLine), 'begin')
-      let l:endCnt = count(getline(l:itLine), 'end')
-      let l:endIdx = stridx(getline(l:itLine), 'end')
-      let l:commIdx = stridx(getline(l:itLine), '//')
-      
-      " begin
-      if l:beginCnt > 0 && l:endCnt == 0
-         if (l:commIdx == -1) || (l:beginIdx < l:commIdx)
-            let l:diff = l:diff + 1
-         end
-      " end
-      elseif l:endCnt > 0 && l:beginCnt == 0
-         if (l:commIdx == -1) || (l:endIdx < l:commIdx)
-            let l:diff = l:diff - 1
-         end
-      " end else begin
-      elseif l:beginCnt > 0 && l:endCnt > 0
-         if (l:commIdx == -1)
-            if l:diff == 1
-               let l:diff = l:diff - 1
-            endif
-         else
-            " end else begin //
-            if (l:beginIdx < l:commIdx) && (l:endIdx < l:commIdx)
-               if l:diff == 1
-                  let l:diff = l:diff - 1
-               endif
-            endif
-         endif
-      endif
-      
-      " echo getline(l:itLine)." --- l:diff = ".l:diff
-      if l:diff == 0
-         break
-      endif
-      let l:itLine = l:itLine+1
-   endwhile
-   
-   if (l:itLine > l:cLine)
-      let l:cLine = l:cLine+1
-      let l:itLine = l:itLine-1
-      " echom ":".l:cLine.",".l:itLine."fold"
-      silent! exec ":".l:cLine.",".l:itLine."fold"
-   endif
-
-   normal! zz
-
-endfunction
+" function! Fold()
+"    
+"    let l:diff = 0
+"    let l:cLine = line('.')
+"    let l:itLine = l:cLine
+"    let l:lastLine = line('$')
+"    
+"    while l:itLine != l:lastLine
+"       
+"       let l:beginCnt = count(getline(l:itLine), 'begin')
+"       let l:beginIdx = stridx(getline(l:itLine), 'begin')
+"       let l:endCnt = count(getline(l:itLine), 'end')
+"       let l:endIdx = stridx(getline(l:itLine), 'end')
+"       let l:commIdx = stridx(getline(l:itLine), '//')
+"       
+"       " begin
+"       if l:beginCnt > 0 && l:endCnt == 0
+"          if (l:commIdx == -1) || (l:beginIdx < l:commIdx)
+"             let l:diff = l:diff + 1
+"          end
+"       " end
+"       elseif l:endCnt > 0 && l:beginCnt == 0
+"          if (l:commIdx == -1) || (l:endIdx < l:commIdx)
+"             let l:diff = l:diff - 1
+"          end
+"       " end else begin
+"       elseif l:beginCnt > 0 && l:endCnt > 0
+"          if (l:commIdx == -1)
+"             if l:diff == 1
+"                   let l:diff = l:diff - 1
+"                else 
+"                   let l:diff = l:diff + 1
+"                endif
+"          else
+"             " end else begin //
+"             if (l:beginIdx < l:commIdx) && (l:endIdx < l:commIdx)
+"                if l:diff == 1
+"                   let l:diff = l:diff - 1
+"                else 
+"                   let l:diff = l:diff + 1
+"                endif
+"             endif
+"          endif
+"       endif
+"       
+"       " echo getline(l:itLine)." --- l:diff = ".l:diff
+"       if l:diff == 0
+"          break
+"       endif
+"       let l:itLine = l:itLine+1
+"    endwhile
+"    
+"    if (l:itLine > l:cLine)
+"       let l:cLine = l:cLine+1
+"       let l:itLine = l:itLine-1
+"       " echom ":".l:cLine.",".l:itLine."fold"
+"       silent! exec ":".l:cLine.",".l:itLine."fold"
+"    endif
+" 
+"    normal! zz
+" 
+" endfunction
 
 function! AdjVTemplate ()
 
@@ -241,8 +245,6 @@ inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
 
-" C-j: toggle code folding
-inoremap <silent> <nowait> <C-j> <C-o>zf/end<CR>
-nnoremap <silent> <nowait> <C-j> zf/end<CR>
-vnoremap <silent> <nowait> <C-j> <Esc><C-c>zf/end<CR><Esc>
-
+" C-j: toggle code fol=ding
+" inoremap <buffer> <silent> <nowait> <C-.> <C-o>:call Fold()<CR>
+" nnoremap <buffer> <silent> <nowait> <C-.> :call Fold()<CR>

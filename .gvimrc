@@ -155,8 +155,12 @@ set bufhidden=unload
 set switchbuf=useopen
 
 set showmatch
-set foldmethod=manual
 set foldenable
+set foldmethod=indent
+set foldnestmax=20
+set foldcolumn=5
+
+set cpoptions+=u
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -1340,9 +1344,7 @@ function! ConvBase(base)
 endfunction
 
 function! Fold()
-   
-   EchoYellowMsg('Empty Fold()')
-
+   EchoYellowMsg('Empty fold function, implement in after/ftplugin dir')
 endfunction
 
 map <silent> <nowait> <Leader>t :TableModeEnable<CR>
@@ -1378,7 +1380,7 @@ inoremap <silent> <nowait> <C-o> <Esc>l
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
-inoremap <silent> <nowait> <C-.> <C-o>
+" inoremap <silent> <nowait> <C-.> <C-o>
 
 " inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " nnoremap <silent> <nowait> <Esc> i
@@ -1536,15 +1538,16 @@ xnoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
 snoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
 snoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
 " cnoremap <expr> <silent> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<C-c>/<C-r>/<CR>" : "<C-c>:call EchoWarnMsg('Empty search')<CR>"
-cnoremap <silent> <nowait> <C-f> <C-c>/<C-r>/<CR>
+cnoremap <silent> <nowait> <C-f> <C-c>/<C-r>/<CR>zz
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
 
 " C-j: toggle code fol=ding
-inoremap <silent> <nowait> <C-.> <C-o>:call Fold()<CR>
-nnoremap <silent> <nowait> <C-.> :call Fold()<CR>
-vnoremap <silent> <nowait> <C-.> <Esc><C-c>:call Fold()<CR>
+inoremap <silent> <nowait> <C-.> <C-o>zc
+nnoremap <silent> <nowait> <C-.> zc
+xnoremap <silent> <nowait> <C-.> <Esc><C-c>zF
+snoremap <silent> <nowait> <C-.> <C-o>zF
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
@@ -1694,12 +1697,14 @@ inoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "<C
 nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge<Right>" : "b"
 
 " C-x: close current buffer
-" inoremap <expr> <silent> <nowait> <C-x> tabpagenr('$') > 1 ? winnr('$') > 1 ? "<C-o>:bw! <CR>" : "<C-o>:tabclose!<CR>" : "<Esc>:call EchoWarnMsg('Last window, Alt+F4 to quit')<CR>"
 inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
-" nnoremap <expr> <silent> <nowait> <C-x> winnr() == 1 && line('$') == 1 && getline('.') == '' ? ":bd!<CR>" : winnr('$') > 1 ? ":bd!<CR>" : ":tabclose!<CR>"
 nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
-vnoremap <silent> <nowait> <C-x> <Esc><C-o>:call CloseBuffer()<CR>
 tnoremap <silent> <nowait> <C-x> exit<CR>
+
+vnoremap <silent> <nowait> + <C-a>
+vnoremap <silent> <nowait> <kPlus> <C-a>
+vnoremap <silent> <nowait> - <C-x>
+vnoremap <silent> <nowait> <kMinus> <C-x>
 
 " C-t: open new tab
 inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
@@ -1784,8 +1789,8 @@ vnoremap <expr> <silent> <nowait> <C-S-Left> getline('.')[col('.')-2] == ' ' ? "
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
 augroup BufWinIn
-
    autocmd!
+   autocmd BufEnter,BufRead * normal! zR
    " refresh directory listing if entering NERDTree
    " autocmd BufEnter,BufRead NERD_tree* stopinsert | silent! :NERDTreeRefreshRoot
    " autocmd BufEnter netrw* stopinsert | call feedkeys("2<Down>")

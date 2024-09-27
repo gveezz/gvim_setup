@@ -1,5 +1,6 @@
 " set number
 " set relativenumber
+setlocal foldcolumn=0
 nmap <silent> <nowait> <buffer> <nowait> <C-d> <C-6>
 nmap <silent> <nowait> <buffer> <nowait> <Esc> <C-6>
 nmap <silent> <nowait> <buffer> <nowait> <Space> t
