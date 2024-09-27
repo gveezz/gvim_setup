@@ -37,6 +37,6 @@ endfunction
 inoremap <silent> <nowait> <buffer> <M-c> <C-o>:Dox<CR>
 
 " C-j: toggle code fol=ding
-inoremap <buffer> <silent> <nowait> <C-j> <C-o>:call Fold()<CR>
-nnoremap <buffer> <silent> <nowait> <C-j> :call Fold()<CR>
-vnoremap <buffer> <silent> <nowait> <C-j> <Esc><C-c>:call Fold()<CR>
+inoremap <buffer> <silent> <nowait> <C-.> <C-o>:call Fold()<CR>
+nnoremap <buffer> <silent> <nowait> <C-.> :call Fold()<CR>
+vnoremap <buffer> <silent> <nowait> <C-.> <Esc><C-c>:call Fold()<CR>

@@ -568,10 +568,10 @@ function! InComment()
 
    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
    if l:incomment >= 0
-      call EchoYellowMsg("In Comment ".l:incomment)
+      " call EchoYellowMsg("In Comment ".l:incomment)
       return 1
    else
-      call EchoYellowMsg("Not Comment ".l:incomment)
+      " call EchoYellowMsg("Not Comment ".l:incomment)
       return 0
    endif
 endfunction
@@ -1339,6 +1339,12 @@ function! ConvBase(base)
    return string(str2nr(getreg('*'), a:base))
 endfunction
 
+function! Fold()
+   
+   EchoYellowMsg('Empty Fold()')
+
+endfunction
+
 map <silent> <nowait> <Leader>t :TableModeEnable<CR>
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
@@ -1534,6 +1540,11 @@ cnoremap <silent> <nowait> <C-f> <C-c>/<C-r>/<CR>
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
+
+" C-j: toggle code fol=ding
+inoremap <silent> <nowait> <C-.> <C-o>:call Fold()<CR>
+nnoremap <silent> <nowait> <C-.> :call Fold()<CR>
+vnoremap <silent> <nowait> <C-.> <Esc><C-c>:call Fold()<CR>
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
