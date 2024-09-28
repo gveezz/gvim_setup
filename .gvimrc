@@ -162,6 +162,8 @@ set foldcolumn=5
 set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 set cpoptions+=u
 
+set tags=$HOME/.tags
+
 let g:bclose_multiple = 0
 let g:searchString = ""
 
@@ -1347,6 +1349,48 @@ function! Fold()
    EchoYellowMsg('Empty fold function, implement in after/ftplugin dir')
 endfunction
 
+function! TagList(tag_word)
+
+   let l:taglst = taglist(a:tag_word)
+
+   if len(l:taglst) == 1
+      exec ":split ".l:taglst[0].filename
+   else
+      let l:taglst = sort(l:taglst, 'l')
+      let l:num = 0
+
+      echohl None
+      echon "Tag: "
+      echohl None
+      echohl StatusLineLB
+      echon a:tag_word."\n"
+      echohl None
+      for l:tag in l:taglst
+         " let l:menuitem = bufname(nbuff)
+         let l:tname = l:tag.name
+         let l:tfilename = l:tag.filename
+         let l:tcmd = l:tag.cmd
+         echohl StatusLineY
+         echon "[".l:num."] "
+         echohl None
+         echohl StatusLineW
+         echon l:tfilename." "
+         echohl None
+         echohl StatusLineG
+         echon l:tcmd."\n"
+         echohl None
+         let l:num = l:num + 1
+      endfor
+   endif
+
+   let l:num = input("Type a tag #: ")
+   if l:num =~# '^\d\+$'
+      exec ":split ".l:taglst[l:num].filename
+      exec l:taglst[l:num].cmd
+   endif
+
+endfunction
+
 map <silent> <nowait> <Leader>t :TableModeEnable<CR>
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
@@ -1394,6 +1438,10 @@ inoremap <silent> <nowait> <C-w> <C-o><C-w><C-w><C-w>
 " inoremap <silent> <nowait> { {}<Left>
 " inoremap <silent> <nowait> ( ()<Left>
 " inoremap <silent> <nowait> [ []<Left>
+
+inoremap <silent> <nowait> <C-]> <C-o>:call TagList(expand('<cword>'))<CR>
+nnoremap <silent> <nowait> <C-]> :call TagList(expand('<cword>'))<CR>
+vnoremap <silent> <nowait> <C-]> <Esc><C-c>:call TagList(getreg('*'))<CR>
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
@@ -1543,9 +1591,9 @@ cnoremap <silent> <nowait> <C-f> <C-c>/<C-r>/<CR>zz
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
 
-" C-j: toggle code fol=ding
-inoremap <expr> <silent> <nowait> <C-.> (foldclosed(line('.')) == -1) ? "<C-o>zc" : "<C-o>zo"
-nnoremap <expr> <silent> <nowait> <C-.> (foldclosed(line('.')) == -1) ? "zc" : "zo"
+" C-.: toggle code fol=ding
+inoremap <silent> <nowait> <C-.> <C-o>zc
+nnoremap <silent> <nowait> <C-.> zc
 xnoremap <silent> <nowait> <C-.> <Esc><C-c>zF
 snoremap <silent> <nowait> <C-.> <C-o>zF
 
