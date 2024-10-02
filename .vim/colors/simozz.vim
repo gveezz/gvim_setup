@@ -55,6 +55,7 @@ hi TabLineSel             term=reverse  ctermfg=white ctermbg=lightblue guifg=wh
 hi Underlined             term=underline cterm=bold,underline ctermfg=lightblue guifg=lightblue guibg=#222222 gui=bold,underline
 hi Ignore                 ctermfg=black ctermbg=black guifg=black guibg=black
 hi StatusLine             ctermfg=15  guifg=black guibg=yellow gui=bold ctermbg=239 cterm=bold
+hi StatusLineM            ctermfg=15  guifg=#9700ff guibg=yellow gui=bold ctermbg=239 cterm=bold
 hi StatusLineG            ctermfg=15  guifg=#00ff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
 hi StatusLineNC           ctermfg=249 guifg=#000000 guibg=#AAAAAA gui=bold ctermbg=239 cterm=bold
 hi StatusLineR            ctermfg=15  guifg=#ff0000 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
