@@ -64,6 +64,9 @@ syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
+set notimeout
+set timeoutlen=0
+set ttimeoutlen=0
 set tags=tags;/
 set noswapfile
 set autoread
@@ -101,7 +104,7 @@ set laststatus=2
 " set statusline=%{GetMode()}\ %F\ %m\ %#StatusLine#%r%*\ BUFF#%n\ WIN#%{winnr()}\ (L:\ %l/%L\ \(%p%%),\ C:\ %c,\ BYTES:\ %o\)
 set statusline=%f\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ %w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)\ %{GetMode()}
 set backspace=indent,eol,start
-set guicursor=n:ver25-blinkon500-blinkoff500-Cursor,i-c:ver25-blinkoff0-iCursor,v:ver25-blinkoff0-vCursor
+set guicursor=n-c:ver100-blinkwait175blinkon250-blinkoff250-nCursor,i:ver100-blinkoff0-iCursor,v:ver100-blinkoff0-vCursor
 "set guicursor=n-v-c:ver25-Cursor,o:ver25-Cursor,i-ci:ver25-iCursor,r-cr:ver25-Cursor/lCursor,sm:ver25-Cursor-blinkwait175-blinkoff150-blinkon17
 set noignorecase
 set nocul
@@ -180,7 +183,7 @@ augroup Vim
    autocmd!
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
-   autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorMode()
+   " autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorMode()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
@@ -373,10 +376,10 @@ vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
 
 " C-.: toggle code fol=ding
-inoremap <silent> <nowait> <C-.> <C-o>zc
-nnoremap <silent> <nowait> <C-.> zc
-xnoremap <silent> <nowait> <C-.> <Esc><C-c>zF
-snoremap <silent> <nowait> <C-.> <C-o>zF
+inoremap <silent> <nowait> <C-.> <C-o>zczz
+nnoremap <silent> <nowait> <C-.> zczz
+xnoremap <silent> <nowait> <C-.> <Esc><C-c>zFzz
+snoremap <silent> <nowait> <C-.> <C-o>zFzz
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+

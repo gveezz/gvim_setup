@@ -332,45 +332,45 @@ function! GetMode()
    endif
 endfunction
 
-function! UpdateCursorLineMode()
-
-   let l:mode = mode()
-
-   if l:mode == 'i'
-      set hlsearch | hi CursorLine guibg=#555555 | hi Cursor guibg=#00ff00
-   elseif l:mode == 'n'
-      set hlsearch | hi CursorLine  guibg=#0000AA | hi Cursor guibg=#FFE800
-   elseif l:mode == 'c'
-      set hlsearch | hi CursorLine guibg=#ffa556
-   elseif l:mode == 'R' || l:mode == 'Rc'
-      " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
-      set hlsearch | hi CursorLine guibg=#fec800 | hi Cursor guibg=#ff0000
-   elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
-      " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
-      set hlsearch
-   else
-      set nohlsearch | hi CursorLine guibg=#fffea0
-   endif
-   
-endfunction
-
-function! UpdateCursorMode()
-
-   let l:mode = mode()
-
-   if l:mode == 'i'
-      set hlsearch | hi Cursor guibg=#00ff00 "| set cursorline
-   elseif l:mode == 'n'
-      set hlsearch | hi Cursor guibg=#0000FF "| set nocursorline
-   elseif l:mode == 'c'
-      set hlsearch | 
-   elseif l:mode == 'R' || l:mode == 'Rc'
-      set hlsearch | hi Cursor guibg=#ff0000
-   elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
-      set hlsearch | hi Cursor guibg=#ab46ff
-   endif
-   
-endfunction
+" function! UpdateCursorLineMode()
+" 
+"    let l:mode = mode()
+" 
+"    if l:mode == 'i'
+"       set hlsearch | hi CursorLine guibg=#555555 | hi Cursor guibg=#00ff00
+"    elseif l:mode == 'n'
+"       set hlsearch | hi CursorLine  guibg=#0000AA | hi Cursor guibg=#FFE800
+"    elseif l:mode == 'c'
+"       set hlsearch | hi CursorLine guibg=#ffa556
+"    elseif l:mode == 'R' || l:mode == 'Rc'
+"       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
+"       set hlsearch | hi CursorLine guibg=#fec800 | hi Cursor guibg=#ff0000
+"    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
+"       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
+"       set hlsearch
+"    else
+"       set nohlsearch | hi CursorLine guibg=#fffea0
+"    endif
+"    
+" endfunction
+" 
+" function! UpdateCursorMode()
+" 
+"    let l:mode = mode()
+" 
+"    if l:mode == 'i'
+"       set hlsearch | hi Cursor guibg=#c746ff "| set cursorline
+"    elseif l:mode == 'n'
+"       set hlsearch | hi Cursor guibg=#0000FF "| set nocursorline
+"    elseif l:mode == 'c'
+"       set hlsearch | 
+"    elseif l:mode == 'R' || l:mode == 'Rc'
+"       set hlsearch | hi Cursor guibg=#ff0000
+"    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
+"       set hlsearch | hi Cursor guibg=#ab46ff
+"    endif
+"    
+" endfunction
 
 
 function! DeleteLineChars()

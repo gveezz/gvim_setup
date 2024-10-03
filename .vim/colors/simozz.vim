@@ -30,10 +30,10 @@ hi Title                  term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold  
 hi Visual                 guifg=black guibg=#467BFF guifg=#000000 gui=bold
 hi HighCW                 guifg=black guibg=#b8b8b8 guifg=#000000 gui=bold
 hi WarningMsg             term=standout  cterm=bold  ctermfg=black ctermbg=Yellow guifg=black guibg=Yellow
-hi Cursor                 guifg=#1be611  guibg=#0000ff cterm=bold
-hi nCursor                guibg=#E4E5E5 cterm=bold
-hi link iCursor           Cursor
-hi vCursor                guibg=#024AFF guifg=#000000 cterm=bold
+hi Cursor                 guifg=#1be611  guibg=#0000ff guifg=#000000 cterm=bold
+hi nCursor                guibg=#007cff guifg=#000000 cterm=bold
+hi iCursor                guibg=#00ff00 guifg=#000000 cterm=bold 
+hi vCursor                guibg=#ab46ff guifg=#000000 cterm=bold
 hi Comment                term=bold  cterm=bold ctermfg=cyan  guifg=Yellow gui=bold
 hi Constant               term=underline  cterm=bold ctermfg=magenta  guifg=#ED762E gui=bold
 hi Special                term=bold  cterm=bold ctermfg=red  guifg=#f7aa1b gui=bold
