@@ -151,7 +151,7 @@ set cursorline
 set bufhidden=unload
 set switchbuf=useopen
 
-set showmatch
+" set showmatch
 set foldenable
 set foldmethod=indent
 set foldnestmax=20
@@ -246,20 +246,6 @@ inoremap <nowait> <C-b> <C-o>:b
 noremap <nowait> <C-b> :b 
 " M-n: go to normal mode from insert mode
 " inoremap <silent> <nowait> <M-n> <Esc>
-
-" " C-d: open netrw in a vertical split
-" inoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<C-o>:Explore!<CR><C-w>L" : "<C-o>:Vexplore!<CR><C-w>L"
-" nnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? ":Explore!<CR><C-w>L" : ":Vexplore!<CR><C-w>L" 
-" vnoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-" snoremap <expr> <silent> <nowait> <C-d> line('$') == 1 && getline('.') == '' ? "<Esc><C-o>:Explore!<CR><C-w>L" : "<Esc><C-o>:Vexplore!<CR><C-w>L"
-" cnoremap <silent> <nowait> <C-d> <C-c>
-
-" C-d: open netrw in a new tab 
-" inoremap <silent> <nowait> <M-t> <C-o>:Texplore<CR>
-" nnoremap <silent> <nowait> <M-t> :Texplore<CR>
-" vnoremap <silent> <nowait> <M-t> <Esc><C-o>:Texplore<CR>
-" snoremap <silent> <nowait> <M-t> <Esc><C-o>:Texplore<CR>
-" cnoremap <silent> <nowait> <M-t> <C-c>
 
 " C-d: open netrw in a new tab 
 inoremap <silent> <nowait> <C-d> <C-o>:Explore!<CR>
@@ -376,8 +362,6 @@ nnoremap <silent> <nowait> <C-M-Enter> #
 inoremap <nowait> <C-f> <C-o>:call setreg('/', '')<CR><Esc>/
 " inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
 nnoremap <nowait> <C-f> :call setreg('/', '')<CR>/
-" nnoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "/<C-r>/<CR>" : "/"
-" vnoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', getreg("*"))<CR>
 xnoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR>
 xnoremap <nowait> <C-M-Space> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR>
 snoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR><Esc>
@@ -397,10 +381,16 @@ snoremap <silent> <nowait> <C-.> <C-o>zF
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
 nnoremap <nowait> <C-v> <C-r><C-o>+
-xnoremap <nowait> <C-v> <C-r><C-o>+
-snoremap <nowait> <C-v> <C-r><C-o>+
+vnoremap <nowait> <C-v> <C-r><C-o>+
+"xnoremap <nowait> <C-v> <C-r><C-o>+
+"snoremap <nowait> <C-v> <C-r><C-o>+
 tnoremap <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
+
+inoremap <nowait> <M-v> <C-r>+
+nnoremap <nowait> <M-v> <C-r>+
+vnoremap <nowait> <M-v> <C-r>+
+
 
 " C-l: prompt replace
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
@@ -542,9 +532,12 @@ inoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "<C
 nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge<Right>" : "b"
 
 " C-x: close current buffer
-inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
-nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
+inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer(1)<CR>
+nnoremap <silent> <nowait> <C-x> :call CloseBuffer(1)<CR>
 tnoremap <silent> <nowait> <C-x> exit<CR>
+
+inoremap <silent> <nowait> <C-M-x> <C-o>:call CloseBuffer(0)<CR>
+nnoremap <silent> <nowait> <C-M-x> :call CloseBuffer(0)<CR>
 
 vnoremap <silent> <nowait> + <C-a>
 vnoremap <silent> <nowait> <kPlus> <C-a>
@@ -558,7 +551,7 @@ snoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
 vnoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
 
 " C-Del
-inoremap <silent> <nowait> <C-Del> <C-o>dw
+inoremap <expr> <silent> <nowait> <C-Del> (col('.')-1)==strlen(getline('.')) ? "<Del>" : "<C-o>dw"
 nnoremap <silent> <nowait> <C-Del> dw
 
 " C-Backspace

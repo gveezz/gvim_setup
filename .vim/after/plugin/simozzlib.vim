@@ -1045,25 +1045,29 @@ function! IsEmptyBuffer()
    endif
 endfunction
 
-function! CloseBuffer()
+function! CloseBuffer(opt)
 
-   if tabpagenr('$') > 1 || winnr('$') > 1
-      if IsEmptyBuffer() == 1
-         silent! :bw!
-      else
-         silent! :close!
-      endif
+   if a:opt == 1
+      silent! :bw!
    else
-      if IsEmptyBuffer()
-         call EchoWarnMsg('Last win empty buffer, q to quit')
-         if nr2char(getchar()) == 'q'
-            silent! :q
+      if tabpagenr('$') > 1 || winnr('$') > 1
+         if IsEmptyBuffer() == 1
+            silent! :bw!
+         else
+            silent! :close!
          endif
-      else 
-         silent! :bw!
+      else
+         if IsEmptyBuffer()
+            call EchoWarnMsg('Last win empty buffer, q to quit')
+            if nr2char(getchar()) == 'q'
+               silent! :q
+            endif
+         else 
+            silent! :bw!
+         endif
       endif
    endif
-   
+      
 endfunction
 
 " Return hex string equivalent to given decimal string or number.
