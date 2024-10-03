@@ -104,10 +104,14 @@ set laststatus=2
 " set statusline=%{GetMode()}\ %F\ %m\ %#StatusLine#%r%*\ BUFF#%n\ WIN#%{winnr()}\ (L:\ %l/%L\ \(%p%%),\ C:\ %c,\ BYTES:\ %o\)
 set statusline=%f\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ %w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)\ %{GetMode()}
 set backspace=indent,eol,start
-set guicursor=n-c:ver100-blinkwait175blinkon250-blinkoff250-nCursor,i:ver100-blinkoff0-iCursor,v:ver100-blinkoff0-vCursor
-"set guicursor=n-v-c:ver25-Cursor,o:ver25-Cursor,i-ci:ver25-iCursor,r-cr:ver25-Cursor/lCursor,sm:ver25-Cursor-blinkwait175-blinkoff150-blinkon17
+
+set guicursor=n:ver100-blinkon250-blinkoff250-nCursor
+set guicursor+=i:ver100-blinkoff0-iCursor,
+set guicursor+=v:ver100-blinkoff0-vCursor,
+set guicursor+=c-ci:hor100-blinkoff0-cCursor
+
 set noignorecase
-set nocul
+
 set formatoptions=tcj
 set mouse=ar
 set mousehide
