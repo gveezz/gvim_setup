@@ -1048,7 +1048,18 @@ endfunction
 function! CloseBuffer(opt)
 
    if a:opt == 1
-      silent! :bw!
+      if tabpagenr('$') > 1 || winnr('$') > 1
+         silent! :bw!
+      else
+         if IsEmptyBuffer()
+            call EchoWarnMsg('Last win empty buffer, q to quit')
+            if nr2char(getchar()) == 'q'
+               silent! :q
+            endif
+         else 
+            silent! :bw!
+         endif
+      endif
    else
       if tabpagenr('$') > 1 || winnr('$') > 1
          if IsEmptyBuffer() == 1

@@ -26,7 +26,7 @@ let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 let g:netrw_fastbrowse = 1
-let g:netrw_list_hide = '^\.\.,^\.'
+let g:netrw_list_hide = '^\.\.\/,^\.\/'
 let g:netrw_hide = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_winsize = 25
@@ -46,7 +46,7 @@ let g:netrw_altfile = 1
 " 
 " let g:indentLine_enabled = 1
 " let g:indentLine_setColors = 1
-" " let g:indentLine_defaultGroup = 'SpecialKey'
+" let g:indentLine_defaultGroup = 'SpecialKey'
 " let g:indentLine_color_gui = '#AAAAAA'
 " let g:indentLine_char_list = ['|']
 
@@ -240,9 +240,9 @@ inoremap <silent> <nowait> <C-w> <C-o><C-w><C-w><C-w>
 " inoremap <silent> <nowait> ( ()<Left>
 " inoremap <silent> <nowait> [ []<Left>
 
-inoremap <silent> <nowait> <C-]> <C-o>:call TagJump(expand('<cword>'))<CR>
-nnoremap <silent> <nowait> <C-]> :call TagJump(expand('<cword>'))<CR>
-vnoremap <silent> <nowait> <C-]> <Esc><C-c>:call TagJump(expand('<cword>'))<CR>
+inoremap <silent> <nowait> <C-]> <C-o>:tjump <C-r><C-w><CR>
+nnoremap <silent> <nowait> <C-]> :tjump <C-r><C-w><CR>
+vnoremap <silent> <nowait> <C-]> <Esc><C-c><C-r><C-w><CR>
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
