@@ -105,10 +105,11 @@ set laststatus=2
 set statusline=%f\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ %w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)\ %{GetMode()}
 set backspace=indent,eol,start
 
-set guicursor=n:ver100-blinkon250-blinkoff250-nCursor
-set guicursor+=i:ver100-blinkoff0-iCursor,
-set guicursor+=v:ver100-blinkoff0-vCursor,
-set guicursor+=c-ci:hor100-blinkoff0-cCursor
+set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
+set guicursor=o:ver100-blinkoff0-nCursor
+set guicursor+=i:ver25-blinkoff0-iCursor
+set guicursor+=v:ver25-blinkoff0-vCursor
+set guicursor+=c-ci:ver25-blinkoff0-cCursor
 
 set noignorecase
 
@@ -185,9 +186,11 @@ augroup END
 
 augroup Vim
    autocmd!
+   " autocmd CursorHold,CursorHoldI * set nohlsearch
    autocmd VimEnter * call AutoCompleteInoremap()
+   autocmd ModeChanged * if mode() == 'n' | hi CursorLine  guibg=#0000AA | else | hi CursorLine guibg=#555555 | endif
    autocmd TabNew * :$tabmove
-   " autocmd CmdwinEnter,ModeChanged * silent! call UpdateCursorMode()
+   " autocmd CmdwinEnter,ModeChanged * silent! call ()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
@@ -366,21 +369,20 @@ nnoremap <silent> <nowait> <C-Enter> n
 inoremap <silent> <nowait> <C-M-Enter> <C-o>#
 nnoremap <silent> <nowait> <C-M-Enter> #
 
-inoremap <nowait> <C-f> <C-o>:call setreg('/', '')<CR><Esc>/
+inoremap <nowait> <C-f> <Esc>/
 " inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
-nnoremap <nowait> <C-f> :call setreg('/', '')<CR>/
-xnoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR>
-xnoremap <nowait> <C-M-Space> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR>
-snoremap <nowait> <C-f> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR><Esc>
-snoremap <nowait> <C-M-Space> <Esc><C-c>:call setreg('/', '')<CR>:%s/<C-r>*//gn<CR><Esc>
-" cnoremap <expr> <silent> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<C-c>/<C-r>/<CR>" : "<C-c>:call EchoWarnMsg('Empty search')<CR>"
-cnoremap <silent> <nowait> <C-f> <C-c>:call setreg('/', '')<CR>/<C-r>/<CR>zz
+nnoremap <nowait> <C-f> /
+xnoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR>
+xnoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
+snoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
+snoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
+cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
 
 " C-.: toggle code fol=ding
-inoremap <silent> <nowait> <C-.> <C-o>zczz
+inoremap <silent> <nowait> <C-.> <C-o>zc<C-o>zz
 nnoremap <silent> <nowait> <C-.> zczz
 xnoremap <silent> <nowait> <C-.> <Esc><C-c>zFzz
 snoremap <silent> <nowait> <C-.> <C-o>zFzz
@@ -394,9 +396,9 @@ vnoremap <nowait> <C-v> <C-r><C-o>+
 tnoremap <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
 
-inoremap <nowait> <M-v> <C-r>+
-nnoremap <nowait> <M-v> <C-r>+
-vnoremap <nowait> <M-v> <C-r>+
+inoremap <nowait> <C-M-v> <C-r>+
+nnoremap <nowait> <C-M-v> <C-r>+
+vnoremap <nowait> <C-M-v> <C-r>+
 
 
 " C-l: prompt replace

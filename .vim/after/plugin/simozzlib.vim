@@ -372,7 +372,6 @@ endfunction
 "    
 " endfunction
 
-
 function! DeleteLineChars()
    normal! ^d$
 endfunction
@@ -1202,13 +1201,11 @@ function! HighlightCursorMatch()
 endfunction
 
 function! HighlightWordUnderCursor()
-   
    if getline(".")[col(".")-1] !~# '[[:blank:]]' 
       exec 'match HighCW /\<'.expand('<cword>').'\>/'
    else 
       match none 
    endif
-   
 endfunction
 
 function! ConvBase(base)
