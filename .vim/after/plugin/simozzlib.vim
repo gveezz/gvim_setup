@@ -1045,10 +1045,28 @@ function! IsEmptyBuffer()
 endfunction
 
 function! CloseBuffer(opt)
+   let l:b_name = bufname()
+   let l:w_num = winnr('$')
+   let l:t_num = tabpagenr('$')
+   let l:b_count = 0
+   let l:btot = 0
+
+   let l:buf_list = tabpagebuflist('.')
+   for l:b_i in range(0, (len(l:buf_list)-1))
+      if bufname(l:buf_list[l:b_i]) == l:b_name
+         let l:b_count = l:b_count + 1
+      endif
+
+      let l:btot = l:btot + 1
+   endfor
 
    if a:opt == 1
       if tabpagenr('$') > 1 || winnr('$') > 1
-         silent! :bw!
+         if l:btot > 1
+            silent! :close!
+         else 
+            silent! :bw!
+         endif
       else
          if IsEmptyBuffer()
             call EchoWarnMsg('Last win empty buffer, q to quit')
@@ -1327,3 +1345,4 @@ endfunction
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 " vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
+command! -nargs=1 Clrr call setreg(<f-args>, "")

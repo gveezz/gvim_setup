@@ -105,8 +105,8 @@ function! AddMultiLineComment()
    
    silent! :'<,'>v/\/\//s/$/ \/\/ /g
    " silent! :'<,'>v/\/\//Tab /\/\//l1
-   silent! :'<,'>EasyAlign /\s\/\// {'lm':1,'rm':0}
-   " silent! :'<,'>v/\/\//s/$/ /g
+   silent! :'<,'>EasyAlign /\s\/\/ / {'lm':0,'rm':0}
+   silent! :'<,'>g/\/\/$/s/\/\/$/\/\/ /g
 
 endfunction
 

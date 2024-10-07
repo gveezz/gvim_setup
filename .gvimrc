@@ -10,7 +10,7 @@
 
 " let g:popupBufferPattern = "Select %f (%n) from %p directory"
 
-let g:mapleader = '\'
+" let g:mapleader = '\'
 let g:skip_defaults_vim=1
 
 " let g:ctrlp_clear_cache_on_exit = 1
@@ -33,8 +33,8 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 let g:netrw_altfile = 1
 
-" let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']' }
-" let g:AutoCloseOn = 0
+let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']', '"': '"'}
+let g:AutoCloseOn = 1
 " let g:loaded_AutoClose = 1
 
 " if v:version < 700 || exists('loaded_bclose') || &cp
@@ -52,6 +52,7 @@ let g:netrw_altfile = 1
 
 helptags ~/.vim/doc
 set nocompatible  
+set viminfofile=NONE
 colorscheme simozz
 "set insertmode
 set magic
@@ -64,10 +65,11 @@ syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
-set notimeout
-set timeoutlen=0
-set ttimeoutlen=0
-set tags=tags;/
+" set notimeout
+" set timeoutlen=1000
+" set ttimeoutlen=-1
+" set tags=tags;/
+" set tags=./tags,tags;
 set noswapfile
 set autoread
 set autowrite
@@ -155,7 +157,7 @@ set guitablabel=%{GuiTabLabel()}
 set equalalways
 " set iskeyword+=10,33-47,92-95
 set cursorline
-
+set showcmd
 set bufhidden=unload
 set switchbuf=useopen
 
@@ -168,6 +170,7 @@ set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 
 let g:bclose_multiple = 0
 let g:searchString = ""
+let g:loaded_table_mode = "0"
 
 augroup BufWinIn
    autocmd!
@@ -180,8 +183,8 @@ augroup END
 
 augroup Insert
    autocmd!
-   autocmd InsertLeave * set iminsert=0
-   autocmd InsertEnter * set iminsert=1
+   " autocmd InsertLeave * set iminsert=0
+   " autocmd InsertEnter * set iminsert=1
 augroup END
 
 augroup Vim
@@ -199,7 +202,18 @@ augroup AutoFoldColumn
   au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
 augroup END
 
-map <silent> <nowait> <Leader>t :TableModeEnable<CR>
+" map <silent> <nowait> <Leader>t :TableModeEnable<CR>
+
+" Fix for bug
+"" inoremap <silent> <nowait> { {
+"" inoremap <silent> <nowait> } }
+"" inoremap <silent> <nowait> [ [
+"" inoremap <silent> <nowait> ] ]
+"" 
+"" cnoremap <nowait> { {
+"" cnoremap <nowait> } }
+"" cnoremap <nowait> [ [
+"" cnoremap <nowait> ] ]
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
 " inoremap <silent> <nowait> <C-RightRelease> <C-o>:call LargerFont()<CR>
@@ -228,7 +242,7 @@ snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
 
 " C-o: goes to normal mode if insert mode. This makes less likely
 " to accidentally jump from insert and normal mode
-inoremap <silent> <nowait> <C-o> <Esc>l
+" inoremap <silent> <nowait> <C-o> <Esc>l
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
@@ -237,19 +251,11 @@ nnoremap <silent> <nowait> <C-o> <nop>
 " inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " nnoremap <silent> <nowait> <Esc> i
 
-inoremap <expr> <silent> <nowait> <Esc> col('.')==1 ? "<Esc>" : "<Esc><Right>"
+inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 nnoremap <silent> <nowait> <Esc> i
 nnoremap <silent> <nowait> <C-c> i
 
-inoremap <silent> <nowait> <C-w> <C-o><C-w><C-w><C-w>
-
-" inoremap <silent> <nowait> { {}<Left>
-" inoremap <silent> <nowait> ( ()<Left>
-" inoremap <silent> <nowait> [ []<Left>
-
-inoremap <silent> <nowait> <C-]> <C-o>:tjump <C-r><C-w><CR>
-nnoremap <silent> <nowait> <C-]> :tjump <C-r><C-w><CR>
-vnoremap <silent> <nowait> <C-]> <Esc><C-c><C-r><C-w><CR>
+inoremap <silent> <nowait> <C-w> <C-o><C-w>w
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
@@ -373,10 +379,12 @@ inoremap <nowait> <C-f> <Esc>/
 " inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
 nnoremap <nowait> <C-f> /
 xnoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR>
-xnoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
-snoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
-snoremap <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
+xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
+snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
+snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
+" cnoremap <nowait> <C-f> /<C-r><C-w>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
+cnoremap <nowait> <C-w> <C-r><C-w>
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
@@ -510,12 +518,12 @@ cnoremap <silent> <nowait> <C-PageDown> <C-c>
 " inoremap <silent> <nowait> <M-w> <C-o>:call GoToWin()<CR>
 " nnoremap <silent> <nowait> <M-w> :call GoToWin()<CR>
 " vnoremap <silent> <nowait> <M-w> <C-o>:call GoToWin()<CR>
-" cnoremap <silent> <nowait> <M-w> <C-c>
+" cnoremap <silent> <nowait> <-w> <C-c>
 
 " M-o: open pop up window to open a file (or create one)
 inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
-
+                            
 " Better advance or reverse page
 inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
 nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
@@ -610,13 +618,14 @@ snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
 xnoremap <silent> <nowait> [ di[<C-r><C-o>*]
 xnoremap <silent> <nowait> { di{<C-r><C-o>*}
 xnoremap <silent> <nowait> ( di(<C-r><C-o>*)
-xnoremap <silent> <nowait> " "<C-r><C-o>*"
+"xnoremap <silent> <nowait> " "<C-r><C-o>*"
+xnoremap <silent> <nowait> < <<C-r><C-o>*>
 
 " Enclose word by {} [] () "" if selected
 snoremap <silent> <nowait> { {<C-r><C-o>*}
 snoremap <silent> <nowait> [ [<C-r><C-o>*]
 snoremap <silent> <nowait> ( (<C-r><C-o>*)
-snoremap <silent> <nowait> " "<C-r><C-o>*"
+"snoremap <silent> <nowait> " "<C-r><C-o>*"
 snoremap <silent> <nowait> < <<C-r><C-o>*>
 
 vnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
