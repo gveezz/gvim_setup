@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rm -fr ~/.gvimrc ~/.vim
+cp -a .vim ${HOME}/
+cp -a .gvimrc ${HOME}/
