@@ -33,9 +33,7 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 let g:netrw_altfile = 1
 
-let g:AutoClosePairs = { '(': ')', '{': '}', '[': ']', '"': '"'}
-let g:AutoCloseOn = 1
-" let g:loaded_AutoClose = 1
+" let g:autoclose_on = 1
 
 " if v:version < 700 || exists('loaded_bclose') || &cp
 "     finish
@@ -385,6 +383,7 @@ snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
 " cnoremap <nowait> <C-f> /<C-r><C-w>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
+" cnoremap <nowait> <C-e> /<C-r>/<CR>zz
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>

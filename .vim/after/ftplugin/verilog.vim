@@ -16,69 +16,6 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-" function! Fold()
-"    
-"    let l:diff = 0
-"    let l:cLine = line('.')
-"    let l:itLine = l:cLine
-"    let l:lastLine = line('$')
-"    
-"    while l:itLine != l:lastLine
-"       
-"       let l:beginCnt = count(getline(l:itLine), 'begin')
-"       let l:beginIdx = stridx(getline(l:itLine), 'begin')
-"       let l:endCnt = count(getline(l:itLine), 'end')
-"       let l:endIdx = stridx(getline(l:itLine), 'end')
-"       let l:commIdx = stridx(getline(l:itLine), '//')
-"       
-"       " begin
-"       if l:beginCnt > 0 && l:endCnt == 0
-"          if (l:commIdx == -1) || (l:beginIdx < l:commIdx)
-"             let l:diff = l:diff + 1
-"          end
-"       " end
-"       elseif l:endCnt > 0 && l:beginCnt == 0
-"          if (l:commIdx == -1) || (l:endIdx < l:commIdx)
-"             let l:diff = l:diff - 1
-"          end
-"       " end else begin
-"       elseif l:beginCnt > 0 && l:endCnt > 0
-"          if (l:commIdx == -1)
-"             if l:diff == 1
-"                   let l:diff = l:diff - 1
-"                else 
-"                   let l:diff = l:diff + 1
-"                endif
-"          else
-"             " end else begin //
-"             if (l:beginIdx < l:commIdx) && (l:endIdx < l:commIdx)
-"                if l:diff == 1
-"                   let l:diff = l:diff - 1
-"                else 
-"                   let l:diff = l:diff + 1
-"                endif
-"             endif
-"          endif
-"       endif
-"       
-"       " echo getline(l:itLine)." --- l:diff = ".l:diff
-"       if l:diff == 0
-"          break
-"       endif
-"       let l:itLine = l:itLine+1
-"    endwhile
-"    
-"    if (l:itLine > l:cLine)
-"       let l:cLine = l:cLine+1
-"       let l:itLine = l:itLine-1
-"       " echom ":".l:cLine.",".l:itLine."fold"
-"       silent! exec ":".l:cLine.",".l:itLine."fold"
-"    endif
-" 
-"    normal! zz
-" 
-" endfunction
-
 function! AdjVTemplate ()
 
    let l:currYear = strftime('%Y')
@@ -188,7 +125,7 @@ function! FormatIoInstance() range
    silent! :'<,'>v/\/\//s/,$/( ),/g
    silent! :'<,'>v/\/\/\|,/normal! A( )
    " silent! :'<,'>v/\/\//Tab /(/l0
-   silent! :'<,'>EasyAlign /(/ {'lm':0, 'rm':0}
+   silent! :'<,'>EasyAlign /(/ {'lm':0, 'rm': 0}
    
 endfunction
 
@@ -210,9 +147,9 @@ xnoremap <buffer> <silent> <nowait> <M-a> :call AlignAssignment()<CR>'<<End>
 " snoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
 " xnoremap <buffer> <nowait> <M-t> :Tab /<C-R>=PromptAlign()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End>
-snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End>
-xnoremap <buffer> <silent> <nowait> <M-d> :call AlignDeclarations()<CR>'<<End>
+inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
+snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
+xnoremap <buffer> <silent> <nowait> <M-d> :call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
 snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
