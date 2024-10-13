@@ -34,6 +34,7 @@ let g:netrw_preview = 1
 let g:netrw_altfile = 1
 
 " let g:autoclose_on = 1
+" let g:autoclose_pairs = [ ["(", ")"], ["{", "}"], ["[", "]"], ["<", ">"]]
 
 " if v:version < 700 || exists('loaded_bclose') || &cp
 "     finish
@@ -101,10 +102,12 @@ set relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
-" set statusline=%{GetMode()}\ %F\ %m\ %#StatusLine#%r%*\ BUFF#%n\ WIN#%{winnr()}\ (L:\ %l/%L\ \(%p%%),\ C:\ %c,\ BYTES:\ %o\)
-set statusline=%f\ %y\ %m\ %#StatusLine#%r%*\ b#%n\ %w#%{winnr()}\ (l:\ %l/%L\ %p,\ c:\ %c,\ v:%v)\ %{GetMode()}
-set backspace=indent,eol,start
+set statusline=%f\ %y\ %m%r
+set statusline+=\ [b#%n\ w#%{winnr()}\ t#%{tabpagenr()}]
+set statusline+=\ [l#%l\|%L\ c#%c]
+set statusline+=\ %{GetMode()}
 
+set backspace=indent,eol,start
 set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
 set guicursor=o:ver100-blinkoff0-nCursor
 set guicursor+=i:ver25-blinkoff0-iCursor
@@ -123,7 +126,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,k,t,i,w,b
+set complete=.,k,t,i,w,b,d,u,U,kspell,s,]
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -132,6 +135,7 @@ set timeoutlen=0
 set ttimeoutlen=0
 syntax enable
 set textwidth=80
+
 set colorcolumn=80
 " set wrapmargin=0
 " set linebreak
@@ -145,9 +149,10 @@ set lines=51
 " set wildmode=longest,list,full
 " set wildmenu
 " set wildoptions=tagfile
-set tabline=%!MyTabLine()
+" set tabline=%!MyTabLine()
 set showtabline=2
-set guitablabel=%{GuiTabLabel()}
+set guitabtooltip=%F
+set guitablabel=%m\ %{expand('%:t')}
 " set splitbelow
 " set splitright
 " tab sball
@@ -156,7 +161,7 @@ set equalalways
 " set iskeyword+=10,33-47,92-95
 set cursorline
 set showcmd
-set bufhidden=unload
+set bufhidden=wipe
 set switchbuf=useopen
 
 " set showmatch
@@ -181,6 +186,7 @@ augroup END
 
 augroup Insert
    autocmd!
+   " autocmd KeyInputPre * if v:char == 28 | let v:char = 92 | endif
    " autocmd InsertLeave * set iminsert=0
    " autocmd InsertEnter * set iminsert=1
 augroup END
@@ -202,16 +208,13 @@ augroup END
 
 " map <silent> <nowait> <Leader>t :TableModeEnable<CR>
 
-" Fix for bug
-"" inoremap <silent> <nowait> { {
-"" inoremap <silent> <nowait> } }
-"" inoremap <silent> <nowait> [ [
-"" inoremap <silent> <nowait> ] ]
-"" 
-"" cnoremap <nowait> { {
-"" cnoremap <nowait> } }
-"" cnoremap <nowait> [ [
-"" cnoremap <nowait> ] ]
+" Bug fix in case of wrong \ interpretation
+inoremap <silent> <nowait> <C-\> \
+snoremap <silent> <nowait> <C-\> \
+nnoremap <silent> <nowait> <C-\> \
+snoremap <silent> <nowait> <C-\> \
+vnoremap <silent> <nowait> <C-\> \
+cnoremap <nowait> <C-\> \
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
 " inoremap <silent> <nowait> <C-RightRelease> <C-o>:call LargerFont()<CR>
@@ -253,7 +256,9 @@ inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 nnoremap <silent> <nowait> <Esc> i
 nnoremap <silent> <nowait> <C-c> i
 
-inoremap <silent> <nowait> <C-w> <C-o><C-w>w
+inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
+nnoremap <silent> <nowait> <M-w> <C-w><C-w>
+" tnoremap <silent> <nowait> <M-w> <C-\><C-n><C-w>w
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
@@ -339,7 +344,7 @@ inoremap <nowait> <M-x> <C-o>:
 nnoremap <nowait> <M-x> :
 snoremap <nowait> <M-x> <C-o>:
 xnoremap <nowait> <M-x> <C-c>:'<,'>
-tnoremap <silent> <nowait> <Esc> <C-\><C-n>
+" tnoremap <silent> <nowait> <Esc> <C-\><C-n>
 cnoremap <nowait> <M-x> <C-c>:
 
 inoremap <silent> <nowait> <C-LeftMouse> <nop>
@@ -400,7 +405,7 @@ nnoremap <nowait> <C-v> <C-r><C-o>+
 vnoremap <nowait> <C-v> <C-r><C-o>+
 "xnoremap <nowait> <C-v> <C-r><C-o>+
 "snoremap <nowait> <C-v> <C-r><C-o>+
-tnoremap <nowait> <C-v> <C-W>"+
+" tnoremap <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
 
 inoremap <nowait> <C-M-v> <C-r>+
@@ -425,10 +430,16 @@ snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 " snoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctS()<CR>
 
 " C-s: save
-inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
-nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
-cnoremap <silent> <nowait> <C-s> <C-c><C-o>:call GuiSave()<CR>
-xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
+inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:saveas " : "<C-o>:w!<CR>" : ""
+nnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? ":saveas " : ":w!<CR>" : ""
+xnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<Esc>:saveas " : "<Esc>:w!<CR>" : ""
+snoremap <nowait> <C-s> <Esc>
+cnoremap <nowait> <C-s> <C-c>
+
+" inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
+" nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
+" cnoremap <silent> <nowait> <C-s> <C-c><C-o>:call GuiSave()<CR>
+" xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
 
 " C-k: delete line
 inoremap <silent> <nowait> <C-k> <C-o>dd
@@ -465,9 +476,12 @@ inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 " C-Space: start visual block mode
 " <LeftMouse><LeftMouse>
 inoremap <silent> <nowait> <C-Space> <C-o>viw
-nnoremap <silent> <nowait> <C-Space> i
-xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<Esc>" : "v"
+nnoremap <silent> <nowait> <C-Space> viw
+xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<Esc>i" : "v"
 
+inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
+nnoremap <silent> <nowait> <C-e> :enew!<CR>
+vnoremap <silent> <nowait> <C-e> <Esc><C-c>:enew!<CR>
 
 " C-a: select all
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
@@ -493,14 +507,14 @@ nnoremap <silent> <nowait> <M-Down> <C-w><Down>
 xnoremap <silent> <nowait> <M-Down> <Esc><C-w><Down>
 
 " C-n
-inoremap <silent> <nowait> <C-n> <C-o>:vnew<CR>
-nnoremap <silent> <nowait> <C-n> :vnew<CR>
-xnoremap <silent> <nowait> <C-n> <Esc><C-o>:vnew<CR>
+inoremap <silent> <nowait> <C-n> <C-o>:vsplit<CR>
+nnoremap <silent> <nowait> <C-n> :vsplit<CR>
+xnoremap <silent> <nowait> <C-n> <Esc><C-o>:vsplit<CR>
 
 " C-M-n
-inoremap <silent> <nowait> <C-M-n> <C-o>:new<CR>
-nnoremap <silent> <nowait> <C-M-n> :new<CR>
-xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:new<CR>
+inoremap <silent> <nowait> <C-M-n> <C-o>:split<CR>
+nnoremap <silent> <nowait> <C-M-n> :split<CR>
+xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:split<CR>
 
 " C-PageUp: switch to next window or tab
 " inoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
@@ -524,10 +538,12 @@ inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
                             
 " Better advance or reverse page
-inoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
-nnoremap <silent> <nowait> <PageDown> :call AvPage()<CR>
-inoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
-nnoremap <silent> <nowait> <PageUp> :call RePage()<CR>
+inoremap <silent> <nowait> <PageDown> <C-o>:call PageDown()<CR>
+nnoremap <silent> <nowait> <PageDown> :call PageDown()<CR>
+snoremap <silent> <nowait> <PageDown> <C-o>:call PageDown()<CR>
+inoremap <silent> <nowait> <PageUp> <C-o>:call PageUp()<CR>
+nnoremap <silent> <nowait> <PageUp> :call PageUp()<CR>
+snoremap <silent> <nowait> <PageUp> <C-o>:call PageUp()<CR>
 
 " C-Up: 
 " inoremap <silent> <nowait> <C-Up> <C-o>:call BetterBufferPrev()<CR>
@@ -548,12 +564,9 @@ inoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "<C
 nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge<Right>" : "b"
 
 " C-x: close current buffer
-inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer(1)<CR>
-nnoremap <silent> <nowait> <C-x> :call CloseBuffer(1)<CR>
-tnoremap <silent> <nowait> <C-x> exit<CR>
-
-inoremap <silent> <nowait> <C-M-x> <C-o>:call CloseBuffer(0)<CR>
-nnoremap <silent> <nowait> <C-M-x> :call CloseBuffer(0)<CR>
+inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
+nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
+" tnoremap <silent> <nowait> <C-x> exit<CR>
 
 vnoremap <silent> <nowait> + <C-a>
 vnoremap <silent> <nowait> <kPlus> <C-a>
@@ -561,10 +574,10 @@ vnoremap <silent> <nowait> - <C-x>
 vnoremap <silent> <nowait> <kMinus> <C-x>
 
 " C-t: open new tab
-inoremap <silent> <nowait> <C-t> <C-o>:tabnew<CR>
-nnoremap <silent> <nowait> <C-t> :tabnew<CR>
-snoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
-vnoremap <silent> <nowait> <C-t> <Esc>:tabnew<CR>
+inoremap <silent> <nowait> <C-t> <C-o>:tabnew %<CR>
+nnoremap <silent> <nowait> <C-t> :tabnew %<CR>
+snoremap <silent> <nowait> <C-t> <Esc>:tabnew %<CR>
+vnoremap <silent> <nowait> <C-t> <Esc>:tabnew %<CR>
 
 " C-Del
 inoremap <expr> <silent> <nowait> <C-Del> (col('.')-1)==strlen(getline('.')) ? "<Del>" : "<C-o>dw"
@@ -601,7 +614,7 @@ vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 
 vnoremap <silent> <nowait> <C-c> "+ygv
-tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
+" tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
 
 vnoremap <silent> <nowait> y "+ygv
 vnoremap <silent> <nowait> <C-v> "+P
@@ -610,21 +623,18 @@ vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
 " snoremap <silent> <nowait> <M-w> <C-o><C-w>w
 
-snoremap <silent> <nowait> <PageDown> <C-o>:call AvPage()<CR>
-snoremap <silent> <nowait> <PageUp> <C-o>:call RePage()<CR>
-
 " Enclose word by {} [] () "" if visual selected
 xnoremap <silent> <nowait> [ di[<C-r><C-o>*]
 xnoremap <silent> <nowait> { di{<C-r><C-o>*}
 xnoremap <silent> <nowait> ( di(<C-r><C-o>*)
-"xnoremap <silent> <nowait> " "<C-r><C-o>*"
+xnoremap <silent> <nowait> " "<C-r><C-o>*"
 xnoremap <silent> <nowait> < <<C-r><C-o>*>
 
 " Enclose word by {} [] () "" if selected
 snoremap <silent> <nowait> { {<C-r><C-o>*}
 snoremap <silent> <nowait> [ [<C-r><C-o>*]
 snoremap <silent> <nowait> ( (<C-r><C-o>*)
-"snoremap <silent> <nowait> " "<C-r><C-o>*"
+snoremap <silent> <nowait> " "<C-r><C-o>*"
 snoremap <silent> <nowait> < <<C-r><C-o>*>
 
 vnoremap <silent> <nowait> <ScrollWheelUp> <Esc>

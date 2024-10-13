@@ -61,31 +61,31 @@ endfunction
 "    stopinsert | CtrlP l:path
 "endfunction
 
-function! GuiTabLabel()
-	  let label = ''
-	  let bufnrlist = tabpagebuflist(v:lnum)
-
-	  " Add '+' if one of the buffers in the tab page is modified
-	  for bufnr in bufnrlist
-	    if getbufvar(bufnr, "&modified")
-	      let label = '+'
-	      break
-	    endif
-	  endfor
-
-	  " Append the number of windows in the tab page if more than one
-	  let l:wincount = tabpagewinnr(v:lnum, '$')
-	  if l:wincount > 1
-	    let label .= 'w('.l:wincount.')'
-	  endif
-	  if label != ''
-	    let label .= ' '
-	  endif
-
-	  " Append the buffer name
-     let &guitabtooltip = fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]), ":p")
-     return label . fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]),  ":t")
-endfunction
+" function! GuiTabLabel()
+" 	  let label = ''
+" 	  let bufnrlist = tabpagebuflist(v:lnum)
+" 
+" 	  " Add '+' if one of the buffers in the tab page is modified
+" 	  for bufnr in bufnrlist
+" 	    if getbufvar(bufnr, "&modified")
+" 	      let label = '+'
+" 	      break
+" 	    endif
+" 	  endfor
+" 
+" 	  " Append the number of windows in the tab page if more than one
+" 	  let l:wincount = tabpagewinnr(v:lnum, '$')
+" 	  if l:wincount > 1
+" 	    let label .= 'w('.l:wincount.')'
+" 	  endif
+" 	  if label != ''
+" 	    let label .= ' '
+" 	  endif
+" 
+" 	  " Append the buffer name
+"      let &guitabtooltip = fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]), ":p")
+"      return label . fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]),  ":t")
+" endfunction
 
 function! MyTabLine()
 	  let s = ''
@@ -249,11 +249,11 @@ endfunction
 
 function! BufferList()
 
-   let l:b_all = range(1, bufnr('$'))
-
-   " Unlisted ones
-   let l:b_unl = filter(l:b_all, 'buflisted(v:val)')
-   for l:nbuff in l:b_unl
+   let l:blstnm = []
+   let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+   " let l:blstnm = sort(bufname(l:blist))
+   
+   for l:nbuff in l:blist
       " let l:menuitem = bufname(nbuff)
       let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
       let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
@@ -925,25 +925,23 @@ function! ExecCmd()
 
 endfunction
 
-function! RePage()
+function! PageUp()
 
    let l:cLine = line('.')
    let l:cCol = col('.')
    let l:winheight = winheight('.')
    let l:firstvline = line('w0')
    let l:bfirstline = 1
-
-   if (l:firstvline - l:bfirstline) >= (2*l:winheight -1)
-      call cursor(l:firstvline - l:winheight, l:cCol)
-      silent! exec "zz"
-   else
-      let l:linejmp = (line('.') - l:bfirstline)
-      call cursor(l:cLine - l:linejmp, l:cCol)
+   
+   call cursor(l:firstvline+1, l:cCol)
+   call execute('normal! zb')
+   if (l:firstvline == 1)
+      call cursor(1, l:cCol)
    endif
 
 endfunction
 
-function! AvPage()
+function! PageDown()
 
    let l:cLine = line('.')
    let l:cCol = col('.')
@@ -952,9 +950,9 @@ function! AvPage()
    let l:lastvline = line('w$')
    let l:blastline = line('$')
 
-   if (l:blastline - l:lastvline) >= (2*l:winheight -1)
-      call cursor(l:lastvline + l:winheight, l:cCol)
-      silent! exec "zz"
+   if (l:blastline - l:lastvline) >= l:winheight
+      call cursor(l:lastvline-1, l:cCol)
+      call execute('normal! zt')
    else
       call cursor(l:blastline, l:cCol)
    endif
@@ -1044,55 +1042,34 @@ function! IsEmptyBuffer()
    endif
 endfunction
 
-function! CloseBuffer(opt)
-   let l:b_name = bufname()
-   let l:w_num = winnr('$')
-   let l:t_num = tabpagenr('$')
-   let l:b_count = 0
-   let l:btot = 0
-
-   let l:buf_list = tabpagebuflist('.')
-   for l:b_i in range(0, (len(l:buf_list)-1))
-      if bufname(l:buf_list[l:b_i]) == l:b_name
-         let l:b_count = l:b_count + 1
-      endif
-
-      let l:btot = l:btot + 1
+function! BuffInMoreWins(bnum)
+   
+   let l:buflist = []
+   
+   for l:t_i in range(1, tabpagenr('$'))
+      let l:buflist += tabpagebuflist(l:t_i)
    endfor
+   
+   return count(l:buflist, a:bnum)
+endfunction
 
-   if a:opt == 1
-      if tabpagenr('$') > 1 || winnr('$') > 1
-         if l:btot > 1
-            silent! :close!
-         else 
-            silent! :bw!
-         endif
-      else
-         if IsEmptyBuffer()
-            call EchoWarnMsg('Last win empty buffer, q to quit')
-            if nr2char(getchar()) == 'q'
-               silent! :q
-            endif
-         else 
-            silent! :bw!
-         endif
+function! CloseBuffer()
+   
+   if tabpagenr('$') > 1 || winnr('$') > 1
+      let l:b_count = BuffInMoreWins(bufnr())
+      if l:b_count > 1
+         silent! :close!
+      else 
+         silent! :bw!
       endif
    else
-      if tabpagenr('$') > 1 || winnr('$') > 1
-         if IsEmptyBuffer() == 1
-            silent! :bw!
-         else
-            silent! :close!
+      if IsEmptyBuffer()
+         call EchoWarnMsg('Last win empty buffer, q to quit')
+         if nr2char(getchar()) == 'q'
+            silent! :q
          endif
-      else
-         if IsEmptyBuffer()
-            call EchoWarnMsg('Last win empty buffer, q to quit')
-            if nr2char(getchar()) == 'q'
-               silent! :q
-            endif
-         else 
-            silent! :bw!
-         endif
+      else 
+         silent! :bw!
       endif
    endif
       

@@ -76,7 +76,7 @@ endfunction
 
 function! AlignIoInstance() range
 
-   silent! :'<,'>EasyAlign /(/ {'lm':0,'rm':0}
+   silent! :'<,'>EasyAlign /(/ {'lm':1,'rm':0}
    silent! :'<,'>v/\/\//s/\s*)/)/g
    silent! ;'<,'>v/\/\//s/\s\+$//g
 
