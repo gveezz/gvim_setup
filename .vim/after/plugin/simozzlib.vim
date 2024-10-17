@@ -639,15 +639,7 @@ function! GoToLine()
    let l:line = input("Go to line: ")
    call inputrestore()
    
-   if (stridx(l:line, '+') == 0) || (stridx(l:line, '-') == 0)
-      if l:line[1:] =~# '\d'
-         silent! call cursor(line('.') + str2nr(l:line), l:col)
-      endif
-   elseif l:line[1:] =~# '\d'
-      silent! call cursor(str2nr(l:line), l:col)
-   endif
-   
-   normal! zz
+   silent! exec ":".l:line
 
 endfunction
 

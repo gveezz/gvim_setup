@@ -69,6 +69,7 @@ syntax enable
 " set ttimeoutlen=-1
 " set tags=tags;/
 " set tags=./tags,tags;
+set tags=""
 set noswapfile
 set autoread
 set autowrite
@@ -177,10 +178,11 @@ let g:loaded_table_mode = "0"
 
 augroup BufWinIn
    autocmd!
-   autocmd BufEnter,BufRead * normal! zR
+   " autocmd BufEnter,BufRead * normal! zR
+   autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
-   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "nerdtree")) | startinsert | endif
+   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw")) | startinsert | endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
 augroup END
 
@@ -207,6 +209,8 @@ augroup AutoFoldColumn
 augroup END
 
 " map <silent> <nowait> <Leader>t :TableModeEnable<CR>
+
+" inoremap <silent> <nowait> <C-r> <C-r><C-o>
 
 " Bug fix in case of wrong \ interpretation
 inoremap <silent> <nowait> <C-\> \
@@ -249,12 +253,12 @@ nnoremap <silent> <nowait> <C-o> <nop>
 " Esc: return to normal mode if insert mode, or viceversa
 " inoremap <silent> <nowait> <C-.> <C-o>
 
-" inoremap <silent> <nowait> <Esc> <C-o><Esc>
+inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " nnoremap <silent> <nowait> <Esc> i
 
-inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+" inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 nnoremap <silent> <nowait> <Esc> i
-nnoremap <silent> <nowait> <C-c> i
+" nnoremap <silent> <nowait> <C-c> i
 
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
@@ -574,10 +578,10 @@ vnoremap <silent> <nowait> - <C-x>
 vnoremap <silent> <nowait> <kMinus> <C-x>
 
 " C-t: open new tab
-inoremap <silent> <nowait> <C-t> <C-o>:tabnew %<CR>
-nnoremap <silent> <nowait> <C-t> :tabnew %<CR>
-snoremap <silent> <nowait> <C-t> <Esc>:tabnew %<CR>
-vnoremap <silent> <nowait> <C-t> <Esc>:tabnew %<CR>
+inoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<C-o>:tabnew<CR>" : "<C-o>:tabnew %<CR>"
+nnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? ":tabnew<CR>" : ":tabnew %<CR>"
+snoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
+vnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
 
 " C-Del
 inoremap <expr> <silent> <nowait> <C-Del> (col('.')-1)==strlen(getline('.')) ? "<Del>" : "<C-o>dw"
@@ -586,6 +590,7 @@ nnoremap <silent> <nowait> <C-Del> dw
 " C-Backspace
 inoremap <silent> <nowait> <C-Backspace> <C-o>db
 nnoremap <silent> <nowait> <C-Backspace> db
+cnoremap <nowait> <C-Backspace> <C-w>
 
 " End: go to end of line
 nnoremap <silent> <nowait> <End> $<Right>

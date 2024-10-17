@@ -37,7 +37,7 @@ hi cCursor                guibg=#b8b8b8 guifg=#000000 cterm=bold
 hi iCursor                guibg=#ab46ff guifg=#000000 cterm=bold 
 hi vCursor                guibg=#ab46ff guifg=#000000 cterm=bold
 
-hi MsgArea                guibg=#222222 gui=bold
+hi MsgArea                term=bold,reverse cterm=bold guibg=#222222 gui=bold
 
 hi Comment                term=bold  cterm=bold ctermfg=cyan  guifg=Yellow gui=bold
 hi Constant               term=underline  cterm=bold ctermfg=magenta  guifg=#ED762E gui=bold
@@ -72,9 +72,10 @@ hi StatusLineO2           ctermfg=15  guifg=#ec4f01 guibg=#222222 gui=bold cterm
 hi StatusLineP            ctermfg=15  guifg=#eb58ff guibg=#222222 gui=bold ctermbg=239 cterm=bold
 hi Pmenu                  ctermbg=15  guifg=#AAAAAA guibg=#323232 gui=bold
 hi PmenuSel               ctermbg=15  guifg=#000000 gui=bold
+hi PmenuMatchSel          ctermbg=15  guifg=#000000 guibg=#00ff00 gui=bold
 hi ColorColumn            ctermbg=15  guibg=#6F6F6F
-hi Folded                 guibg=#222222 guifg=#1fff00 gui=bold ctermbg=239 cterm=bold ctermfg=15
-hi FoldColumn             guibg=#222222 guifg=#1fff00 gui=bold ctermbg=239 cterm=bold ctermfg=15
+hi Folded                 guibg=#222222 guifg=#aaaaaa gui=bold ctermbg=239 cterm=bold ctermfg=15
+hi FoldColumn             guibg=#222222 guifg=#aaaaaa gui=bold ctermbg=239 cterm=bold ctermfg=15
 hi link String            Special
 hi link Character         Special
 hi link Number            PreProc
