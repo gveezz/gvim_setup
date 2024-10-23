@@ -26,7 +26,7 @@ let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 let g:netrw_fastbrowse = 1
-let g:netrw_list_hide = '^\.\.\/,^\.\/'
+let g:netrw_list_hide = '^\.\/'
 let g:netrw_hide = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_winsize = 25
@@ -43,7 +43,7 @@ let g:netrw_altfile = 1
 "
 " let b:did_indent = 1
 " 
-" let g:indentLine_enabled = 1
+let g:indentLine_enabled = 1
 " let g:indentLine_setColors = 1
 " let g:indentLine_defaultGroup = 'SpecialKey'
 " let g:indentLine_color_gui = '#AAAAAA'
@@ -127,7 +127,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,k,t,i,w,b,d,u,U,kspell,s,]
+set complete=.,k,t,w,b,d,u,U,s,]
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -182,6 +182,7 @@ augroup BufWinIn
    autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
+   "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw")) | startinsert | endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
 augroup END
@@ -256,7 +257,9 @@ nnoremap <silent> <nowait> <C-o> <nop>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " nnoremap <silent> <nowait> <Esc> i
 
-" inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
+
 nnoremap <silent> <nowait> <Esc> i
 " nnoremap <silent> <nowait> <C-c> i
 
@@ -386,9 +389,9 @@ inoremap <nowait> <C-f> <Esc>/
 " inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
 nnoremap <nowait> <C-f> /
 xnoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR>
-xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
+" xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
 snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
-snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
+" snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
 " cnoremap <nowait> <C-f> /<C-r><C-w>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
@@ -451,8 +454,11 @@ nnoremap <silent> <nowait> <C-k> dd
 vnoremap <silent> <nowait> <C-k> dl
 
 " C-g: go to line and column
-inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+"inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
+"nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+
+inoremap <nowait> <C-g> <Esc>v/
+nnoremap <nowait> <C-g> v/
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
@@ -479,7 +485,7 @@ inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
 " <LeftMouse><LeftMouse>
-inoremap <silent> <nowait> <C-Space> <C-o>viw
+inoremap <silent> <nowait> <C-Space> <C-c>l
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<Esc>i" : "v"
 

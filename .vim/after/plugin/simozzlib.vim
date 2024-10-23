@@ -792,6 +792,21 @@ function! TestGetChar()
    endwhile
 endfunction
 
+function! TestSetLine()
+   let l:line=line('.')
+   let l:c = 0
+   let l:cInEsc = 27
+   let l:cIn = 0
+   while l:cIn != l:cInEsc
+      let l:cIn = getchar()
+      "echom "l:cIn = ".l:cIn." = nr2char(".l:cIn.") = ". nr2char(l:cIn)
+      for l:lidx in range(l:line, l:line+4)
+         call setline(l:lidx, getline(l:lidx).l:cIn)
+      endfor
+      silent! redraw
+   endwhile
+endfunction
+
 function! PromptFindI()
 
    let l:line = line('.')
@@ -1058,7 +1073,7 @@ function! CloseBuffer()
       if IsEmptyBuffer()
          call EchoWarnMsg('Last win empty buffer, q to quit')
          if nr2char(getchar()) == 'q'
-            silent! :q
+            silent! :q!
          endif
       else 
          silent! :bw!

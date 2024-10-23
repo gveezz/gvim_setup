@@ -7,7 +7,6 @@ if exists('g:loaded_dirdiff')
 endif
 let g:loaded_dirdiff = 1
 
-setlocal modifiable
 " Public Interface:
 command! -nargs=* -complete=dir DirDiff call <SID>DirDiff (<f-args>)
 command! -nargs=0 DirDiffOpen call <SID>DirDiffOpen ()
@@ -24,10 +23,10 @@ command! -nargs=0 DirDiffQuit call <SID>DirDiffQuit ()
 " \dk - Diff previous: (think k for up)
 
 if get(g:, 'DirDiffEnableMappings', 0)
-    silent! exe 'nnoremap <silent> <nowait> ' . get(g:, 'DirDiffGetKeyMap', '<Leader>dg') . ' :diffget<CR>'
-    silent! exe 'nnoremap <silent> <nowait> ' . get(g:, 'DirDiffPutKeyMap', '<Leader>dp') . ' :diffput<CR>'
-    silent! exe 'nnoremap <silent> <nowait> ' . get(g:, 'DirDiffNextKeyMap', '<Leader>dj') . ' :DirDiffNext<CR>'
-    silent! exe 'nnoremap <silent> <nowait> ' . get(g:, 'DirDiffPrevKeyMap', '<Leader>dk') . ' :DirDiffPrev<CR>'
+    silent! exe 'nnoremap ' . get(g:, 'DirDiffGetKeyMap', '<Leader>dg') . ' :diffget<CR>'
+    silent! exe 'nnoremap ' . get(g:, 'DirDiffPutKeyMap', '<Leader>dp') . ' :diffput<CR>'
+    silent! exe 'nnoremap ' . get(g:, 'DirDiffNextKeyMap', '<Leader>dj') . ' :DirDiffNext<CR>'
+    silent! exe 'nnoremap ' . get(g:, 'DirDiffPrevKeyMap', '<Leader>dk') . ' :DirDiffPrev<CR>'
 endif
 
 " Global Maps:
@@ -59,7 +58,7 @@ if !exists("g:DirDiffWindowSize")
     let g:DirDiffWindowSize = 14
 endif
 if !exists("g:DirDiffInteractive")
-    let g:DirDiffInteractive = 0
+    let g:DirDiffInteractive = 1
 endif
 if !exists("g:DirDiffIgnoreCase")
     let g:DirDiffIgnoreCase = 0
@@ -68,7 +67,7 @@ if !exists("g:DirDiffTheme")
     let g:DirDiffTheme = ""
 endif
 if !exists("g:DirDiffSimpleMap")
-    let g:DirDiffSimpleMap = 0
+    let g:DirDiffSimpleMap = 1
 endif
 " Additional arguments
 if !exists("g:DirDiffAddArgs")
@@ -288,19 +287,19 @@ function! <SID>DirDiff(srcA, srcB)
     " \dk is enough.  Otherwise, use j,k, and enter.
 "    nnoremap <buffer> n :call <SID>DirDiffNext()<CR>
 "    nnoremap <buffer> p :call <SID>DirDiffPrev()<CR>
-    nnoremap <silent> <nowait> <buffer> s :. call <SID>DirDiffSync()<CR>
-    vnoremap <silent> <nowait> <buffer> s :call <SID>DirDiffSync()<CR>
-    nnoremap <silent> <nowait> <buffer> u :call <SID>DirDiffUpdate()<CR>
-    nnoremap <silent> <nowait> <buffer> x :call <SID>ChangeExcludes()<CR>
-    nnoremap <silent> <nowait> <buffer> a :call <SID>ChangeArguments()<CR>
-    nnoremap <silent> <nowait> <buffer> i :call <SID>ChangeIgnore()<CR>
-    nnoremap <silent> <nowait> <buffer> h :call <SID>DirDiffHexmode()<CR>
-    nnoremap <silent> <nowait> <buffer> w :call <SID>DirDiffWrapmode()<CR>
-    nnoremap <silent> <nowait> <buffer> q :call <SID>DirDiffQuit()<CR>
+    nnoremap <buffer> s :. call <SID>DirDiffSync()<CR>
+    vnoremap <buffer> s :call <SID>DirDiffSync()<CR>
+    nnoremap <buffer> u :call <SID>DirDiffUpdate()<CR>
+    nnoremap <buffer> x :call <SID>ChangeExcludes()<CR>
+    nnoremap <buffer> a :call <SID>ChangeArguments()<CR>
+    nnoremap <buffer> i :call <SID>ChangeIgnore()<CR>
+    nnoremap <buffer> h :call <SID>DirDiffHexmode()<CR>
+    nnoremap <buffer> w :call <SID>DirDiffWrapmode()<CR>
+    nnoremap <buffer> q :call <SID>DirDiffQuit()<CR>
 
-    nnoremap <silent> <nowait> <buffer> o    :call <SID>DirDiffOpen()<CR>
-    nnoremap <silent> <nowait> <buffer> <CR>  :call <SID>DirDiffOpen()<CR>
-    nnoremap <silent> <nowait> <buffer> <2-Leftmouse> :call <SID>DirDiffOpen()<CR>
+    nnoremap <buffer> o    :call <SID>DirDiffOpen()<CR>
+    nnoremap <buffer> <CR>  :call <SID>DirDiffOpen()<CR>
+    nnoremap <buffer> <2-Leftmouse> :call <SID>DirDiffOpen()<CR>
     call <SID>SetupSyntax()
 
     " Open the first diff
