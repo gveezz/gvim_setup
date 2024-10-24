@@ -35,13 +35,13 @@ module $COMPONENT_NAME
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-input  SClk;     // comment here
-input  Reset_n;  // comment here
-input  SyncRst;  // comment here
-input  IDataVal; // comment here
-input  IData;    // comment here
-output ODataVal; // comment here
-output OData;    // comment here
+input  SClk;     // COMMENT
+input  Reset_n;  // COMMENT
+input  SyncRst;  // COMMENT
+input  IDataVal; // COMMENT
+input  IData;    // COMMENT
+output ODataVal; // COMMENT
+output OData;    // COMMENT
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal parameters (localparams)
@@ -51,8 +51,8 @@ output OData;    // comment here
 // Registered outputs
 ////////////////////////////////////////////////////////////////////////////////
 
-reg ODataVal; //
-reg OData;    //
+reg ODataVal; // COMMENT
+reg OData;    // COMMENT
 
 ///////////////////////////////////////////////////////////////////////////////
 // Virtually registered output (combinational regs)
