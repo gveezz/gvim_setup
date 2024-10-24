@@ -122,6 +122,16 @@ function! MultiLineComment() range
    silent! :'<,'>normal! I// 
 endfunction
 
+function! HasWireRegDeclaration()
+   
+   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
+      return 0
+   else
+      return stridx(getline('.'), 'reg') >= 0 || stridx(getline('.'), 'wire') >= 0
+   fi
+   
+endfunction
+
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>'<<End>
 xnoremap <buffer> <silent> <nowait> <M-c> :call AddMultiLineComment()<CR>'<<End>
@@ -171,6 +181,4 @@ inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
 
-" C-j: toggle code fol=ding
-" inoremap <buffer> <silent> <nowait> <C-.> <C-o>:call Fold()<CR>
-" nnoremap <buffer> <silent> <nowait> <C-.> :call Fold()<CR>
+inoremap <expr> <silent> <nowait> ; HasWireRegDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
