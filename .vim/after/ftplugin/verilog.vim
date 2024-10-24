@@ -16,122 +16,6 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-function! AddLineComment()
-
-   if len(getline('.')) > 0
-      silent! :s/$/ \/\/ /g
-   else
-      silent! :norm 80i/
-   endif
-
-endfunction
-
-function! AddMultiLineComment()
-
-   
-   silent! :'<,'>v/\/\//s/$/ \/\/ /g
-   " silent! :'<,'>v/\/\//Tab /\/\//l1
-   silent! :'<,'>EasyAlign /\s\/\/ / {'lm':0,'rm':0}
-   silent! :'<,'>g/\/\/$/s/\/\/$/\/\/ /g
-
-endfunction
-
-function! AlignComment() range
-
-   " silent! :'<,'>Tab /\/\/
-   silent! :'<,'>EasyAlign /\s\/\// {'lm':0, 'rm':1}
-   silent! :'<,'>s/\s\+\/\/\s+/ \/\/ /g
-endfunction
-
-function! AlignDeclarations()
-
-   silent! :'<,'>s# \+# #g
-   " silent! :'<,'>Tab /\s\a/l0
-   silent! :'<,'>EasyAlign /\s\a/ {'lm':0,'rm':0}
-   " silent! :'<,'>Tab /\/\/
-   silent! :'<,'>EasyAlign /\/\// {'lm':0,'rm':0}
-
-endfunction
-
-function! AlignParams()
-
-   silent! :'<,'>s# \+# #g
-   " :'<,'>Tab /\s[A-Z]/l0
-   silent! :'<,'>EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}
-   " :'<,'>Tab /=
-   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
-
-endfunction
-
-function! AlignIoInstance() range
-
-   silent! :'<,'>EasyAlign /(/ {'lm':1,'rm':0}
-   silent! :'<,'>v/\/\//s/\s*)/)/g
-   silent! ;'<,'>v/\/\//s/\s\+$//g
-
-endfunction
-
-function! AlignAssignment() range
-
-   " silent! :'<,'>Tab /<=/
-   silent! :'<,'>g/</EasyAlign /<=/ {'lm':1,'rm':1}
-   " silent! :'<,'>s/\a<=/\a <=/g
-   " silent! :'<,'>Tab /=/l1
-   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
-   " silent! :'<,'>s/=\d/= /g
-endfunction
-
-function! RplcSemicolonToDot()
-   
-   silent! :'<,'>s/,/;/g
-
-endfunction
-
-function! InsertDot() range
-   
-   silent! :'<,'>v/\/\//normal! I.
-
-endfunction
-
-function! AppendComma() range
-   
-   silent! ;'<,'>v/\/\//s/\s\+$//g
-   silent! :'<,'>v/\/\//normal! A,
-
-endfunction
-
-function! AppendSemicolon() range
-   
-   silent! ;'<,'>v/\/\//s/\s\+$//g
-   silent! :'<,'>v/\/\//normal! A;
-
-endfunction
-
-function! FormatIoInstance() range
-
-   silent! :'<,'>v/\/\//normal! I.
-   silent! ;'<,'>v/\/\//s/\s\+$//g
-   silent! :'<,'>v/\/\//s/,$/( ),/g
-   silent! :'<,'>v/\/\/\|,/normal! A( )
-   " silent! :'<,'>v/\/\//Tab /(/l0
-   silent! :'<,'>EasyAlign /(/ {'lm':0, 'rm': 0}
-   
-endfunction
-
-function! MultiLineComment() range
-   silent! :'<,'>normal! I// 
-endfunction
-
-function! HasWireRegDeclaration()
-   
-   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
-      return 0
-   else
-      return stridx(getline('.'), 'reg') >= 0 || stridx(getline('.'), 'wire') >= 0
-   fi
-   
-endfunction
-
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>'<<End>
 xnoremap <buffer> <silent> <nowait> <M-c> :call AddMultiLineComment()<CR>'<<End>
@@ -181,4 +65,140 @@ inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
 
-inoremap <expr> <silent> <nowait> ; HasWireRegDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
+inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
+inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
+
+function! AddLineComment()
+
+   if len(getline('.')) > 0
+      silent! :s/$/ \/\/ /g
+   else
+      silent! :norm 80i/
+   endif
+
+endfunction
+
+function! AddMultiLineComment()
+
+   
+   silent! :'<,'>v/\/\//s/$/ \/\/ /g
+   " silent! :'<,'>v/\/\//Tab /\/\//l1
+   silent! :'<,'>EasyAlign /\s\/\/ / {'lm':0,'rm':0}
+   silent! :'<,'>g/\/\/$/s/\/\/$/\/\/ /g
+
+endfunction
+
+function! AlignComment() range
+
+   " silent! :'<,'>Tab /\/\/
+   silent! :'<,'>EasyAlign /\s\/\// {'lm':0, 'rm':1}
+   silent! :'<,'>s/\s\+\/\/\s+/ \/\/ /g
+endfunction
+
+function! AlignDeclarations()
+
+   silent! :'<,'>s# \+# #g
+   " silent! :'<,'>Tab /\s\a/l0
+   silent! :'<,'>EasyAlign /\s\a/ {'lm':0,'rm':0}
+   " silent! :'<,'>Tab /\/\/
+   silent! :'<,'>EasyAlign /\/\// {'lm':0,'rm':0}
+
+endfunction
+
+function! AlignParams()
+
+   silent! :'<,'>s# \+# #g
+   " :'<,'>Tab /\s[A-Z]/l0
+   silent! :'<,'>EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}
+   " :'<,'>Tab /=
+   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
+
+endfunction
+
+function! AlignIoInstance() range
+
+   silent! :'<,'>EasyAlign /(/ {'lm':1,'rm':0 }
+   silent! :'<,'>v/\/\//s/\s*)/)/g
+   silent! ;'<,'>v/\/\//s/\s\+$//g
+
+endfunction
+
+function! AlignAssignment() range
+
+   " silent! :'<,'>Tab /<=/
+   silent! :'<,'>g/</EasyAlign /<=/ {'lm':1,'rm':1}
+   " silent! :'<,'>s/\a<=/\a <=/g
+   " silent! :'<,'>Tab /=/l1
+   silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
+   " silent! :'<,'>s/=\d/= /g
+endfunction
+
+function! RplcSemicolonToDot()
+   
+   silent! :'<,'>s/,/;/g
+
+endfunction
+
+function! InsertDot() range
+   
+   silent! :'<,'>v/\/\//normal! I.
+
+endfunction
+
+function! AppendComma() range
+   
+   silent! ;'<,'>v/\/\//s/\s\+$//g
+   silent! :'<,'>v/\/\//normal! A,
+
+endfunction
+
+function! AppendSemicolon() range
+   
+   silent! ;'<,'>v/\/\//s/\s\+$//g
+   silent! :'<,'>v/\/\//normal! A;
+
+endfunction
+
+function! FormatIoInstance() range
+
+   silent! :'<,'>v/\/\//normal! I.
+   silent! ;'<,'>v/\/\//s/\s\+$//g
+   silent! :'<,'>v/\/\//s/,$/( ),/g
+   silent! :'<,'>v/\/\/\|,/normal! A( )
+   " silent! :'<,'>v/\/\//Tab /(/l0
+   silent! :'<,'>EasyAlign /(/ {'lm':0,'rm':0}
+   " close above /)
+   
+endfunction
+
+function! MultiLineComment() range
+   silent! :'<,'>normal! I// 
+endfunction
+
+function! HasWireRegDeclaration()
+   
+   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
+      return 0
+   else
+      return stridx(getline('.'), 'reg') >= 0 ||
+             \ stridx(getline('.'), 'wire') >= 0
+   fi
+   
+endfunction
+
+function! HasIODeclaration()
+   
+   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
+      return 0
+   else
+      return stridx(getline('.'), 'input') >= 0 || 
+             \ stridx(getline('.'), 'output') >= 0 ||
+             \ stridx(getline('.'), 'inout') >= 0
+
+   fi
+   
+endfunction
+
+function! HasDeclaration()
+   return HasIODeclaration() || HasWireRegDeclaration()
+endfunction
