@@ -177,7 +177,7 @@ endfunction
 
 function! HasWireRegDeclaration()
    
-   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
+   if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
    else
       return stridx(getline('.'), 'reg') >= 0 ||
@@ -188,7 +188,7 @@ endfunction
 
 function! HasIODeclaration()
    
-   if stridx(getline('.')[:col('.')-1], '\/\/') >= 0
+   if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
    else
       return stridx(getline('.'), 'input') >= 0 || 
