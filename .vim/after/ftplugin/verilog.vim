@@ -199,6 +199,18 @@ function! HasIODeclaration()
    
 endfunction
 
+function! HasParamDeclaration()
+   
+   if stridx(getline('.')[:col('.')-1], '//') >= 0
+      return 0
+   else
+      return stridx(getline('.'), 'parameter') >= 0
+   fi
+   
+endfunction
+
 function! HasDeclaration()
-   return HasIODeclaration() || HasWireRegDeclaration()
+   return HasIODeclaration() || 
+          \ HasWireRegDeclaration() || 
+          \ HasParamDeclaration()
 endfunction
