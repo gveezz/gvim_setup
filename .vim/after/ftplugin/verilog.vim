@@ -16,17 +16,6 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-function! AdjVTemplate ()
-
-   let l:currYear = strftime('%Y')
-   let l:buffNname = expand('%:r')
-
-   silent! exec ":%s/$YEAR/".l:currYear."/g"
-   silent! exec ":%s/$COMPONENT_NAME/".l:buffNname."/g"
-   silent! :1
-
-endfunction
-
 function! AddLineComment()
 
    if len(getline('.')) > 0

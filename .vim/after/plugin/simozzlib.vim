@@ -1,4 +1,28 @@
 " CUSTOM FUNCTIONS
+function! AdjTemplate ()
+
+   let l:currYear = strftime('%Y')
+   let l:buffNname = expand('%:r')
+   let l:corp = expand($CORP)
+   let l:corpemail = expand($EMAIL)
+
+   if l:corp == ''
+      let l:corp = '<none>'
+   endif
+
+   if l:corpemail == ''
+      let l:corpemail = '<none@domain.com>'
+   endif
+
+   silent! exec ":%s/$YEAR/".l:currYear."/g"
+   silent! exec ":%s/$CORP/".l:corp."/g"
+   silent! exec ":%s/$EMAIL/".l:corpemail."/g"
+   silent! exec ":%s/$COMPONENT_NAME/".l:buffNname."/g"
+   silent! exec ":%s/$MACRO/".toupper(l:buffNname)."/g"
+   silent! :1
+
+endfunction
+
 function! Eatchar(pat)
    let c = nr2char(getchar(0))
    return (c =~ a:pat) ? '' : c
