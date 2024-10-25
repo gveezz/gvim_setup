@@ -229,28 +229,28 @@ function! JumpToTabWin(tabn, winn)
    silent! exec "normal! ".a:winn."\<C-w>w"
 endfunction
 
-function! PopupBufferList()
-   
-   let l:menuName = "BList"
-   silent! exec ":aunmenu ".l:menuName
-   
-   for l:t_idx in range(1, tabpagenr('$'))
-      let l:buf_list = tabpagebuflist(l:t_idx)
-      for l:idx in range(0, (len(l:buf_list)-1))
-         " windows are numbered from 1 to winnr('$')
-         let l:w_idx = l:idx+1
-         let l:menuitem = substitute(fnamemodify(bufname(l:buf_list[l:idx]), ':p:t'), '\.', '\\.', 'g')
-         let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
-         if empty(l:menuitem)
-            let l:menuitem = 'NoName'
-         endif
-         exec ":amenu ".l:menuName.".".l:menuitem." :call JumpToTabWin(".l:t_idx.",".l:w_idx.")<CR>"
-      endfor
-   endfor
-
-   :exec ":popup ".l:menuName
-   
-endfunction
+" function! PopupBufferList()
+"    
+"    let l:menuName = "BList"
+"    silent! exec ":aunmenu ".l:menuName
+"    
+"    for l:t_idx in range(1, tabpagenr('$'))
+"       let l:buf_list = tabpagebuflist(l:t_idx)
+"       for l:idx in range(0, (len(l:buf_list)-1))
+"          " windows are numbered from 1 to winnr('$')
+"          let l:w_idx = l:idx+1
+"          let l:menuitem = substitute(fnamemodify(bufname(l:buf_list[l:idx]), ':p:t'), '\.', '\\.', 'g')
+"          let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
+"          if empty(l:menuitem)
+"             let l:menuitem = 'NoName'
+"          endif
+"          exec ":amenu ".l:menuName.".".l:menuitem." :call JumpToTabWin(".l:t_idx.",".l:w_idx.")<CR>"
+"       endfor
+"    endfor
+" 
+"    :exec ":popup ".l:menuName
+"    
+" endfunction
 
 function! ClearBufferList()
 
@@ -269,6 +269,36 @@ function! ClearBufferList()
       silent! :exec "bw! ".nbuff
    endfor
 
+endfunction
+
+function! PopupBufferList()
+   let l:popupblstnm = []
+   let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+   
+   for l:nbuff in l:blist
+      let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
+      let l:menuitem = "[".l:nbuff."] ".substitute(l:menuitem, ' ', '_', 'g')
+      let l:popupblstnm = add(l:popupblstnm, l:menuitem)
+   endfor
+
+   call popup_menu(l:popupblstnm,
+                     \ #{title: 'Buffer List',
+                     \   pos: 'center',
+                     \   scrollbar: 'false',
+                     \   border: [],
+                     \   padding: [1,1,0,1],
+		               \   close: 'click',
+                     \   type: 'popupMarker',
+                     \   callback: 'PopupBufferChoose',
+                     \   highlight: 'Question',
+                     \   mapping: 'true'
+                     \  }
+                     \)
+endfunction
+
+function! PopupBufferChoose(id, result)
+   echo "Pressed ".a:result
+   silent! exec ":b ".a:result
 endfunction
 
 function! BufferList()
@@ -301,13 +331,15 @@ function! BufferList()
 
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    if stridx(l:cmd, 'd') == 0
-      exec ":b".l:cmd. " | :bnext"
+      exec ":b".l:cmd
    elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
    else
       exec ":b ".l:cmd
    endif
 endfunction
+
+
 
 function! TabsList()
    :tabs
