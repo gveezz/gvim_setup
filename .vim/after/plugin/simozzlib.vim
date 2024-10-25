@@ -305,17 +305,19 @@ function! BufferList()
 
    let l:blstnm = []
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-   " let l:blstnm = sort(bufname(l:blist))
-   
+
    for l:nbuff in l:blist
       " let l:menuitem = bufname(nbuff)
       let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
       let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
-      echohl StatusLineY
+      if l:nbuff == bufnr() 
+         echohl StatusLineLB
+      else
+         echohl StatusLineY
+      endif
       echon "[".l:nbuff."] "
       echohl None
       echohl StatusLineW
-      " echon l:menuitem."\t\t\t".fnamemodify(bufname(nbuff), ':p:h')
       echon fnamemodify(bufname(nbuff), ':p:h')."/"
       echohl None
       echohl StatusLineG
@@ -1261,6 +1263,7 @@ endfunction
 function! HighlightWordUnderCursor()
    if getline(".")[col(".")-1] !~# '[[:blank:]]' 
       exec 'match HighCW /\<'.expand('<cword>').'\>/'
+
    else 
       match none 
    endif
@@ -1380,6 +1383,12 @@ function! TagListXref(tag_word)
    endif
    
 endfunction
+
+" function! VisualSelectSearch()
+"    "exec ":%s/".substitute(@*, '\/', '\\/', 'g')."//gn"
+"    let l:srchstr = substitute(@*, '\/', '\\/', 'g')
+"    return substitute(l:srchstr, '\$', '\\$', 'g')
+" endfunction
 
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>

@@ -26,11 +26,12 @@ let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 let g:netrw_fastbrowse = 1
-let g:netrw_list_hide = '^\.\/'
+let g:netrw_list_hide = '^\.\/,^.svn/,^.git/'
 let g:netrw_hide = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
+let g:netrw_alto = 0
 let g:netrw_altfile = 1
 
 " let g:autoclose_on = 1
@@ -386,15 +387,15 @@ inoremap <silent> <nowait> <C-M-Enter> <C-o>#
 nnoremap <silent> <nowait> <C-M-Enter> #
 
 inoremap <nowait> <C-f> <Esc>/
-" inoremap <expr> <nowait> <C-f> (strlen(getreg('/')) > 0) ? "<Esc>/<C-r>/" : "<Esc>/"
 nnoremap <nowait> <C-f> /
-xnoremap <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR>
-" xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
-snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>*//gn<CR><Esc>
-" snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
-" cnoremap <nowait> <C-f> /<C-r><C-w>
+xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/".substitute(@*, '\/', '\\/', 'g')."//gn<CR>" : "/"
+":%s/<C-r>*//gn
+snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=substitute(@*, '\/', '\\/', 'g')<CR>//gn<CR>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
+" snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
+" cnoremap <nowait> <C-f> /<C-r><C-w>
+" xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
 " cnoremap <nowait> <C-e> /<C-r>/<CR>zz
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
@@ -451,7 +452,9 @@ cnoremap <nowait> <C-s> <C-c>
 " C-k: delete line
 inoremap <silent> <nowait> <C-k> <C-o>dd
 nnoremap <silent> <nowait> <C-k> dd
-vnoremap <silent> <nowait> <C-k> dl
+" snoremap <silent> <nowait> <C-k> <Esc><C-c>ddi
+vnoremap <silent> <nowait> <C-k> <Delete>
+xnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
 "inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
@@ -639,14 +642,12 @@ xnoremap <silent> <nowait> [ di[<C-r><C-o>*]
 xnoremap <silent> <nowait> { di{<C-r><C-o>*}
 xnoremap <silent> <nowait> ( di(<C-r><C-o>*)
 xnoremap <silent> <nowait> " "<C-r><C-o>*"
-xnoremap <silent> <nowait> < <<C-r><C-o>*>
 
 " Enclose word by {} [] () "" if selected
 snoremap <silent> <nowait> { {<C-r><C-o>*}
 snoremap <silent> <nowait> [ [<C-r><C-o>*]
 snoremap <silent> <nowait> ( (<C-r><C-o>*)
 snoremap <silent> <nowait> " "<C-r><C-o>*"
-snoremap <silent> <nowait> < <<C-r><C-o>*>
 
 vnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
 snoremap <silent> <nowait> <ScrollWheelUp> <Esc>
