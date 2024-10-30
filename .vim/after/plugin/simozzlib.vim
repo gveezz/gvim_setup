@@ -307,27 +307,25 @@ function! BufferList()
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
 
    for l:nbuff in l:blist
-      " let l:menuitem = bufname(nbuff)
-      let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
-      let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
-      if l:nbuff == bufnr() 
-         echohl StatusLineLB
-      else
+      if l:nbuff != bufnr() 
+         " let l:menuitem = bufname(nbuff)
+         let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
+         let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
          echohl StatusLineY
-      endif
-      echon "[".l:nbuff."] "
-      echohl None
-      echohl StatusLineW
-      echon fnamemodify(bufname(nbuff), ':p:h')."/"
-      echohl None
-      echohl StatusLineG
-      echon l:menuitem."\n"
-      echohl None
-      " echohl StatusLineY
-      " echon "[".l:nbuff."]\n"
-      " echohl None
+         echon "[".l:nbuff."] "
+         echohl None
+         echohl StatusLineW
+         echon fnamemodify(bufname(nbuff), ':p:h')."/"
+         echohl None
+         echohl StatusLineG
+         echon l:menuitem."\n"
+         echohl None
+         " echohl StatusLineY
+         " echon "[".l:nbuff."]\n"
+         " echohl None
 
-      " echom "[".l:nbuff."] ".l:menuitem
+         " echom "[".l:nbuff."] ".l:menuitem
+      endif
    endfor
    echohl None
 
@@ -692,13 +690,14 @@ endfunction
 
 function! GoToLine()
 
-   let l:col = col('.')
+   " silent! set norelativenumber
+   " silent! redraw
    call inputsave()
    let l:line = input("Go to line: ")
    call inputrestore()
-   
    silent! exec ":".l:line
-
+   " silent! set relativenumber
+   " silent! redraw
 endfunction
 
 " function! GoToLine()
@@ -1384,11 +1383,13 @@ function! TagListXref(tag_word)
    
 endfunction
 
-" function! VisualSelectSearch()
-"    "exec ":%s/".substitute(@*, '\/', '\\/', 'g')."//gn"
-"    let l:srchstr = substitute(@*, '\/', '\\/', 'g')
-"    return substitute(l:srchstr, '\$', '\\$', 'g')
-" endfunction
+function! VSearchStrSub()
+   " echo "0 Str is: ".getreg('*') | 2sleep
+   let l:srchstr = substitute(@*, '\/', '\\\/', 'g')
+   let l:srchstr = substitute(l:srchstr, '\n', '\\n', 'g')
+   " echo "1 Str is: ".getreg('*') | 2sleep
+   return l:srchstr
+endfunction
 
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>

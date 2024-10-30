@@ -388,9 +388,9 @@ nnoremap <silent> <nowait> <C-M-Enter> #
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/".substitute(@*, '\/', '\\/', 'g')."//gn<CR>" : "/"
+xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz" : "/"
 ":%s/<C-r>*//gn
-snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=substitute(@*, '\/', '\\/', 'g')<CR>//gn<CR>
+snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
 " snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
@@ -457,11 +457,11 @@ vnoremap <silent> <nowait> <C-k> <Delete>
 xnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
-"inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-"nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
+nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
 
-inoremap <nowait> <C-g> <Esc>v/
-nnoremap <nowait> <C-g> v/
+" inoremap <nowait> <C-g> <Esc>v/
+" nnoremap <nowait> <C-g> v/
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
