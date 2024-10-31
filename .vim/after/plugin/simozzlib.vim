@@ -350,83 +350,45 @@ endfunction
 function! GetMode()
     let l:ms=mode()
     if l:ms == 'n'
-
-	   ":hi StatusLine guifg=#B0B0FF
       return 'NORMAL  '
-
    elseif l:ms == 'i'
-
-	   ":hi StatusLine guifg=#00ff00
       return 'INSERT  '
-
    elseif l:ms == 'v' || l:ms == 'V'
-
-      ":hi StatusLine guifg=#AF8FFF
       return 'VISUAL  '
-
    elseif l:ms == 's' || l:ms == 'S'
-
-      ":hi StatusLine guifg=#AF8FFF
       return 'SELECT  '
-
    elseif l:ms == 'R' || l:ms == 'Rv'
-      
       return 'REPLACE '
-
    elseif l:ms == 't'
-
-      ":hi StatusLine guifg=#41DF25
       return 'TERMINAL'
-
    elseif l:ms == 'c'
-
-      ": hi StatusLine guifg=#FF9300
       return 'COMMAND '
-
    else
       return l:ms
    endif
 endfunction
 
-" function! UpdateCursorLineMode()
-" 
-"    let l:mode = mode()
-" 
-"    if l:mode == 'i'
-"       set hlsearch | hi CursorLine guibg=#555555 | hi Cursor guibg=#00ff00
-"    elseif l:mode == 'n'
-"       set hlsearch | hi CursorLine  guibg=#0000AA | hi Cursor guibg=#FFE800
-"    elseif l:mode == 'c'
-"       set hlsearch | hi CursorLine guibg=#ffa556
-"    elseif l:mode == 'R' || l:mode == 'Rc'
-"       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#ff6356
-"       set hlsearch | hi CursorLine guibg=#fec800 | hi Cursor guibg=#ff0000
-"    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
-"       " set hlsearch | hi Cursor guibg=#FFE800 | hi CursorLine guibg=#a0a3ff
-"       set hlsearch
-"    else
-"       set nohlsearch | hi CursorLine guibg=#fffea0
-"    endif
-"    
-" endfunction
-" 
-" function! UpdateCursorMode()
-" 
-"    let l:mode = mode()
-" 
-"    if l:mode == 'i'
-"       set hlsearch | hi Cursor guibg=#c746ff "| set cursorline
-"    elseif l:mode == 'n'
-"       set hlsearch | hi Cursor guibg=#0000FF "| set nocursorline
-"    elseif l:mode == 'c'
-"       set hlsearch | 
-"    elseif l:mode == 'R' || l:mode == 'Rc'
-"       set hlsearch | hi Cursor guibg=#ff0000
-"    elseif l:mode == 'v' || l:mode == 'V' || l:mode == 's' || l:mode == 'S'
-"       set hlsearch | hi Cursor guibg=#ab46ff
-"    endif
-"    
-" endfunction
+function! SetStatusLineMode()
+    let l:ms=mode()
+    if l:ms == 'n'
+	   hi StatusLine guifg=#6b9bf3 guibg=#222222
+   elseif l:ms == 'i'
+	   hi StatusLine guifg=#F3C81B guibg=#4900B8
+   elseif l:ms == 'v' || l:ms == 'V'
+      hi StatusLine guifg=#1c5dff guibg=#F3C81B
+   elseif  l:ms == 's' || l:ms == 'S'
+      hi StatusLine guifg=#4900B8 guibg=#F3C81B
+   elseif l:ms == 'R' || l:ms == 'Rv'
+      hi StatusLine guifg=#F3C81B guibg=#222222
+   elseif l:ms == 't'
+      hi StatusLine guifg=#41DF25 guibg=#222222
+   elseif l:ms == 'c'
+      hi StatusLine guifg=#FF9300
+   else
+      return l:ms
+   endif
+   redraw
+endfunction
 
 function! DeleteLineChars()
    normal! ^d$

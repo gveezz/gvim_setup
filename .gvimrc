@@ -144,8 +144,8 @@ set colorcolumn=80
 " set wrap
 " set linebreak
 " note trailing space at end of next line
-set columns=171
-set lines=51
+set columns=100
+set lines=25
 " set history=1000
 " set wc=<Tab>
 " set wildmode=longest,list,full
@@ -201,6 +201,7 @@ augroup Vim
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd ModeChanged * if mode() == 'n' | hi CursorLine  guibg=#0000AA | else | hi CursorLine guibg=#555555 | endif
    autocmd TabNew * :$tabmove
+   autocmd ModeChanged * call SetStatusLineMode()
    " autocmd CmdwinEnter,ModeChanged * silent! call ()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
