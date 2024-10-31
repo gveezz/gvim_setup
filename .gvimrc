@@ -387,6 +387,8 @@ nnoremap <silent> <nowait> <C-Enter> n
 inoremap <silent> <nowait> <C-M-Enter> <C-o>#
 nnoremap <silent> <nowait> <C-M-Enter> #
 
+inoremap <silent> <nowait> <C-q> <C-o><C-q>
+
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz" : "/"
