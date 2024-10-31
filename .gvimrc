@@ -167,7 +167,7 @@ set bufhidden=wipe
 set switchbuf=useopen
 
 " set showmatch
-set foldenable
+set nofoldenable
 set foldmethod=indent
 set foldnestmax=20
 set foldcolumn=0
@@ -180,7 +180,7 @@ let g:loaded_table_mode = "0"
 augroup BufWinIn
    autocmd!
    " autocmd BufEnter,BufRead * normal! zR
-   autocmd BufNew,BufEnter,BufRead * normal! zR
+   " autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
    "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
