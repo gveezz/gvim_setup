@@ -387,7 +387,6 @@ function! SetStatusLineMode()
    else
       return l:ms
    endif
-   redraw
 endfunction
 
 function! DeleteLineChars()
