@@ -261,9 +261,6 @@ nnoremap <silent> <nowait> <C-o> <nop>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " nnoremap <silent> <nowait> <Esc> i
 
-inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
-
 nnoremap <silent> <nowait> <Esc> i
 " nnoremap <silent> <nowait> <C-c> i
 

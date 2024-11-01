@@ -1,5 +1,13 @@
 #!/bin/sh
 
-rm -fr ~/.gvimrc ~/.vim
-cp -a .vim ${HOME}/
-cp -a .gvimrc ${HOME}/
+option=${1}
+if [ "${option}" = "-g" ]; then
+   echo "Getting setup"
+   cp -a ~/.vim .
+   cp -a ~/.gvimrc .
+else
+   echo "Setting setup"
+   rm -fr ${HOME}/.gvimrc ${HOME}/.vim
+   cp -a .vim ${HOME}/
+   cp -a .gvimrc ${HOME}/
+fi
