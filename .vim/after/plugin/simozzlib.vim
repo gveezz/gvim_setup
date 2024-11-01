@@ -305,7 +305,6 @@ function! BufferList()
 
    let l:blstnm = []
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-
    for l:nbuff in l:blist
       if l:nbuff != bufnr() 
          " let l:menuitem = bufname(nbuff)
@@ -328,7 +327,7 @@ function! BufferList()
       endif
    endfor
    echohl None
-
+   
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    if stridx(l:cmd, 'd') == 0
       exec ":b".l:cmd
@@ -348,52 +347,60 @@ function! TabsList()
 endfunction
 
 function! GetMode()
-   let l:ms=mode()
-   if l:ms == 'n'
-      return '-- NORMAL-- '
-   elseif l:ms == 'i'
-      return '-- INSERT-- '
-   elseif l:ms == 'v'
-      return '-- VISUAL-- '
-   elseif l:ms == 'V' 
-      return '-- VISUAL LINE-- '
-   elseif l:ms == "\<C-V>"
-      return '-- VISUAL BLOCK-- '
-   elseif l:ms == 's' || l:ms == 'S'
-      return '-- SELECT-- '
-   elseif l:ms == 'R' || l:ms == 'Rv'
-      return '-- REPLACE-- '
-   elseif l:ms == 't'
-      return '-- TERMINAL-- '
-   elseif l:ms == 'c'
-      return '-- COMMAND-- '
+   let l:mode = mode()
+   if l:mode == 'n'
+      return '-- NORMAL -- '
+   elseif l:mode == 'i'
+      return '-- INSERT -- '
+   elseif l:mode == 'v'
+      return '-- VISUAL CHAR -- '
+   elseif l:mode == 'V' 
+      return '-- VISUAL LINE -- '
+   elseif l:mode == "\<C-V>"
+      return '-- VISUAL BLOCK -- '
+   elseif l:mode == 's' || l:mode == 'S'
+      return '-- SELECT -- '
+   elseif l:mode == 'R'
+      return '-- REPLACE -- '
+   elseif l:mode == 't'
+      return '-- TERMINAL -- '
+   elseif l:mode == 'c'
+      return '-- COMMAND -- '
    else
-      return l:ms
+      return l:mode
+   endif
+endfunction
+
+function! SetCursorLineMode()
+   let l:mode = mode()
+   if l:mode == 'n'
+      hi CursorLine  guibg=#0007ff
+   else
+      hi CursorLine guibg=#555555
    endif
 endfunction
 
 function! SetStatusLineMode()
-    let l:ms=mode()
-    if l:ms == 'n'
-	   hi StatusLine guifg=#6b9bf3 guibg=#222222
-   elseif l:ms == 'i'
-	   hi StatusLine guifg=#F3C81B guibg=#4900B8
-   elseif l:ms == 'v' 
+   let l:mode = mode()
+   if l:mode == 'n'
+      hi StatusLine guifg=#ffffff guibg=#0007ff
+   elseif l:mode == 'i'
+      hi StatusLine guifg=#F3C81B guibg=#4900B8
+   elseif l:mode == 'v' 
       hi StatusLine guifg=#1c5dff guibg=#F3C81B
-   elseif l:ms == 'V'
+   elseif l:mode == 'V'
       hi StatusLine guifg=#b602de guibg=#F3C81B
-   elseif l:ms == "\<C-V>"
-      hi StatusLine guifg=#000000 guibg=#F3C81B
-   elseif  l:ms == 's' || l:ms == 'S'
+   elseif l:mode == "\<C-V>"
+      hi StatusLine guifg=#0007ff guibg=#F3C81B
+   elseif  l:mode == 's' || l:mode == 'S'
       hi StatusLine guifg=#4900B8 guibg=#F3C81B
-   elseif l:ms == 'R' || l:ms == 'Rv'
+   elseif l:mode == 'R' || l:mode == 'Rv'
       hi StatusLine guifg=#F3C81B guibg=#222222
-   elseif l:ms == 't'
+   elseif l:mode == 't'
       hi StatusLine guifg=#41DF25 guibg=#222222
-   elseif l:ms == 'c'
-      hi StatusLine guifg=#00FF00 guibg=#222222
+   " elseif l:mode == 'c'
+   "    hi StatusLine guifg=#00FF00 guibg=#222222
    endif
-   redraw
 endfunction
 
 function! DeleteLineChars()

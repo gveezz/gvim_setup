@@ -137,15 +137,14 @@ set timeoutlen=0
 set ttimeoutlen=0
 syntax enable
 set textwidth=80
-
 set colorcolumn=80
 " set wrapmargin=0
 " set linebreak
 " set wrap
 " set linebreak
 " note trailing space at end of next line
-set columns=100
-set lines=25
+set columns=150
+set lines=35
 " set history=1000
 " set wc=<Tab>
 " set wildmode=longest,list,full
@@ -197,12 +196,10 @@ augroup END
 
 augroup Vim
    autocmd!
-   " autocmd CursorHold,CursorHoldI * set nohlsearch
    autocmd VimEnter * call AutoCompleteInoremap()
-   autocmd ModeChanged * if mode() == 'n' | hi CursorLine  guibg=#0000AA | else | hi CursorLine guibg=#555555 | endif
    autocmd TabNew * :$tabmove
-   autocmd ModeChanged * call SetStatusLineMode()
-   " autocmd CmdwinEnter,ModeChanged * silent! call ()
+   autocmd ModeChanged * call SetStatusLineMode() | call SetCursorLineMode()
+   autocmd CmdwinEnter * hi StatusLine guifg=#00FF00 guibg=#222222
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
