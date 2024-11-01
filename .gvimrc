@@ -95,10 +95,10 @@ set autoindent
 " set cindent
 " set copyindent
 set tabstop=3
-set softtabstop=0
+set softtabstop=3
 set shiftwidth=3
 " set indentexpr=
-" set smarttab
+set smarttab
 set number
 set relativenumber
 set guifont=Monospace\ 11
@@ -107,7 +107,7 @@ set laststatus=2
 set statusline=%f\ %y\ %m%r
 set statusline+=\ [b#%n\ w#%{winnr()}\ t#%{tabpagenr()}]
 set statusline+=\ [l#%l\|%L\ c#%c]
-set statusline+=\ %{GetMode()}
+set statusline+=%=\ %{GetMode()}
 
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
@@ -222,6 +222,8 @@ nnoremap <silent> <nowait> <C-\> \
 snoremap <silent> <nowait> <C-\> \
 vnoremap <silent> <nowait> <C-\> \
 cnoremap <nowait> <C-\> \
+
+"inoremap <silent> <nowait> <expr> <Backspace> getline('.')[col('.')-2] == '\s\+' ? "<Backspace><Backspace><Backspace>" : "<Backspace>"
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
 " inoremap <silent> <nowait> <C-RightRelease> <C-o>:call LargerFont()<CR>
@@ -396,10 +398,6 @@ xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSe
 snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
-" snoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<c-r>*//gn<cr><esc>
-" cnoremap <nowait> <C-f> /<C-r><C-w>
-" xnoremap <silent> <nowait> <C-M-Space> <Esc><C-c>:%s/<C-r>*//gn<CR>
-" cnoremap <nowait> <C-e> /<C-r>/<CR>zz
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
 nnoremap <nowait> <C-M-Backspace> ?<CR>
@@ -457,11 +455,12 @@ inoremap <silent> <nowait> <C-k> <C-o>dd
 nnoremap <silent> <nowait> <C-k> dd
 " snoremap <silent> <nowait> <C-k> <Esc><C-c>ddi
 vnoremap <silent> <nowait> <C-k> <Delete>
-xnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
 inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
 nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
 
 " inoremap <nowait> <C-g> <Esc>v/
 " nnoremap <nowait> <C-g> v/

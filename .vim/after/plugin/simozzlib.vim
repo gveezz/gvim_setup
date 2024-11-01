@@ -348,38 +348,42 @@ function! TabsList()
 endfunction
 
 function! GetMode()
-   let l:ms=mode(0)
+   let l:ms=mode()
    if l:ms == 'n'
-      return 'NORMAL  '
+      return '-- NORMAL-- '
    elseif l:ms == 'i'
-      return 'INSERT  '
+      return '-- INSERT-- '
    elseif l:ms == 'v'
-      return 'VISUAL  '
+      return '-- VISUAL-- '
    elseif l:ms == 'V' 
-      return 'VISUAL LINE '
+      return '-- VISUAL LINE-- '
    elseif l:ms == "\<C-V>"
-      return 'VISUAL BLOCK '
+      return '-- VISUAL BLOCK-- '
    elseif l:ms == 's' || l:ms == 'S'
-      return 'SELECT : '
+      return '-- SELECT-- '
    elseif l:ms == 'R' || l:ms == 'Rv'
-      return 'REPLACE '
+      return '-- REPLACE-- '
    elseif l:ms == 't'
-      return 'TERMINAL'
+      return '-- TERMINAL-- '
    elseif l:ms == 'c'
-      return 'COMMAND '
+      return '-- COMMAND-- '
    else
       return l:ms
    endif
 endfunction
 
 function! SetStatusLineMode()
-    let l:ms=mode(0)
+    let l:ms=mode()
     if l:ms == 'n'
 	   hi StatusLine guifg=#6b9bf3 guibg=#222222
    elseif l:ms == 'i'
 	   hi StatusLine guifg=#F3C81B guibg=#4900B8
-   elseif l:ms == 'v' || l:ms == 'V' || l:ms == "\<C-V>"
+   elseif l:ms == 'v' 
       hi StatusLine guifg=#1c5dff guibg=#F3C81B
+   elseif l:ms == 'V'
+      hi StatusLine guifg=#b602de guibg=#F3C81B
+   elseif l:ms == "\<C-V>"
+      hi StatusLine guifg=#000000 guibg=#F3C81B
    elseif  l:ms == 's' || l:ms == 'S'
       hi StatusLine guifg=#4900B8 guibg=#F3C81B
    elseif l:ms == 'R' || l:ms == 'Rv'
