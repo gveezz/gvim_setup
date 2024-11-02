@@ -11,11 +11,11 @@ module $COMPONENT_NAME
    SyncRst,
    // Data interface
    // --inputs
-   IDataVal,
-   IData,
+   DataInVal,
+   DataIn,
    // --outputs
-   ODataVal,
-   OData
+   DataOutVal,
+   DataOut
 );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,13 +35,18 @@ module $COMPONENT_NAME
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-input  SClk;     // COMMENT
-input  Reset_n;  // COMMENT
-input  SyncRst;  // COMMENT
-input  IDataVal; // COMMENT
-input  IData;    // COMMENT
-output ODataVal; // COMMENT
-output OData;    // COMMENT
+// System interface
+// -- inputs
+input SClk;    // COMMENT
+input Reset_n; // COMMENT
+input SyncRst; // COMMENT
+// Data interface
+// --inputs
+input   DataInVal; // COMMENT
+input  DataIn;     // COMMENT
+// --outputs
+output DataOutVal; // COMMENT
+output DataOut;    // COMMENT
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal parameters (localparams)
@@ -51,8 +56,8 @@ output OData;    // COMMENT
 // Registered outputs
 ////////////////////////////////////////////////////////////////////////////////
 
-reg ODataVal; // COMMENT
-reg OData;    // COMMENT
+reg DataOutVal;
+reg DataOut;   
 
 ///////////////////////////////////////////////////////////////////////////////
 // Virtually registered output (combinational regs)
@@ -80,12 +85,12 @@ reg OData;    // COMMENT
 
 always @(posedge SClk or negedge Reset_n) begin
    if (!Reset_n) begin
-      ODataVal <= 0;
-      OData    <= 0;
+      DataOutVal <= 0;
+      DataOut    <= 0;
    end else begin
       if (SyncRst) begin
-         ODataVal <= 0;
-         OData    <= 0;
+         DataOutVal <= 0;
+         DataOut    <= 0;
       end
    end
 end
