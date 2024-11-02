@@ -2,9 +2,12 @@
 function! AdjTemplate ()
 
    let l:currYear = strftime('%Y')
-   let l:buffNname = expand('%:r')
+   let l:buffNname = expand("%:t")
+   let l:buffNnameExt = expand("%:e")
    let l:corp = expand($CORP)
    let l:corpemail = expand($EMAIL)
+   
+   let l:buffNname = substitute(l:buffNname, ".".l:buffNnameExt, "", "g")
 
    if l:corp == ''
       let l:corp = '<none>'
