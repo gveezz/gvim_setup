@@ -35,16 +35,11 @@ module $COMPONENT_NAME
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-// System interface
-// -- inputs
-input SClk;    // COMMENT
-input Reset_n; // COMMENT
-input SyncRst; // COMMENT
-// Data interface
-// --inputs
-input   DataInVal; // COMMENT
-input  DataIn;     // COMMENT
-// --outputs
+input  SClk;     // COMMENT
+input  Reset_n;  // COMMENT
+input  SyncRst;  // COMMENT
+input  DataInVal; // COMMENT
+input  DataIn;    // COMMENT
 output DataOutVal; // COMMENT
 output DataOut;    // COMMENT
 
@@ -56,8 +51,8 @@ output DataOut;    // COMMENT
 // Registered outputs
 ////////////////////////////////////////////////////////////////////////////////
 
-reg DataOutVal;
-reg DataOut;   
+reg DataOutVal; // COMMENT
+reg DataOut;    // COMMENT
 
 ///////////////////////////////////////////////////////////////////////////////
 // Virtually registered output (combinational regs)

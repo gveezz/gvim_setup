@@ -196,6 +196,7 @@ augroup BufWinIn
    "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "undotree") && (&ft != "diffdir")) | startinsert | else | stopinsert | endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
+   autocmd BufLeave,BufDelete,BufHidden,BufWipeout * if (&ft == "netrw") | silent! :call histdel("/", "@.*$") | silent! :call histdel("/", "\a") endif
 augroup END
 
 augroup Insert
@@ -203,6 +204,7 @@ augroup Insert
    " autocmd KeyInputPre * if v:char == 28 | let v:char = 92 | endif
    " autocmd InsertLeave * set iminsert=0
    " autocmd InsertEnter * set iminsert=1
+   autocmd InsertEnter * let @*=""
 augroup END
 
 augroup Vim
@@ -401,10 +403,16 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-xnoremap <expr> <silent> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz" : "/"
-":%s/<C-r>*//gn
-snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
+vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>" : "/"
+" snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
+cnoremap <nowait> <C-w> <C-r><C-w>
+
+inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
+nnoremap <nowait> <M-f> :%s/<C-r><C-w>/
+vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/" : "<Esc><C-c>:s/"
+" snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
+cnoremap <silent> <nowait> <M-f> <C-c>
 cnoremap <nowait> <C-w> <C-r><C-w>
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>

@@ -2,12 +2,9 @@
 function! AdjTemplate ()
 
    let l:currYear = strftime('%Y')
-   let l:buffNname = expand("%:t")
-   let l:buffNnameExt = expand("%:e")
+   let l:buffNname = expand('%:r')
    let l:corp = expand($CORP)
    let l:corpemail = expand($EMAIL)
-   
-   let l:buffNname = substitute(l:buffNname, ".".l:buffNnameExt, "", "g")
 
    if l:corp == ''
       let l:corp = '<none>'
@@ -1374,3 +1371,4 @@ endfunction
 " vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 command! -nargs=1 Clrr call setreg(<f-args>, "")
+command! -nargs=1 Diffsplit :vertical diffsplit <args>
