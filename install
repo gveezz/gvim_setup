@@ -7,9 +7,18 @@ REMOTE=0
 GET=0
 
 VIMDIR=.vim
-GVIMRC=.gvimrc
 
-while getopts "rgd:u:h:" o; do
+usage () {
+   echo "Args:"
+   echo "-r: remote install"
+   echo "-g: get setup (set otherwise)"
+   echo "-d: remote dir"
+   echo "-u: remote user"
+   echo "-h: remote host"
+   exit 1
+}
+
+while getopts "Hrgd:u:h:" o; do
    case "${o}" in
       r) REMOTE=1
          ;;
@@ -21,7 +30,9 @@ while getopts "rgd:u:h:" o; do
          ;;
       h) REMOTE_HOST="${OPTARG}"
          ;;
-      *)
+      H) usage
+         ;;
+      *) usage
          ;;
          
     esac
@@ -32,21 +43,17 @@ if [ "${GET}" -eq 1 ]; then
    if [ ${REMOTE} -eq 1 ]; then
       echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
       rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}${VIMDIR} .
-      rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}${GVIMRC} .
    else
       echo "Getting local setup"
       cp -a ~/${VIMDIR} .
-      cp -a ~/${GVIMRC} .
    fi
 else
    if [ ${REMOTE} -eq 1 ]; then
       echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
       rsync -avzh ${VIMDIR} ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}
-      rsync -avzh ${GVIMRC} ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}
    else
       echo "Setting local setup"
-      rm -fr ${HOME}/${GVIMRC} ${HOME}/${VIMDIR}
+      rm -fr ${HOME}/${VIMDIR}
       cp -a ${VIMDIR} ${HOME}/
-      cp -a ${GVIMRC} ${HOME}/
    fi
 fi
