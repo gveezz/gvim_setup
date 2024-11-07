@@ -79,10 +79,10 @@ set relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
-set statusline=%{GetMode()}
+set statusline=\ %{GetMode()}
 set statusline+=\ %=%f\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
-set statusline+=\ (%l\/\%L,\%c)
+set statusline+=\ (%l\/\%L,\%c)\ 
 
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
@@ -164,7 +164,7 @@ augroup BufWinIn
    "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
    autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "undotree") && (&ft != "diffdir")) | startinsert | else | stopinsert | endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
-   autocmd BufLeave,BufDelete,BufHidden,BufWipeout * if (&ft == "netrw") | silent! :call histdel("/", "@.*$") | silent! :call histdel("/", "\a") endif
+   " autocmd BufLeave,BufDelete,BufHidden,BufWipeout * if (&ft == "netrw") | silent! :call histdel("/", "@.*$") | silent! :call histdel("/", "\a") endif
 augroup END
 
 augroup Insert
@@ -377,7 +377,7 @@ cnoremap <nowait> <C-w> <C-r><C-w>
 
 inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
 nnoremap <nowait> <M-f> :%s/<C-r><C-w>/
-vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/" : "<Esc><C-c>:s/"
+vnoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>
 cnoremap <silent> <nowait> <M-f> <C-c>
 cnoremap <nowait> <C-w> <C-r><C-w>
 
