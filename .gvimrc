@@ -75,15 +75,21 @@ set noswapfile
 set autoread
 set autowrite
 set clipboard=unnamed
-set guioptions+=a
-set guioptions-=m
-set guioptions-=T
-set guioptions+=a
-set guioptions+=h
-set guioptions+=b
-set guioptions+=r
-set guioptions+=e
+" set guioptions+=a
+" set guioptions-=m
+" set guioptions-=T
+" set guioptions+=a
+" set guioptions+=h
+" set guioptions-=b
+" set guioptions-=r
+" set guioptions-=R
+" set guioptions-=l
+" set guioptions-=L
+" set guioptions+=e
 " set guioptions=-l
+set guioptions=""
+set guioptions+=aepi
+set noscrollfocus
 set virtualedit=onemore
 set whichwrap=<,>,[,],b,s
 set selection=exclusive
@@ -91,6 +97,7 @@ set selectmode=mouse,key
 set keymodel=startsel,stopsel
 set expandtab  
 set autoindent
+" set indentkeys+=!^I
 " set smartindent
 " set cindent
 " set copyindent
@@ -104,10 +111,10 @@ set relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
-set statusline=%f\ %y\ %m%r
-set statusline+=\ [b#%n\ w#%{winnr()}\ t#%{tabpagenr()}]
-set statusline+=\ [l#%l\|%L\ c#%c]
-set statusline+=%=\ %{GetMode()}
+set statusline=%{GetMode()}
+set statusline+=\ %=%f\ %y\ %m%r
+set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
+set statusline+=\ (%l\/\%L,\%c)
 
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
@@ -117,6 +124,7 @@ set guicursor+=v:ver25-blinkoff0-vCursor
 set guicursor+=c-ci:ver25-blinkoff0-cCursor
 
 set noignorecase
+set diffopt=filler,context:0
 
 set formatoptions=tcj
 set mouse=ar
@@ -162,7 +170,7 @@ set equalalways
 " set iskeyword+=10,33-47,92-95
 set cursorline
 set showcmd
-set bufhidden=wipe
+set bufhidden=hide
 set switchbuf=useopen
 
 " set showmatch
@@ -171,6 +179,9 @@ set foldmethod=indent
 set foldnestmax=20
 set foldcolumn=0
 set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
+
+" set undodir=/tmp/
+" set undofile
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -183,7 +194,7 @@ augroup BufWinIn
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
    "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
-   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw")) | startinsert | endif
+   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "undotree") && (&ft != "diffdir")) | startinsert | else | stopinsert | endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
 augroup END
 
@@ -290,8 +301,8 @@ inoremap <silent> <nowait> <F3> <C-o>:call SmallerFont()<CR>
 nnoremap <silent> <nowait> <F3> :call SmallerFont()<CR>
 
 " F4: open file to diff side by side
-inoremap <silent> <nowait> <F4> <C-o>:browse confirm vert diffsplit<CR>
-nnoremap <silent> <nowait> <F4> <C-o>:browse confirm vert diffsplit<CR>
+inoremap <nowait> <M-d> <C-o>:vert diffsplit 
+nnoremap <nowait> <M-d> <C-o>:vert diffsplit 
 
 " S-F4: diffoff
 inoremap <silent> <nowait> <S-F4> <C-o>:diffoff<CR>

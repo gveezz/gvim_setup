@@ -352,23 +352,23 @@ endfunction
 function! GetMode()
    let l:mode = mode()
    if l:mode == 'n'
-      return '-- NORMAL -- '
+      return '-- NORMAL       -- '
    elseif l:mode == 'i'
-      return '-- INSERT -- '
+      return '-- INSERT       -- '
    elseif l:mode == 'v'
-      return '-- VISUAL CHAR -- '
+      return '-- VISUAL CHAR  -- '
    elseif l:mode == 'V' 
-      return '-- VISUAL LINE -- '
+      return '-- VISUAL LINE  -- '
    elseif l:mode == "\<C-V>"
       return '-- VISUAL BLOCK -- '
    elseif l:mode == 's' || l:mode == 'S'
-      return '-- SELECT -- '
+      return '-- SELECT       -- '
    elseif l:mode == 'R'
-      return '-- REPLACE -- '
+      return '-- REPLACE      -- '
    elseif l:mode == 't'
-      return '-- TERMINAL -- '
+      return '-- TERMINAL     -- '
    elseif l:mode == 'c'
-      return '-- COMMAND -- '
+      return '-- COMMAND      -- '
    else
       return l:mode
    endif

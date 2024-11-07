@@ -1,0 +1,1512 @@
+==== start log session Sat Nov 02 16:38:01 2024 ====
+  0.006859974 : Setting termcap entry ku to O*A
+  0.006878542 : Adding termcap entry kd to O*B
+  0.006882475 : Adding termcap entry kr to O*C
+  0.006885250 : Adding termcap entry kl to O*D
+  0.006888043 : Setting termcap entry ýA to [@;*A
+  0.006890790 : Setting termcap entry ýB to [@;*B
+  0.006893431 : Setting termcap entry ýD to [@;*C
+  0.006896144 : Adding termcap entry ýC to [@;*D
+  0.006898914 : Adding termcap entry ý9 to O*P
+  0.006901556 : Adding termcap entry ý: to O*Q
+  0.006904166 : Adding termcap entry ý; to O*R
+  0.006906628 : Adding termcap entry ý< to O*S
+  0.006909193 : Adding termcap entry k1 to [11;*~
+  0.006911879 : Adding termcap entry k2 to [12;*~
+  0.006914499 : Adding termcap entry k3 to [13;*~
+  0.006917005 : Adding termcap entry k4 to [14;*~
+  0.006919616 : Adding termcap entry k5 to [15;*~
+  0.006922125 : Adding termcap entry k6 to [17;*~
+  0.006924706 : Adding termcap entry k7 to [18;*~
+  0.006927282 : Adding termcap entry k8 to [19;*~
+  0.006930363 : Adding termcap entry k9 to [20;*~
+  0.006933223 : Adding termcap entry k; to [21;*~
+  0.006935931 : Adding termcap entry F1 to [23;*~
+  0.006938500 : Adding termcap entry F2 to [24;*~
+  0.006941235 : Adding termcap entry kB to [Z
+  0.006943843 : Adding termcap entry %1 to [28;*~
+  0.006946589 : Adding termcap entry &8 to [26;*~
+  0.006949223 : Adding termcap entry kI to [2;*~
+  0.006951916 : Adding termcap entry kh to [@;*H
+  0.006954567 : Adding termcap entry K1 to [1;*~
+  0.006957334 : Adding termcap entry ý? to O*H
+  0.006959956 : Adding termcap entry ý@ to [7;*~
+  0.006962606 : Adding termcap entry @7 to [@;*F
+  0.006965185 : Adding termcap entry K4 to [4;*~
+  0.006967859 : Adding termcap entry ý= to O*F
+  0.006970608 : Adding termcap entry ý> to [8;*~
+  0.006973513 : Adding termcap entry kP to [5;*~
+  0.006976175 : Adding termcap entry kN to [6;*~
+  0.006978885 : Adding termcap entry K6 to O*k
+  0.006981573 : Adding termcap entry K7 to O*m
+  0.006985218 : Adding termcap entry K8 to O*o
+  0.006988070 : Adding termcap entry K9 to O*j
+  0.006990731 : Adding termcap entry KA to O*M
+  0.006993452 : Adding termcap entry KB to O*n
+  0.006996054 : Adding termcap entry KC to O*p
+  0.006998693 : Adding termcap entry KD to O*q
+  0.007001318 : Adding termcap entry KE to O*r
+  0.007003919 : Adding termcap entry KF to O*s
+  0.007006530 : Adding termcap entry KG to O*t
+  0.007009109 : Adding termcap entry KH to O*u
+  0.007011686 : Adding termcap entry KI to O*v
+  0.007014284 : Adding termcap entry KJ to O*w
+  0.007016877 : Adding termcap entry KK to O*x
+  0.007019616 : Adding termcap entry KL to O*y
+  0.007022351 : Setting termcap entry ýP to [3;*~
+  0.007025013 : Adding termcap entry PS to [200~
+  0.007027580 : Adding termcap entry PE to [201~
+  0.007230827 : Adding termcap entry #2 to [1;2H
+  0.007237441 : Adding termcap entry #4 to [1;2D
+  0.007240834 : Adding termcap entry %i to [1;2C
+  0.007244280 : Adding termcap entry *7 to [1;2F
+  0.007248488 : Adding termcap entry kb to 
+  0.007251701 : Adding termcap entry kD to [3~
+  0.007354395 : Termcap entry kb was: 
+  0.007359486 : Setting termcap entry kb to 
+  0.007373028 : Adding termcap entry ûX to [M
+  0.007377032 : Adding termcap entry íX to [<*M
+  0.007380075 : Adding termcap entry ìX to [<*m
+  0.007384437 : Termcap entry ûX was: [M
+  0.007387088 : Setting termcap entry ûX to [M
+  0.007389975 : Termcap entry íX was: [<*M
+  0.007392381 : Setting termcap entry íX to [<*M
+  0.007395022 : Termcap entry ìX was: [<*m
+  0.007397311 : Setting termcap entry ìX to [<*m
+  0.007399877 : Setting termcap entry ýb to [I
+  0.007402613 : Setting termcap entry ýc to [O
+  0.007424982 : Got size with TIOCGWINSZ: 211 x 51
+  0.007591001 : Got size with TIOCGWINSZ: 211 x 51
+  0.429188243 : Setting termcap entry ýb to [I
+  0.429222913 : Setting termcap entry ýc to [O
+  0.458805444 : raw GUI output: "|0;34R|0;149V|1035H|C|34;0M|2130h"c.v" [New]                                                                                                                                           "
+  0.505614296 : raw GUI output: "|34;1M~/.vim/templates/kd/kdheader.txt""
+  0.507133763 : raw GUI output: "12L,635B"
+  0.508888686 : raw GUI output: "|34;18Mverilog/vtemplate.v"       "
+  0.509457666 : raw GUI output: "94L,3265B"
+  0.509904375 : ERROR silent: E486: Pattern not found: $MACRO
+  0.531066324 : ERROR silent: E488: Trailing characters: ////////////////////////////////////////////////////////////////////////////////\>/: match HighCW /\<////////////////////////////////////////////////////////////////////////////////\>/
+  0.589179529 : setting timeout timer to 2 sec 0 nsec
+  0.593526281 : raw GUI output: "|2130H|0;0M|2138h1   |2138H|2159h///////////////////////////////////////////////////////////////////////////////|2159H|2160h/|2160H|2135h                                                                  |2135H|1;0M|2089h  1 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  2 |2089H|2090h//              Copyright 2024 by KD. All right reserved.|2090H|2;83M|2154h |2154H
+|2089h  3 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  4 |2089H|2090h// Component: c|2090H|4;83M|2154h |2154H
+|2089h  5 |2089H|2090h// Date     : $Date: $|2090H|5;83M|2154h |2154H
+|2089h  6 |2089H|2090h// Version  : $Revision: $|2090H|6;83M|2154h |2154H
+|2089h  7 |2089H|2090h// Author   : SAZ|2090H|7;83M|2154h |2154H
+|2089h  8 |2089H|2090h// Summary  : |2090H|2087hTODO|2087H|2090h: write summary|2090H|8;83M|2154h |2154H
+|2089h  9 |2089H|2090h//            report bugs to simone.azzalin@kdpof.com|2090H|9;83M|2154h |2154H
+|2089h 10 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 11 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 12 |2089H|12;83M|2154h |2154H
+|2089h 13 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 14 |2089H|2090h// Headers include|2090H|14;83M|2154h |2154H
+|2089h 15 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 16 |2089H|16;83M|2154h |2154H
+|2089h 17 |2089H|2133hmodule|2133Hc|17;83M|2154h |2154H
+|2089h 18 |2089H|2132h(|2132H|18;83M|2154h |2154H
+|2089h 19 |2089H|2090h// System interface|2090H"
+  0.595851017 : raw GUI output: "|19;83M|2154h |2154H
+|2089h 20 |2089H|2090h// -- inputs|2090H|20;83M|2154h |2154H
+|2089h 21 |2089HSClk|2132h,|2132H|21;83M|2154h |2154H
+|2089h 22 |2089HReset_n|2132h,|2132H|22;83M|2154h |2154H
+|2089h 23 |2089HSyncRst|2132h,|2132H|23;83M|2154h |2154H
+|2089h 24 |2089H|2090h// Data interface|2090H|24;83M|2154h |2154H
+|2089h 25 |2089H|2090h// --inputs|2090H|25;83M|2154h |2154H
+|2089h 26 |2089HIDataVal|2132h,|2132H|26;83M|2154h |2154H
+|2089h 27 |2089HIData|2132h,|2132H|27;83M|2154h |2154H
+|2089h 28 |2089H|2090h// --outputs|2090H|28;83M|2154h |2154H
+|2089h 29 |2089HODataVal|2132h,|2132H|29;83M|2154h |2154H
+|2089h 30 |2089HOData|30;83M|2154h |2154H
+|2089h 31 |2089H|2132h);|2132H|31;83M|2154h |2154H
+|2089h 32 |2089H|32;83M|2154h |2154H
+|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                                                                                               -- NORMAL -- "
+  0.598256245 : raw GUI output: "|2143H|C"
+  0.632192969 : setting timeout timer to 2 sec 0 nsec
+  0.635301235 : raw GUI output: "|0;0M|2138h1   |2138H|2159h///////////////////////////////////////////////////////////////////////////////|2159H|2160h/|2160H|2135h                                                                  |2135H|1;0M|2089h  1 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  2 |2089H|2090h//              Copyright 2024 by KD. All right reserved.|2090H|2;83M|2154h |2154H
+|2089h  3 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  4 |2089H|2090h// Component: c|2090H|4;83M|2154h |2154H
+|2089h  5 |2089H|2090h// Date     : $Date: $|2090H|5;83M|2154h |2154H
+|2089h  6 |2089H|2090h// Version  : $Revision: $|2090H|6;83M|2154h |2154H
+|2089h  7 |2089H|2090h// Author   : SAZ|2090H|7;83M|2154h |2154H
+|2089h  8 |2089H|2090h// Summary  : |2090H|2087hTODO|2087H|2090h: write summary|2090H|8;83M|2154h |2154H
+|2089h  9 |2089H|2090h//            report bugs to simone.azzalin@kdpof.com|2090H|9;83M|2154h |2154H
+|2089h 10 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 11 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 12 |2089H|12;83M|2154h |2154H
+|2089h 13 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 14 |2089H|2090h// Headers include|2090H|14;83M|2154h |2154H
+|2089h 15 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 16 |2089H|16;83M|2154h |2154H
+|2089h 17 |2089H|2133hmodule|2133Hc|17;83M|2154h |2154H
+|2089h 18 |2089H|2132h(|2132H|18;83M|2154h |2154H
+|2089h 19 |2089H|2090h// System interface|2090H|19;83M"
+  0.635581064 : raw GUI output: "|2154h |2154H
+|2089h 20 |2089H|2090h// -- inputs|2090H|20;83M|2154h "
+  0.636692350 : raw GUI output: "|2154H
+|2089h 21 |2089HSClk|2132h,|2132H|21;83M|2154h |2154H
+|2089h 22 |2089HReset_n|2132h,|2132H|22;83M|2154h |2154H
+|2089h 23 |2089HSyncRst|2132h,|2132H|23;83M|2154h |2154H
+|2089h 24 |2089H|2090h// Data interface|2090H|24;83M|2154h |2154H
+|2089h 25 |2089H|2090h// --inputs|2090H|25;83M|2154h |2154H
+|2089h 26 |2089HIDataVal|2132h,|2132H|26;83M|2154h |2154H
+|2089h 27 |2089HIData|2132h,|2132H|27;83M|2154h |2154H
+|2089h 28 |2089H|2090h// --outputs|2090H|28;83M|2154h |2154H
+|2089h 29 |2089HODataVal|2132h,|2132H|29;83M|2154h |2154H
+|2089h 30 |2089HOData|30;83M|2154h |2154H
+|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                                                                                               -- NORMAL -- "
+  0.643256786 : raw GUI output: "|0;4M"
+  0.646265939 : raw GUI output: "|2143H|C"
+  0.656785389 : setting timeout timer to 2 sec 0 nsec
+  0.660126354 : raw GUI output: "|0;0M|2138h1   |2138H|2159h///////////////////////////////////////////////////////////////////////////////|2159H|2160h/|2160H|2135h                                                                  |2135H|1;0M|2089h  1 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  2 |2089H|2090h//              Copyright 2024 by KD. All right reserved.|2090H|2;83M|2154h |2154H
+|2089h  3 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h  4 |2089H|2090h// Component: c|2090H|4;83M|2154h |2154H
+|2089h  5 |2089H|2090h// Date     : $Date: $|2090H|5;83M|2154h |2154H
+|2089h  6 |2089H|2090h// Version  : $Revision: $|2090H|6;83M|2154h |2154H
+|2089h  7 |2089H|2090h// Author   : SAZ|2090H|7;83M|2154h |2154H
+|2089h  8 |2089H|2090h// Summary  : |2090H|2087hTODO|2087H|2090h: write summary|2090H|8;83M|2154h |2154H
+|2089h  9 |2089H|2090h//            report bugs to simone.azzalin@kdpof.com|2090H|9;83M|2154h |2154H
+|2089h 10 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 11 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 12 |2089H|12;83M|2154h |2154H
+|2089h 13 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 14 |2089H|2090h// Headers include|2090H|14;83M|2154h |2154H
+|2089h 15 |2089H|2090h///////////////////////////////////////////////////////////////////////////////|2090H|2160h/|2160H
+|2089h 16 |2089H|16;83M|2154h |2154H
+|2089h 17 |2089H|2133hmodule|2133Hc|17;83M|2154h |2154H
+|2089h 18 |2089H|2132h(|2132H|18;83M|2154h |2154H
+|2089h 19 |2089H|2090h// System interface|2090H|19;83M"
+  0.661647968 : raw GUI output: "|2154h |2154H
+|2089h 20 |2089H|2090h// -- inputs|2090H|20;83M|2154h |2154H
+|2089h 21 |2089HSClk|2132h,|2132H|21;83M|2154h |2154H
+|2089h 22 |2089HReset_n|2132h,|2132H|22;83M|2154h |2154H
+|2089h 23 |2089HSyncRst|2132h,|2132H|23;83M|2154h |2154H
+|2089h 24 |2089H|2090h// Data interface|2090H|24;83M|2154h |2154H
+|2089h 25 |2089H|2090h// --inputs|2090H|25;83M|2154h |2154H
+|2089h 26 |2089HIDataVal|2132h,|2132H|26;83M|2154h |2154H
+|2089h 27 |2089HIData|2132h,|2132H|27;83M|2154h |2154H
+|2089h 28 |2089H|2090h// --outputs|2090H|28;83M|2154h |2154H
+|2089h 29 |2089HODataVal|2132h,|2132H|29;83M|2154h |2154H
+|2089h 30 |2089HOData|30;83M|2154h |2154H
+|2089h 31 |2089H|2132h);|2132H|31;83M|2154h |2154H
+|2089h 32 |2089H|32;83M|2154h |2154H
+|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                                                                                               -- NORMAL -- "
+  0.663670276 : raw GUI output: "|0;4M|s"
+  0.665005501 : setting timeout timer to 2 sec 0 nsec
+  0.667758933 : raw GUI output: "|33;140MINSERT "
+  0.669015356 : looking for messages on channels
+  2.459441592 : raw GUI output: "|s|2143H|34;139M:|0;4M"
+  2.459789797 : raw GUI output: "|34;0M|2130h                                                                                                                                                      |34;0M:"
+  2.460207782 : SafeState: Start triggering
+  2.462003764 : raw GUI output: "|s|2130H|33;136M|2143h- COMMAND |34;1M"
+  2.462450108 : looking for messages on channels
+  2.462461615 : SafeState: back to waiting, triggering SafeStateAgain
+  2.811352335 : SafeState: reset: key typed
+  2.811390749 : SafeState: Start triggering
+  2.811512112 : raw GUI output: "|2143H|2130he"
+  2.812650132 : looking for messages on channels
+  2.812661835 : SafeState: back to waiting, triggering SafeStateAgain
+  3.043174624 : SafeState: reset: key typed
+  3.043217807 : SafeState: Start triggering
+  3.043235155 : raw GUI output: ""
+  3.044528754 : looking for messages on channels
+  3.044540711 : SafeState: back to waiting, triggering SafeStateAgain
+  3.906889332 : SafeState: reset: key typed
+  3.907341402 : SafeState: Start triggering
+  3.907476639 : raw GUI output: "v"
+  3.908551892 : looking for messages on channels
+  3.908565514 : SafeState: back to waiting, triggering SafeStateAgain
+  4.035733619 : SafeState: reset: key typed
+  4.035772203 : SafeState: Start triggering
+  4.035900305 : raw GUI output: "i"
+  4.036920591 : looking for messages on channels
+  4.036931166 : SafeState: back to waiting, triggering SafeStateAgain
+  4.075213489 : SafeState: reset: key typed
+  4.075249634 : SafeState: Start triggering
+  4.075380961 : raw GUI output: "m"
+  4.076362664 : looking for messages on channels
+  4.076372399 : SafeState: back to waiting, triggering SafeStateAgain
+  4.426232218 : SafeState: reset: key typed
+  4.426267646 : SafeState: Start triggering
+  4.426396422 : raw GUI output: "."
+  4.427550737 : looking for messages on channels
+  4.427563646 : SafeState: back to waiting, triggering SafeStateAgain
+  4.530104349 : SafeState: reset: key typed
+  4.530313834 : raw GUI output: "..."
+  4.532510297 : SafeState: Start triggering
+  4.532850544 : raw GUI output: "log "
+  4.533768563 : looking for messages on channels
+  4.533780236 : SafeState: back to waiting, triggering SafeStateAgain
+  4.995121133 : SafeState: reset: key typed
+  4.995150525 : raw GUI output: ""
+  5.001549141 : raw GUI output: "|s"vim.log"  "
+  5.002654255 : raw GUI output: "[converted]244L,16795B"
+  5.012907423 : SafeState: Start triggering
+  5.015049128 : raw GUI output: "|2130H|34;139M          |s|s|s"
+  5.017072303 : setting timeout timer to 2 sec 0 nsec
+  5.020469398 : raw GUI output: "|0;3M|2138h |2138H|2135h==== start log session Sat Nov 02 16:38:01 2024 ====                           |2135H|2163h |2163H|2135h                                                                  |2135H|1;3M|2089h |2089H  0.006859974 : Setting termcap entry ku to |2119h^[|2119HO*A                              |2154h |2154H|2;3M|2089h |2089H  0.006878542 : Adding termcap entry kd to |2119h^[|2119HO*B          |3;3M|2089h |2089H  0.006882475 : Adding termcap entry kr to |2119h^[|2119HO*C                               |2154h |2154H|4;3M|2089h |2089H  0.006885250 : Addingtermcapentryklto|2119h^[|2119HO*D|5;3M|2089h |2089H  0.006888043 : SettingtermcapentryÃ½Ato|2119h^[|2119H[@;*A|6;3M|2089h |2089H  0.006890790 : Setting termcapentryÃ½Bto|2119h^[|2119H[@;*B|7;3M|2089h |2089H  0.006893431 : SettingtermcapentryÃ½Dto|2119h^[|2119H[@;*C|8;3M|2089h |2089H  0.006896144 : Adding termcap entryÃ½Cto|2119h^[|2119H[@;*D|9;3M|2089h |2089H  0.006898914 : Adding termcap entry Ã½9 to |2119h^[|2119HO*P      |10;3M|2089h |2089H  0.006901556 : Adding termcap entry Ã½: to |2119h^[|2119HO*Q                               |2154h |2154H|11;3M|2089h |2089H  0.006904166 : Adding termcap entry Ã½; to |2119h^[|2119HO*R                               |2154h |2154H|12;6M0.006906628:AddingtermcapentryÃ½<to|2119h^[|2119HO*S|13;3M|2089h |2089H  0.006909193 : Adding termcap entry k1 to |2119h^[|2119H[11;*~                            |2154h |2154H|14;3M|2089h |2089H  0.006911879 : Addingtermcapentryk2to|2119h^[|2119H[12;*~|15;3M|2089h |2089H  0.006914499 : Adding termcap entry k3 to |2119h^[|2119H[13;*~                            |2154h |2154H|16;6M0.006917005:Addingtermcapentryk4to|2119h^[|2119H[14;*~|17;3M|2089h |2089H  0.006919616:Addingtermcapentryk5to|2119h^[|2119H[15;*~|18;3M|2089h |2089H  0.006922125:Addingtermcapentryk6to"
+  5.022042979 : raw GUI output: "|2119h^[|2119H[17;*~|19;6M0.006924706 : Adding termcapentryk7to|2119h^[|2119H[18;*~|20;6M0.006927282 : Addingtermcapentryk8to|2119h^[|2119H[19;*~|21;6M0.006930363:Addingtermcapentryk9to|2119h^[|2119H[20;*~"
+  5.024593954 : raw GUI output: "|22;6M0.006933223:Addingtermcapentryk;to|2119h^[|2119H[21;*~|23;6M0.006935931:AddingtermcapentryF1to|2119h^[|2119H[23;*~|24;6M0.006938500 : AddingtermcapentryF2to|2119h^[|2119H[24;*~|25;6M0.006941235 :AddingtermcapentrykBto|2119h^[|2119H[Z|26;6M0.006943843:Addingtermcapentry%1to|2119h^[|2119H[28;*~|27;6M0.006946589:Addingtermcapentry&8to|2119h^[|2119H[26;*~|28;6M0.006949223 : AddingtermcapentrykIto|2119h^[|2119H[2;*~|29;6M0.006951916:Addingtermcapentrykhto|2119h^[|2119H[@;*H|30;6M0.006954567:AddingtermcapentryK1to|2119h^[|2119H[1;*~|31;3M|2089h |2089H  0.006957334:AddingtermcapentryÃ½?to|2119h^[|2119HO*H|32;6M0.006959956:AddingtermcapentryÃ½@to|2119h^[|2119H[7;*~
+|2143hvim.log   [b#4w#1 t#1] [l#1|244 c#1]      |33;136M -- INSERT "
+  5.025581136 : raw GUI output: "|0;4M"
+  5.027554865 : looking for messages on channels
+  5.027568521 : SafeState: back to waiting, triggering SafeStateAgain
+  7.971589325 : SafeState: reset: ins_typebuf()
+  7.972815170 : SafeState: Start triggering
+  7.973438385 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  7.973454631 : setting timeout timer to 2 sec 0 nsec
+  7.976684204 : raw GUI output: "|0;34R|0;149V|0;0M|2138h10  |2138H|2135h  0.006898914 : Adding termcap entry Ã½9 to |2135H|2164h^[|2164H|2135hO*P                               |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.006962606:Addingtermcapentry@7to|2119h^[|2119H[@;*F|24;83M|2154h |2154H
+|2089h 25 |2089H0.006965185:AddingtermcapentryK4to|2119h^[|2119H[4;*~|25;83M|2154h |2154H
+|2089h 26 |2089H0.006967859:AddingtermcapentryÃ½=to|2119h^[|2119HO*F|26;83M|2154h |2154H
+|2089h 27 |2089H0.006970608:AddingtermcapentryÃ½>to|2119h^[|2119H[8;*~|27;83M|2154h |2154H
+|2089h 28 |2089H0.006973513:AddingtermcapentrykPto|2119h^[|2119H[5;*~|28;83M|2154h |2154H
+|2089h 29 |2089H0.006976175:AddingtermcapentrykNto|2119h^[|2119H[6;*~|29;83M|2154h |2154H
+|2089h 30 |2089H0.006978885:AddingtermcapentryK6to|2119h^[|2119HO*k|30;83M|2154h |2154H
+|2089h 31 |2089H0.006981573:AddingtermcapentryK7to|2119h^[|2119HO*m|31;83M|2154h |2154H
+|2089h 32 |2089H0.006985218:AddingtermcapentryK8to|2119h^[|2119HO*o|32;83M|2154h |2154H|33;28M|2143h0|244 c#1]|2143H
+|2130h                                   |34;139M          "
+  7.977055602 : looking for messages on channels
+  7.977067394 : SafeState: back to waiting, triggering SafeStateAgain
+  8.001917346 : SafeState: reset: ins_typebuf()
+  8.003013563 : SafeState: Start triggering
+  8.003316830 : raw GUI output: "|0;32R|2130H|0;0M|9D"
+  8.003339555 : setting timeout timer to 2 sec 0 nsec
+  8.005894868 : raw GUI output: "|0;34R|0;149V|0;0M|2138h19  |2138H|2135h  0.006922125 : Adding termcap entry k6 to |2135H|2164h^[|2164H|2135h[17;*~                            |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.006988070:AddingtermcapentryK9to|2119h^[|2119HO*j|24;83M|2154h |2154H
+|2089h 25 |2089H0.006990731:AddingtermcapentryKAto|2119h^[|2119HO*M|25;83M|2154h |2154H
+|2089h 26 |2089H0.006993452:AddingtermcapentryKBto|2119h^[|2119HO*n|26;83M|2154h |2154H
+|2089h 27 |2089H0.006996054:AddingtermcapentryKCto|2119h^[|2119HO*p|27;83M|2154h |2154H
+|2089h 28 |2089H0.006998693:AddingtermcapentryKDto|2119h^[|2119HO*q|28;83M|2154h |2154H
+|2089h 29 |2089H0.007001318:AddingtermcapentryKEto|2119h^[|2119HO*r|29;83M|2154h |2154H
+|2089h 30 |2089H0.007003919:AddingtermcapentryKFto|2119h^[|2119HO*s|30;83M|2154h |2154H
+|2089h 31 |2089H0.007006530:AddingtermcapentryKGto|2119h^[|2119HO*t|31;83M|2154h |2154H
+|2089h 32 |2089H0.007009109:AddingtermcapentryKHto|2119h^[|2119HO*u|32;83M|2154h |2154H|33;28M|2143h9|"
+  8.006534400 : looking for messages on channels
+  8.006560209 : SafeState: back to waiting, triggering SafeStateAgain
+  8.029094549 : SafeState: reset: ins_typebuf()
+  8.030557838 : SafeState: Start triggering
+  8.031042462 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.031057047 : setting timeout timer to 2 sec 0 nsec
+  8.033665757 : raw GUI output: "|0;34R|0;149V|0;0M|2138h28  |2138H|2135h  0.006946589 : Adding termcap entry &8 to |2135H|2164h^[|2164H|2135h[26;*~                            |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.007011686:AddingtermcapentryKIto|2119h^[|2119HO*v|24;83M|2154h |2154H
+|2089h 25 |2089H0.007014284:AddingtermcapentryKJto|2119h^[|2119HO*w|25;83M|2154h |2154H
+|2089h 26 |2089H0.007016877:AddingtermcapentryKKto|2119h^[|2119HO*x|26;83M|2154h |2154H
+|2089h 27 |2089H0.007019616:AddingtermcapentryKLto|2119h^[|2119HO*y|27;83M|2154h |2154H
+|2089h 28 |2089H0.007022351:SettingtermcapentryÃ½Pto|2119h^[|2119H[3;*~|28;83M|2154h |2154H
+|2089h 29 |2089H0.007025013:AddingtermcapentryPSto|2119h^[|2119H[200~|29;83M|2154h |2154H
+|2089h 30 |2089H0.007027580:AddingtermcapentryPEto|2119h^[|2119H[201~|30;83M|2154h |2154H
+|2089h 31 |2089H0.007230827:Addingtermcapentry#2to|2119h^[|2119H[1;2H|31;83M|2154h |2154H
+|2089h 32 |2089H0.007237441:Addingtermcapentry#4to|2119h^[|2119H[1;2D|32;83M|2154h |2154H|33;27M|2143h28|"
+  8.034042475 : looking for messages on channels
+  8.034053262 : SafeState: back to waiting, triggering SafeStateAgain
+  8.058634084 : SafeState: reset: ins_typebuf()
+  8.059504319 : SafeState: Start triggering
+  8.059979014 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.059993367 : setting timeout timer to 2 sec 0 nsec
+  8.074702907 : raw GUI output: "|0;34R|0;149V|0;0M|2138h37  |2138H|2135h  0.006970608 : Adding termcap entry Ã½> to |2135H|2164h^[|2164H|2135h[8;*~                             |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.007240834:Addingtermcapentry%ito|2119h^[|2119H[1;2C|24;83M|2154h |2154H
+|2089h 25 |2089H0.007244280:Addingtermcapentry*7to|2119h^[|2119H[1;2F|25;83M|2154h |2154H
+|2089h 26 |2089H0.007248488:Addingtermcapentrykbto|2119h^?|2119H|26;83M|2154h |2154H
+|2089h 27 |2089H0.007251701:AddingtermcapentrykDto|2119h^[|2119H[3~|27;83M|2154h |2154H
+|2089h 28 |2089H0.007354395:Termcapentrykbwas:|2119h^?|2119H|28;83M|2154h |2154H
+|2089h 29 |2089H0.007359486:Settingtermcapentrykbto|2119h^?|2119H|29;83M|2154h |2154H
+|2089h 30 |2089H0.007373028:AddingtermcapentryÃ»Xto|2119h^[|2119H[M|30;83M|2154h |2154H
+|2089h 31 |2089H0.007377032:AddingtermcapentryÃ­|31;42MXto|2119h^[|2119H[<*M|31;83M|2154h |2154H
+|2089h 32 |2089H0.007380075:AddingtermcapentryÃ¬|32;42MXto|2119h^[|2119H[<*m|32;83M|2154h |2154H|33;27M|2143h37|"
+  8.076807302 : looking for messages on channels
+  8.076838287 : SafeState: back to waiting, triggering SafeStateAgain
+  8.417065635 : SafeState: reset: ins_typebuf()
+  8.417986687 : SafeState: Start triggering
+  8.418499314 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.418515095 : setting timeout timer to 2 sec 0 nsec
+  8.420870588 : raw GUI output: "|0;34R|0;149V|0;0M|2138h46  |2138H|2135h  0.006996054 : Adding termcap entry KC to |2135H|2164h^[|2164H|2135hO*p                               |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.007384437:TermcapentryÃ»Xwas:|2119h^[|2119H[M|24;83M|2154h |2154H
+|2089h 25 |2089H0.007387088:SettingtermcapentryÃ»Xto|2119h^[|2119H[M|25;83M|2154h |2154H
+|2089h 26 |2089H0.007389975:TermcapentryÃ­|26;35MXwas:|2119h^[|2119H[<*M|26;83M|2154h |2154H
+|2089h 27 |2089H0.007392381:SettingtermcapentryÃ­|27;43MXto|2119h^[|2119H[<*M|27;83M|2154h |2154H
+|2089h 28 |2089H0.007395022:TermcapentryÃ¬|28;35MXwas:|2119h^[|2119H[<*m|28;83M|2154h |2154H
+|2089h 29 |2089H0.007397311:SettingtermcapentryÃ¬|29;43MXto|2119h^[|2119H[<*m|29;83M|2154h |2154H
+|2089h 30 |2089H0.007399877:SettingtermcapentryÃ½bto|2119h^[|2119H[I|30;83M|2154h |2154H
+|2089h 31 |2089H0.007402613:SettingtermcapentryÃ½cto|2119h^[|2119H[O|31;83M|2154h |2154H
+|2089h 32 |2089H0.007424982:GotsizewithTIOCGWINSZ:211x51|32;83M|2154h |2154H|33;27M|2143h46|"
+  8.421121956 : looking for messages on channels
+  8.421132966 : SafeState: back to waiting, triggering SafeStateAgain
+  8.474095335 : SafeState: reset: ins_typebuf()
+  8.474955673 : SafeState: Start triggering
+  8.475392002 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.475403799 : setting timeout timer to 2 sec 0 nsec
+  8.477461632 : raw GUI output: "|0;34R|0;149V|0;0M|2138h55  |2138H|2135h  0.007019616 : Adding termcap entry KL to |2135H|2164h^[|2164H|2135hO*y                               |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H0.007591001:GotsizewithTIOCGWINSZ:211x51|24;83M|2154h |2154H
+|2089h 25 |2089H0.429188243:SettingtermcapentryÃ½bto|2119h^[|2119H[I|25;83M|2154h |2154H
+|2089h 26 |2089H0.429222913:SettingtermcapentryÃ½cto|2119h^[|2119H[O|26;83M|2154h |2154H
+|2089h 27 |2089H0.458805444:rawGUIoutput:"|2119h^[|2119H|0;34R|2119h^[|2119H|0;149V|2119h^[|2119H|1035H|2119h^[|2119H|C|2119h^[|2119H|34;0M|2119h^[|2119H|2130h"|2154hc|2154H.v"[New]
+|2089h    |2089H|28;86M"
+|2089h 28 |2089H0.505614296:rawGUIoutput:"|2119h^[|2119H|34;1M~/.vim/templates/kd/kdheader.txt""|2154h |2154H
+|2089h 29 |2089H0.507133763:rawGUIoutput:"|2119h^L|2119H12L,|2119h^L|2119H635B"|30;83M|2154h |2154H
+|2089h 30 |2089H0.508888686:rawGUIoutput:"|2119h^[|2119H|34;18Mverilog/vtemplate.v"|31;73M"|31;83M|2154h |2154H
+|2089h 31 |2089H0.509457666:rawGUIoutput:"|2119h^H^H^H^H^H^H|2119H94L,|2119h^L|2119H3265B"|32;83M|2154h |2154H|33;27M|2143h55|"
+  8.477724283 : looking for messages on channels
+  8.477732679 : SafeState: back to waiting, triggering SafeStateAgain
+  8.786331536 : SafeState: reset: ins_typebuf()
+  8.787546827 : SafeState: Start triggering
+  8.788104087 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.788121844 : setting timeout timer to 2 sec 0 nsec
+  8.791385635 : raw GUI output: "|0;34R|0;149V|0;0M|2138h64  |2138H|2135h  0.007251701 : Adding termcap entry kD to |2135H|2164h^[|2164H|2135h[3~                               |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+
+19
+0
+21
+22
+ 23 |2089H0.509904375:ERRORsilent:E486:Patternnotfound:$MACRO|24;83M|2154h |2154H
+|2089h 24 |2089H0.531066324:ERRORsilent:E488:Trailingcharacters://////////////////////|2154h/|2154H/////////////////////////////////////////////////////////\>/:matc|26;0M|2089h    |2089HhHighCW/\<////////////////////////////////////////////////////////////////////////////////\>/
+|2089h 25 |2089H0.589179529:settingtimeouttimerto2sec0nsec|27;83M|2154h |2154H
+|2089h 26 |2089H0.593526281:rawGUIoutput:"|2119h^[|2119H|2130H|2119h^[|2119H|0;0M|2119h^[|2119H|2138h1|2119h^[|2119H|2138H|2119h^[|2119H|2159h///|2154h/|2154H//////////////////////////////////////////////////////////////////|29;0M|2089h    |2089H/////////|2119h^[|2119H|2159H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^[|2119H|2135h|29;112M|2119h^[|2119H|2135H|2119h^[|2119H|1;0M|2119h^[|2119H|2089h1|2119h^[|2119H|2089H|2119h^[|2119H||30;0M|2089h    |2089H2090h///////////////////////////////////////////////////////////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H|2089h2|2119h^[|2119H|2089H|2119h^[|2119H|2090h//|31;48MCopyright2024byKD.Allrightres|2154he|2154Hrved.|2119h^[|2119H|2090H|2119h^[|2119H|2;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H|2089h3|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////"
+  8.791820871 : raw GUI output: "|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H|33;27M|2143h64|"
+  8.792088474 : looking for messages on channels
+  8.792100683 : SafeState: back to waiting, triggering SafeStateAgain
+  8.833216062 : SafeState: reset: ins_typebuf()
+  8.834324989 : SafeState: Start triggering
+  8.834807101 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  8.834822071 : setting timeout timer to 2 sec 0 nsec
+  8.837953533 : raw GUI output: "|0;34R|0;149V|0;0M|2138h73  |2138H|2135h  0.007392381 : Setting termcap entry Ã­|0;43MX to |2135H|2164h^[|2164H|2135h[<*M                             |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+
+0
+11
+12
+13
+14
+15
+
+16
+17|22;1M18
+19
+ 20 |2089H|2119h^[|2119H|2089h4|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Component:c|2119h^[|2119H|2090H|2119h^[|2119H|4;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 21 |2089H|2119h^[|2119H|2089h5|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Date:$Date:$|2119h^[|2119H|2090H|2119h^[|2119H|5;83M|2119h^[|2119H|2154h|2119h^[|2119H|2|2154h1|2154H54H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H|2089h6|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Version:$Revision:$|2119h^[|2119H|2090H|2119h^[|2119H|6;83M|2119h^[|2119H|2154h|2165h^|2165H|2119h[|2119H|2154H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H|2089h7|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Author:SAZ|2119h^[|2119H|2090H|2119h^[|2119H|7;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^|2119H|2165hM|2165H
+|2089h 24 |2089H|2119h^[|2119H|2089h8|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Summary:|2119h^[|2119H|2090H|2119h^[|2119H|2087hTODO|2119h^[|2119H|2087H|2119h^[|2119H|2090h:|2154h |2154Hwritesummary|2119h^[|2119H|2090H|2119h^[|2119H|8;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 25 |2089H|2119h^[|2119H|2089h9|2119h^[|2119H|2089H|2119h^[|2119H|2090h//|29;46Mreportbugstosimone.azzalin@kdpof.c|2154ho|2154Hm|2119h^[|2119H|2090H|2119h^[|2119H|9;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 26 |2089H|2119h^[|2119H|2089h10|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////"
+  8.839161773 : raw GUI output: "|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H|2089h11|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H|2089h12|2119h^[|2119H|2089H|2119h^[|2119H|12;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|32;83M|2154h "
+  8.839536828 : raw GUI output: "|2154H|33;27M|2143h73|"
+  8.839765514 : looking for messages on channels
+  8.839775430 : SafeState: back to waiting, triggering SafeStateAgain
+  9.633292705 : SafeState: reset: ins_typebuf()
+  9.634522351 : SafeState: Start triggering
+  9.635059405 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+  9.635075384 : setting timeout timer to 2 sec 0 nsec
+  9.638244853 : raw GUI output: "|0;34R|0;149V|0;0M|2138h82  |2138H|2135h  0.458805444 : raw GUI output: "|2135H|2164h^[|2164H|2135h|0;34R|2135H|2164h^[|2164H|2135h|0;149V|2135H|2164h^[|2164H|2135h|1035H|2135H|2164h^[|2164H|2135h|C|2135H|2164h^[|2164H|2135h|34;0M|2135H|2164h^[|2164H|2135h|2130h"|2135H|2163hc|2163H|2135h.v" [New]                                                         |2135H|1;0M|2138h    |2138H|2135h                                                                                  "                                                               |2135H|2;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 7
+ 8|13;1M 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+ 20 |2089H|2119h^[|2119H|2089h13|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 21 |2089H|2119h^[|2119H|2089h14|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Headersinclude|2119h^[|2119H|2090H|2119h^[|2119H|14;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H|2089h15|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H|2089h16|2119h^[|2119H|2089H|2119h^[|2119H|16;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|27;83M|2154h |2154H
+|2089h 24 |2089H|2119h^[|2119H|2089h17|2119h^[|2119H|2089H|2119h^[|2119H|2133hmodule|2119h^[|2119H|2133H|2119h^L|2119Hc|2119h^[|2119H|17;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 25 |2089H|2119h^[|2119H|2089h18|2119h^[|2119H|2089H|2119h^[|2119H|2132h(|2119h^[|2119H|2132H"
+  9.639566182 : raw GUI output: "|2119h^[|2119H|18;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|29;83M|2154h |2154H
+|2089h 26 |2089H|2119h^[|2119H|2089h19|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Systeminterface|2119h^[|2119H|2090H"|30;83M|2154h |2154H
+|2089h 27 |2089H0.595851017:rawGUIoutput:"|2119h^[|2119H|19;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|31;83M|2154h |2154H
+|2089h 28 |2089H|2119h^[|2119H|2089h20|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|20;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H|33;27M|2143h82|"
+  9.639827330 : looking for messages on channels
+  9.639838253 : SafeState: back to waiting, triggering SafeStateAgain
+  9.737388007 : SafeState: reset: ins_typebuf()
+  9.738514202 : SafeState: Start triggering
+  9.739034346 : raw GUI output: "|0;32R|2143H|0;0M|13D"
+  9.739048845 : setting timeout timer to 2 sec 0 nsec
+  9.742749861 : raw GUI output: "|0;34R|0;149V|0;0M|2138h91  |2138H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right res|2135H|2163he|2163H|2135hrved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                          |2135H|1;1M|2089h 1|2089H|1;7M|2124h2089h|2124H|2;1M|2089h 2|2089H|2;7M|2124h2089h|2124H|3;1M|2089h 3|2089H|3;7M|2124h2089h|2124H|4;1M|2089h 4|2089H|4;7M|2124h2089h|2124H|5;1M|2089h 5|2089H|5;7M|2124h2089h|2124H|6;1M|2089h 6|2089H|6;7M|2124h2089h|2124H|7;1M|2089h 7|2089H|7;7M|2124h2089h|2124H|8;1M|2089h 8|2089H|8;7M|2124h2089h|2124H|9;1M|2089h 9|2089H|9;7M|2124h2089h|2124H|10;2M|2089h0|2089H|10;7M|2124h2089h|2124H|11;1M|2089h11|2089H|11;7M|2124h2089h|2124H|12;1M|2089h12|2089H|12;7M|2124h2089h|2124H|13;1M|2089h13|2089H|13;7M|2124h2089h|2124H|14;1M|2089h14|2089H|14;7M|2124h2089h|2124H|15;1M|2089h15|2089H|15;7M|2124h2089h|2124H|16;1M|2089h16|2089H|16;7M|2124h2089h|2124H|17;1M|2089h17|2089H|17;7M|2124h2089h|2124H|18;1M|2089h18
+19|2089H|19;7M|2124h2089h|2124H
+|2089h 20 |2089H|2119h^[|2119H||2124h2089h|2124H21|2119h^[|2119H|2089H|2119h^L^L^L|2119HSClk|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|21;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 21 |2089H|2119h^[|2119H||2124h2089h|2124H22|2119h^[|2119H|2089H|2119h^L^L^L|2119HReset_n|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|22;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 22 |2089H|2119h^[|2119H||2124h2089h|2124H23|2119h^[|2119H|2089H|2119h^L^L^L|2119HSyncRst|2119h^[|2119H|2132h,"
+  9.745993783 : raw GUI output: "|2119h^[|2119H|2132H|2119h^[|2119H|23;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 23 |2089H|2119h^[|2119H||2124h2089h|2124H24|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Datainterface|2119h^[|2119H|2090H|2119h^[|2119H|24;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154h||2154H2154H|2119h^M|2119H
+|2089h 24 |2089H|2119h^[|2119H||2124h2089h|2124H25|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|25;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2165h^|2165H|2119hM|2119H
+|2089h 25 |2089H|2119h^[|2119H||2124h2089h|2124H26|2119h^[|2119H|2089H|2119h^L^L^L|2119HIDataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|26;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 26 |2089H|2119h^[|2119H||2124h2089h|2124H27|2119h^[|2119H|2089H|2119h^L^L^L|2119HIData|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|27;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 27 |2089H|2119h^[|2119H||2124h2089h|2124H28|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--outputs|2119h^[|2119H|2090H|2119h^[|2119H|28;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H29|2119h^[|2119H|2089H|2119h^L^L^L|2119HODataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|29;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H30|2119h^[|2119H|2089H|2119h^L^L^L|2119HOData|2119h^[|2119H|30;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|29;83M|2154h |2154H
+|2089h 30 |2089H|2119h^[|2119H||2124h2089h|2124H31|2119h^[|2119H|2089H|2119h^[|2119H|2132h);|2119h^[|2119H|2132H|2119h^[|2119H|31;83M"
+  9.746886874 : raw GUI output: "|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|30;83M|2154h |2154H
+|2089h 31 |2089H|2119h^[|2119H||2124h2089h|2124H32|2119h^[|2119H|2089H|2119h^[|2119H|32;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|31;83M|2154h |2154H
+|2089h 32 |2089H|2119h^[|2119H|2143hc.v[verilog][b#1w#1t#1][l#1|107c#1]|32;83M|2154h |2154H|32;149M-|32;0M|2119h@@@                                                                                                                                                   |2119H|33;27M|2143h91|"
+  9.747114755 : looking for messages on channels
+  9.747124754 : SafeState: back to waiting, triggering SafeStateAgain
+ 11.203492689 : SafeState: reset: key typed
+ 11.204227755 : setting timeout timer to 0 sec 60000000 nsec
+ 11.205549274 : setting timeout timer to 0 sec 60000000 nsec
+ 11.206369109 : SafeState: Start triggering
+ 11.210142586 : setting timeout timer to 2 sec 0 nsec
+ 11.213130972 : raw GUI output: "|2143H|2138h |2138H|2135h{|2135H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right re|2135H|2163hs|2163H|2135herved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                         |2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   |2119H|33;9M|2143h[+] [b#4 w#1 t#1] [l#91|244 c#2]"
+ 11.213506793 : raw GUI output: "|0;5M"
+ 11.215089171 : looking for messages on channels
+ 11.215102989 : SafeState: back to waiting, triggering SafeStateAgain
+ 11.395588407 : SafeState: reset: key typed
+ 11.396225767 : setting timeout timer to 0 sec 60000000 nsec
+ 11.397442386 : setting timeout timer to 0 sec 60000000 nsec
+ 11.398195621 : SafeState: Start triggering
+ 11.398390378 : setting timeout timer to 2 sec 0 nsec
+ 11.399629372 : raw GUI output: "|2143H|2135h{{|2135H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right r|2135H|2163he|2163H|2135hserved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                        "
+ 11.401488698 : raw GUI output: "|2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   "
+ 11.401768767 : raw GUI output: "|2119H|33;39M|2143h3]|0;6M"
+ 11.402811040 : looking for messages on channels
+ 11.402832156 : SafeState: back to waiting, triggering SafeStateAgain
+ 11.571527436 : SafeState: reset: key typed
+ 11.572159244 : setting timeout timer to 0 sec 60000000 nsec
+ 11.573596796 : setting timeout timer to 0 sec 60000000 nsec
+ 11.574570357 : SafeState: Start triggering
+ 11.574789839 : setting timeout timer to 2 sec 0 nsec
+ 11.576205404 : raw GUI output: "|2143H|2135h{{|2135H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right |2135H|2163hr|2163H|2135heserved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                       "
+ 11.578257011 : raw GUI output: "|2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   "
+ 11.578570230 : raw GUI output: "|2119H|33;39M|2143h4]|0;7M"
+ 11.579463263 : looking for messages on channels
+ 11.579474039 : SafeState: back to waiting, triggering SafeStateAgain
+ 11.899534811 : SafeState: reset: key typed
+ 11.900231612 : setting timeout timer to 0 sec 60000000 nsec
+ 11.901478522 : setting timeout timer to 0 sec 60000000 nsec
+ 11.902210741 : SafeState: Start triggering
+ 11.902423874 : setting timeout timer to 2 sec 0 nsec
+ 11.903592014 : raw GUI output: "|2143H|2135h{|2135H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right r|2135H|2163he|2163H|2135hserved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                        "
+ 11.905745182 : raw GUI output: "|2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   "
+ 11.906051222 : raw GUI output: "|2119H|33;39M|2143h3]|0;6M"
+ 11.907019301 : looking for messages on channels
+ 11.907032102 : SafeState: back to waiting, triggering SafeStateAgain
+ 12.059637179 : SafeState: reset: key typed
+ 12.060481298 : setting timeout timer to 0 sec 60000000 nsec
+ 12.062042026 : setting timeout timer to 0 sec 60000000 nsec
+ 12.062760704 : SafeState: Start triggering
+ 12.062952023 : setting timeout timer to 2 sec 0 nsec
+ 12.064133829 : raw GUI output: "|2143H|2135h{|2135H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right re|2135H|2163hs|2163H|2135herved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                         "
+ 12.066679563 : raw GUI output: "|2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   "
+ 12.067011642 : raw GUI output: "|2119H|33;39M|2143h2]|0;5M"
+ 12.067984516 : looking for messages on channels
+ 12.067999249 : SafeState: back to waiting, triggering SafeStateAgain
+ 12.211126107 : SafeState: reset: key typed
+ 12.211806407 : SafeState: Start triggering
+ 12.212029939 : setting timeout timer to 2 sec 0 nsec
+ 12.213321659 : raw GUI output: "|2143H|2138h |2138H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right res|2135H|2163he|2163H|2135hrved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                          "
+ 12.215761002 : raw GUI output: "|2135H|32;0M|2089h 32 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|32;0M|2119h@@@                                                                                                                                                   "
+ 12.216087850 : raw GUI output: "|2119H|33;39M|2143h1]|0;4M"
+ 12.218723319 : looking for messages on channels
+ 12.218738748 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.090661032 : SafeState: reset: ins_typebuf()
+ 13.091693566 : SafeState: Start triggering
+ 13.092160937 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.092175367 : setting timeout timer to 2 sec 0 nsec
+ 13.096161165 : raw GUI output: "|0;34R|0;149V|0;0M|2138h100 |2138H|2164h^[|2164H|2135h||0;12M 11 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h///////////////////////////////////////////////////|2135H|2163h/|2163H|2135h///////////////////////////|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2160h/|2135H|2164h^[|2164H|2135h|2160H|2135H|2164h^M|2164H|2135h            |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+ 23 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|24;0M|2089h    |2089H-NORMAL--"
+|2089h 24 |2089H0.598256245:rawGUIoutput:"|2119h^[|2119H|2143H|2119h^[|2119H|C"|25;83M|2154h |2154H
+|2089h 25 |2089H0.632192969:settingtimeouttimerto2sec0nsec|26;83M|2154h |2154H
+|2089h 26 |2089H0.635301235:rawGUIoutput:"|2119h^[|2119H|0;0M|2119h^[|2119H|2138h1|2119h^[|2119H|2138H|2119h^[|2119H|2159h///////////|2154h/|2154H//////////////////////////////////////////////////////////////////|28;0M|2089h    |2089H/|2119h^[|2119H|2159H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^[|2119H|2135h|28;104M|2119h^[|2119H|2135H|2119h^[|2119H|1;0M|2119h^[|2119H||2124h2089h|2124H1|2119h^[|2119H|2089H|2119h^[|2119H|2090h///|29;0M|2089h    |2089H////////////////////////////////////////////////////////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H||2124h2089h|2124H2|2119h^[|2119H|2089H|2119h^[|2119H|2090h//|30;48MCopyright2024byKD.Allrightres|2154he|2154Hrved.|2119h^[|2119H|2090H|2119h^[|2119H|2;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H3"
+ 13.097015121 : raw GUI output: "|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H4|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Component:c|2119h^[|2119H|2090H|2119h^[|2119H|4;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H|33;30M|2143h100|244 c#1]"
+ 13.097305392 : looking for messages on channels
+ 13.097314606 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.122137175 : SafeState: reset: ins_typebuf()
+ 13.123104206 : SafeState: Start triggering
+ 13.123372828 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.123386107 : setting timeout timer to 2 sec 0 nsec
+ 13.126719908 : raw GUI output: "|0;34R|0;149V|0;0M|2138h109 |2138H|2135h  0.595851017 : raw GUI output: "|2135H|2164h^[|2164H|2135h|19;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                  |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1|2089H|1;6M|2089h |2;1M|2089h 2|2089H|2;6M|2089h |3;1M|2089h 3|2089H|3;6M|2089h |4;1M|2089h 4|2089H|4;6M|2089h |5;1M|2089h 5|2089H|5;6M|2089h |6;1M|2089h 6|2089H|6;6M|2089h |7;1M|2089h 7|2089H|7;6M|2089h |8;1M|2089h 8|2089H|8;6M|2089h |9;1M|2089h 9|2089H|9;6M|2089h |10;2M|2089h0|2089H|10;6M|2089h |11;1M|2089h11|2089H|11;6M|2089h |12;1M|2089h12|2089H|12;6M|2089h |13;1M|2089h13|2089H|13;6M|2089h |14;1M|2089h14
+
+15
+16
+17|2089H|19;121M|2089h |21;1M|2089h18|2089H|21;6M|2089h |22;1M|2089h19|2089H|22;6M|2089h |23;2M|2089h0|2089H|23;6M|2089h 
+|2089h 21 |2089H|2119h^[|2119H|2089h5|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Date:$Date:$|2119h^[|2119H|2090H|2119h^[|2119H|5;83M|2119h^[|2119H|2154h|2119h^[|2119H|2|2154h1|2154H54H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H|2089h6|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Version:$Revision:$|2119h^[|2119H|2090H|2119h^[|2119H|6;83M|2119h^[|2119H|2154h|2165h^|2165H|2119h[|2119H|2154H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H|2089h7|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Author:SAZ|2119h^[|2119H|2090H|2119h^[|2119H|7;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^|2119H|2165hM|2165H
+|2089h 24 |2089H|2119h^[|2119H|2089h8|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Summary:|2119h^[|2119H|2090H|2119h^[|2119H|2087hTODO|2119h^[|2119H|2087H|2119h^[|2119H|2090h:|2154h |2154Hwritesummary|2119h^[|2119H|2090H|2119h^[|2119H|8;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H"
+ 13.128672064 : raw GUI output: "|2119h^M|2119H
+|2089h 25 |2089H|2119h^[|2119H|2089h9|2119h^[|2119H|2089H|2119h^[|2119H|2090h//|28;46Mreportbugstosimone.azzalin@kdpof.c|2154ho|2154Hm|2119h^[|2119H|2090H|2119h^[|2119H|9;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 26 |2089H|2119h^[|2119H|2089h10|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H|2089h11|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H|2089h12|2119h^[|2119H|2089H|2119h^[|2119H|12;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|31;83M|2154h |2154H
+|2089h 29 |2089H|2119h^[|2119H|2089h13|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M"
+ 13.129091185 : raw GUI output: "|2119H|33;32M|2143h9|"
+ 13.129386788 : looking for messages on channels
+ 13.129407631 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.147498322 : SafeState: reset: ins_typebuf()
+ 13.148505446 : SafeState: Start triggering
+ 13.148842121 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.148855963 : setting timeout timer to 2 sec 0 nsec
+ 13.152054365 : raw GUI output: "|0;34R|0;149V|0;0M|2138h118 |2138H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h 28 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^L^L^L^[|2164H|2135h|2090h// --outputs|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|28;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154|2135H|2163hH|2163H|2164h^M|2164H|2135h                                                                |2135H|1;1M|2089h 1|2089H|1;7M|2124h2089h|2124H|2;1M|2089h 2|2089H|2;7M|2124h2089h|2124H|3;1M|2089h 3|2089H|3;7M|2124h2089h|2124H|4;1M|2089h 4|2089H|4;7M|2124h2089h|2124H|5;1M|2089h 5
+
+ 6
+ 7
+ 8|2089H|10;122M|2124h2089h|2124H|12;1M|2089h 9|2089H|12;7M|2124h2089h|2124H|13;2M|2089h0|2089H|13;7M|2124h2089h|2124H|14;1M|2089h11|2089H|14;7M|2124h2089h|2124H|15;1M|2089h12|2089H|15;7M|2124h2089h|2124H|16;1M|2089h13|2089H|16;7M|2124h2089h|2124H|17;1M|2089h14|2089H|17;7M|2124h2089h|2124H|18;1M|2089h15|2089H|18;7M|2124h2089h|2124H|19;1M|2089h16|2089H|19;7M|2124h2089h|2124H|20;1M|2089h17|2089H|20;7M|2124h2089h|2124H|21;1M|2089h18|2089H|21;7M|2124h2089h|2124H|22;1M|2089h19|2089H|22;7M|2124h2089h|2124H|23;2M|2089h0|2089H|23;7M|2124h2089h|2124H
+|2089h 21 |2089H|2119h^[|2119H||2124h2089h|2124H14|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Headersinclude|2119h^[|2119H|2090H|2119h^[|2119H|14;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H||2124h2089h|2124H15|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H||2124h2089h|2124H16|2119h^[|2119H|2089H|2119h^[|2119H|16;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M"
+ 13.153662410 : raw GUI output: "|2119H|26;83M|2154h |2154H
+|2089h 24 |2089H|2119h^[|2119H||2124h2089h|2124H17|2119h^[|2119H|2089H|2119h^[|2119H|2133hmodule|2119h^[|2119H|2133H|2119h^L|2119Hc|2119h^[|2119H|17;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 25 |2089H|2119h^[|2119H||2124h2089h|2124H18|2119h^[|2119H|2089H|2119h^[|2119H|2132h(|2119h^[|2119H|2132H|2119h^[|2119H|18;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|28;83M|2154h |2154H
+|2089h 26 |2089H|2119h^[|2119H||2124h2089h|2124H19|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Systeminterface|2119h^[|2119H|2090H|2119h^[|2119H|19;83M"|29;83M|2154h |2154H
+|2089h 27 |2089H0.635581064:rawGUIoutput:"|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|30;83M|2154h |2154H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H20|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|20;83M|2119h^[|2119H|2154h"|2154h |2154H
+|2089h 29 |2089H0.636692350:rawGUIoutput:"|2119h^[|2119H|2154H|2119h^M|2119H|32;83M|2154h |2154H|33;31M|2143h18|"
+ 13.153944159 : looking for messages on channels
+ 13.153953526 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.179656062 : SafeState: reset: ins_typebuf()
+ 13.180478079 : SafeState: Start triggering
+ 13.180910378 : raw GUI output: "|0;32R|2143H|0;0M|12D"
+ 13.180923697 : setting timeout timer to 2 sec 0 nsec
+ 13.184543269 : raw GUI output: "|0;34R|0;149V|0;0M|2138h127 |2138H|2164h^[|2164H|2135h||0;12M  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right res|2135H|2163he|2163H|2135hrved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                          |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+ 21 |2089H|2119h^[|2119H||2124h2089h|2124H21|2119h^[|2119H|2089H|2119h^L^L^L|2119HSClk|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|21;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 22 |2089H|2119h^[|2119H||2124h2089h|2124H22|2119h^[|2119H|2089H|2119h^L^L^L|2119HReset_n|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|22;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 23 |2089H|2119h^[|2119H||2124h2089h|2124H23|2119h^[|2119H|2089H|2119h^L^L^L|2119HSyncRst|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|23;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 24 |2089H|2119h^[|2119H||2124h2089h|2124H24|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Datainterface|2119h^[|2119H|2090H|2119h^[|2119H|24;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154h||2154H2154H|2119h^M|2119H
+|2089h 25 |2089H|2119h^[|2119H||2124h2089h|2124H25|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|25;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2165h^|2165H|2119hM|2119H
+|2089h 26 |2089H|2119h^[|2119H||2124h2089h|2124H26|2119h^[|2119H|2089H|2119h^L^L^L|2119HIDataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|26;83M"
+ 13.186532542 : raw GUI output: "|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 27 |2089H|2119h^[|2119H||2124h2089h|2124H27|2119h^[|2119H|2089H|2119h^L^L^L|2119HIData|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|27;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H28|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--outputs|2119h^[|2119H|2090H|2119h^[|2119H|28;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H29|2119h^[|2119H|2089H|2119h^L^L^L|2119HODataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|29;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 30 |2089H|2119h^[|2119H||2124h2089h|2124H30|2119h^[|2119H|2089H|2119h^L^L^L|2119HOData|2119h^[|2119H|30;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|30;83M|2154h |2154H
+|2089h 31 |2089H|2119h^[|2119H|2143hc.v[verilog][b#1w#1t#1][l#1|107c#1]|31;83M|2154h |2154H|31;149M-|32;0M|2089h    |2089H-NORMAL--"|33;31M|2143h27|"
+ 13.187020474 : looking for messages on channels
+ 13.187031745 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.218926824 : SafeState: reset: ins_typebuf()
+ 13.219775770 : SafeState: Start triggering
+ 13.220184611 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.220195799 : setting timeout timer to 2 sec 0 nsec
+ 13.223439137 : raw GUI output: "|0;34R|0;149V|0;0M|2138h136 |2138H|2164h^[|2164H|2135h||0;12M 11 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h///////////////////////////////////////////////////|2135H|2163h/|2163H|2135h///////////////////////////|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2160h/|2135H|2164h^[|2164H|2135h|2160H|2135H|2164h^M|2164H|2135h            |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+
+ 23 |2089H0.643256786:rawGUIoutput:"|2119h^[|2119H|0;4M"|24;83M|2154h |2154H
+|2089h 24 |2089H0.646265939:rawGUIoutput:"|2119h^[|2119H|2143H|2119h^[|2119H|C"|25;83M|2154h |2154H
+|2089h 25 |2089H0.656785389:settingtimeouttimerto2sec0nsec|26;83M|2154h |2154H
+|2089h 26 |2089H0.660126354:rawGUIoutput:"|2119h^[|2119H|0;0M|2119h^[|2119H|2138h1|2119h^[|2119H|2138H|2119h^[|2119H|2159h///////////|2154h/|2154H//////////////////////////////////////////////////////////////////|28;0M|2089h    |2089H/|2119h^[|2119H|2159H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^[|2119H|2135h|28;104M|2119h^[|2119H|2135H|2119h^[|2119H|1;0M|2119h^[|2119H||2124h2089h|2124H1|2119h^[|2119H|2089H|2119h^[|2119H|2090h///|29;0M|2089h    |2089H////////////////////////////////////////////////////////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H||2124h2089h|2124H2|2119h^[|2119H|2089H|2119h^[|2119H|2090h//|30;48MCopyright2024byKD.Allrightres|2154he|2154Hrved.|2119h^[|2119H|2090H|2119h^[|2119H|2;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H3|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////"
+ 13.224048015 : raw GUI output: "|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H4|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Component:c|2119h^[|2119H|2090H|2119h^[|2119H|4;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H|33;31M|2143h36|"
+ 13.224238909 : looking for messages on channels
+ 13.224246955 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.473302157 : SafeState: reset: ins_typebuf()
+ 13.474289956 : SafeState: Start triggering
+ 13.474758709 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.474772941 : setting timeout timer to 2 sec 0 nsec
+ 13.477815170 : raw GUI output: "|0;34R|0;149V|0;0M|2138h145 |2138H|2135h  0.635581064 : raw GUI output: "|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                           |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1|2089H|1;6M|2089h |2;1M|2089h 2
+ 3|2089H|3;6M|2089h |4;1M|2089h 4|2089H|4;6M|2089h |5;1M|2089h 5|2089H|5;6M|2089h |6;1M|2089h 6|2089H|6;6M|2089h |7;1M|2089h 7|2089H|7;6M|2089h |8;1M|2089h 8|2089H|8;6M|2089h |9;1M|2089h 9|2089H|9;6M|2089h |10;2M|2089h0|2089H|10;6M|2089h |11;1M|2089h11|2089H|11;6M|2089h |12;1M|2089h12|2089H|12;6M|2089h |13;1M|2089h13
+
+14
+15
+16
+17|2089H|19;121M|2089h |21;1M|2089h18|2089H|21;6M|2089h |22;1M|2089h19|2089H|22;6M|2089h |23;2M|2089h0|2089H|23;6M|2089h 
+|2089h 21 |2089H|2119h^[|2119H|2089h5|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Date:$Date:$|2119h^[|2119H|2090H|2119h^[|2119H|5;83M|2119h^[|2119H|2154h|2119h^[|2119H|2|2154h1|2154H54H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H|2089h6|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Version:$Revision:$|2119h^[|2119H|2090H|2119h^[|2119H|6;83M|2119h^[|2119H|2154h|2165h^|2165H|2119h[|2119H|2154H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H|2089h7|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Author:SAZ|2119h^[|2119H|2090H|2119h^[|2119H|7;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^|2119H|2165hM|2165H
+|2089h 24 |2089H|2119h^[|2119H|2089h8|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Summary:|2119h^[|2119H|2090H|2119h^[|2119H|2087hTODO|2119h^[|2119H|2087H|2119h^[|2119H|2090h:|2154h |2154Hwritesummary|2119h^[|2119H|2090H|2119h^[|2119H|8;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 25 |2089H|2119h^[|2119H|2089h9|2119h^[|2119H|2089H|2119h^["
+ 13.479361176 : raw GUI output: "|2119H|2090h//|28;46Mreportbugstosimone.azzalin@kdpof.c|2154ho|2154Hm|2119h^[|2119H|2090H|2119h^[|2119H|9;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H
+|2089h 26 |2089H|2119h^[|2119H|2089h10|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 27 |2089H|2119h^[|2119H|2089h11|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H|2089h12|2119h^[|2119H|2089H|2119h^[|2119H|12;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|31;83M|2154h |2154H
+|2089h 29 |2089H|2119h^[|2119H|2089h13|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H|33;31M|2143h45|"
+ 13.479589592 : looking for messages on channels
+ 13.479599394 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.498529752 : SafeState: reset: ins_typebuf()
+ 13.499453585 : SafeState: Start triggering
+ 13.499717825 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 13.499731259 : setting timeout timer to 2 sec 0 nsec
+ 13.503071895 : raw GUI output: "|0;34R|0;149V|0;0M|2138h154 |2138H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h 27 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^L^L^L|2164H|2135hIData|2135H|2164h^[|2164H|2135h|2132h,|2135H|2164h^[|2164H|2135h|2132H|2135H|2164h^[|2164H|2135h|27;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h   |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1|2089H|1;7M|2124h2089h|2124H|2;1M|2089h 2|2089H|2;7M|2124h2089h|2124H|3;1M|2089h 3|2089H|3;7M|2124h2089h|2124H|4;1M|2089h 4
+
+ 5
+ 6
+ 7
+ 8|2089H|10;122M|2124h2089h|2124H|12;1M|2089h 9|2089H|12;7M|2124h2089h|2124H|13;2M|2089h0|2089H|13;7M|2124h2089h|2124H|14;1M|2089h11|2089H|14;7M|2124h2089h|2124H|15;1M|2089h12|2089H|15;7M|2124h2089h|2124H|16;1M|2089h13|2089H|16;7M|2124h2089h|2124H|17;1M|2089h14|2089H|17;7M|2124h2089h|2124H|18;1M|2089h15|2089H|18;7M|2124h2089h|2124H|19;1M|2089h16|2089H|19;7M|2124h2089h|2124H|20;1M|2089h17|2089H|20;7M|2124h2089h|2124H|21;1M|2089h18|2089H|21;7M|2124h2089h|2124H|22;1M|2089h19|2089H|22;7M|2124h2089h|2124H|23;2M|2089h0|2089H|23;7M|2124h2089h|2124H
+|2089h 21 |2089H|2119h^[|2119H||2124h2089h|2124H14|2119h^[|2119H|2089H|2119h^[|2119H|2090h//Headersinclude|2119h^[|2119H|2090H|2119h^[|2119H|14;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 22 |2089H|2119h^[|2119H||2124h2089h|2124H15|2119h^[|2119H|2089H|2119h^[|2119H|2090h///////////////////////////////////////////////////|2154h/|2154H///////////////////////////|2119h^[|2119H|2090H|2119h^[|2119H|2160h/|2119h^[|2119H|2160H|2119h^M|2119H
+|2089h 23 |2089H|2119h^[|2119H||2124h2089h|2124H16|2119h^[|2119H|2089H|2119h^[|2119H|16;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M"
+ 13.505152406 : raw GUI output: "|2119H|26;83M|2154h |2154H
+|2089h 24 |2089H|2119h^[|2119H||2124h2089h|2124H17|2119h^[|2119H|2089H|2119h^[|2119H|2133hmodule|2119h^[|2119H|2133H|2119h^L|2119Hc|2119h^[|2119H|17;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 25 |2089H|2119h^[|2119H||2124h2089h|2124H18|2119h^[|2119H|2089H|2119h^[|2119H|2132h(|2119h^[|2119H|2132H|2119h^[|2119H|18;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|28;83M|2154h |2154H
+|2089h 26 |2089H|2119h^[|2119H||2124h2089h|2124H19|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Systeminterface|2119h^[|2119H|2090H|2119h^[|2119H|19;83M"|29;83M|2154h |2154H
+|2089h 27 |2089H0.661647968:rawGUIoutput:"|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|30;83M|2154h |2154H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H20|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|20;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H21|2119h^[|2119H|2089H|2119h^L^L^L|2119HSClk|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|21;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H|33;31M|2143h54|"
+ 13.505377484 : looking for messages on channels
+ 13.505386553 : SafeState: back to waiting, triggering SafeStateAgain
+ 13.543534001 : SafeState: reset: ins_typebuf()
+ 13.544422949 : SafeState: Start triggering
+ 13.544841328 : raw GUI output: "|0;32R|2143H|0;0M|12D"
+ 13.544853022 : setting timeout timer to 2 sec 0 nsec
+ 13.548422865 : raw GUI output: "|0;34R|0;149V|0;0M|2138h163 |2138H|2164h^[|2164H|2135h||0;12M  2 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h//              Copyright 2024 by KD. All right res|2135H|2163he|2163H|2135hrved.|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                          |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+ 21 |2089H|2119h^[|2119H||2124h2089h|2124H22|2119h^[|2119H|2089H|2119h^L^L^L|2119HReset_n|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|22;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 22 |2089H|2119h^[|2119H||2124h2089h|2124H23|2119h^[|2119H|2089H|2119h^L^L^L|2119HSyncRst|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|23;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 23 |2089H|2119h^[|2119H||2124h2089h|2124H24|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//Datainterface|2119h^[|2119H|2090H|2119h^[|2119H|24;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154h||2154H2154H|2119h^M|2119H
+|2089h 24 |2089H|2119h^[|2119H||2124h2089h|2124H25|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--inputs|2119h^[|2119H|2090H|2119h^[|2119H|25;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2165h^|2165H|2119hM|2119H
+|2089h 25 |2089H|2119h^[|2119H||2124h2089h|2124H26|2119h^[|2119H|2089H|2119h^L^L^L|2119HIDataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|26;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 26 |2089H|2119h^[|2119H||2124h2089h|2124H27|2119h^[|2119H|2089H|2119h^L^L^L|2119HIData|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|27;83M|2119h^["
+ 13.550225126 : raw GUI output: "|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 27 |2089H|2119h^[|2119H||2124h2089h|2124H28|2119h^[|2119H|2089H|2119h^L^L^L^[|2119H|2090h//--outputs|2119h^[|2119H|2090H|2119h^[|2119H|28;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154|2154hH|2154H|2119h^M|2119H
+|2089h 28 |2089H|2119h^[|2119H||2124h2089h|2124H29|2119h^[|2119H|2089H|2119h^L^L^L|2119HODataVal|2119h^[|2119H|2132h,|2119h^[|2119H|2132H|2119h^[|2119H|29;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|2154h |2154H
+|2089h 29 |2089H|2119h^[|2119H||2124h2089h|2124H30|2119h^[|2119H|2089H|2119h^L^L^L|2119HOData|2119h^[|2119H|30;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|29;83M|2154h |2154H
+|2089h 30 |2089H|2119h^[|2119H||2124h2089h|2124H31|2119h^[|2119H|2089H|2119h^[|2119H|2132h);|2119h^[|2119H|2132H|2119h^[|2119H|31;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|30;83M|2154h |2154H
+|2089h 31 |2089H|2119h^[|2119H||2124h2089h|2124H32|2119h^[|2119H|2089H|2119h^[|2119H|32;83M|2119h^[|2119H|2154h|2119h^[|2119H|2154H|2119h^M|2119H|31;83M|2154h |2154H
+|2089h 32 |2089H|2119h^[|2119H|2143hc.v[verilog][b#1w#1t#1][l#1|107c#1]|32;83M|2154h |2154H|32;149M-|32;0M|2119h@@@                                                                                                                                                   |2119H|33;31M|2143h63|"
+ 13.550432368 : looking for messages on channels
+ 13.550440286 : SafeState: back to waiting, triggering SafeStateAgain
+ 14.506306148 : SafeState: reset: ins_typebuf()
+ 14.507680519 : SafeState: Start triggering
+ 14.508193759 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 14.508208271 : setting timeout timer to 2 sec 0 nsec
+ 14.511669331 : raw GUI output: "|0;34R|0;149V|0;0M|2138h172 |2138H|2164h^[|2164H|2135h||0;12M 11 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^[|2164H|2135h|2090h///////////////////////////////////////////////////|2135H|2163h/|2163H|2135h///////////////////////////|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|2160h/|2135H|2164h^[|2164H|2135h|2160H|2135H|2164h^M|2164H|2135h            |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+ 23 |2089H|2119h^[|2119H|2143hc.v [verilog]  [b#1 w#1 t#1] [l#1|107 c#1]                             |2154h |2154H                                                                 -|24;0M|2089h    |2089H-NORMAL--"
+|2089h 24 |2089H0.663670276:rawGUIoutput:"|2119h^[|2119H|0;4M|2119h^[|2119H|s"|25;83M|2154h |2154H
+|2089h 25 |2089H0.665005501:settingtimeouttimerto2sec0nsec|26;83M|2154h |2154H
+|2089h 26 |2089H0.667758933:rawGUIoutput:"|2119h^[|2119H|33;140MINSERT"|27;83M|2154h |2154H
+|2089h 27 |2089H0.669015356:lookingformessagesonchannels|28;83M|2154h |2154H
+|2089h 28 |2089H2.459441592:rawGUIoutput:"|2119h^[|2119H|s|2119h^[|2119H|2143H|2119h^[|2119H|34;139M:|2119h^[|2119H|0;4M"|29;83M|2154h |2154H
+|2089h 29 |2089H2.459789797:rawGUIoutput:"|2119h^[|2119H|34;0M|2119h^[|2119H|2130h|30;83M|2154h |2154H
+|2089h    |2089H|31;57M|2119h^[|2119H|34;0M:"
+|2089h 30 |2089H2.460207782:SafeState:Starttriggering|32;83M|2154h |2154H|33;31M|2143h72|"
+ 14.511968468 : looking for messages on channels
+ 14.511979147 : SafeState: back to waiting, triggering SafeStateAgain
+ 14.549113723 : SafeState: reset: ins_typebuf()
+ 14.550098736 : SafeState: Start triggering
+ 14.550594284 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 14.550609421 : setting timeout timer to 2 sec 0 nsec
+ 14.553401335 : raw GUI output: "|0;34R|0;149V|0;0M|2138h181 |2138H|2135h  0.661647968 : raw GUI output: "|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154H|2135H|2164h^M|2164H|2135h                           |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1|2089H|1;6M|2089h |2;1M|2089h 2|2089H|2;6M|2089h |3;1M|2089h 3|2089H|3;6M|2089h |4;1M|2089h 4|2089H|4;6M|2089h |5;1M|2089h 5|2089H|5;6M|2089h |6;1M|2089h 6|2089H|6;6M|2089h |7;1M|2089h 7|2089H|7;6M|2089h |8;1M|2089h 8|2089H|8;6M|2089h |9;1M|2089h 9|2089H|9;6M|2089h |10;2M|2089h0|2089H|10;6M|2089h |11;1M|2089h11|2089H|11;6M|2089h |12;1M|2089h12|2089H|12;6M|2089h |13;1M|2089h13|2089H|13;6M|2089h |14;1M|2089h14
+
+15
+16
+17
+18
+19
+0
+
+21
+ 22 |2089H2.462003764:rawGUIoutput:"|2119h^[|2119H|s|2119h^[|2119H|2130H|2119h^[|2119H|33;136M|2119h^[|2119H|2143h-|2119h^L|2119HCOMMAND|2119h^[|2119H|3|2154h4|2154H;1M"
+|2089h 23 |2089H2.462450108:lookingformessagesonchannels|25;83M|2154h |2154H
+|2089h 24 |2089H2.462461615:SafeState:backtowaiting,triggeringSafeStateAgain|26;83M|2154h |2154H
+|2089h 25 |2089H2.811352335:SafeState:reset:keytyped|27;83M|2154h |2154H
+|2089h 26 |2089H2.811390749:SafeState:Starttriggering|28;83M|2154h |2154H
+|2089h 27 |2089H2.811512112:rawGUIoutput:"|2119h^[|2119H|2143H|2119h^[|2119H|2130he"|29;83M|2154h |2154H
+|2089h 28 |2089H2.812650132:lookingformessagesonchannels|30;83M|2154h |2154H
+|2089h 29 |2089H2.812661835:SafeState:backtowaiting,triggeringSafeStateAgain|31;83M|2154h |2154H
+|2089h 30 |2089H3.043174624:SafeState:reset:keytyped|32;83M|2154h |2154H|33;31M|2143h81|"
+ 14.553686934 : looking for messages on channels
+ 14.553696266 : SafeState: back to waiting, triggering SafeStateAgain
+ 14.585351211 : SafeState: reset: ins_typebuf()
+ 14.586230057 : SafeState: Start triggering
+ 14.586694653 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 14.586707215 : setting timeout timer to 2 sec 0 nsec
+ 14.589456265 : raw GUI output: "|0;34R|0;149V|0;0M|2138h190 |2138H|2164h^[|2164H|2135h||2135H|2124h2089h|2124H|2135h 28 |2135H|2164h^[|2164H|2135h|2089H|2135H|2164h^L^L^L^[|2164H|2135h|2090h// --outputs|2135H|2164h^[|2164H|2135h|2090H|2135H|2164h^[|2164H|2135h|28;83M|2135H|2164h^[|2164H|2135h|2154h |2135H|2164h^[|2164H|2135h|2154|2135H|2163hH|2163H|2164h^M|2164H|2135h                                                                |2135H|1;1M|2089h 1|2089H|1;7M|2124h2089h|2124H|2;1M|2089h 2|2089H|2;7M|2124h2089h|2124H|3;1M|2089h 3|2089H|3;7M|2124h2089h|2124H|4;1M|2089h 4|2089H|4;7M|2124h2089h|2124H|5;1M|2089h 5
+
+ 6
+ 7
+ 8
+ 9
+0
+11
+
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+ 22 |2089H3.043217807:SafeState:Starttriggering|24;83M|2154h |2154H
+|2089h 23 |2089H3.043235155:rawGUIoutput:"|2119h^L|2119H"|25;83M|2154h |2154H
+|2089h 24 |2089H3.044528754:lookingformessagesonchannels|26;83M|2154h |2154H
+|2089h 25 |2089H3.044540711:SafeState:backtowaiting,triggeringSafeStateAgain|27;83M|2154h |2154H
+|2089h 26 |2089H3.906889332:SafeState:reset:keytyped|28;83M|2154h |2154H
+|2089h 27 |2089H3.907341402:SafeState:Starttriggering|29;83M|2154h |2154H
+|2089h 28 |2089H3.907476639:rawGUIoutput:"v"|30;83M|2154h |2154H
+|2089h 29 |2089H3.908551892:lookingformessagesonchannels|31;83M|2154h |2154H
+|2089h 30 |2089H3.908565514:SafeState:backtowaiting,triggeringSafeStateAgain|32;83M|2154h |2154H|33;31M|2143h90|"
+ 14.589777445 : looking for messages on channels
+ 14.589786318 : SafeState: back to waiting, triggering SafeStateAgain
+ 14.890250458 : SafeState: reset: ins_typebuf()
+ 14.891215802 : SafeState: Start triggering
+ 14.891720358 : raw GUI output: "|0;32R|2143H|0;0M|10D"
+ 14.891734754 : setting timeout timer to 2 sec 0 nsec
+ 14.894239938 : raw GUI output: "|0;34R|0;149V|0;0M|2138h199 |2138H|2135h  0.669015356 : looking for messages on channels                               |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+ 22 |2089H4.035733619:SafeState:reset:keytyped|23;83M|2154h |2154H
+|2089h 23 |2089H4.035772203:SafeState:Starttriggering|24;83M|2154h |2154H
+|2089h 24 |2089H4.035900305:rawGUIoutput:"i"|25;83M|2154h |2154H
+|2089h 25 |2089H4.036920591:lookingformessagesonchannels|26;83M|2154h |2154H
+|2089h 26 |2089H4.036931166:SafeState:backtowaiting,triggeringSafeStateAgain|27;83M|2154h |2154H
+|2089h 27 |2089H4.075213489:SafeState:reset:keytyped|28;83M|2154h |2154H
+|2089h 28 |2089H4.075249634:SafeState:Starttriggering|29;83M|2154h |2154H
+|2089h 29 |2089H4.075380961:rawGUIoutput:"m"|30;83M|2154h |2154H
+|2089h 30 |2089H4.076362664:lookingformessagesonchannels|31;83M|2154h |2154H
+|2089h 31 |2089H4.076372399:SafeState:backtowaiting,triggeringSafeStateAgain|32;83M|2154h |2154H|33;32M|2143h9|"
+ 14.894585182 : looking for messages on channels
+ 14.894595379 : SafeState: back to waiting, triggering SafeStateAgain
+ 14.937678497 : SafeState: reset: ins_typebuf()
+ 14.938590122 : SafeState: Start triggering
+ 14.939064926 : raw GUI output: "|0;32R|2143H|0;0M|10D"
+ 14.939077872 : setting timeout timer to 2 sec 0 nsec
+ 14.940913805 : raw GUI output: "|0;34R|0;149V|0;0M|2138h208 |2138H|2135h  2.811512112 : raw GUI output: "|2135H|2164h^[|2164H|2135h|2143H|2135H|2164h^[|2164H|2135h|2130he"                            |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+ 23 |2089H4.426232218:SafeState:reset:keytyped|23;83M|2154h |2154H
+|2089h 24 |2089H4.426267646:SafeState:Starttriggering|24;83M|2154h |2154H
+|2089h 25 |2089H4.426396422:rawGUIoutput:"."|25;83M|2154h |2154H
+|2089h 26 |2089H4.427550737:lookingformessagesonchannels|26;83M|2154h |2154H
+|2089h 27 |2089H4.427563646:SafeState:backtowaiting,triggeringSafeStateAgain|27;83M|2154h |2154H
+|2089h 28 |2089H4.530104349:SafeState:reset:keytyped|28;83M|2154h |2154H
+|2089h 29 |2089H4.530313834:rawGUIoutput:"..."|29;83M|2154h |2154H
+|2089h 30 |2089H4.532510297:SafeState:Starttriggering|30;83M|2154h |2154H
+|2089h 31 |2089H4.532850544:rawGUIoutput:"|2119h^H^H^H|2119Hlog|2119h^H|2119H"|31;83M|2154h |2154H
+|2089h 32 |2089H4.533768563:lookingformessagesonchannels|32;83M|2154h |2154H|33;30M|2143h208|"
+ 14.941547281 : looking for messages on channels
+ 14.941557142 : SafeState: back to waiting, triggering SafeStateAgain
+ 15.650613907 : SafeState: reset: ins_typebuf()
+ 15.651671345 : SafeState: Start triggering
+ 15.652220914 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 15.652240441 : setting timeout timer to 2 sec 0 nsec
+ 15.654419354 : raw GUI output: "|0;34R|0;149V|0;0M|2138h217 |2138H|2135h  3.907341402 : SafeState: Start triggering                                    |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+21
+22
+23
+ 24 |2089H4.533780236:SafeState:backtowaiting,triggeringSafeStateAgain|24;83M|2154h |2154H
+|2089h 25 |2089H4.995121133:SafeState:reset:keytyped|25;83M|2154h |2154H
+|2089h 26 |2089H4.995150525:rawGUIoutput:"|2119h^M|2119H"|26;83M|2154h |2154H
+|2089h 27 |2089H5.001549141:rawGUIoutput:"|2119h^[|2119H|s"vim.log""|27;83M|2154h |2154H
+|2119h~                                                                                                                                                     |29;0M~                                                                                                                                                     |30;0M~                                                                                                                                                     |31;0M~                                                                                                                                                     |32;0M~                                                                                                                                                     |2119H|33;31M|2143h17|"
+ 15.654764517 : looking for messages on channels
+ 15.654776128 : SafeState: back to waiting, triggering SafeStateAgain
+ 15.681722650 : SafeState: reset: ins_typebuf()
+ 15.682690885 : SafeState: Start triggering
+ 15.682980368 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 15.682995651 : setting timeout timer to 2 sec 0 nsec
+ 15.684633768 : raw GUI output: "|0;34R|0;149V|0;0M|2138h226 |2138H|2135h  4.075213489 : SafeState: reset: key typed                                    |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+0
+11
+12
+13
+14
+15
+16
+17
+18|2089H|24;0M|2119h~                                                                                                                                                     |25;0M~                                                                                                                                                     |26;0M~                                                                                                                                                     |27;0M~                                                                                                                                                     |28;0M~                                                                                                                                                     |29;0M~                                                                                                                                                     |30;0M~                                                                                                                                                     |31;0M~                                                                                                                                                     |32;0M~                                                                                                                                                     |2119H|33;31M|2143h26|"
+ 15.685418560 : looking for messages on channels
+ 15.685431212 : SafeState: back to waiting, triggering SafeStateAgain
+ 15.706231020 : SafeState: reset: ins_typebuf()
+ 15.707136848 : SafeState: Start triggering
+ 15.707630188 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 15.707645119 : setting timeout timer to 2 sec 0 nsec
+ 15.709112758 : raw GUI output: "|0;34R|0;149V|0;0M|2138h235 |2138H|2135h  4.427563646 : SafeState: back to waiting, triggering SafeStateAgain          |2135H|2163h |2163H|2135h                                                                  |2135H|1;1M|2089h 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9|2089H|24;0M|2119h~                                                                                                                                                     |25;0M~                                                                                                                                                     |26;0M~                                                                                                                                                     |27;0M~                                                                                                                                                     |28;0M~                                                                                                                                                     |29;0M~                                                                                                                                                     |30;0M~                                                                                                                                                     |31;0M~                                                                                                                                                     |32;0M~                                                                                                                                                     |2119H|33;31M|2143h35|"
+ 15.709479521 : looking for messages on channels
+ 15.709489698 : SafeState: back to waiting, triggering SafeStateAgain
+ 15.755098039 : SafeState: reset: ins_typebuf()
+ 15.755895150 : SafeState: Start triggering
+ 15.756351944 : raw GUI output: "|0;32R|2143H|0;0M|9D"
+ 15.756365588 : setting timeout timer to 2 sec 0 nsec
+ 15.757759990 : raw GUI output: "|0;34R|0;149V|0;0M|2138h244 |2138H|2135h  5.001549141 : raw GUI output: "|2135H|2164h^[|2164H|2135h|s"vim.log"  "                              |2135H|2163h |2163H|2135h                                                                  |2135H|24;0M|2119h~                                                                                                                                                     |25;0M~                                                                                                                                                     |26;0M~                                                                                                                                                     |27;0M~                                                                                                                                                     |28;0M~                                                                                                                                                     |29;0M~                                                                                                                                                     |30;0M~                                                                                                                                                     |31;0M~                                                                                                                                                     |32;0M~                                                                                                                                                     |2119H|33;31M|2143h44|"
+ 15.758222028 : looking for messages on channels
+ 15.758236222 : SafeState: back to waiting, triggering SafeStateAgain
+ 16.530235559 : SafeState: reset: ins_typebuf()
+ 16.530987638 : SafeState: Start triggering
+ 16.531582643 : raw GUI output: "|0;32R|2143H|0;0M|9I"
+ 16.531600612 : setting timeout timer to 2 sec 0 nsec
+ 16.533357890 : raw GUI output: "|0;34R|0;149V|0;0M|2089h  9 |2089H4.427563646:SafeState:backtowaiting,triggeringSafeStateAgain|0;83M|2154h |2154H
+|2089h  8 |2089H4.530104349:SafeState:reset:keytyped|1;83M|2154h |2154H
+|2089h  7 |2089H4.530313834:rawGUIoutput:"..."|2;83M|2154h |2154H
+|2089h  6 |2089H4.532510297:SafeState:Starttriggering|3;83M|2154h |2154H
+|2089h  5 |2089H4.532850544:rawGUIoutput:"|2119h^H^H^H|2119Hlog|2119h^H|2119H"|4;83M|2154h |2154H
+|2089h  4 |2089H4.533768563:lookingformessagesonchannels|5;83M|2154h |2154H
+|2089h  3 |2089H4.533780236:SafeState:backtowaiting,triggeringSafeStateAgain|6;83M|2154h |2154H
+|2089h  2 |2089H4.995121133:SafeState:reset:keytyped|7;83M|2154h |2154H
+|2089h  1 |2089H4.995150525:rawGUIoutput:"|2119h^M|2119H"|8;83M|2154h "
+ 16.533693389 : raw GUI output: "|9;4M"
+ 16.535618198 : looking for messages on channels
+ 16.535641412 : SafeState: back to waiting, triggering SafeStateAgain
+ 16.577123893 : SafeState: reset: ins_typebuf()
+ 16.577836208 : SafeState: Start triggering
+ 16.578128951 : raw GUI output: "|0;32R|2154H|0;0M|9I"
+ 16.578147721 : setting timeout timer to 2 sec 0 nsec
+ 16.579462109 : raw GUI output: "|0;34R|0;149V|0;0M|2089h 18 |2089H4.075213489:SafeState:reset:keytyped|0;83M|2154h |2154H
+|2089h 17 |2089H4.075249634:SafeState:Starttriggering|1;83M|2154h |2154H
+|2089h 16 |2089H4.075380961:rawGUIoutput:"m"|2;83M|2154h |2154H
+|2089h 15 |2089H4.076362664:lookingformessagesonchannels|3;83M|2154h |2154H
+|2089h 14 |2089H4.076372399:SafeState:backtowaiting,triggeringSafeStateAgain|4;83M|2154h |2154H
+|2089h 13 |2089H4.426232218:SafeState:reset:keytyped|5;83M|2154h |2154H
+|2089h 12 |2089H4.426267646:SafeState:Starttriggering|6;83M|2154h |2154H
+|2089h 11 |2089H4.426396422:rawGUIoutput:"."|7;83M|2154h |2154H
+|2089h 10 |2089H4.427550737:lookingformessagesonchannels|8;83M|2154h "
+ 16.579822373 : raw GUI output: "|18;4M"
+ 16.581747677 : looking for messages on channels
+ 16.581768021 : SafeState: back to waiting, triggering SafeStateAgain
+ 16.657355653 : SafeState: reset: ins_typebuf()
+ 16.657988628 : SafeState: Start triggering
+ 16.658477247 : raw GUI output: "|0;32R|2154H|0;0M|9I"
+ 16.658491334 : setting timeout timer to 2 sec 0 nsec
+ 16.659755481 : raw GUI output: "|0;34R|0;149V|0;0M|2089h 27 |2089H3.907341402:SafeState:Starttriggering|0;83M|2154h |2154H
+|2089h 26 |2089H3.907476639:rawGUIoutput:"v"|1;83M|2154h |2154H
+|2089h 25 |2089H3.908551892:lookingformessagesonchannels|2;83M|2154h |2154H
+|2089h 24 |2089H3.908565514:SafeState:backtowaiting,triggeringSafeStateAgain|3;83M|2154h |2154H
+|2089h 23 |2089H4.035733619:SafeState:reset:keytyped|4;83M|2154h |2154H
+|2089h 22 |2089H4.035772203:SafeState:Starttriggering|5;83M|2154h |2154H
+|2089h 21 |2089H4.035900305:rawGUIoutput:"i"|6;83M|2154h |2154H
+|2089h 20 |2089H4.036920591:lookingformessagesonchannels|7;83M|2154h |2154H
+|2089h 19 |2089H4.036931166:SafeState:backtowaiting,triggeringSafeStateAgain|8;83M|2154h "
+ 16.660217489 : raw GUI output: "|27;4M"
+ 16.661114824 : looking for messages on channels
+ 16.661125349 : SafeState: back to waiting, triggering SafeStateAgain
+ 20.124064441 : SafeState: reset: ins_typebuf()
+ 20.125717908 : raw GUI output: "|s|2154H|34;0M|2130h"vim.log"[converted]244L,16795B"
+ 20.126087983 : raw GUI output: "|2130H|34;139Ml         |27;4M"
+ 20.126449543 : SafeState: Start triggering
+ 20.126633226 : raw GUI output: "|34;139M |27;5M"
+ 20.128721560 : setting timeout timer to 2 sec 0 nsec
+ 20.130297725 : raw GUI output: "|2138h |2138H|2162h  5.001549141 : raw GUI output: "|2162H|2166h^[|2166H|2162h|s"vim.log"  "                              |2162H|2163h |2163H|2162h                                                                  |2162H|33;0M|2161hvim.log  [+] [b#4 w#1 t#1] [l#244|244 c#2]                                                                                               -- NORMAL -- "
+ 20.130525813 : raw GUI output: "|27;5M"
+ 20.131673424 : looking for messages on channels
+ 20.131693211 : SafeState: back to waiting, triggering SafeStateAgain
+ 20.356014361 : SafeState: reset: ins_typebuf()
+ 20.356370389 : raw GUI output: "|2161H|34;139Miw|27;5M"
+ 20.356978761 : SafeState: Start triggering
+ 20.357191469 : raw GUI output: "|34;139M2 |27;6M"
+ 20.360570065 : setting timeout timer to 2 sec 0 nsec
+ 20.362072782 : raw GUI output: "|2138h |2138H|2123h  |2123H|2124h5|2124H.001549141 : raw GUI output: "|2119h^[|2119H|s"vim.log"  "                              |2154h |2154H|27;84M|$|33;0M|2167hvim.log  [+] [b#4 w#1 t#1] [l#244|244 c#3]                                                                                          -- VISUAL CHAR -- "
+ 20.362313572 : raw GUI output: "|27;6M"
+ 20.363524800 : looking for messages on channels
+ 20.363537162 : SafeState: back to waiting, triggering SafeStateAgain
+ 20.587636232 : SafeState: reset: ins_typebuf()
+ 20.587792867 : raw GUI output: "|2167H|34;139MV|27;6M"
+ 20.588116228 : SafeState: Start triggering
+ 20.588354809 : raw GUI output: "|34;139M1|27;6M"
+ 20.591462801 : setting timeout timer to 2 sec 0 nsec
+ 20.592652579 : raw GUI output: "|2123h 5.001549141 : raw GUI output: "^[|s"vim.log"  " |2123H|33;0M|2168hvim.log  [+] [b#4 w#1 t#1] [l#244|244 c#3]                                                                                          -- VISUAL LINE -- "
+ 20.592876038 : looking for messages on channels
+ 20.592885478 : SafeState: back to waiting, triggering SafeStateAgain
+ 21.524307011 : SafeState: reset: ins_typebuf()
+ 21.526867493 : raw GUI output: "|2168H|34;139M i|26;36M"
+ 21.527365316 : SafeState: Start triggering
+ 21.529686412 : raw GUI output: "|34;139M |26;36M|s"
+ 21.531744465 : setting timeout timer to 2 sec 0 nsec
+ 21.533609094 : raw GUI output: "|0;2M|2089h6
+5
+4
+3
+2
+1
+0
+19
+8
+7
+6
+5
+4
+3
+2
+1
+0
+ 9
+8
+7
+6
+5
+4
+3
+2
+1|2089H
+|2138h243 |2138H|2135h  4.995150525 : raw GUI output: "|2135H|2164h^M|2164H|2135h"                                           |2135H|2163h |2163H|2135h                                                                  |2135H|27;0M|2089h  1 |2089H  5.001549141 : raw GUI output: "|2119h^[|2119H|s"vim.log"  "  |33;0M|2143hvim.log  [+] [b#4 w#1 t#1] [l#243|244 c#33]                                                                                              -- INSERT -- "
+ 21.534385501 : looking for messages on channels
+ 21.534398172 : SafeState: back to waiting, triggering SafeStateAgain
+ 21.763510270 : SafeState: reset: ins_typebuf()
+ 21.764328718 : raw GUI output: "|s|2143H|34;139Ml|26;36M"
+ 21.764458832 : raw GUI output: "|34;139M "
+ 21.764813207 : SafeState: Start triggering
+ 21.764974163 : raw GUI output: "|26;36M"
+ 21.767752433 : setting timeout timer to 2 sec 0 nsec
+ 21.769263592 : raw GUI output: "|26;3M|2138h |2138H|2162h  4.995150525 : raw GUI output: "|2162H|2166h^M|2166H|2162h"                                           |2162H|2163h |2163H|2162h                                                                  |2162H|33;0M|2161hvim.log  [+] [b#4 w#1 t#1] [l#243|244 c#33]                                                                                              -- NORMAL -- "
+ 21.769746987 : looking for messages on channels
+ 21.769757638 : SafeState: back to waiting, triggering SafeStateAgain
+ 22.709118702 : SafeState: reset: key typed
+ 22.709360339 : raw GUI output: "|2161H|34;139M{|26;36M"
+ 22.709529680 : raw GUI output: "|34;139M "
+ 22.710365236 : SafeState: Start triggering
+ 22.710702514 : setting timeout timer to 2 sec 0 nsec
+ 22.714366082 : raw GUI output: "|0;4M|2138h1   |2138H|2162h==== |2162H|2124hstart|2124H|2162h log session Sat Nov 02 16:38:01 2024 ====                           |2162H|2163h |2163H|2162h                                                                  |2162H|1;1M|2089h 1|2089H|1;6M006859974Settingtermcapentrykuto|2119h^[|2119HO*A|2;1M|2089h 2|2089H|2;6M00687854Adding termcap entrykdto |2119h^[|2119HO*B|3;1M|2089h |2089H|3;6M006882475Adding rmcp entry kr to |2119h^[|2119HO*C                    |4;1M|2089h 4|2089H|4;6M006885250Adding rmcap entry kl to |2119h^[|2119HO*D|5;1M|2089h 5|2089H|5;6M00688804etting termcp entry Ã½A to|2119h^[|2119H[@;*A|6;1M|2089h 6|2089H|6;6M00689790SettingtermcapentryÃ½Bto|2119h^[|2119H[@;*B|7;1M|2089h 7|2089H|7;6M0089343Setttemcap entry Ã½D to |2119h^[|2119H[@;*C|8;1M|2089h |2089H|8;6M0089644Adding rmcp entry Ã½C to |2119h^[|2119H[@;*D                  |9;1M|2089h 9|2089H|9;6M006898914Adding rmcap entry Ã½9 to |2119h^[|2119HO*P|10;2M|2089h0|2089H|10;6M006901556Adding rmcap eny Ã½: to |2119h^[|2119HO*Q|11;2M|2089h1|2089H|11;6M00690416Adding termcap entryÃ½;to|2119h^[|2119HO*R|12;2M|2089h2|2089H|12;6M0090628Adding termcap entryÃ½<to |2119h^[|2119HO*S|13;6M0090913Adding rmcp entry k1 to |2119h^[|2119H[11;*~                 |14;2M|2089h4|2089H|14;6M000911879Adding rmcap entry k2 to |2119h^[|2119H[12;*~|15;2M|2089h5|2089H|15;6M000914499Adding rmcap eny k3 to |2119h^[|2119H[13;*~|16;2M|2089h6|2089H|16;6M000917005Adding termcap entryk4to|2119h^[|2119H[14;*~|17;1M|2089h17|2089H|17;6M0006919616Adding termcap entryk5to |2119h^[|2119H[15;*~|18;1M|2089h1|2089H|18;6M0006922125Adding rmcp entry k6 to |2119h^[|2119H[17;*~                 |19;1M|2089h19|2089H|19;6M000692706Adding rmcap entry k7 to "
+ 22.716329115 : raw GUI output: "|2119h^[|2119H[18;*~|20;1M|2089h20|2089H|20;6M0006927282Adding termcap entry k8to|2119h^[|2119H[19;*~|21;1M|2089h21|2089H|21;6M000693363Adding rmcap eny k9 to |2119h^[|2119H[20;*~|22;1M|2089h22|2089H|22;6M0006933223Adding termcap entry k; to|2119h^[|2119H[21;*~|23;1M|2089h2|2089H|23;6M0006935931Adding termcap entryF1to |2119h^[|2119H[23;*~|24;1M|2089h24|2089H|24;6M0006938500Adding rmcp entry F2 to |2119h^[|2119H[24;*~                 |25;1M|2089h25|2089H|25;6M00069425Adding rmcap entry kB to |2119h^[|2119H[Z
+|2089h 26 |2089H  0.006943843 : Adding termcap entry %1 to |2119h^[|2119H[28;*~                            |2154h |2154H|26;84M|$|27;1M|2089h27|2089H|27;6M0696589Adding termcap entry &8 to |2119h^[|2119H[26;*~
+|2089h 28 |2089H  0.006949223 : Adding termcap entry kI to |2119h^[|2119H[2;*~                             |2154h |2154H|28;84M|$|29;0M|2089h 29 |2089H  0.006951916 : Adding termcap entry kh to |2119h^[|2119H[@;*H                             |2154h |2154H|29;84M|$|30;0M|2089h 30 |2089H  0.006954567 : Adding termcap entry K1 to |2119h^[|2119H[1;*~                             |2154h |2154H|30;84M|$|31;0M|2089h 31 |2089H  0.006957334 : Adding termcap entry Ã½? to |2119h^[|2119HO*H                               |2154h |2154H|31;84M|$|32;0M|2089h 32 |2089H  0.006959956 : Adding termcap entry Ã½@ to |2119h^[|2119H[7;*~                             |2154h |2154H|32;84M|$"
+ 22.716737000 : raw GUI output: "|33;30M|2161h1|244 c#1]    |0;4M"
+ 22.718036040 : looking for messages on channels
+ 22.718050901 : SafeState: back to waiting, triggering SafeStateAgain
+ 22.883293595 : SafeState: reset: key typed
+ 22.883434779 : raw GUI output: "|2161H|34;139M{|0;4M"
+ 22.883540008 : raw GUI output: "|34;139M "
+ 22.883611306 : SafeState: Start triggering
+ 22.883737919 : setting timeout timer to 2 sec 0 nsec
+ 22.884903589 : raw GUI output: "|0;4M"
+ 22.885207511 : looking for messages on channels
+ 22.885216477 : SafeState: back to waiting, triggering SafeStateAgain
+ 23.634851028 : SafeState: reset: ins_typebuf()
+ 23.635220405 : raw GUI output: "|34;139Miw|0;4M"
+ 23.635769362 : SafeState: Start triggering
+ 23.636305929 : raw GUI output: "|34;139M4 |0;8M"
+ 23.639576956 : setting timeout timer to 2 sec 0 nsec
+ 23.641031185 : raw GUI output: "|0;3M|2138h |2138H|2123h====|2123H start log session Sat Nov 02 16:38:01 2024 ====                           |2154h |2154H|0;84M|$|33;0M|2167hvim.log  [+] [b#4 w#1 t#1] [l#1|244 c#5]                                                                                            -- VISUAL CHAR -- "
+ 23.641252748 : raw GUI output: "|0;8M"
+ 23.642655501 : looking for messages on channels
+ 23.642668616 : SafeState: back to waiting, triggering SafeStateAgain
+ 24.348271502 : SafeState: reset: ins_typebuf()
+ 24.348439665 : raw GUI output: "|2167H|34;139MV|0;8M"
+ 24.348773715 : SafeState: Start triggering
+ 24.349106934 : raw GUI output: "|34;139M1|0;8M"
+ 24.352304333 : setting timeout timer to 2 sec 0 nsec
+ 24.353723407 : raw GUI output: "|2123h start log session Sat Nov 02 16:38:01 2024 ==== |2123H|33;0M|2168hvim.log  [+] [b#4 w#1 t#1] [l#1|244 c#5]                                                                                            -- VISUAL LINE -- "
+ 24.353949294 : looking for messages on channels
+ 24.353959969 : SafeState: back to waiting, triggering SafeStateAgain
+ 25.365795988 : SafeState: reset: ins_typebuf()
+ 25.368452542 : raw GUI output: "|2168H|34;139M i|0;4M"
+ 25.368927635 : SafeState: Start triggering
+ 25.370759487 : raw GUI output: "|34;139M |0;4M|s"
+ 25.373658960 : setting timeout timer to 2 sec 0 nsec
+ 25.375704056 : raw GUI output: "|2138h |2138H|2135h==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                           |2135H|2163h |2163H|2135h                                                                  |2135H|33;0M|2143hvim.log  [+] [b#4 w#1 t#1] [l#1|244 c#1]                                                                                                 -- INSERT -- "
+ 25.376592940 : looking for messages on channels
+ 25.376607111 : SafeState: back to waiting, triggering SafeStateAgain
+ 26.331489451 : SafeState: reset: key typed
+ 26.332078697 : setting timeout timer to 0 sec 60000000 nsec
+ 26.333078062 : setting timeout timer to 0 sec 60000000 nsec
+ 26.333643691 : SafeState: Start triggering
+ 26.333819885 : setting timeout timer to 2 sec 0 nsec
+ 26.334421639 : raw GUI output: "|2143H|2138h |2138H|2135h{==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                          |2135H|2163h |2163H|2135h                                                                  "
+ 26.336224638 : raw GUI output: "|2135H|33;38M|2143h2]|0;5M"
+ 26.337170732 : looking for messages on channels
+ 26.337186502 : SafeState: back to waiting, triggering SafeStateAgain
+ 26.540216384 : SafeState: reset: key typed
+ 26.541216739 : setting timeout timer to 0 sec 60000000 nsec
+ 26.542048524 : setting timeout timer to 0 sec 60000000 nsec
+ 26.542517108 : SafeState: Start triggering
+ 26.542683137 : setting timeout timer to 2 sec 0 nsec
+ 26.543224460 : raw GUI output: "|2143H|2135h{{==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                         |2135H|2163h |2163H|2135h                                                                  "
+ 26.544797822 : raw GUI output: "|2135H|33;38M|2143h3]|0;6M"
+ 26.545495045 : looking for messages on channels
+ 26.545504355 : SafeState: back to waiting, triggering SafeStateAgain
+ 26.724624037 : SafeState: reset: key typed
+ 26.725271287 : setting timeout timer to 0 sec 60000000 nsec
+ 26.726386765 : setting timeout timer to 0 sec 60000000 nsec
+ 26.727012511 : SafeState: Start triggering
+ 26.727168440 : setting timeout timer to 2 sec 0 nsec
+ 26.727682371 : raw GUI output: "|2143H|2135h{{==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                        |2135H|2163h |2163H|2135h                                                                  "
+ 26.729376985 : raw GUI output: "|2135H|33;38M|2143h4]|0;7M"
+ 26.730204201 : looking for messages on channels
+ 26.730218143 : SafeState: back to waiting, triggering SafeStateAgain
+ 27.300680140 : SafeState: reset: key typed
+ 27.301447131 : setting timeout timer to 0 sec 60000000 nsec
+ 27.302287582 : setting timeout timer to 0 sec 60000000 nsec
+ 27.302536108 : SafeState: Start triggering
+ 27.302800027 : setting timeout timer to 2 sec 0 nsec
+ 27.303606359 : raw GUI output: "|2143H|2135h{|2135H|2136h{}|2136H|2135h==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                       |2135H|2163h |2163H|2135h                                                                  "
+ 27.305536022 : SafeState: reset: key typed
+ 27.306156293 : setting timeout timer to 0 sec 60000000 nsec
+ 27.307320139 : setting timeout timer to 0 sec 60000000 nsec
+ 27.307961292 : SafeState: Start triggering
+ 27.308105752 : setting timeout timer to 2 sec 0 nsec
+ 27.309854605 : raw GUI output: "|2135H|33;38M|2143h5]|0;8M|2143H|2135h{{}{==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                      |2135H|2163h |2163H|2135h                                                                  "
+ 27.310156206 : raw GUI output: "|2135H|33;38M|2143h6]|0;9M"
+ 27.311175802 : looking for messages on channels
+ 27.311190728 : SafeState: back to waiting, triggering SafeStateAgain
+ 27.619719439 : SafeState: reset: key typed
+ 27.620442068 : setting timeout timer to 0 sec 60000000 nsec
+ 27.621262827 : setting timeout timer to 0 sec 60000000 nsec
+ 27.621512517 : SafeState: Start triggering
+ 27.621663121 : setting timeout timer to 2 sec 0 nsec
+ 27.622256573 : raw GUI output: "|2143H|2135h}|2135H|2136h{}|2136H|2135h==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                     |2135H|2163h |2163H|2135h                                                                  "
+ 27.623844869 : raw GUI output: "|2135H|33;38M|2143h7]|0;10M"
+ 27.624721714 : looking for messages on channels
+ 27.624732340 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.134100311 : SafeState: reset: key typed
+ 28.134811237 : setting timeout timer to 0 sec 60000000 nsec
+ 28.135705138 : setting timeout timer to 0 sec 60000000 nsec
+ 28.136054256 : SafeState: Start triggering
+ 28.136254364 : setting timeout timer to 2 sec 0 nsec
+ 28.137010863 : raw GUI output: "|2143H|0;4M|2135h{|2135H|2136h{|2136H|2135h{}{}|2135H|2136h}|2136H|2135h==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                    |2135H|2163h |2163H|2135h                                                                  "
+ 28.138730578 : raw GUI output: "|2135H|33;38M|2143h8]|0;11M"
+ 28.139519755 : looking for messages on channels
+ 28.139531563 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.164166946 : SafeState: reset: key typed
+ 28.164772835 : setting timeout timer to 0 sec 60000000 nsec
+ 28.165568959 : setting timeout timer to 0 sec 60000000 nsec
+ 28.165887522 : SafeState: Start triggering
+ 28.166079726 : setting timeout timer to 2 sec 0 nsec
+ 28.167825121 : raw GUI output: "|2143H|0;3M|2138h |2138H|2136h{|2136H|2135h{{}{}}|2135H|2136h}|2136H|2135h==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                   |2135H|2163h |2163H|2135h                                                                  "
+ 28.168655853 : raw GUI output: "|2135H|33;38M|2143h9]|0;12M"
+ 28.169608974 : looking for messages on channels
+ 28.169625733 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.196108780 : SafeState: reset: key typed
+ 28.196692451 : setting timeout timer to 0 sec 60000000 nsec
+ 28.197414901 : setting timeout timer to 0 sec 60000000 nsec
+ 28.197722692 : SafeState: Start triggering
+ 28.197891473 : setting timeout timer to 2 sec 0 nsec
+ 28.198413572 : raw GUI output: "|2143H|0;3M|2138h |2138H|2135h{{{}{}}}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                  |2135H|2163h |2163H|2135h                                                                  "
+ 28.199888044 : raw GUI output: "|2135H|33;38M|2143h10]|0;13M"
+ 28.200882336 : looking for messages on channels
+ 28.200894599 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.226598759 : SafeState: reset: key typed
+ 28.227438163 : setting timeout timer to 0 sec 60000000 nsec
+ 28.228554689 : setting timeout timer to 0 sec 60000000 nsec
+ 28.229067070 : SafeState: Start triggering
+ 28.229266728 : setting timeout timer to 2 sec 0 nsec
+ 28.230939363 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                 |2135H|2163h |2163H|2135h                                                                  "
+ 28.231360437 : raw GUI output: "|2135H|33;39M|2143h1]|0;14M"
+ 28.233561393 : looking for messages on channels
+ 28.233574799 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.258526565 : SafeState: reset: key typed
+ 28.259093378 : setting timeout timer to 0 sec 60000000 nsec
+ 28.259804391 : setting timeout timer to 0 sec 60000000 nsec
+ 28.260156603 : SafeState: Start triggering
+ 28.260315558 : setting timeout timer to 2 sec 0 nsec
+ 28.260816834 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====                |2135H|2163h |2163H|2135h                                                                  "
+ 28.262255964 : raw GUI output: "|2135H|33;39M|2143h2]|0;15M"
+ 28.262835895 : looking for messages on channels
+ 28.262845131 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.288738292 : SafeState: reset: key typed
+ 28.289217314 : setting timeout timer to 0 sec 60000000 nsec
+ 28.289903686 : setting timeout timer to 0 sec 60000000 nsec
+ 28.290242232 : SafeState: Start triggering
+ 28.290378830 : setting timeout timer to 2 sec 0 nsec
+ 28.290809088 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====               |2135H|2163h |2163H|2135h                                                                  "
+ 28.292228548 : raw GUI output: "|2135H|33;39M|2143h3]|0;16M"
+ 28.292926205 : looking for messages on channels
+ 28.292936321 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.321691862 : SafeState: reset: key typed
+ 28.322170781 : setting timeout timer to 0 sec 60000000 nsec
+ 28.322843097 : setting timeout timer to 0 sec 60000000 nsec
+ 28.323187229 : SafeState: Start triggering
+ 28.323336620 : setting timeout timer to 2 sec 0 nsec
+ 28.323796254 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====              |2135H|2163h |2163H|2135h                                                                  "
+ 28.325137197 : raw GUI output: "|2135H|33;39M|2143h4]|0;17M"
+ 28.325895640 : looking for messages on channels
+ 28.325905191 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.352888291 : SafeState: reset: key typed
+ 28.353356090 : setting timeout timer to 0 sec 60000000 nsec
+ 28.354017004 : setting timeout timer to 0 sec 60000000 nsec
+ 28.354371379 : SafeState: Start triggering
+ 28.354498651 : setting timeout timer to 2 sec 0 nsec
+ 28.354895424 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====             |2135H|2163h |2163H|2135h                                                                  "
+ 28.356193309 : raw GUI output: "|2135H|33;39M|2143h5]|0;18M"
+ 28.356794615 : looking for messages on channels
+ 28.356802713 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.397608001 : SafeState: reset: key typed
+ 28.398047715 : setting timeout timer to 0 sec 60000000 nsec
+ 28.398732030 : setting timeout timer to 0 sec 60000000 nsec
+ 28.399101213 : SafeState: Start triggering
+ 28.399224987 : setting timeout timer to 2 sec 0 nsec
+ 28.399602199 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====            |2135H|2163h |2163H|2135h                                                                  "
+ 28.401154719 : raw GUI output: "|2135H|33;39M|2143h6]|0;19M"
+ 28.401991873 : looking for messages on channels
+ 28.402006170 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.427980631 : SafeState: reset: key typed
+ 28.428444745 : setting timeout timer to 0 sec 60000000 nsec
+ 28.429148893 : setting timeout timer to 0 sec 60000000 nsec
+ 28.429546601 : SafeState: Start triggering
+ 28.429675272 : setting timeout timer to 2 sec 0 nsec
+ 28.431027342 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====           |2135H|2163h |2163H|2135h                                                                  "
+ 28.431468222 : raw GUI output: "|2135H|33;39M|2143h7]|0;20M"
+ 28.433512221 : looking for messages on channels
+ 28.433525651 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.459086362 : SafeState: reset: key typed
+ 28.459537304 : setting timeout timer to 0 sec 60000000 nsec
+ 28.460261526 : setting timeout timer to 0 sec 60000000 nsec
+ 28.460681462 : SafeState: Start triggering
+ 28.460806233 : setting timeout timer to 2 sec 0 nsec
+ 28.461148379 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====          |2135H|2163h |2163H|2135h                                                                  "
+ 28.462463195 : raw GUI output: "|2135H|33;39M|2143h8]|0;21M"
+ 28.462997016 : looking for messages on channels
+ 28.463005066 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.490025692 : SafeState: reset: key typed
+ 28.490473648 : setting timeout timer to 0 sec 60000000 nsec
+ 28.491231610 : setting timeout timer to 0 sec 60000000 nsec
+ 28.491706385 : SafeState: Start triggering
+ 28.491867304 : setting timeout timer to 2 sec 0 nsec
+ 28.492377511 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====         |2135H|2163h |2163H|2135h                                                                  "
+ 28.493884918 : raw GUI output: "|2135H|33;39M|2143h9]|0;22M"
+ 28.494667751 : looking for messages on channels
+ 28.494676801 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.522042949 : SafeState: reset: key typed
+ 28.522679965 : setting timeout timer to 0 sec 60000000 nsec
+ 28.524016673 : setting timeout timer to 0 sec 60000000 nsec
+ 28.524770740 : SafeState: Start triggering
+ 28.525308050 : setting timeout timer to 2 sec 0 nsec
+ 28.527657342 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====        |2135H|2163h |2163H|2135h                                                                  "
+ 28.528239480 : raw GUI output: "|2135H|33;38M|2143h20]|0;23M"
+ 28.529414232 : looking for messages on channels
+ 28.529454892 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.551744370 : SafeState: reset: key typed
+ 28.552433330 : setting timeout timer to 0 sec 60000000 nsec
+ 28.553255785 : setting timeout timer to 0 sec 60000000 nsec
+ 28.553754911 : SafeState: Start triggering
+ 28.553893862 : setting timeout timer to 2 sec 0 nsec
+ 28.554275782 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====       |2135H|2163h |2163H|2135h                                                                  "
+ 28.555629170 : raw GUI output: "|2135H|33;39M|2143h1]|0;24M"
+ 28.556388665 : looking for messages on channels
+ 28.556398385 : SafeState: back to waiting, triggering SafeStateAgain
+ 28.582801250 : SafeState: reset: key typed
+ 28.583255904 : setting timeout timer to 0 sec 60000000 nsec
+ 28.584107602 : setting timeout timer to 0 sec 60000000 nsec
+ 28.584797259 : SafeState: Start triggering
+ 28.585047851 : setting timeout timer to 2 sec 0 nsec
+ 28.586405396 : raw GUI output: "|2143H|2135h}}==== |2135H|2124hstart|2124H|2135h log session Sat Nov 02 16:38:01 2024 ====      |2135H|2163h |2163H|2135h                                                                  "
+ 28.586669109 : raw GUI output: "|2135H|33;39M|2143h2]|0;25M"
+ 28.588022658 : looking for messages on channels
+ 28.588040184 : SafeState: back to waiting, triggering SafeStateAgain
+ 30.683424320 : Exiting...
