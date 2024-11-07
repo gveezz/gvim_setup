@@ -73,6 +73,8 @@ set tabstop=3
 set softtabstop=3
 set shiftwidth=3
 " set indentexpr=
+set breakindent
+set browsedir=last
 set smarttab
 set number
 set relativenumber
