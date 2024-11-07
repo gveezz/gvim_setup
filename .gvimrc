@@ -1,22 +1,5 @@
-" if version >= 700 && version < 800
-"    let $VIMRUNTIME = $HOME."/.vim74/"
-"    set runtimepath^=$VIMRUNTIME
-"    set helpfile=$VIMRUNTIME/doc/help.txt
-" elseif version >= 800 && version < 900
-"    let $VIMRUNTIME = $HOME."/.vim82/"
-"    set runtimepath^=$VIMRUNTIME
-"    set helpfile=$VIMRUNTIME/doc/help.txt
-" endif
 
-" let g:popupBufferPattern = "Select %f (%n) from %p directory"
-
-" let g:mapleader = '\'
 let g:skip_defaults_vim=1
-
-" let g:ctrlp_clear_cache_on_exit = 1
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_cmd='CtrlP :pwd'
-
 let g:netrw_mousemaps= 0
 " hide netrw menu
 let g:netrw_banner = 0
@@ -33,22 +16,7 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 let g:netrw_alto = 0
 let g:netrw_altfile = 1
-
-" let g:autoclose_on = 1
-" let g:autoclose_pairs = [ ["(", ")"], ["{", "}"], ["[", "]"], ["<", ">"]]
-
-" if v:version < 700 || exists('loaded_bclose') || &cp
-"     finish
-" endif
-" let loaded_bclose = 1
-"
-" let b:did_indent = 1
-" 
 let g:indentLine_enabled = 1
-" let g:indentLine_setColors = 1
-" let g:indentLine_defaultGroup = 'SpecialKey'
-" let g:indentLine_color_gui = '#AAAAAA'
-" let g:indentLine_char_list = ['|']
 
 helptags ~/.vim/doc
 set nocompatible  
@@ -404,14 +372,12 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>" : "/"
-" snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
 inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
 nnoremap <nowait> <M-f> :%s/<C-r><C-w>/
 vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/" : "<Esc><C-c>:s/"
-" snoremap <silent> <nowait> <C-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>zz
 cnoremap <silent> <nowait> <M-f> <C-c>
 cnoremap <nowait> <C-w> <C-r><C-w>
 
