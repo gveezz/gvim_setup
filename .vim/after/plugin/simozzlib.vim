@@ -401,6 +401,7 @@ function! SetStatusLineMode()
    " elseif l:mode == 'c'
    "    hi StatusLine guifg=#00FF00 guibg=#222222
    endif
+      
 endfunction
 
 function! DeleteLineChars()
@@ -1099,7 +1100,9 @@ function! CloseBuffer()
       if l:b_count > 1
          silent! :close!
       else 
-         silent! :bw!
+         let l:bufnr = bufnr()
+         silent! :bnext
+         silent! exec ":bd! ".l:bufnr
       endif
    else
       if IsEmptyBuffer()
