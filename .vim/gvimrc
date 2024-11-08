@@ -182,7 +182,13 @@ augroup END
 
 augroup Vim
    autocmd!
-   autocmd VimEnter * if (isdirectory(argv(0))) | call SetPWD(argv(0)) | else | call SetPWD(expand("%:h")) | endif
+   autocmd VimEnter * if (argv(0)=="") |
+                      \ call SetPWD($PWD) | 
+                      \ elseif (isdirectory(argv(0))) |  
+                      \ call SetPWD(argv(0)) |  
+                      \ else |  
+                      \ call SetPWD(expand("%:h")) |  
+                      \ endif
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
    autocmd ModeChanged *  call SetCursorLineMode() | call SetStatusLineMode()
@@ -335,6 +341,11 @@ snoremap <expr> <silent> <nowait> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "
 
 inoremap <silent> <nowait> <C-p> <C-c>:CtrlP<CR>
 nnoremap <silent> <nowait> <C-p> :CtrlP<CR>
+vnoremap <silent> <nowait> <C-p> <Esc><C-c>:CtrlP<CR>
+
+inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
+nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
+vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
 
 " C-c: command line mode
 inoremap <nowait> <M-x> <C-o>:
