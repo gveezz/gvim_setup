@@ -28,7 +28,7 @@ set viminfofile=NONE
 colorscheme simozz
 "set insertmode
 set magic
-set autochdir
+set noautochdir
 set noshowmode
 set viminfo=""
 set incsearch
