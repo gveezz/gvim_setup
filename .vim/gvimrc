@@ -86,7 +86,7 @@ set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
-set statusline+=\ %=[%{getcwd()}]\ %f\ %y\ %m%r
+set statusline+=\ %=[%{getcwd()}/]\ %{GetCWDRelFPath()}\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
 set backspace=indent,eol,start

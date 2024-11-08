@@ -27,6 +27,11 @@ function! SetPWD(path)
    silent! exec ":cd ".a:path
 endfunction
 
+function! GetCWDRelFPath()
+   let l:fpath = expand("%:p")
+   return substitute(l:fpath, getcwd()."/", "", "g")
+endfunction
+
 function! Eatchar(pat)
    let c = nr2char(getchar(0))
    return (c =~ a:pat) ? '' : c
