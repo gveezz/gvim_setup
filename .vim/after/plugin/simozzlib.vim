@@ -23,6 +23,10 @@ function! AdjTemplate ()
 
 endfunction
 
+function! SetPWD(path)
+   silent! exec ":cd ".a:path
+endfunction
+
 function! Eatchar(pat)
    let c = nr2char(getchar(0))
    return (c =~ a:pat) ? '' : c

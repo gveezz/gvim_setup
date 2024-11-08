@@ -28,7 +28,7 @@ set viminfofile=NONE
 colorscheme simozz
 "set insertmode
 set magic
-set noautochdir
+set autochdir
 set noshowmode
 set viminfo=""
 set incsearch
@@ -89,7 +89,6 @@ set statusline=\ %{GetMode()}
 set statusline+=\ %=[%{getcwd()}]\ %f\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
-
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
 set guicursor=o:ver100-blinkoff0-nCursor
@@ -183,7 +182,7 @@ augroup END
 
 augroup Vim
    autocmd!
-   autocmd VimEnter * if (isdirectory(argv(0))) | silent! exec ":cd ".argv(0) | endif
+   autocmd VimEnter * if (isdirectory(argv(0))) | call SetPWD(argv(0)) | else | call SetPWD(expand("%:h")) | endif
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
    autocmd ModeChanged *  call SetCursorLineMode() | call SetStatusLineMode()
