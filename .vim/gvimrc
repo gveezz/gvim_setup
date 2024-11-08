@@ -166,10 +166,14 @@ augroup BufWinIn
    " autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
-   "autocmd BufReadPost * if &ft == "netrw" | call feedkeys("\<Down>") | endif
-   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") && (&ft != "undotree") && (&ft != "diffdir")) | startinsert | else | stopinsert | endif
+   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") 
+                      \ && (&ft != "undotree") 
+                      \  && (&ft != "diffdir")) |  
+                      \ startinsert |  
+                      \ else |  
+                      \ stopinsert |  
+                      \ endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
-   " autocmd BufLeave,BufDelete,BufHidden,BufWipeout * if (&ft == "netrw") | silent! :call histdel("/", "@.*$") | silent! :call histdel("/", "\a") endif
 augroup END
 
 augroup Insert
@@ -177,7 +181,7 @@ augroup Insert
    " autocmd KeyInputPre * if v:char == 28 | let v:char = 92 | endif
    " autocmd InsertLeave * set iminsert=0
    " autocmd InsertEnter * set iminsert=1
-   autocmd InsertEnter * let @*=""
+   " autocmd InsertEnter * let @*=""
 augroup END
 
 augroup Vim
