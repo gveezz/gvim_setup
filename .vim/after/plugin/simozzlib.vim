@@ -1107,19 +1107,22 @@ function! CloseBuffer()
    if tabpagenr('$') > 1 || winnr('$') > 1
       let l:b_count = BuffInMoreWins(bufnr())
       if l:b_count > 1
+         " echo "l:b_count > 1" | sleep
          silent! :close!
       else 
          let l:bufnr = bufnr()
-         silent! :bnext
+         " echo "l:b_count = 1" | sleep
+         silent! :bnext!
          silent! exec ":bd! ".l:bufnr
       endif
    else
-      if IsEmptyBuffer()
+      if IsEmptyBuffer() && IsEmptyVim()
          call EchoWarnMsg('Last win empty buffer, q to quit')
          if nr2char(getchar()) == 'q'
             silent! :q!
          endif
       else 
+         " echo ":bw!" | sleep
          silent! :bw!
       endif
    endif

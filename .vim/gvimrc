@@ -47,9 +47,8 @@ syntax enable
 " set notimeout
 " set timeoutlen=1000
 " set ttimeoutlen=-1
-" set tags=tags;/
+set tags=tags;/
 " set tags=./tags,tags;
-set tags=""
 set noswapfile
 set autoread
 set autowrite
@@ -173,9 +172,11 @@ augroup BufWinIn
    " autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
-   autocmd BufEnter * if ((&ft != "help") && (&ft != "netrw") 
+   autocmd BufEnter *  if ((&ft != "help") 
+                      \ && (&ft != "netrw") 
                       \ && (&ft != "undotree") 
-                      \  && (&ft != "diffdir")) |  
+                      \ && (&ft != "diffdir")
+                      \ && (&ft != "ctrlp")) |  
                       \ startinsert |  
                       \ else |  
                       \ stopinsert |  
@@ -357,6 +358,10 @@ vnoremap <silent> <nowait> <C-p> <Esc><C-c>:CtrlP<CR>
 inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
 vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
+
+inoremap <nowait> <C-j> <C-o><C-w><C-]>
+nnoremap <nowait> <C-j> <C-w><C-]>
+vnoremap <nowait> <C-j> <Esc><C-c><C-w><C-]>
 
 " C-c: command line mode
 inoremap <nowait> <M-x> <C-o>:
