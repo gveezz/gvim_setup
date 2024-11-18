@@ -2,10 +2,9 @@
 function! AdjTemplate ()
 
    let l:currYear = strftime('%Y')
-   let l:buffNname = expand('%:r')
    let l:corp = expand($CORP)
    let l:corpemail = expand($EMAIL)
-
+   let l:buffPath = expand('%:r')
    if l:corp == ''
       let l:corp = '<none>'
    endif
@@ -14,11 +13,14 @@ function! AdjTemplate ()
       let l:corpemail = '<none@domain.com>'
    endif
 
+   let l:component = substitute(expand('%:p:r'), 
+                     \ expand('%:p:h').'/', '', 'g')
+   
    silent! exec ":%s/$YEAR/".l:currYear."/g"
    silent! exec ":%s/$CORP/".l:corp."/g"
    silent! exec ":%s/$EMAIL/".l:corpemail."/g"
-   silent! exec ":%s/$COMPONENT_NAME/".l:buffNname."/g"
-   silent! exec ":%s/$MACRO/".toupper(l:buffNname)."/g"
+   silent! exec ":%s/$COMPONENT_NAME/".l:component."/g"
+   silent! exec ":%s/$MACRO/".toupper(l:component)."/g"
    silent! :1
 
 endfunction
