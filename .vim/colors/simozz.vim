@@ -17,7 +17,7 @@ let colors_name = "simozz"
 hi Normal                 guifg=white guibg=#222222
 hi Scrollbar              guifg=black guibg=cyan
 hi Menu                   guifg=black guibg=cyan
-hi SpecialKey             term=bold cterm=bold  ctermfg=darkred  guifg=#cc0000 gui=bold
+hi SpecialKey             term=bold cterm=bold  ctermfg=darkred  guifg=#AAAAAA gui=bold
 hi NonText                term=bold cterm=bold  ctermfg=darkred  gui=bold  guifg=#cc0000
 hi Directory              term=bold cterm=bold  ctermfg=brown  guifg=Yellow
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red

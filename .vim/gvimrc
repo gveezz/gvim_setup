@@ -117,7 +117,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,k,t,w,b,d,u,U,s,]
+set complete=.,w,b,d
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -163,6 +163,9 @@ set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 
 " set undodir=/tmp/
 " set undofile
+
+set list
+set listchars=tab:>>
 
 let g:bclose_multiple = 0
 let g:searchString = ""
