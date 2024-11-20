@@ -1395,7 +1395,12 @@ function! HighlightSet(name, ...)
         endfor
         exe command
     endif
-endfunc 
+endfunc
+
+function! GetDate()
+   let l:date = strftime('%a %Y-%m-%d %H:%M:%S%z')
+   return l:date
+endfunction
 
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
@@ -1404,5 +1409,5 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 command! -nargs=1 Clrr call setreg(<f-args>, "")
 command! -nargs=1 Diffsplit :vertical diffsplit <args>
 command! -nargs=+ HiSet call HighlightSet(<f-args>)
-command! -bang -nargs=0 InsDate :put! =strftime(' %a %Y-%m-%d %H:%M:%S%z')
+command! -bang -nargs=0 InsDate :normal! i<C-r>=GetDate()<CR>
 
