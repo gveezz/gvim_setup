@@ -78,8 +78,8 @@ function! s:Log(eventName) abort
 endfunction
 
 function! PrintVimrcVersion()
-	":normal ! echo "g:vimrcv".<CR>
-	call EchoYellowMsg(g:vimrcv)
+   ":normal ! echo "g:vimrcv".<CR>
+   call EchoYellowMsg(g:vimrcv)
 endfunction
 
 " function! EnterWinBuffer()
@@ -87,7 +87,7 @@ endfunction
 "    if (&ft != 'help' && &ft != 'netrw' && &ft != 'nerdtree' && &buftype != 'terminal')
 "        silent! lcd %:p:h | startinsert
 "    else
-" 	    silent! stopinsert
+"        silent! stopinsert
 "    endif
 "
 " endfunction
@@ -97,57 +97,57 @@ endfunction
 "endfunction
 
 " function! GuiTabLabel()
-" 	  let label = ''
-" 	  let bufnrlist = tabpagebuflist(v:lnum)
+"      let label = ''
+"      let bufnrlist = tabpagebuflist(v:lnum)
 " 
-" 	  " Add '+' if one of the buffers in the tab page is modified
-" 	  for bufnr in bufnrlist
-" 	    if getbufvar(bufnr, "&modified")
-" 	      let label = '+'
-" 	      break
-" 	    endif
-" 	  endfor
+"      " Add '+' if one of the buffers in the tab page is modified
+"      for bufnr in bufnrlist
+"        if getbufvar(bufnr, "&modified")
+"          let label = '+'
+"          break
+"        endif
+"      endfor
 " 
-" 	  " Append the number of windows in the tab page if more than one
-" 	  let l:wincount = tabpagewinnr(v:lnum, '$')
-" 	  if l:wincount > 1
-" 	    let label .= 'w('.l:wincount.')'
-" 	  endif
-" 	  if label != ''
-" 	    let label .= ' '
-" 	  endif
+"      " Append the number of windows in the tab page if more than one
+"      let l:wincount = tabpagewinnr(v:lnum, '$')
+"      if l:wincount > 1
+"        let label .= 'w('.l:wincount.')'
+"      endif
+"      if label != ''
+"        let label .= ' '
+"      endif
 " 
-" 	  " Append the buffer name
+"      " Append the buffer name
 "      let &guitabtooltip = fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]), ":p")
 "      return label . fnamemodify(bufname(bufnrlist[tabpagewinnr(v:lnum) - 1]),  ":t")
 " endfunction
 
 function! MyTabLine()
-	  let s = ''
-	  for i in range(tabpagenr('$'))
-	    " select the highlighting
-	    if i + 1 == tabpagenr()
-	      let s .= '%#TabLineSel#'
-	    else
-	      let s .= '%#TabLine#'
-	    endif
+     let s = ''
+     for i in range(tabpagenr('$'))
+       " select the highlighting
+       if i + 1 == tabpagenr()
+         let s .= '%#TabLineSel#'
+       else
+         let s .= '%#TabLine#'
+       endif
 
-	    " set the tab page number (for mouse clicks)
-	    let s .= '%' . (i + 1) . 'T'
+       " set the tab page number (for mouse clicks)
+       let s .= '%' . (i + 1) . 'T'
 
-	    " the label is made by MyTabLabel()
-	    let s .= ' %{MyTabLabel(' . (i + 1) . ')} |'
-	  endfor
+       " the label is made by MyTabLabel()
+       let s .= ' %{MyTabLabel(' . (i + 1) . ')} |'
+     endfor
 
-	  " after the last tab fill with TabLineFill and reset tab page nr
-	  let s .= '%#TabLineFill#%T'
+     " after the last tab fill with TabLineFill and reset tab page nr
+     let s .= '%#TabLineFill#%T'
 
-	  " right-align the label to close the current tab page
-	  if tabpagenr('$') > 1
-	    let s .= '%=%#TabLineFill#%999Xx'
-	  endif
+     " right-align the label to close the current tab page
+     if tabpagenr('$') > 1
+       let s .= '%=%#TabLineFill#%999Xx'
+     endif
 
-	  return s
+     return s
 endfunction
 
 function! MyTabLabel(n)
@@ -293,18 +293,18 @@ function! PopupBufferList()
    endfor
 
    call popup_menu(l:popupblstnm,
-                     \ #{title: 'Buffer List',
-                     \   pos: 'center',
-                     \   scrollbar: 'false',
-                     \   border: [],
-                     \   padding: [1,1,0,1],
-		               \   close: 'click',
-                     \   type: 'popupMarker',
-                     \   callback: 'PopupBufferChoose',
-                     \   highlight: 'Question',
-                     \   mapping: 'true'
-                     \  }
-                     \)
+                  \ #{title: 'Buffer List',
+                  \   pos: 'center',
+                  \   scrollbar: 'false',
+                  \   border: [],
+                  \   padding: [1,1,0,1],
+                  \   close: 'click',
+                  \   type: 'popupMarker',
+                  \   callback: 'PopupBufferChoose',
+                  \   highlight: 'Question',
+                  \   mapping: 'true'
+                  \  }
+                  \)
 endfunction
 
 function! PopupBufferChoose(id, result)

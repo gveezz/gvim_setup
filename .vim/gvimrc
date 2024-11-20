@@ -117,7 +117,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,w,b,d
+set complete=.,t,w,b,d
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -136,10 +136,9 @@ set columns=150
 set lines=35
 " set history=1000
 " set wc=<Tab>
-" set wildmode=longest,list,full
-" set wildmenu
-" set wildoptions=tagfile
-" set tabline=%!MyTabLine()
+set wildmenu
+set wildmode=longest,list,full
+set wildoptions=pum
 set showtabline=2
 set guitabtooltip=%F
 set guitablabel=%m\ %{expand('%:t')}
