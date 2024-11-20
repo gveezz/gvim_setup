@@ -1,4 +1,5 @@
 " CUSTOM FUNCTIONS
+
 function! AdjTemplate ()
 
    let l:currYear = strftime('%Y')
@@ -1383,9 +1384,23 @@ function! VSearchStrSub()
    return l:srchstr
 endfunction
 
+function! HighlightSet(name, ...)
+    let colour_order = ['guifg', 'guibg', 'gui', 'ctermfg', 'ctermbg', 'cterm', 'term']
+    let command = 'hi ' . a:name
+    if (len(a:000) < 1) || (len(a:000) > (len(colour_order)))
+        echoerr "No colour or too many colours specified"
+    else
+        for i in range(0,len(a:000)-1)
+            let command .= ' ' . colour_order[i] . '=' . a:000[i]
+        endfor
+        exe command
+    endif
+endfunc 
+
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 " vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 command! -nargs=1 Clrr call setreg(<f-args>, "")
 command! -nargs=1 Diffsplit :vertical diffsplit <args>
+command! -nargs=+ HiSet call HighlightSet(<f-args>)
