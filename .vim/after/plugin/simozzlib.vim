@@ -1404,3 +1404,5 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 command! -nargs=1 Clrr call setreg(<f-args>, "")
 command! -nargs=1 Diffsplit :vertical diffsplit <args>
 command! -nargs=+ HiSet call HighlightSet(<f-args>)
+command! -bang -nargs=0 InsDate :put! =strftime(' %a %Y-%m-%d %H:%M:%S%z')
+
