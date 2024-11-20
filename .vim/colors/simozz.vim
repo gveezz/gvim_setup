@@ -21,7 +21,7 @@ hi Menu                   guifg=black guibg=cyan
 hi SpecialKey             term=bold cterm=bold  ctermfg=darkred  guifg=#AAAAAA gui=bold
 hi NonText                term=bold cterm=bold  ctermfg=darkred  gui=bold guifg=#222222 " guifg=#cc0000
 hi Directory              term=bold cterm=bold  ctermfg=brown  guifg=Yellow
-hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red
+hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=#000000  guibg=Yellow gui=bold
 hi IncSearch              term=reverse  ctermfg=white  ctermbg=red  guifg=Green  guibg=white
 hi Search                 guibg=white guifg=#000000 guibg=#00ff00 gui=bold
 hi MoreMsg                term=bold  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=SeaGreen

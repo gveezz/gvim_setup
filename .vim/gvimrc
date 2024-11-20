@@ -33,6 +33,7 @@ helptags $HOME/.vim/doc
 set nocompatible  
 set viminfofile=NONE
 colorscheme simozz
+syntax enable
 "set insertmode
 set magic
 set noautochdir
@@ -124,22 +125,19 @@ set hlsearch
 set incsearch
 set timeoutlen=0
 set ttimeoutlen=0
-syntax enable
-set textwidth=80
+set textwidth=0
 set colorcolumn=80
-" set wrapmargin=0
-" set linebreak
 " set wrap
-" set linebreak
+set linebreak
 " note trailing space at end of next line
 set columns=150
 set lines=35
 " set history=1000
 " set wc=<Tab>
 set wildmenu
-set wildmode=longest,list,full
-set wildoptions=pum
-set showtabline=2
+set wildmode=full
+set wildoptions=fuzzy
+set showtabline=1
 set guitabtooltip=%F
 set guitablabel=%m\ %{expand('%:t')}
 " set splitbelow
@@ -271,6 +269,8 @@ inoremap <silent> <nowait> <expr> <C-c> col('.')== 1? "<C-c>" : "<C-c>l"
 nnoremap <silent> <nowait> <C-c> i
 
 nnoremap <silent> <nowait> <Esc> i
+
+inoremap <silent> <nowait> <C-w> <C-o><C-w>
 
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
@@ -664,12 +664,18 @@ vnoremap <silent> <nowait> <M-o> <nop>
 xnoremap <silent> <nowait> [ di[<C-r><C-o>*]
 xnoremap <silent> <nowait> { di{<C-r><C-o>*}
 xnoremap <silent> <nowait> ( di(<C-r><C-o>*)
+xnoremap <silent> <nowait> ] di[<C-r><C-o>*]
+xnoremap <silent> <nowait> } di{<C-r><C-o>*}
+xnoremap <silent> <nowait> ) di(<C-r><C-o>*)
 xnoremap <silent> <nowait> " "<C-r><C-o>*"
 
 " Enclose word by {} [] () "" if selected
 snoremap <silent> <nowait> { {<C-r><C-o>*}
 snoremap <silent> <nowait> [ [<C-r><C-o>*]
 snoremap <silent> <nowait> ( (<C-r><C-o>*)
+snoremap <silent> <nowait> } {<C-r><C-o>*}
+snoremap <silent> <nowait> ] [<C-r><C-o>*]
+snoremap <silent> <nowait> ) (<C-r><C-o>*)
 snoremap <silent> <nowait> " "<C-r><C-o>*"
 
 vnoremap <silent> <nowait> <ScrollWheelUp> <Esc>

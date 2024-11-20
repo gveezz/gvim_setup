@@ -3,7 +3,7 @@ setlocal shiftwidth=2
 setlocal softtabstop=0
 setlocal expandtab
 
-function! MdToPdf()
+function! s:MdToPdf()
 
    let l:convProg = "pandoc"
    let l:cFileName = expand("%")
@@ -18,7 +18,7 @@ function! MdToPdf()
 
 endfunction
 
-function! MdToHtml()
+function! s:MdToHtml()
 
    let l:convProg = "pandoc"
    let l:cFileName = expand("%")
@@ -33,7 +33,7 @@ function! MdToHtml()
 
 endfunction
 
-inoremap <buffer> <silent> <nowait> <M-h> <C-o>:call MdToHtml()<CR>
-nnoremap <buffer> <silent> <nowait> <M-h> :call MdToHtml()<CR>
-inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call MdToPdf()<CR>
-nnoremap <buffer> <silent> <nowait> <M-p> :call MdToPdf()<CR>
+inoremap <buffer> <silent> <nowait> <M-h> <C-o>:call <sid>MdToHtml()<CR>
+nnoremap <buffer> <silent> <nowait> <M-h> :call <sid>MdToHtml()<CR>
+inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>MdToPdf()<CR>
+nnoremap <buffer> <silent> <nowait> <M-p> :call <sid>MdToPdf()<CR>

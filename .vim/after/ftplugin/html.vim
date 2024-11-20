@@ -1,4 +1,4 @@
-function! HtmlToPdf()
+function! s:HtmlToPdf()
 
    let l:convProg = "pandoc"
    let l:cFileName = expand("%")
@@ -13,5 +13,5 @@ function! HtmlToPdf()
 
 endfunction
 
-inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call HtmlToPdf()<CR>
-nnoremap <buffer> <silent> <nowait> <M-p> :call HtmlToPdf()<CR>
+inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>HtmlToPdf()<CR>
+nnoremap <buffer> <silent> <nowait> <M-p> :call <sid>HtmlToPdf()<CR>

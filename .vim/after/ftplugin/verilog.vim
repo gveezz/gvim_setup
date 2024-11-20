@@ -1,11 +1,9 @@
 setlocal wrap
+setlocal textwidth=80
 setlocal tabstop=3
 setlocal shiftwidth=3
 setlocal softtabstop=0
 setlocal expandtab
-" setlocal textwidth=80
-" setlocal wrapmargin=80
-" setlocal colorcolumn=81
 " stop annoying with positioning # to the beginning of the line
 setlocal cinkeys-=0#
 "setlocal cindent
@@ -16,59 +14,59 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
-snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>'<<End>
-xnoremap <buffer> <silent> <nowait> <M-c> :call AddMultiLineComment()<CR>'<<End>
+inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
+snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment()<CR>'<<End>
+xnoremap <buffer> <silent> <nowait> <M-c> :call <sid>AddMultiLineComment()<CR>'<<End>
 
-snoremap <buffer> <silent> <nowait> <M-7> <C-o>:call AlignComment()<CR>'<<End>
-xnoremap <buffer> <silent> <nowait> <M-7> :call AlignComment()<CR>'<<End>
+snoremap <buffer> <silent> <nowait> <M-7> <C-o>:call <sid>AlignComment()<CR>'<<End>
+xnoremap <buffer> <silent> <nowait> <M-7> :call <sid>AlignComment()<CR>'<<End>
 
-snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call AlignAssignment()<CR>'<<End>
-xnoremap <buffer> <silent> <nowait> <M-a> :call AlignAssignment()<CR>'<<End>
+snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call <sid>AlignAssignment()<CR>'<<End>
+xnoremap <buffer> <silent> <nowait> <M-a> :call <sid>AlignAssignment()<CR>'<<End>
 
 " inoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
 " snoremap <buffer> <nowait> <M-t> <C-o>:Tab /<C-R>=PromptAlign()<CR>
 " xnoremap <buffer> <nowait> <M-t> :Tab /<C-R>=PromptAlign()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
-snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
-xnoremap <buffer> <silent> <nowait> <M-d> :call AlignDeclarations()<CR>'<<End><C-o>:call AlignComment()<CR>
+inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
+snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
+xnoremap <buffer> <silent> <nowait> <M-d> :call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
-snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call AlignParams()<CR>
-xnoremap <buffer> <silent> <nowait> <M-p> :call AlignParams()<CR>
+inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
+snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
+xnoremap <buffer> <silent> <nowait> <M-p> :call <sid>AlignParams()<CR>
 
-snoremap <buffer> <silent> <nowait> <M-i> <C-o>:call AlignIoInstance()<CR>
-xnoremap <buffer> <silent> <nowait> <M-i> :call AlignIoInstance()<CR>
+snoremap <buffer> <silent> <nowait> <M-i> <C-o>:call <sid>AlignIoInstance()<CR>
+xnoremap <buffer> <silent> <nowait> <M-i> :call <sid>AlignIoInstance()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot()<CR>
-snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot()<CR>
-xnoremap <buffer> <silent> <nowait> <M-.> :call InsertDot()<CR>
+inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot()<CR>
+snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot()<CR>
+xnoremap <buffer> <silent> <nowait> <M-.> :call <sid>InsertDot()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma()<CR>
-snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma()<CR>
-xnoremap <buffer> <silent> <nowait> <M-,> :call AppendComma()<CR>
+inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
+snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
+xnoremap <buffer> <silent> <nowait> <M-,> :call <sid>AppendComma()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot()<CR>
-snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot()<CR>
-xnoremap <buffer> <silent> <nowait> <M-s> :call RplcSemicolonToDot()<CR>
+inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+xnoremap <buffer> <silent> <nowait> <M-s> :call <sid>RplcSemicolonToDot()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon()<CR>
-snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon()<CR>
-xnoremap <buffer> <silent> <nowait> <M-;> :call AppendSemicolon()<CR>
+inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>
+snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>
+xnoremap <buffer> <silent> <nowait> <M-;> :call <sid>AppendSemicolon()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance()<CR>
-snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance()<CR>
-xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance()<CR>
+inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call <sid>FormatIoInstance()<CR>
+snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call <sid>FormatIoInstance()<CR>
+xnoremap <buffer> <silent> <nowait> <M-8> :call <sid>FormatIoInstance()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
-snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
-xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
+inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call <sid>MultiLineComment()<CR>
+snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call <sid>MultiLineComment()<CR>
+xnoremap <buffer> <silent> <nowait> <M-j> :call <sid>MultiLineComment()<CR>
 
 inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
 inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
 
-function! AddLineComment()
+function! s:AddLineComment()
 
    if len(getline('.')) > 0
       silent! :s/$/ \/\/ /g
@@ -78,7 +76,7 @@ function! AddLineComment()
 
 endfunction
 
-function! AddMultiLineComment()
+function! s:AddMultiLineComment()
 
    
    silent! :'<,'>v/\/\//s/$/ \/\/ /g
@@ -88,14 +86,14 @@ function! AddMultiLineComment()
 
 endfunction
 
-function! AlignComment() range
+function! s:AlignComment() range
 
    " silent! :'<,'>Tab /\/\/
    silent! :'<,'>EasyAlign /\s\/\// {'lm':0, 'rm':1}
    silent! :'<,'>s/\s\+\/\/\s+/ \/\/ /g
 endfunction
 
-function! AlignDeclarations()
+function! s:AlignDeclarations()
 
    silent! :'<,'>s# \+# #g
    " silent! :'<,'>Tab /\s\a/l0
@@ -105,7 +103,7 @@ function! AlignDeclarations()
 
 endfunction
 
-function! AlignParams()
+function! s:AlignParams()
 
    silent! :'<,'>s# \+# #g
    " :'<,'>Tab /\s[A-Z]/l0
@@ -115,7 +113,7 @@ function! AlignParams()
 
 endfunction
 
-function! AlignIoInstance() range
+function! s:AlignIoInstance() range
 
    silent! :'<,'>EasyAlign /(/ {'lm':1,'rm':0 }
    silent! :'<,'>v/\/\//s/\s*)/)/g
@@ -123,7 +121,7 @@ function! AlignIoInstance() range
 
 endfunction
 
-function! AlignAssignment() range
+function! s:AlignAssignment() range
 
    " silent! :'<,'>Tab /<=/
    silent! :'<,'>g/</EasyAlign /<=/ {'lm':1,'rm':1}
@@ -133,33 +131,33 @@ function! AlignAssignment() range
    " silent! :'<,'>s/=\d/= /g
 endfunction
 
-function! RplcSemicolonToDot()
+function! s:RplcSemicolonToDot()
    
    silent! :'<,'>s/,/;/g
 
 endfunction
 
-function! InsertDot() range
+function! s:InsertDot() range
    
    silent! :'<,'>v/\/\//normal! I.
 
 endfunction
 
-function! AppendComma() range
+function! s:AppendComma() range
    
    silent! ;'<,'>v/\/\//s/\s\+$//g
    silent! :'<,'>v/\/\//normal! A,
 
 endfunction
 
-function! AppendSemicolon() range
+function! s:AppendSemicolon() range
    
    silent! ;'<,'>v/\/\//s/\s\+$//g
    silent! :'<,'>v/\/\//normal! A;
 
 endfunction
 
-function! FormatIoInstance() range
+function! s:FormatIoInstance() range
 
    silent! :'<,'>v/\/\//normal! I.
    silent! ;'<,'>v/\/\//s/\s\+$//g
@@ -171,11 +169,11 @@ function! FormatIoInstance() range
    
 endfunction
 
-function! MultiLineComment() range
+function! s:MultiLineComment() range
    silent! :'<,'>normal! I// 
 endfunction
 
-function! HasWireRegDeclaration()
+function! s:HasWireRegDeclaration()
    
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
@@ -186,7 +184,7 @@ function! HasWireRegDeclaration()
    
 endfunction
 
-function! HasIODeclaration()
+function! s:HasIODeclaration()
    
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
@@ -199,7 +197,7 @@ function! HasIODeclaration()
    
 endfunction
 
-function! HasParamDeclaration()
+function! s:HasParamDeclaration()
    
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
@@ -209,8 +207,8 @@ function! HasParamDeclaration()
    
 endfunction
 
-function! HasDeclaration()
-   return HasIODeclaration() || 
-          \ HasWireRegDeclaration() || 
-          \ HasParamDeclaration()
+function! s:HasDeclaration()
+   return s:HasIODeclaration() || 
+          \ s:HasWireRegDeclaration() || 
+          \ s:HasParamDeclaration()
 endfunction
