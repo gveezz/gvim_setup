@@ -63,8 +63,8 @@ inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call <sid>MultiLineComment()<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call <sid>MultiLineComment()<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call <sid>MultiLineComment()<CR>
 
-inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
-inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
+inoremap <expr> <silent> <nowait> , <sid>HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
+inoremap <expr> <silent> <nowait> ; <sid>HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
 
 function! s:AddLineComment()
 
