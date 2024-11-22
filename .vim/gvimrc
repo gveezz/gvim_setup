@@ -116,7 +116,7 @@ set lazyredraw
 set scrolloff=0
 set splitright
 set splitbelow
-set complete=.,t,w,b,d
+set complete=.,t,w,b,d,k
 set completeopt+=menuone,preview
 set hidden
 set hlsearch
@@ -183,7 +183,7 @@ augroup BufWinIn
                       \ else |  
                       \ stopinsert |  
                       \ endif
-   autocmd BufAdd,BufCreate,BufNewFile * silent! call AddFtDict()
+   autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
 augroup END
 
 augroup Insert

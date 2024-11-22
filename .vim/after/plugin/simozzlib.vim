@@ -604,7 +604,7 @@ function! IabbrevSnippet()
 
    let l:snippetStr = "snippet"
    let l:snippetsStr = l:snippetStr."s"
-   let l:ftSnipFile = $VIMHOME."/".l:snippetsStr."/".&ft.".".l:snippetsStr
+   let l:ftSnipFile = $MYVIMDIR."/".l:snippetsStr."/".&ft.".".l:snippetsStr
 
    if filereadable(l:ftSnipFile) > 0
       " echom "Snippet file".l:ftSnipFile." found"
@@ -614,7 +614,7 @@ function! IabbrevSnippet()
          if stridx(line, l:snippetStr) == 0
             let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
             if len(l:snippetToMatch) > 0 && stridx(l:snippetToMatch, '#') < 0
-               echom "l:snippetToMatch = ".l:snippetToMatch
+               " echom "l:snippetToMatch = ".l:snippetToMatch
                exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." SnippetInComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
             endif
          endif
@@ -625,7 +625,7 @@ endfunction
 
 function! AddFtDict()
 
-   let l:ftdictpath = $VIMHOME."/dictionary/".&ft.".txt"
+   let l:ftdictpath = $MYVIMDIR."/dictionary/".&ft.".txt"
 
    if filereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath

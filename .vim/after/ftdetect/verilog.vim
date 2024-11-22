@@ -7,6 +7,6 @@ augroup Verilog
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | :0r $HOME/.vim/templates/kd/kdheader.txt | :$r $HOME/.vim/templates/verilog/vtemplate.vh | :call AdjTemplate() | endif
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | :0r $HOME/.vim/templates/kd/kdheader.txt | :$r $HOME/.vim/templates/verilog/vtemplate.vinc | :call AdjTemplate() | endif
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vf,*.svf if line('$') == 1 && getline(1) == '' | :0r $HOME/.vim/templates/kd/kdheader.txt | :$r $HOME/.vim/templates/verilog/vtemplate.vf | :call AdjTemplate() | endif
-   autocmd FileType verilog :call SetIndentMarks()
+   autocmd FileType verilog call SetIndentMarks() | call AddFtDict() | call IabbrevSnippet()
 
 augroup END
