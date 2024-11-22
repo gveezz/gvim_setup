@@ -1,5 +1,13 @@
 " CUSTOM FUNCTIONS
 
+function! ReloadVimRc ()
+   if has('gui') && filereadable($MYGVIMRC)
+      silent! source $MYGVIMRC
+   elseif filereadable($MYGVIMRC)
+      silent! source $MYVIMRC
+   endif
+endfunction
+
 function! AdjTemplate ()
 
    let l:currYear = strftime('%Y')
@@ -1402,12 +1410,25 @@ function! GetDate()
    return l:date
 endfunction
 
+function! MakePatch(afile, bfile)
+   EchoYellowMsg("Nothing to do")
+endfunction
+
+function! SetIndentMarks ()
+   let l:tabstop = &tabstop
+   let l:tabstop = l:tabstop-1
+   let l:leadSpace = repeat('\ ', l:tabstop)."\¦"
+   exec ":setlocal listchars+=leadmultispace:".l:leadSpace
+endfunction
+
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 " vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-command! -nargs=1 Clrr call setreg(<f-args>, "")
+command! -nargs=1 ClearReg call setreg(<f-args>, "")
 command! -nargs=1 Diffsplit :vertical diffsplit <args>
+" command! -nargs=2 MakePatch :call MakePatch(<f-args>)<CR>
 command! -nargs=+ HiSet call HighlightSet(<f-args>)
 command! -bang -nargs=0 InsDate :normal! i<C-r>=GetDate()<CR>
+command! -nargs=0 SetIMarks :call SetIndentMarks()
 

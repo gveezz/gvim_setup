@@ -15,7 +15,7 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 let g:netrw_alto = 0
 let g:netrw_altfile = 1
-let g:indentLine_enabled = 1
+let g:indentLine_enabled = 0
 
 
 let g:ctrlp_working_path_mode = 0
@@ -106,8 +106,6 @@ set guicursor+=v:ver25-blinkoff0-vCursor
 set guicursor+=c-ci:ver25-blinkoff0-cCursor
 
 set noignorecase
-set diffopt=filler,context:0
-
 set formatoptions=tcj
 set mouse=ar
 set mousehide
@@ -158,11 +156,13 @@ set foldnestmax=20
 set foldcolumn=0
 set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 
+set diffopt=internal,filler,closeoff
+
 " set undodir=/tmp/
 " set undofile
 
 set list
-set listchars=tab:>>
+set listchars=tab:>\  
 
 let g:bclose_multiple = 0
 let g:searchString = ""
@@ -203,6 +203,7 @@ augroup Vim
                       \ else |  
                       \ call SetPWD(expand("%:h")) |  
                       \ endif
+   autocmd VimEnter * if filereadable('tags') | set tags=./tags | endif
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
    autocmd ModeChanged *  call SetCursorLineMode() | call SetStatusLineMode()

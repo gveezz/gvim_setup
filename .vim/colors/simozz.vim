@@ -15,22 +15,22 @@ let colors_name = "simozz"
 
 let g:simozz_bgcolor = '#222222'
 
-hi Normal                 guifg=white guibg=#222222
+hi Normal                 guifg=white guibg=#222222 ctermbg=black ctermfg=white
 hi Scrollbar              guifg=black guibg=cyan
 hi Menu                   guifg=black guibg=cyan
-hi SpecialKey             term=bold cterm=bold  ctermfg=darkred  guifg=#AAAAAA gui=bold
-hi NonText                term=bold cterm=bold  ctermfg=darkred  gui=bold guifg=#222222 " guifg=#cc0000
-hi Directory              term=bold cterm=bold  ctermfg=brown  guifg=Yellow
+hi SpecialKey             term=bold cterm=bold  ctermfg=LightGrey  guifg=#555555 gui=bold
+hi NonText                term=bold cterm=bold  ctermfg=LightGrey  gui=bold guifg=#222222 " guifg=#cc0000
+hi Directory              term=bold cterm=bold  ctermfg=Yellow  guifg=Yellow
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=#000000  guibg=Yellow gui=bold
-hi IncSearch              term=reverse  ctermfg=white  ctermbg=red  guifg=Green  guibg=white
+hi IncSearch              term=reverse  ctermfg=white  ctermbg=Green  guifg=Green  guibg=white
 hi Search                 guibg=white guifg=#000000 guibg=#00ff00 gui=bold
 hi MoreMsg                term=bold  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=SeaGreen
 hi ModeMsg                term=bold  cterm=bold  gui=bold  guifg=White  guibg=Blue
-hi LineNr                 term=underline  cterm=bold  ctermfg=darkcyan  guifg=Yellow
-hi Question               term=standout  cterm=bold  ctermfg=darkgreen  gui=bold  guifg=Green
-hi Title                  term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold  guifg=Magenta
-hi Visual                 guibg=#467BFF guifg=#000000 gui=bold
-hi HighCW                 guibg=#c0c0c0 guifg=#000000 gui=bold
+hi LineNr                 term=underline  cterm=bold  ctermfg=Green  guifg=Yellow
+hi Question               term=standout  cterm=bold  ctermfg=yellow  gui=bold  guifg=Green
+hi Title                  term=bold  cterm=bold  ctermfg=LightGrey  gui=bold  guifg=Magenta
+hi Visual                 guibg=#467BFF guifg=#000000 gui=bold cterm=bold  ctermfg=white ctermbg=LightBlue
+hi HighCW                 guibg=#c0c0c0 guifg=#000000 gui=bold cterm=bold  ctermfg=white ctermbg=LightBlue
 hi WarningMsg             term=standout  cterm=bold  ctermfg=black ctermbg=Yellow guifg=black guibg=Yellow
 
 hi Cursor                 guibg=#0000ff guifg=#000000 cterm=bold
@@ -40,11 +40,11 @@ hi cCursor                guibg=#00ff00 cterm=bold
 hi iCursor                guibg=#467BFF guifg=#000000 cterm=bold 
 hi vCursor                guibg=#ab46ff guifg=#000000 cterm=bold
 
-hi MsgArea                term=bold,reverse cterm=bold guibg=#222222 gui=bold
+hi MsgArea                term=bold,reverse cterm=bold guibg=#222222 gui=bold ctermbg=black ctermfg=lightgray
 
-hi Comment                term=bold  cterm=bold ctermfg=cyan  guifg=Yellow gui=bold
-hi Constant               term=underline  cterm=bold ctermfg=magenta  guifg=#ED762E gui=bold
-hi Special                term=bold  cterm=bold ctermfg=red  guifg=#f7aa1b gui=bold
+hi Comment                term=bold  cterm=bold ctermfg=yellow guifg=Yellow gui=bold
+hi Constant               term=underline  cterm=bold ctermfg=magenta guifg=#ED762E gui=bold
+hi Special                term=bold  cterm=bold ctermfg=LightYellow guifg=#f7aa1b gui=bold
 hi Identifier             term=underline   ctermfg=brown  guifg=#40ffff
 hi Statement              term=bold  cterm=bold ctermfg=yellow  gui=bold  guifg=#B0B0FF
 hi PreProc                term=underline  ctermfg=darkmagenta   guifg=#E179FF gui=bold
