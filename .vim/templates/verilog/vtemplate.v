@@ -35,11 +35,11 @@ module $COMPONENT_NAME
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
 
-input  SClk;     // COMMENT
-input  Reset_n;  // COMMENT
-input  SyncRst;  // COMMENT
-input  DataInVal; // COMMENT
-input  DataIn;    // COMMENT
+input  SClk;       // COMMENT
+input  Reset_n;    // COMMENT
+input  SyncRst;    // COMMENT
+input  DataInVal;  // COMMENT
+input  DataIn;     // COMMENT
 output DataOutVal; // COMMENT
 output DataOut;    // COMMENT
 
