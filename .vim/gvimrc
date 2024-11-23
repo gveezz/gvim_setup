@@ -17,19 +17,7 @@ let g:netrw_alto = 0
 let g:netrw_altfile = 1
 let g:indentLine_enabled = 0
 
-
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 1
-" let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cmd = 'CtrlPCurWD'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
-let g:ctrlp_prompt_mappings = { 'PrtDelete()'       : ['<c-k>', '<del>'] }
-let g:ctrlp_prompt_mappings = { 'PrtExit()'         : ['<c-x>', '<esc>'] }
-
-helptags $HOME/.vim/doc
+helptags $MYVIMDIR/doc
 set nocompatible  
 set viminfofile=NONE
 colorscheme simozz
@@ -381,10 +369,7 @@ nnoremap <silent> <nowait> <C-RightMouse> <nop>
 inoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <silent> <nowait> <S-Del> <nop>
 
-" Enter: trigger snippet completitio if pumvisible, Enter otherwise
-" inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
-" Enter: trigger snippet completitio if pumvisible, Enter otherwise
-" inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() == 0)) ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+inoremap <expr> <silent> <nowait> <Enter> pumvisible() ? "<C-y>" : "<Enter>"
 
 " Backspace: behave as in normal mode
 " nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
@@ -508,9 +493,9 @@ inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
 " <LeftMouse><LeftMouse>
-inoremap <silent> <nowait> <C-.> <C-c>l
-nnoremap <silent> <nowait> <C-.> viw
-xnoremap <expr> <silent> <nowait> <C-.> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
+inoremap <silent> <nowait> <C-Space> <C-c>l
+nnoremap <silent> <nowait> <C-Space> viw
+xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>
