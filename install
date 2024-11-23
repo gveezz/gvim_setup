@@ -1,12 +1,11 @@
 #!/bin/sh
 
+VIMDIR=.vim
 REMOTE_HOST=""
-REMOTE_USER=""
-REMOTE_DIR=""
+REMOTE_USER=${USER}
+REMOTE_DIR=${VIMDIR}
 REMOTE=0
 GET=0
-
-VIMDIR=.vim
 
 usage () {
    echo "Args:"
