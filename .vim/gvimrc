@@ -258,18 +258,14 @@ snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
-" inoremap <silent> <nowait> <C-.> <C-o>
-
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
-" nnoremap <silent> <nowait> <Esc> i
+nnoremap <silent> <nowait> <Esc> i
 
 inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
 
 inoremap <silent> <nowait> <expr> <C-c> col('.')== 1? "<C-c>" : "<C-c>l"
 nnoremap <silent> <nowait> <C-c> i
-
-nnoremap <silent> <nowait> <Esc> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 
@@ -279,7 +275,7 @@ nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-b:
 inoremap <nowait> <C-b> <C-o>:b 
-noremap <nowait> <C-b> :b 
+nnoremap <nowait> <C-b> :b 
 " M-n: go to normal mode from insert mode
 " inoremap <silent> <nowait> <M-n> <Esc>
 
@@ -388,7 +384,7 @@ cnoremap <silent> <nowait> <S-Del> <nop>
 " Enter: trigger snippet completitio if pumvisible, Enter otherwise
 " inoremap <expr> <silent> <nowait> <Enter> pumvisible() != 0 ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 " Enter: trigger snippet completitio if pumvisible, Enter otherwise
-inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() == 0)) ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
+" inoremap <expr> <silent> <nowait> <Enter> ((pumvisible() != 0) && (InComment() == 0)) ? "<C-y><c-r>=TriggerSnippet()<CR>" : "<Enter>"
 
 " Backspace: behave as in normal mode
 " nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
@@ -512,9 +508,9 @@ inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
 " <LeftMouse><LeftMouse>
-inoremap <silent> <nowait> <C-m> <C-c>l
-nnoremap <silent> <nowait> <C-m> viw
-xnoremap <expr> <silent> <nowait> <C-m> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
+inoremap <silent> <nowait> <C-.> <C-c>l
+nnoremap <silent> <nowait> <C-.> viw
+xnoremap <expr> <silent> <nowait> <C-.> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>

@@ -449,44 +449,12 @@ function! DeleteWord()
 
 endfunction
 
-" function! NerdTreeToggle()
-" 
-"    let l:winnr = winnr("$")
-"    " if NERDTree is open
-"    if (&ft == 'nerdtree')
-"       " and it is not the only open window
-"       if l:winnr > 1
-"          " close NERDTree
-"          silent! :NERDTreeClose
-"       endif
-"    else
-"       " otherwise open it
-"       if g:NERDTree.IsOpen() == 0
-"          silent! :NERDTree
-"       " else
-"       "    silent! :NERDTreeClose
-"       endif
-"    endif
-" endfunction
-
-function! InComment()
-
-   let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
-   if l:incomment >= 0
-      " call EchoYellowMsg("In Comment ".l:incomment)
-      return 1
-   else
-      " call EchoYellowMsg("Not Comment ".l:incomment)
-      return 0
-   endif
-endfunction
-
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
 " The window will show the alternate buffer (Ctrl-^) if it exists,
 " or the previous buffer (:bp), or a blank buffer if no previous.
 " Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
 " An optional argument can specify which buffer to close (name or number).
-function! s:Bclose(bang, buffer)
+function! Bclose(bang, buffer)
 
    if empty(a:buffer)
        let btarget = bufnr('%')
@@ -577,50 +545,10 @@ function! BetterBufferPrev() abort
 
 endfunction
 
-" function! Abbrev(match, replace)
-"
-"    let l:incomment = stridx(synIDattr(synID(line('.'), col('.'), 0), 'name'), 'Comment')
-"    if l:incomment <= 0
-"       return a:replace
-"    else
-"       return a:match
-"
-" endfunction
-
-function! InComment()
-
-   return (stridx(getline('.')[:col('.')-1], '//') >= 0)
-
-endfunction
-
-function! SnippetInComment(snippetToMatch)
-
-   let l:snipN = len(split(getline('.'), a:snippetToMatch))
-   return ((l:snipN > 0) && (InComment() >= 0))
-
-endfunction
-
-function! IabbrevSnippet()
-
-   let l:snippetStr = "snippet"
-   let l:snippetsStr = l:snippetStr."s"
-   let l:ftSnipFile = $MYVIMDIR."/".l:snippetsStr."/".&ft.".".l:snippetsStr
-
-   if filereadable(l:ftSnipFile) > 0
-      " echom "Snippet file".l:ftSnipFile." found"
-      " exec "setlocal dict+=".l:ftdictpath
-      for l:line in readfile(l:ftSnipFile, '', 100)
-         " echom "line = ".line
-         if stridx(line, l:snippetStr) == 0
-            let l:snippetToMatch = l:line[len(l:snippetStr)+1:]
-            if len(l:snippetToMatch) > 0 && stridx(l:snippetToMatch, '#') < 0
-               " echom "l:snippetToMatch = ".l:snippetToMatch
-               exec ":iabbrev <expr> <silent> <buffer> ".l:snippetToMatch." SnippetInComment('".l:snippetToMatch."') == 1 ? \"".l:snippetToMatch."\" : \"".l:snippetToMatch."<C-o>:call TriggerSnippet()<CR><c-r>=Eatchar(' ')<CR>\""
-            endif
-         endif
-      endfor
-   endif
-
+function! InComment(word)
+   let l:commidx = stridx(getline('.'), '//')
+   let l:wordidx = stridx(getline('.'), a:word)
+   return ((l:commidx >= 0) && (l:commidx < l:wordidx))
 endfunction
 
 function! AddFtDict()
