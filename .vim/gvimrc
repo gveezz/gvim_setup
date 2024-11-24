@@ -171,7 +171,8 @@ augroup BufWinIn
                       \ else |  
                       \ stopinsert |  
                       \ endif
-   autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
+   " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
+   autocmd FileType * silent! :call AddFtDict() 
 augroup END
 
 augroup Insert
@@ -228,7 +229,7 @@ nnoremap <silent> <nowait> <C-ScrollWheelDown> :call SmallerFont()<CR>
 inoremap <silent> <nowait> <M-PageUp> <C-o>10zh
 nnoremap <silent> <nowait> <M-PageUp> 10zh
 xnoremap <silent> <nowait> <M-PageUp> 10zh
-inoremap <silent> <nowait> <C-M-ScrollWheelUp> <C-o>10zh
+inoremap <silent> <nowait> <C-M-ScrollWheelUp> <C-o>10zh:
 nnoremap <silent> <nowait> <C-M-ScrollWheelUp> 10zh
 snoremap <silent> <nowait> <C-M-ScrollWheelUp> <C-o>10zh
 

@@ -23,5 +23,4 @@ extern "C" {
 #endif
 
 #endif
-// end of $COMPONENT_NAME
- 
+// end of $COMPONENT_NAME 

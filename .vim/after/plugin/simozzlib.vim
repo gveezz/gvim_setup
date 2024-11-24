@@ -552,13 +552,10 @@ function! InComment(word)
 endfunction
 
 function! AddFtDict()
-
    let l:ftdictpath = $MYVIMDIR."/dictionary/".&ft.".txt"
-
-   if filereadable(l:ftdictpath) > 0
+   if filºereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath
    endif
-
 endfunction
 
 " function! CleverTab()
