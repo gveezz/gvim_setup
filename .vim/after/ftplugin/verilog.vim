@@ -16,9 +16,9 @@ let b:verilog_indent_modules=1
 
 " iabbrev <buffer> <expr> if InComment('if') ? "if" : "if<Space>()<Space>begin<C-o>T(<C-r>=Eatchar(' ')<CR>"
 
-" inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
-" snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment()<CR>'<<End>
-" xnoremap <buffer> <silent> <nowait> <M-c> :call <sid>AddMultiLineComment()<CR>'<<End>
+inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
+snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment()<CR>'<<End>
+xnoremap <buffer> <silent> <nowait> <M-c> :call <sid>AddMultiLineComment()<CR>'<<End>
 " 
 " snoremap <buffer> <silent> <nowait> <M-7> <C-o>:call <sid>AlignComment()<CR>'<<End>
 " xnoremap <buffer> <silent> <nowait> <M-7> :call <sid>AlignComment()<CR>'<<End>
