@@ -30,16 +30,16 @@ inoremap <buffer> <silent> <nowait> <M-a> <C-o>:call <sid>PromptAlign()<CR>
 snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call <sid>PromptAlign()<CR>
 xnoremap <buffer> <silent> <nowait> <M-a> :call <sid>PromptAlign()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
-snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
-xnoremap <buffer> <silent> <nowait> <M-d> :call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
+" inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
+" snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
+" xnoremap <buffer> <silent> <nowait> <M-d> :call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
-snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
-xnoremap <buffer> <silent> <nowait> <M-p> :call <sid>AlignParams()<CR>
+" inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
+" snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
+" xnoremap <buffer> <silent> <nowait> <M-p> :call <sid>AlignParams()<CR>
 
-snoremap <buffer> <silent> <nowait> <M-i> <C-o>:call <sid>AlignIoInstance()<CR>
-xnoremap <buffer> <silent> <nowait> <M-i> :call <sid>AlignIoInstance()<CR>
+" snoremap <buffer> <silent> <nowait> <M-i> <C-o>:call <sid>AlignIoInstance()<CR>
+" xnoremap <buffer> <silent> <nowait> <M-i> :call <sid>AlignIoInstance()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot()<CR>
 snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot()<CR>
