@@ -603,7 +603,7 @@ function! AutoCompleteInoremap()
         \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '//', '\\' , '_', '<Backspace>']
+        \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '//', '\\' , '_']
   for key in s:keysMappingDriven
     silent! execute "inoremap <expr> <silent> <nowait> ".key." pumvisible() == 0 ? \"".key."<c-r>=FeedCompletePopUp()<CR>\" : \"".key."\""
   endfor
@@ -1356,4 +1356,5 @@ command! -nargs=1 Diffsplit :vertical diffsplit <args>
 command! -nargs=+ HiSet call HighlightSet(<f-args>)
 command! -bang -nargs=0 InsDate :normal! i<C-r>=GetDate()<CR>
 command! -nargs=0 SetIMarks :call SetIndentMarks()
+command! ClearBufferList :call ClearBufferList()
 

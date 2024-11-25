@@ -181,7 +181,7 @@ augroup Insert
    " autocmd InsertLeave * set iminsert=0
    " autocmd InsertEnter * set iminsert=1
    " autocmd InsertEnter * let @*=""
-   autocmd CompleteDonePre * if complete_info()['selected'] >= 0 &&
+   " autocmd CompleteDonePre * if complete_info()['selected'] >= 0 &&
                              \ getline('.')[col('.'):] =~ '\w' |
                              \ silent! normal! ved | 
                              \ endif
