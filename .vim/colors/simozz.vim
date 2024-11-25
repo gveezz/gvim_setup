@@ -18,7 +18,7 @@ let g:simozz_bgcolor = '#222222'
 hi Normal                 guifg=white guibg=#222222 ctermbg=black ctermfg=white
 hi Scrollbar              guifg=black guibg=cyan
 hi Menu                   guifg=black guibg=cyan
-hi SpecialKey             term=bold cterm=bold  ctermfg=LightGrey  guifg=#555555 gui=bold
+hi SpecialKey             term=bold cterm=bold  ctermfg=LightGrey  guifg=#888888 gui=bold
 hi NonText                term=bold cterm=bold  ctermfg=LightGrey  gui=bold guifg=#222222 " guifg=#cc0000
 hi Directory              term=bold cterm=bold  ctermfg=Yellow  guifg=Yellow
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=#000000  guibg=Yellow gui=bold
