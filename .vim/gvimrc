@@ -24,7 +24,7 @@ colorscheme simozz
 syntax enable
 "set insertmode
 set magic
-set noautochdir
+set autochdir
 set noshowmode
 set viminfo=""
 set incsearch
