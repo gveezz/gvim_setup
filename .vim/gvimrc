@@ -456,9 +456,9 @@ vnoremap <silent> <nowait> <MiddleMouse> <nop>
 " inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
-inoremap <silent> <nowait> <C-Space> <C-c>l
+inoremap <silent> <nowait> <C-Space> <C-o>v
 nnoremap <silent> <nowait> <C-Space> viw
-xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
+xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>
