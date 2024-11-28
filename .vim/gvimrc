@@ -250,7 +250,8 @@ snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
-inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" inoremap <silent> <nowait> <Esc> <C-o><Esc>
+inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc>l"
 nnoremap <silent> <nowait> <Esc> i
 
 inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
