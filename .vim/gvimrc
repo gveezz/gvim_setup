@@ -77,8 +77,7 @@ set shiftwidth=3
 set breakindent
 set browsedir=last
 set smarttab
-set number
-set relativenumber
+set number relativenumber
 set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
@@ -262,15 +261,9 @@ nnoremap <silent> <nowait> <C-c> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 
+" M-w: Change window
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
-" tnoremap <silent> <nowait> <M-w> <C-\><C-n><C-w>w
-
-" C-b:
-inoremap <nowait> <C-b> <C-o>:b 
-nnoremap <nowait> <C-b> :b 
-" M-n: go to normal mode from insert mode
-" inoremap <silent> <nowait> <M-n> <Esc>
 
 " C-d: open netrw in a new tab 
 inoremap <silent> <nowait> <C-d> <C-o>:Explore!<CR>
@@ -284,16 +277,16 @@ inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
 nnoremap <silent> <nowait> <F2> :call LargerFont()<CR>
 
 " F3: switch to next window
-inoremap <silent> <nowait> <F3> <C-o>:call SmallerFont()<CR>
-nnoremap <silent> <nowait> <F3> :call SmallerFont()<CR>
+inoremap <silent> <nowait> <S-F2> <C-o>:call SmallerFont()<CR>
+nnoremap <silent> <nowait> <S-F2> :call SmallerFont()<CR>
 
 " F4: open file to diff side by side
 inoremap <nowait> <M-d> <C-o>:vert diffsplit 
 nnoremap <nowait> <M-d> <C-o>:vert diffsplit 
 
 " S-F4: diffoff
-inoremap <silent> <nowait> <S-F4> <C-o>:diffoff<CR>
-nnoremap <silent> <nowait> <S-F4> <C-o>:diffoff<CR>
+inoremap <silent> <nowait> <M-S-d> <C-o>:diffoff<CR>
+nnoremap <silent> <nowait> <M-S-d> <C-o>:diffoff<CR>
 
 " F5: increase vertical resize by 5 units
 inoremap <silent> <nowait> <F5> <C-o>:vertical resize +5<CR>
@@ -345,10 +338,6 @@ nnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^"
 vnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
 snoremap <expr> <silent> <nowait> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
 
-inoremap <silent> <nowait> <C-p> <C-c>:CtrlP<CR>
-nnoremap <silent> <nowait> <C-p> :CtrlP<CR>
-vnoremap <silent> <nowait> <C-p> <Esc><C-c>:CtrlP<CR>
-
 inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
 vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
@@ -375,9 +364,6 @@ inoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <silent> <nowait> <S-Del> <nop>
 
 inoremap <expr> <silent> <nowait> <Enter> pumvisible() ? "<C-y>" : "<Enter>"
-
-" Backspace: behave as in normal mode
-" nnoremap <expr> <silent> <nowait> <Backspace> col('.') == 1 ? "k$<Right>" : "dh"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-N>" : "<Tab>"
@@ -420,31 +406,16 @@ snoremap <silent> <nowait> <C-.> <C-o>zFzz
 inoremap <nowait> <C-v> <C-r><C-o>+
 nnoremap <nowait> <C-v> <C-r><C-o>+
 vnoremap <nowait> <C-v> <C-r><C-o>+
-"xnoremap <nowait> <C-v> <C-r><C-o>+
-"snoremap <nowait> <C-v> <C-r><C-o>+
-" tnoremap <nowait> <C-v> <C-W>"+
 cnoremap <nowait> <C-v> <C-r>+
 
 inoremap <nowait> <C-M-v> <C-r>+
 nnoremap <nowait> <C-M-v> <C-r>+
 vnoremap <nowait> <C-M-v> <C-r>+
 
-
 " C-l: prompt replace
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 nnoremap <nowait> <C-l> :call BufferList()<CR>
 snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
-
-
-" C-r: prompt replace
-" inoremap <nowait> <C-r> <C-o>:call PromptReplI()<CR>
-" nnoremap <nowait> <C-r> :call PromptReplI()<CR>
-" snoremap <nowait> <C-r> <C-o>:call PromptReplS()<CR>
-" cnoremap <silent> <nowait> <C-r> <C-c>
-
-" M-r: prompt replace exact match
-" inoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctI()<CR>
-" snoremap <silent> <nowait> <M-r> <C-o>:call PromptReplExctS()<CR>
 
 " C-s: save
 inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:saveas " : "<C-o>:w!<CR>" : ""
@@ -453,25 +424,16 @@ xnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname
 snoremap <nowait> <C-s> <Esc>
 cnoremap <nowait> <C-s> <C-c>
 
-" inoremap <silent> <nowait> <C-s> <C-o>:call GuiSave()<CR>
-" nnoremap <silent> <nowait> <C-s> :call GuiSave()<CR>
-" cnoremap <silent> <nowait> <C-s> <C-c><C-o>:call GuiSave()<CR>
-" xnoremap <silent> <nowait> <C-s> <Esc>:call GuiSave()<CR>
-
 " C-k: delete line
 inoremap <silent> <nowait> <C-k> <C-o>dd
 nnoremap <silent> <nowait> <C-k> dd
-" snoremap <silent> <nowait> <C-k> <Esc><C-c>ddi
 vnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
-inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
-xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
-snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
-
-" inoremap <nowait> <C-g> <Esc>v/
-" nnoremap <nowait> <C-g> v/
+" inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
+" nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+" xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+" snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
@@ -484,20 +446,15 @@ inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
 nnoremap <silent> <nowait> <C-y> :redo<CR>
 xnoremap <silent> <nowait> <C-z> <Esc>:redo<CR>
 
-
 " MiddleMouse: paste as well
-" inoremap <silent> <nowait> <MiddleMouse> <C-o>"+P
-" nnoremap <silent> <nowait> <MiddleMouse> "+P
-" xnoremap <silent> <nowait> <MiddleMouse> <nop>
 inoremap <silent> <nowait> <MiddleMouse> <nop>
 nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
 " M-v: block paste
-inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
+" inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
 
 " C-Space: start visual block mode
-" <LeftMouse><LeftMouse>
 inoremap <silent> <nowait> <C-Space> <C-c>l
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : mode() =="V" ? "b<C-c>i" : "v"
