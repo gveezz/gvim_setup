@@ -104,7 +104,7 @@ set scrolloff=0
 set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
-set completeopt+=menuone,preview,longest
+set completeopt+=menuone,preview
 set hidden
 set hlsearch
 set incsearch
@@ -452,12 +452,14 @@ inoremap <silent> <nowait> <MiddleMouse> <nop>
 nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
-" M-v: block paste
-" inoremap <silent> <nowait> <M-v> <C-o>:put "+<CR>
+" M-s: select inner word
+inoremap <silent> <nowait> <M-s> <C-c>viw
+nnoremap <silent> <nowait> <M-s> viw
+xnoremap <silent> <nowait> <M-s> iw
+snoremap <silent> <nowait> <M-s> <C-g>iw<C-g>
 
 " C-Space: start visual block mode
 inoremap <silent> <nowait> <C-Space> <C-o>v
-nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
