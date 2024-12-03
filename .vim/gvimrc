@@ -384,7 +384,8 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-vnoremap <expr> <nowait> <C-f> mode() == 'v' ? "<Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>" : "/"
+xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>"
+snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
@@ -452,11 +453,15 @@ inoremap <silent> <nowait> <MiddleMouse> <nop>
 nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
+" M-s: select inner word
+inoremap <silent> <nowait> <M-s> <C-c>viw
+nnoremap <silent> <nowait> <M-s> viw
+xnoremap <silent> <nowait> <M-s> iw
+snoremap <silent> <nowait> <M-s> <C-g>iw<C-g>
+
 " C-Space: start visual block mode
 inoremap <silent> <nowait> <C-Space> <C-o>v
-nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
-snoremap <silent> <nowait> <C-Space> <C-g>
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>

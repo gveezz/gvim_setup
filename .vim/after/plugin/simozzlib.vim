@@ -60,7 +60,7 @@ function! ToUpper()
     call setpos(".", cursor_pos)
 endfunction
 
-function! EchoYellowMsg(msg)
+function! EchoYellowMsg(msg) range
   echohl StatusLineY
   echo a:msg
   echohl None
@@ -410,7 +410,7 @@ function! SetStatusLineMode()
       hi StatusLine guifg=#1c5dff guibg=#F3C81B
    elseif l:mode == 'V'
       hi StatusLine guifg=#b602de guibg=#F3C81B
-   elseif l:mode == "\<C-V>"
+   elseif l:mode == "<C-v>"
       hi StatusLine guifg=#0007ff guibg=#F3C81B
    elseif  l:mode == 's' || l:mode == 'S'
       hi StatusLine guifg=#4900B8 guibg=#F3C81B
