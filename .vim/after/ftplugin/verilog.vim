@@ -49,9 +49,9 @@ inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
 snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
 xnoremap <buffer> <silent> <nowait> <M-,> :call <sid>AppendComma()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
-snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
-xnoremap <buffer> <silent> <nowait> <M-s> :call <sid>RplcSemicolonToDot()<CR>
+" inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+" snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+" xnoremap <buffer> <silent> <nowait> <M-s> :call <sid>RplcSemicolonToDot()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>
 snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>

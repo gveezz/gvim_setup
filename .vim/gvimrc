@@ -385,8 +385,8 @@ nnoremap <nowait> <C-f> /
 xnoremap <expr> <silent> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:let @/=\"<C-r>=VSearchStrSub()<CR>\"<CR>b"
 " snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 snoremap <silent> <nowait> <C-f> <C-c>:let @/="<C-r>=VSearchStrSub()<CR>"<CR>b
-cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
-cnoremap <expr> <nowait> <C-f> /
+cnoremap <expr> <nowait> <C-f> len(@/) > 0 ? "/<C-r>/<CR>" : "/"
+" cnoremap <expr> <nowait> <C-f> /
 cnoremap <nowait> <C-w> <C-r><C-w>
 
 inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
