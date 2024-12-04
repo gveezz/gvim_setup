@@ -162,15 +162,12 @@ augroup BufWinIn
    autocmd BufEnter,BufRead help* stopinsert
    autocmd BufEnter,BufRead netrw* stopinsert
    autocmd BufEnter *  if ((&ft != "help") 
-                      \ && (&ft != "netrw") 
-                      \ && (&ft != "undotree") 
-                      \ && (&ft != "diffdir")
-                      \ && (&ft != "ctrlp")) |  
+                      \ && (&ft != "netrw")) |  
                       \ startinsert |  
                       \ else |  
                       \ stopinsert |  
                       \ endif
-   " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
+   autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
    autocmd FileType * silent! :call AddFtDict() 
 augroup END
 
@@ -198,7 +195,7 @@ augroup Vim
    autocmd VimEnter * if filereadable('tags') | set tags=./tags | endif
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
-   autocmd ModeChanged *  call SetCursorLineMode() | call SetStatusLineMode()
+   autocmd VimEnter,ModeChanged *  call SetCursorLineMode() | call SetStatusLineMode()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
@@ -251,13 +248,13 @@ nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
 " inoremap <silent> <nowait> <Esc> <C-o><Esc>
-inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc>l"
+inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc><Right>"
 nnoremap <silent> <nowait> <Esc> i
 
 inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
 
-inoremap <silent> <nowait> <expr> <C-c> col('.')== 1? "<C-c>" : "<C-c>l"
+inoremap <silent> <nowait> <expr> <C-c> col('.')== 1? "<C-c>" : "<C-c><Right>"
 nnoremap <silent> <nowait> <C-c> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
