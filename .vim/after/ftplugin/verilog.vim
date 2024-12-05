@@ -14,7 +14,7 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-" iabbrev <buffer> <expr> if InComment('if') ? "if" : "if<Space>()<Space>begin<C-o>T(<C-r>=Eatchar(' ')<CR>"
+inoremap <expr> <buffer> <nowait> <CR> getline(line('.')) =~ '^\s\+\.\a' ? "<C-o>:call  <sid>AlignIoInstancePrev()<CR><CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment()<CR>'<<End>
@@ -49,9 +49,9 @@ inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
 snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call <sid>AppendComma()<CR>
 xnoremap <buffer> <silent> <nowait> <M-,> :call <sid>AppendComma()<CR>
 
-" inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
-" snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
-" xnoremap <buffer> <silent> <nowait> <M-s> :call <sid>RplcSemicolonToDot()<CR>
+inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call <sid>RplcSemicolonToDot()<CR>
+xnoremap <buffer> <silent> <nowait> <M-s> :call <sid>RplcSemicolonToDot()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>
 snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call <sid>AppendSemicolon()<CR>
@@ -99,17 +99,13 @@ function! s:PromptAlign() range
    elseif l:sel == 'p'
       call <sid>AlignParams()
    elseif l:sel == 'io'
-      call <sid>AlignIoInstance()
+      :'<,'>call <sid>AlignIoInstanceLine()
    endif
 endfunction
 
 function! s:AlignAssignment() range
-   " silent! :'<,'>Tab /<=/
    silent! :'<,'>g/</EasyAlign /<=/ {'lm':1,'rm':1}
-   " silent! :'<,'>s/\a<=/\a <=/g
-   " silent! :'<,'>Tab /=/l1
    silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
-   " silent! :'<,'>s/=\d/= /g
 endfunction
 
 function! s:AlignComment() range
@@ -122,9 +118,8 @@ function! s:AlignDeclarations() range
    silent! :'<,'>s# \+# #g
    " silent! :'<,'>Tab /\s\a/l0
    silent! :'<,'>EasyAlign /\s\a/ {'lm':0,'rm':0}
-   " silent! :'<,'>Tab /\/\/
+:   " silent! :'<,'>Tab /\/\/
    silent! :'<,'>EasyAlign /\/\// {'lm':0,'rm':0}
-
 endfunction
 
 function! s:AlignParams() range
@@ -133,15 +128,40 @@ function! s:AlignParams() range
    silent! :'<,'>EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}
    " :'<,'>Tab /=
    silent! :'<,'>EasyAlign /=/ {'lm':1,'rm':1}
-
 endfunction
 
 function! s:AlignIoInstance() range
-
    silent! :'<,'>EasyAlign /(/ {'lm':1,'rm':0 }
    silent! :'<,'>v/\/\//s/\s*)/)/g
-   silent! ;'<,'>v/\/\//s/\s\+$//g
+   silent! :'<,'>v/\/\//s/\s\+$//g
+endfunction
 
+function! s:AlignIoInstanceLine(fline, lline) range
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':1,'rm':0 }"
+   silent! exec ":".a:fline.",".a:lline."v/\/\//s/\s*)/)/g"
+   silent! exec ":".a:fline.",".a:lline."v/\/\//s/\s\+$//g"
+endfunction
+
+function! s:AlignIoInstancePrev()
+   let l:cline = line('.')
+   let l:fline = l:cline-1
+   let l:done = 0
+
+   while !l:done 
+      if getline(l:fline) =~ '^\s\+\.\a'
+         let l:fline = l:fline-1
+      else
+         let l:done = 1
+      endif
+   endwhile
+
+   let l:fline = l:fline+1
+   " echom ":".l:fline.",".l:cline | 2sleep
+   if l:fline < l:cline
+      call <sid>AlignIoInstanceLine(l:fline, l:cline)
+      call cursor(l:cline, col('$'))
+   endif
+   
 endfunction
 
 function! s:RplcSemicolonToDot()
