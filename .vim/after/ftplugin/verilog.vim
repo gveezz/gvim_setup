@@ -14,7 +14,7 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-inoremap <expr> <buffer> <nowait> <CR> getline(line('.')) =~ '^\s\+\.\a' ? "<C-o>:call  <sid>AlignIoInstancePrev()<CR><CR>" : "<CR>"
+inoremap <expr> <buffer> <nowait> <CR> getline(line('.')) =~ '^\s\+\.\a' ? "<CR><C-o>:call  <sid>AlignIoInstancePrev()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment()<CR>'<<End>
@@ -159,9 +159,8 @@ function! s:AlignIoInstancePrev()
    " echom ":".l:fline.",".l:cline | 2sleep
    if l:fline < l:cline
       call <sid>AlignIoInstanceLine(l:fline, l:cline)
-      call cursor(l:cline, col('$'))
    endif
-   
+   call cursor(l:cline, col('$'))
 endfunction
 
 function! s:RplcSemicolonToDot()
