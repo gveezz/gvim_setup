@@ -121,7 +121,7 @@ set lines=35
 " set wc=<Tab>
 set wildmenu
 set wildmode=full
-set wildoptions=fuzzy
+set wildoptions=
 set showtabline=1
 set guitabtooltip=%F
 set guitablabel=%m\ %{expand('%:t')}
