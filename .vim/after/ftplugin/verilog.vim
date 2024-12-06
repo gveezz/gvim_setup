@@ -17,25 +17,12 @@ let b:verilog_indent_modules=1
 inoremap <expr> <buffer> <nowait> <CR> getline(line('.')) =~ '^\s\+\.\a' ? "<CR><C-o>:call  <sid>AutoAlignIoInstance()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddLineComment()<CR><End>
-" snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment(line("'<"),line("'>"))<CR><C-o>:call <sid>AlignComment(line("'<"),line("'>"))<CR>'<<End>
-" xnoremap <buffer> <silent> <nowait> <M-c> :call <sid>AddMultiLineComment(line("'<"),line("'>"))<CR><C-o>:call <sid>AlignComment(line("'<"),line("'>"))<CR>'<<End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call <sid>AddMultiLineComment(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-c> :call <sid>AddMultiLineComment(line("'<"),line("'>"))<CR>
 
 inoremap <buffer> <silent> <nowait> <M-a> <C-o>:call <sid>PromptAlign(line("."),line("."))<CR>
 snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call <sid>PromptAlign(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-a> :call <sid>PromptAlign(line("'<"),line("'>"))<CR>
-
-" inoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
-" snoremap <buffer> <silent> <nowait> <M-d> <C-o>:call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
-" xnoremap <buffer> <silent> <nowait> <M-d> :call <sid>AlignDeclarations()<CR>'<<End><C-o>:call <sid>AlignComment()<CR>
-
-" inoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
-" snoremap <buffer> <silent> <nowait> <M-p> <C-o>:call <sid>AlignParams()<CR>
-" xnoremap <buffer> <silent> <nowait> <M-p> :call <sid>AlignParams()<CR>
-
-" snoremap <buffer> <silent> <nowait> <M-i> <C-o>:call <sid>AlignIoInstance()<CR>
-" xnoremap <buffer> <silent> <nowait> <M-i> :call <sid>AlignIoInstance()<CR>
 
 inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot(line("."),line("."))<CR>
 snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call <sid>InsertDot(line("'<"),line("'>"))<CR>
@@ -116,7 +103,7 @@ function! s:PromptAlign(fline, lline) range
    elseif l:sel == 'p'
       call <sid>AlignParams(a:fline, a:lline)
    elseif l:sel == 'io'
-      :'<,'>call <sid>AlignIoInstance(a:fline, a:lline)
+      call <sid>AlignIoInstance(a:fline, a:lline)
    endif
 endfunction
 
@@ -126,14 +113,8 @@ function! s:AlignAssignment(fline, lline) range
    silent! exec ":".a:fline.",".a:lline."s/\\\s=/=/g"
 endfunction
 
-function! s:VAlignComment() range
-   silent! :'<,'>v/^\s\+\/\//EasyAlign /\s\/\/\s/ {'lm':0, 'rm':1}
-   " silent! :'<,'>v/^\s\+\/\//s/\s\+\/\/\s/ \/\/ /g
-endfunction
-
 function! s:AlignComment(fline, lline) 
-   exec ":".a:fline.",".a:lline."EasyAlign \\  {'f': 'v/^\\s\\+\\/\\//\\s\\/\\//'}"
-   " exec ":".a:fline.",".a:lline."v/^\\s\\+\\/\\//normal! A "
+   silent! exec ":".a:fline.",".a:lline."EasyAlign \\  {'f': 'v/^\\s\\+\\/\\//\\s\\/\\//'}"
 endfunction
 
 function! s:AlignDeclarations(fline, lline) range

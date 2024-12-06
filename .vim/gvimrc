@@ -104,7 +104,7 @@ set scrolloff=0
 set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
-set completeopt+=menuone,preview
+set completeopt+=menuone
 set hidden
 set hlsearch
 set incsearch
