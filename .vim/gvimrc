@@ -167,7 +167,7 @@ augroup BufWinIn
                       \ else |  
                       \ stopinsert |  
                       \ endif
-   autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
+   " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
    autocmd FileType * silent! :call AddFtDict() 
 augroup END
 

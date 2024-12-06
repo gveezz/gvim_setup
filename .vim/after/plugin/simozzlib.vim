@@ -553,7 +553,7 @@ endfunction
 
 function! AddFtDict()
    let l:ftdictpath = $MYVIMDIR."/dictionary/".&ft.".txt"
-   if filºereadable(l:ftdictpath) > 0
+   if filereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath
    endif
 endfunction
