@@ -160,8 +160,8 @@ function! InsertDot(fline, lline) range
 endfunction
 
 function! AppendComma(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//normal! A,"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//normal! A,"
 endfunction
 
 function! AppendSemicolon(fline, lline) range
@@ -170,10 +170,10 @@ function! AppendSemicolon(fline, lline) range
 endfunction
 
 function! FormatIoInstance(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//normal! I."
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/,$/( ),/g"
-   silent! exec ":".a:lline."v/^\\\s\\+\\gn\\\/\|,/normal! A( )"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//normal! I."
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/,$/( ),/g"
+   silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\/\|,/normal! A( )"
    silent! exec ":".a:lline."s/,//g"
    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0}"
    " close above /)
