@@ -429,10 +429,14 @@ nnoremap <silent> <nowait> <C-k> dd
 vnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
-" inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-" nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
-" xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
-" snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
+nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
+xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+
+inoremap <nowait> <C-b> <C-o>:b 
+nnoremap <nowait> <C-b> :b 
+vnoremap <nowait> <C-b> <Esc>:b 
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
