@@ -32,9 +32,9 @@ inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma(line("."),line(
 snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-,> :call AppendComma(line("'<"),line("'>"))<CR>
 
-inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-s> :call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
+" inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("."),line("."))<CR>
+" snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
+" xnoremap <buffer> <silent> <nowait> <M-s> :call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
 
 inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon(line("."),line("."))<CR>
 snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon(line("'<"),line("'>"))<CR>
