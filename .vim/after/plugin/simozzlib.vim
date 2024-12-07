@@ -552,7 +552,7 @@ function! InComment(word)
 endfunction
 
 function! AddFtDict()
-   let l:ftdictpath = $MYVIMDIR."/dictionary/".&ft.".txt"
+   let l:ftdictpath = $MYVIMDIR."dictionary/".&ft.".txt"
    if filereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath
    endif
