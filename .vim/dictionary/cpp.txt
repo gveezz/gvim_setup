@@ -72,6 +72,7 @@ int32_t
 int8_t
 line
 long
+main
 module
 module
 mutable

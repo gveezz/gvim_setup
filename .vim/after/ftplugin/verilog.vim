@@ -14,7 +14,7 @@ setlocal cinwords+="begin,end,;,#"
 
 let b:verilog_indent_modules=1
 
-inoremap <expr> <buffer> <nowait> <CR> getline(line('.')) =~ '^\s\+\.\a' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
+inoremap <expr> <buffer> <silent> <nowait> <CR> substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment(line("'<"),line("'>"))<CR>
@@ -130,7 +130,7 @@ function! AlignParams(fline, lline) range
 endfunction
 
 function! AlignIoInstance(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':1,'rm':0 }"
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0 }"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s*)/)/g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s\+$//g"
 endfunction
@@ -140,12 +140,8 @@ function! AutoAlignIoInstance()
    let l:fline = l:cline-1
    let l:done = 0
 
-   while !l:done 
-      if getline(l:fline) =~ '^\s\+\.\a'
-         let l:fline = l:fline-1
-      else
-         let l:done = 1
-      endif
+   while substitute(getline(l:fline), '\s', '', 'g')[0] == '.'
+      let l:fline = l:fline-1
    endwhile
 
    let l:fline = l:fline+1
