@@ -131,7 +131,7 @@ endfunction
 
 function! AlignIoInstance(fline, lline) range
    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0 }"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s*)/)/g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\s\\+)/)/g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s\+$//g"
 endfunction
 

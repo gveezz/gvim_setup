@@ -186,11 +186,11 @@ augroup END
 augroup Vim
    autocmd!
    autocmd VimEnter * if (argv(0)=="") |
-                      \ call SetPWD($PWD) | 
-                      \ elseif (isdirectory(argv(0))) |  
-                      \ call SetPWD(argv(0)) |  
-                      \ else |  
-                      \ call SetPWD(expand("%:h")) |  
+                      \ call SetPWD($PWD) |
+                      \ elseif (isdirectory(argv(0))) |
+                      \ call SetPWD(argv(0)) |
+                      \ else |
+                      \ call SetPWD(expand("%:h")) |
                       \ endif
    autocmd VimEnter * if filereadable('tags') | set tags=./tags | endif
    autocmd VimEnter * call AutoCompleteInoremap()
