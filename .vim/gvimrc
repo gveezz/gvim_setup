@@ -185,7 +185,7 @@ augroup END
 
 augroup Vim
    autocmd!
-   autocmd VimEnter * if (argv(0)=="") |
+   autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
                       \ call SetPWD($PWD) |
                       \ elseif (isdirectory(argv(0))) |
                       \ call SetPWD(argv(0)) |
