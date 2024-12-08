@@ -417,9 +417,9 @@ nnoremap <nowait> <C-l> :call BufferList()<CR>
 snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 
 " C-s: save
-inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:saveas " : "<C-o>:w!<CR>" : ""
-nnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? ":saveas " : ":w!<CR>" : ""
-xnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<Esc>:saveas " : "<Esc>:w!<CR>" : ""
+inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:w " : "<C-o>:w!<CR>" : ""
+nnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? ":w " : ":w!<CR>" : ""
+xnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<Esc>:w " : "<Esc>:w!<CR>" : ""
 snoremap <nowait> <C-s> <Esc>
 cnoremap <nowait> <C-s> <C-c>
 
