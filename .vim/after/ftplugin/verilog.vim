@@ -12,11 +12,9 @@ setlocal expandtab
 setlocal cinkeys-=0#
 setlocal cindent
 setlocal cinwords+="begin,end,;,#"
-
 setlocal indentkeys-=0#
 " setlocal smartindent
-" setlocal formatoptions-=croº
-setlocal iskeyword-=\/
+" setlocal formatoptions-=cro
 
 let b:verilog_indent_modules=1
 

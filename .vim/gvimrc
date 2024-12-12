@@ -269,7 +269,11 @@ vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
 snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
 cnoremap <silent> <nowait> <C-d> <C-c>
 
-" F1-F12 mappings
+" inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
+" nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "
+vnoremap <nowait> <F1> <C-c>:h <C-r>*<CR>
+
+" F2 mappings
 inoremap <silent> <nowait> <F2> <C-o>:call LargerFont()<CR>
 nnoremap <silent> <nowait> <F2> :call LargerFont()<CR>
 
@@ -326,14 +330,15 @@ snoremap <silent> <nowait> <F9> <Esc>
 snoremap <silent> <nowait> <F12> <nop>
 
 " F11: toggle full screen
-inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
-nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
+" inoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
+" nnoremap <expr> <silent> <nowait> <F11> (&columns <= 100) ? "<C-o>:set columns=999<CR>" : "<C-o>:set columns=171<CR>"
 
-" <Home>: jump before the first non-blank of the current line
-inoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
-nnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
-vnoremap <expr> <silent> <nowait> <Home> getline('.')[:col('.')-2] =~ '\w' ? "^" : "0"
-snoremap <expr> <silent> <nowait> <S-Home> getline('.')[:col('.')-2] =~ '\w' ? "<C-o>^" : "<C-o>0"
+" <Home>: jump before the first non-blank of the current line, or at the first
+" column
+inoremap <expr> <silent> <nowait> <Home> col('.') == 1 ? "<C-o>^" : "<C-o>0"
+nnoremap <expr> <silent> <nowait> <Home> col('.') == 1 ?  ? "^" : "0"
+vnoremap <expr> <silent> <nowait> <Home> col('.') == 1 ?  ? "^" : "0"
+snoremap <expr> <silent> <nowait> <S-Home> col('.') == 1 ? "<C-o>^" : "<C-o>0"
 
 inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
@@ -399,6 +404,8 @@ inoremap <silent> <nowait> <C-.> <C-o>zc<C-o>zz
 nnoremap <silent> <nowait> <C-.> zczz
 xnoremap <silent> <nowait> <C-.> <Esc><C-c>zFzz
 snoremap <silent> <nowait> <C-.> <C-o>zFzz
+
+" C-h: 
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
