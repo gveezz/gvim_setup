@@ -1,10 +1,18 @@
 setlocal foldignore=#
 "setlocal foldmarker={,}
 "setlocal tabstop=4
+setlocal wrapmargin=80
+setlocal textwidth=80
+setlocal linebreak
+setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal softtabstop=0
 setlocal expandtab
-setlocal nocindent
+
+setlocal cinkeys-=0#
+setlocal cindent
+setlocal cinwords+="{,},;,#"
+setlocal indentkeys-=0#
 
 inoremap <silent> <nowait> <buffer> <M-c> <C-o>:Dox<CR>
 

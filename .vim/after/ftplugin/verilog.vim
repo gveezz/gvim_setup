@@ -1,16 +1,22 @@
 setlocal wrap
+" setlocal comments="/*,\/\/"
+setlocal formatoptions=joqmtcrn
+setlocal wrapmargin=80
 setlocal textwidth=80
+setlocal linebreak
 setlocal tabstop=3
 setlocal shiftwidth=3
 setlocal softtabstop=0
 setlocal expandtab
 " stop annoying with positioning # to the beginning of the line
 setlocal cinkeys-=0#
-"setlocal cindent
-"setlocal smartindent
-setlocal formatoptions-=cro
+setlocal cindent
 setlocal cinwords+="begin,end,;,#"
-" setlocal iskeyword-=_
+
+setlocal indentkeys-=0#
+" setlocal smartindent
+" setlocal formatoptions-=croº
+setlocal iskeyword-=\/
 
 let b:verilog_indent_modules=1
 

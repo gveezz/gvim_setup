@@ -75,7 +75,7 @@ set softtabstop=3
 set shiftwidth=3
 " set indentexpr=
 set breakindent
-set browsedir=last
+set browsedir=current
 set smarttab
 set number relativenumber
 set guifont=Monospace\ 11
