@@ -110,7 +110,8 @@ set hlsearch
 set incsearch
 set timeoutlen=0
 set ttimeoutlen=0
-set textwidth=0
+
+set textwidth=80
 set colorcolumn=80
 " set wrap
 set linebreak
@@ -159,8 +160,6 @@ augroup BufWinIn
    autocmd!
    " autocmd BufEnter,BufRead * normal! zR
    " autocmd BufNew,BufEnter,BufRead * normal! zR
-   autocmd BufEnter,BufRead help* stopinsert
-   autocmd BufEnter,BufRead netrw* stopinsert
    autocmd BufEnter *  if ((&ft != "help") 
                       \ && (&ft != "netrw")) |  
                       \ startinsert |  
