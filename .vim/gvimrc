@@ -160,12 +160,12 @@ augroup BufWinIn
    autocmd!
    " autocmd BufEnter,BufRead * normal! zR
    " autocmd BufNew,BufEnter,BufRead * normal! zR
-   autocmd BufEnter *  if ((&ft != "help") 
-                      \ && (&ft != "netrw")) |  
-                      \ startinsert |  
-                      \ else |  
-                      \ stopinsert |  
-                      \ endif
+   " autocmd BufEnter *  if ((&ft != "help") 
+   "                    \ && (&ft != "netrw")) |  
+   "                    \ startinsert |  
+   "                    \ else |  
+   "                    \ stopinsert |  
+   "                    \ endif
    " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
    autocmd FileType * silent! :call AddFtDict() 
 augroup END
@@ -263,11 +263,11 @@ inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-d> <C-o>:Explore!<CR>
+inoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
 nnoremap <silent> <nowait> <C-d> :Explore!<CR>
 vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
 snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-cnoremap <silent> <nowait> <C-d> <C-c>
+cnoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
 " nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "

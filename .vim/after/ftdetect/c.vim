@@ -1,5 +1,4 @@
 augroup C
-
    autocmd!
    autocmd BufReadPost,BufWritePost,BufNewFile *.c,*.h set filetype=c
    autocmd BufReadPost,BufWritePost,BufNewFile *.cc,*.cpp,*.hpp set filetype=cpp

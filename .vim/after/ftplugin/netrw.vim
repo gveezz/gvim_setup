@@ -1,4 +1,3 @@
-" set number
 setlocal number relativenumber
 setlocal foldcolumn=0
 nmap <silent> <nowait> <buffer> o <CR>
