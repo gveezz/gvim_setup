@@ -111,7 +111,7 @@ set incsearch
 set timeoutlen=0
 set ttimeoutlen=0
 
-set textwidth=80
+set textwidth=0
 set colorcolumn=80
 " set wrap
 set linebreak
