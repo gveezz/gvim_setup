@@ -19,7 +19,7 @@ setlocal indentkeys-=0#
 let b:verilog_indent_modules=1
 
 " extend gvimrc inoremap for <CR>
-inoremap <expr> <buffer> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
+" inoremap <expr> <buffer> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment(line("'<"),line("'>"))<CR>
@@ -94,7 +94,7 @@ endfunction
 " Pending fix
 function! PromptAlign(fline, lline) range
    call inputrestore()
-   let l:sel = input("Select alignment: a:assignment -  c:comment - d:declaration - p:params - io:input outputs instance ")
+   let l:sel = input("Select alignment: [a]ssignment -  [c]omment - [d]eclaration - [p]arams - [io] instance: ")
    call inputsave()
 
    "echom "'<,'>= ".line("'<")." ".line("'>") | 2sleep
