@@ -18,7 +18,8 @@ setlocal indentkeys-=0#
 
 let b:verilog_indent_modules=1
 
-inoremap <expr> <buffer> <silent> <nowait> <CR> substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
+" extend gvimrc inoremap for <CR>
+inoremap <expr> <buffer> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
 snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment(line("'<"),line("'>"))<CR>
