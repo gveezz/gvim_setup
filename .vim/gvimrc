@@ -24,7 +24,7 @@ colorscheme simozz
 syntax enable
 "set insertmode
 set magic
-set autochdir
+set noautochdir
 set noshowmode
 set viminfo=""
 set incsearch
@@ -185,9 +185,9 @@ augroup END
 augroup Vim
    autocmd!
    autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
-                      \ call SetPWD($PWD) |
+                      \ call SetPWD($PWD) | :Explore |
                       \ elseif (isdirectory(argv(0))) |
-                      \ call SetPWD(argv(0)) |
+                      \ call SetPWD(argv(0)) | :Explore |
                       \ else |
                       \ call SetPWD(expand("%:h")) |
                       \ endif
@@ -263,11 +263,11 @@ inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
-nnoremap <silent> <nowait> <C-d> :Explore!<CR>
-vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-cnoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
+inoremap <silent> <nowait> <C-d> <C-c>:Rexplore<CR>
+nnoremap <silent> <nowait> <C-d> :Rexplore<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Rexplore<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-o>:Rexplore<CR>
+cnoremap <silent> <nowait> <C-d> <C-c>:Rexplore<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
 " nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "
