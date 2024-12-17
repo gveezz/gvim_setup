@@ -325,6 +325,9 @@ function! BufferList()
 
    let l:blstnm = []
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+   echohl StatusLineLB
+   echo "Buffer list (current buffer \# not shown)\n"
+   echohl None
    for l:nbuff in l:blist
       if l:nbuff != bufnr() 
          " let l:menuitem = bufname(nbuff)
