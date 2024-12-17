@@ -1190,7 +1190,10 @@ endfunction
 
 function! HighlightWordUnderCursor()
    if getline(".") != ''
-      if getline(".")[col(".")-1] !~# '[[:blank:]]' 
+      if getline(".")[col(".")-1] !~# '[[:blank:]]' &&
+         \ getline(".")[col(".")-1] !~# ',' && 
+         \ getline(".")[col(".")-1] !~# ';' && 
+         \ getline(".")[col(".")-1] !~# '\/'
          exec 'match HighCW /\<'.expand('<cword>').'\>/'
       endif
    else 
@@ -1311,6 +1314,11 @@ function! TagListXref(tag_word)
       endif
    endif
    
+endfunction
+
+function! StrSub(astr)
+   let l:str = substitute(a:astr, '\\/', '\\\/', 'g')
+   return l:str
 endfunction
 
 function! VSearchStrSub()
