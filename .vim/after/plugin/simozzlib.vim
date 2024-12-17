@@ -1189,9 +1189,10 @@ function! HighlightCursorMatch()
 endfunction
 
 function! HighlightWordUnderCursor()
-   if getline(".")[col(".")-1] !~# '[[:blank:]]' 
-      exec 'match HighCW /\<'.expand('<cword>').'\>/'
-
+   if getline(".") != ''
+      if getline(".")[col(".")-1] !~# '[[:blank:]]' 
+         exec 'match HighCW /\<'.expand('<cword>').'\>/'
+      endif
    else 
       match none 
    endif

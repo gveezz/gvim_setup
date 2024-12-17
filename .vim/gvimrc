@@ -164,7 +164,7 @@ augroup BufWinIn
                       \ && (&ft != "netrw")) |  
                       \ startinsert |  
                       \ endif
-   " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
+   autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
    autocmd FileType * silent! :call AddFtDict() 
 augroup END
 
@@ -185,7 +185,7 @@ augroup Vim
    autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
                       \ call SetPWD($PWD) | :Explore |
                       \ elseif (isdirectory(argv(0))) |
-                      \ call SetPWD(argv(0)) | :Explore |
+                      \ call SetPWD(argv(0)) | 
                       \ else |
                       \ call SetPWD(expand("%:h")) |
                       \ endif
