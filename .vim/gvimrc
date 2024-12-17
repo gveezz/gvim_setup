@@ -160,12 +160,10 @@ augroup BufWinIn
    autocmd!
    " autocmd BufEnter,BufRead * normal! zR
    " autocmd BufNew,BufEnter,BufRead * normal! zR
-   " autocmd BufEnter *  if ((&ft != "help") 
-   "                    \ && (&ft != "netrw")) |  
-   "                    \ startinsert |  
-   "                    \ else |  
-   "                    \ stopinsert |  
-   "                    \ endif
+   autocmd BufEnter *  if ((&ft != "help") 
+                      \ && (&ft != "netrw")) |  
+                      \ startinsert |  
+                      \ endif
    " autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
    autocmd FileType * silent! :call AddFtDict() 
 augroup END
