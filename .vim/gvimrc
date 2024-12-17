@@ -583,12 +583,12 @@ snoremap <silent> <nowait> <End> <Esc>$
 xnoremap <silent> <nowait> <End> $
 
 " <ScrollWheelUp> <ScrollWheelDown>
-inoremap <silent> <nowait> <ScrollWheelUp> <ScrollWheelUp><ScrollWheelUp><ScrollWheelUp>
-inoremap <silent> <nowait> <ScrollWheelDown> <ScrollWheelDown><ScrollWheelDown><ScrollWheelDown>
-nnoremap <silent> <nowait> <ScrollWheelUp> <ScrollWheelUp><ScrollWheelUp><ScrollWheelUp>
-nnoremap <silent> <nowait> <ScrollWheelDown> <ScrollWheelDown><ScrollWheelDown><ScrollWheelDown>
-xnoremap <silent> <nowait> <ScrollWheelUp> <Esc>
-xnoremap <silent> <nowait> <ScrollWheelDown> <Esc>
+inoremap <silent> <nowait> <ScrollWheelUp> <C-o>:call ScrollWheelUp(10)<CR>
+inoremap <silent> <nowait> <ScrollWheelDown> <C-o>:call ScrollWheelDown(10)<CR>
+nnoremap <silent> <nowait> <ScrollWheelUp> :call ScrollWheelUp(10)<CR>
+nnoremap <silent> <nowait> <ScrollWheelDown> :call ScrollWheelDown(10)<CR>
+xnoremap <silent> <nowait> <ScrollWheelUp> <C-c>:call ScrollWheelUp(10)<CR>
+xnoremap <silent> <nowait> <ScrollWheelDown> <C-c>:call ScrollWheelUp(10)<CR>
 
 vnoremap <silent> <nowait> <M-v> <nop>
 xnoremap <silent> <nowait> <Up> k

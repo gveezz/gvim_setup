@@ -915,11 +915,9 @@ endfunction
 
 function! PageUp()
 
-   let l:cLine = line('.')
    let l:cCol = col('.')
    let l:winheight = winheight('.')
    let l:firstvline = line('w0')
-   let l:bfirstline = 1
    
    call cursor(l:firstvline+1, l:cCol)
    call execute('normal! zb')
@@ -929,9 +927,24 @@ function! PageUp()
 
 endfunction
 
-function! PageDown()
+function! ScrollWheelUp(scroll)
 
    let l:cLine = line('.')
+   let l:cCol = col('.')
+   let l:winheight = winheight('.')
+   let l:firstvline = line('w0')
+   let l:bfirstline = 1
+   
+   if (l:firstvline == 1) || (l:cLine < a:scroll)
+      call cursor(1, l:cCol)
+   else
+      call cursor(l:cLine-a:scroll, l:cCol)
+   endif
+
+endfunction
+
+function! PageDown()
+
    let l:cCol = col('.')
    let l:winheight = winheight('.')
 
@@ -945,6 +958,23 @@ function! PageDown()
       call cursor(l:blastline, l:cCol)
    endif
 
+endfunction
+
+function! ScrollWheelDown(scroll)
+
+   let l:cLine = line('.')
+   let l:cCol = col('.')
+   let l:winheight = winheight('.')
+   let l:winheight = winheight('.')
+
+   let l:lastvline = line('w$')
+   let l:blastline = line('$')
+
+   if (l:blastline - l:lastvline) >= l:winheight
+       call cursor(l:cLine+a:scroll, l:cCol)
+   else
+      call cursor(l:blastline, l:cCol)
+   end
 endfunction
 
 function! GotoTab()
