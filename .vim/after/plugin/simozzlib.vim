@@ -1190,7 +1190,6 @@ endfunction
 
 function! HighlightWordUnderCursor()
    let l:chlist = ['[[:blank:]]', ',', ';', '\/']
-   let l:hi = 0
    if getline(".")[col(".")-1] !~# '[[:blank:]]' &&
       \ getline(".")[col(".")-1] !~# ',' && 
       \ getline(".")[col(".")-1] !~# ';' && 
