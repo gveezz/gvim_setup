@@ -1219,11 +1219,8 @@ function! HighlightCursorMatch()
 endfunction
 
 function! HighlightWordUnderCursor()
-   let l:chlist = ['[[:blank:]]', ',', ';', '\/']
-   if getline(".")[col(".")-1] !~# '[[:blank:]]' &&
-      \ getline(".")[col(".")-1] !~# ',' && 
-      \ getline(".")[col(".")-1] !~# ';' && 
-      \ getline(".")[col(".")-1] !~# '\/'
+   if getline(".")[col(".")-1] =~# '_' || 
+      \ getline(".")[col(".")-1] =~# '[[:alnum:]]'
       exec 'match HighCW /\<'.expand('<cword>').'\>/'
    else 
       match none 
