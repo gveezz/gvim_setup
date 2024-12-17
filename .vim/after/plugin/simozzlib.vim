@@ -935,7 +935,7 @@ function! ScrollWheelUp(scroll)
    let l:firstvline = line('w0')
    let l:bfirstline = 1
    
-   if (l:firstvline == 1) || (l:cLine < a:scroll)
+   if (l:firstvline == 1) || (l:cLine <= a:scroll)
       call cursor(1, l:cCol)
    else
       call cursor(l:cLine-a:scroll, l:cCol)
