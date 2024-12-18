@@ -1219,8 +1219,7 @@ function! HighlightCursorMatch()
 endfunction
 
 function! HighlightWordUnderCursor()
-   if getline(".")[col(".")-1] =~# '_' || 
-      \ getline(".")[col(".")-1] =~# '[[:alnum:]]'
+   if getline(".")[col(".")-1] =~# '\w'
       exec 'match HighCW /\<'.expand('<cword>').'\>/'
    else 
       match none 

@@ -136,6 +136,7 @@ set cursorline
 set showcmd
 set bufhidden=hide
 set switchbuf=useopen
+
 " set showmatch
 set nofoldenable
 set foldmethod=indent
