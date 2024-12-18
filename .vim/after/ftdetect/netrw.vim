@@ -1,7 +1,4 @@
 augroup Netrw
    autocmd!
-   autocmd FileType netrw stopinsert " | 
-            " \ setl bufhidden=wipe | 
-            " \ silent! call histdel("/", "@.*$") |
-            " \ silent! call histdel("/", "\a")
+   autocmd FileType netrw stopinsert
 augroup END

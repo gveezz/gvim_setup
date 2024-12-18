@@ -263,8 +263,8 @@ nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 " C-d: open netrw in a new tab 
 inoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
 nnoremap <silent> <nowait> <C-d> :Explore!<CR>
-vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-c>:Explore!<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-c>:Explore!<CR>
 cnoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
