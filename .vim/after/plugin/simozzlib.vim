@@ -38,6 +38,10 @@ function! SetPWD(path)
    silent! exec ":cd ".a:path
 endfunction
 
+function! GetCWD()
+   return substitute(getcwd(), $HOME, "~/", "g")
+endfunction
+
 function! GetCWDRelFPath()
    let l:fpath = expand("%:p")
    return substitute(l:fpath, getcwd()."/", "", "g")
