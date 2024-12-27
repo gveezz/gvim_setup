@@ -39,7 +39,8 @@ function! SetPWD(path)
 endfunction
 
 function! GetCWD()
-   return substitute(getcwd(), $HOME, "~/", "g")
+   let l:cwd = getcwd()."/"
+   return substitute(l:cwd, $HOME."/", "~/", "g")
 endfunction
 
 function! GetCWDRelFPath()
