@@ -3,15 +3,18 @@ setlocal foldcolumn=0
 
 nmap <silent> <nowait> <buffer> o <CR>
 
-if exists("g:netrw_liststyle") && (g:netrw_liststyle == 0 || g:netrw_liststyle == 1)
-   nmap <silent> <nowait> <buffer> <Left> -
-   nmap <silent> <nowait> <buffer> <Right> <CR>
-   nmap <silent> <nowait> <buffer> <Tab> <CR>
-   nmap <silent> <nowait> <buffer> <S-Tab> -
-else
-   nmap <silent> <nowait> <buffer> <Tab> w
-   nmap <silent> <nowait> <buffer> <S-Tab> b
+if exists("g:netrw_liststyle")
+   if (g:netrw_liststyle == 0 || g:netrw_liststyle == 1)
+      nmap <silent> <nowait> <buffer> <Tab> <CR>
+      nmap <silent> <nowait> <buffer> <S-Tab> -
+   else
+      nmap <silent> <nowait> <buffer> <Tab> w
+      nmap <silent> <nowait> <buffer> <S-Tab> b
+   endif
 endif
+
+nmap <silent> <nowait> <buffer> <Left> -
+nmap <silent> <nowait> <buffer> <Right> <CR>
 
 nmap <silent> <nowait> <buffer> <C-d> <C-6>
 nmap <silent> <nowait> <buffer> <Esc> <C-6>
