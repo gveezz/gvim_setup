@@ -1,5 +1,7 @@
 let g:skip_defaults_vim=1
 
+let g:netrw_sort_sequence=""
+let g:netrw_special_syntax=1
 " Netrw setting
 let g:netrw_mousemaps= 0
 " hide netrw menu
@@ -84,7 +86,7 @@ set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
-set statusline+=\ %=[%{GetCWD()}]\ %{GetCWDRelFPath()}\ %y\ %m%r
+set statusline+=\ %=%{GetCWD()}\ %{GetCWDRelFPath()}\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
 set backspace=indent,eol,start
