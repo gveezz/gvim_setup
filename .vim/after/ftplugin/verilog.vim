@@ -1,4 +1,4 @@
-setlocal colorcolumn=0
+setlocal colorcolumn=80
 setlocal wrap
 " setlocal comments="/*,\/\/"
 setlocal formatoptions=joqmtcrn
