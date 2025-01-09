@@ -1,6 +1,5 @@
+setlocal colorcolumn=80
 setlocal foldignore=#
-"setlocal foldmarker={,}
-"setlocal tabstop=4
 setlocal wrapmargin=80
 setlocal textwidth=80
 setlocal linebreak
