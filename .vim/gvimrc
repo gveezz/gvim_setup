@@ -90,8 +90,8 @@ set statusline+=\ %=%{GetCWD()}\ %{GetCWDRelFPath()}\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
 set backspace=indent,eol,start
-set guicursor=n:ver100-blinkon250-blinkoff250-blinkwait0-nCursor
-set guicursor=o:ver100-blinkoff0-nCursor
+set guicursor=n:ver100-blinkoff0-nCursor
+set guicursor+=o:ver100-blinkon250-blinkoff250-nCursor
 set guicursor+=i:ver25-blinkoff0-iCursor
 set guicursor+=v:ver25-blinkoff0-vCursor
 set guicursor+=c-ci:ver25-blinkoff0-cCursor
