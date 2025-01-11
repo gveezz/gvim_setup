@@ -196,7 +196,7 @@ augroup Vim
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
    autocmd VimEnter,ModeChanged * call SetCursorLineMode() | call SetStatusLineMode()
-   " autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
+   autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
 augroup END
 
 augroup AutoFoldColumn
