@@ -376,11 +376,11 @@ nnoremap <silent> <nowait> <Tab> >>
 inoremap <expr> <silent> <nowait> <S-Tab> pumvisible() != 0 ? "<C-p>" : "<C-d>"
 nnoremap <silent> <nowait> <S-Tab> <<
 
-inoremap <silent> <nowait> <C-Enter> <C-o>n
-nnoremap <silent> <nowait> <C-Enter> n
+"inoremap <silent> <nowait> <C-Enter> <C-o>n
+"nnoremap <silent> <nowait> <C-Enter> n
 
-inoremap <silent> <nowait> <C-M-Enter> <C-o>#
-nnoremap <silent> <nowait> <C-M-Enter> #
+"inoremap <silent> <nowait> <C-M-Enter> <C-o>#
+"nnoremap <silent> <nowait> <C-M-Enter> #
 
 inoremap <silent> <nowait> <C-q> <C-o><C-q>
 

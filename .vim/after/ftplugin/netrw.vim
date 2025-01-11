@@ -28,6 +28,6 @@ nmap <silent> <nowait> <buffer> <PageDown> 3j
 nmap <silent> <nowait> <buffer> <2-leftmouse> <CR>
 nmap <silent> <nowait> <buffer> <C-s> <nop>
 
-cmap <expr> <silent> <nowait> <buffer> <CR> getcmdtype() == '/' ? "<CR><CR>" : "<CR>"
+cmap <expr> <silent> <nowait> <buffer> <C-CR> getcmdtype() == '/' ? "<CR><CR>" : "<CR>"
 
 
