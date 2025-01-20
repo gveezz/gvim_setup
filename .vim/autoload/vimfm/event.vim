@@ -1,13 +1,11 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-
 function! s:newtralize_netrw() abort
   augroup FileExplorer
     autocmd!
   augroup END
 endfunction
-
 
 function! s:should_init(bufnr, path) abort
   let for_vimfm = vimfm#buffer#is_for_vimfm(a:bufnr)

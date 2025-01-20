@@ -1,18 +1,15 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-
 if exists('g:loaded_vimfm')
   finish
 endif
 let g:loaded_vimfm = 1
 
-
 augroup vimfm_vim
   autocmd!
   autocmd BufEnter * call vimfm#event#on_bufenter()
 augroup END
-
 
 function! s:set_up_default_config()
   let config_dict = {
@@ -35,8 +32,9 @@ endfunction
 call s:set_up_default_config()
 
 command! -bar -nargs=? -complete=dir Vimfm call vimfm#init(<f-args>)
+command! -bar -nargs=? -complete=dir VimfmCurDir call vimfm#init(expand("%:p:h"))
 
-
+nnoremap <silent> <Plug>(vimfm-returnto-buffer)      :<C-u>call vimfm#returnto_buffer()<CR>
 " Toggle
 nnoremap <silent> <Plug>(vimfm-toggle-all)           :<C-u>call vimfm#toggle_all()<CR>
 nnoremap <silent> <Plug>(vimfm-toggle-hidden)        :<C-u>call vimfm#toggle_hidden()<CR>

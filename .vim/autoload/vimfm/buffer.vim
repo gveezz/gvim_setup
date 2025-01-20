@@ -12,7 +12,8 @@ endfunction
 
 
 function! s:set_up_default_mappings() abort
-  " Toggle
+  call s:map_default('n', '<Esc>', 'returnto-buffer',   '<buffer> <silent>')
+   " Toggle
   call s:map_default('n', '<Space>', 'toggle-current',   '<buffer> <silent>')
   call s:map_default('n', '.',       'toggle-hidden',    '<buffer> <silent>')
   call s:map_default('n', '*',       'toggle-all',       '<buffer> <silent>')
@@ -100,7 +101,7 @@ function! vimfm#buffer#init(filer) abort
     call s:set_up_default_mappings()
   endif
 
-  setlocal bufhidden=delete
+  setlocal bufhidden=wipe
   setlocal buftype=nowrite
   setlocal filetype=vimfm
   setlocal matchpairs=

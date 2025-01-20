@@ -16,7 +16,7 @@ endfunction
 
 function! vimfm#renderer#render_filer(items) abort
   if empty(a:items)
-    return ['  (no items)']
+    return ['(no items)']
   endif
 
   return map(copy(a:items), 'vimfm#renderer#render_item(v:val)')

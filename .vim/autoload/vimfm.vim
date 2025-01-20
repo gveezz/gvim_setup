@@ -1,5 +1,6 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
+let w:vimfm_last_bufnr = -1
 
 function! s:keep_buffer_singularity() abort
   let related_win_ids = vimfm#compat#win_findbuf(bufnr('%'))
@@ -69,6 +70,12 @@ endfunction
 " a:000[0]: path
 " a:000[1]: should_overwrite
 function! vimfm#init(...) abort
+
+  " Save las buffer number
+  if (&ft != 'vimfm')
+     let w:vimfm_last_bufnr = bufnr()
+  end
+  
   let path = get(a:000, 0, '')
   if empty(path)
     let path = getcwd()
@@ -228,6 +235,13 @@ function! vimfm#toggle_current(mode) abort
   endfor
 endfunction
 
+function! vimfm#returnto_buffer()
+   if exists("w:vimfm_last_bufnr") && (w:vimfm_last_bufnr != -1)
+      if bufexists(w:vimfm_last_bufnr)
+         exec "b ".w:vimfm_last_bufnr
+      endif
+   endif
+endfunction
 
 function! vimfm#toggle_all() abort
   call s:keep_buffer_singularity()

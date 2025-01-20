@@ -9,8 +9,8 @@ syn match vimfmSelected '^*.\+$'
 syn match vimfmNoItems '^(no items)$'
 
 hi! def link vimfmDirectory Directory
-hi! def link vimfmHidden Comment
-hi! def link vimfmHiddenWithIcon Comment
+hi! def link vimfmHidden HiddenDirectory
+hi! def link vimfmHiddenWithIcon HiddenDirectory
 hi! def link vimfmNoItems Comment
 hi! def link vimfmSelected Special
 

@@ -20,7 +20,8 @@ hi Scrollbar              guifg=black guibg=cyan
 hi Menu                   guifg=black guibg=cyan
 hi SpecialKey             term=bold cterm=bold  ctermfg=LightGrey  guifg=#888888 gui=bold
 hi NonText                term=bold cterm=bold  ctermfg=LightGrey  gui=bold guifg=#222222 " guifg=#cc0000
-hi Directory              term=bold cterm=bold  ctermfg=Yellow  guifg=Yellow
+hi Directory              term=bold cterm=bold  ctermfg=Yellow  guifg=Yellow gui=bold
+hi HiddenDirectory        term=bold cterm=bold  ctermfg=Yellow  guifg=#B0B0FF gui=bold
 hi ErrorMsg               term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=#000000  guibg=Yellow gui=bold
 hi IncSearch              term=reverse  ctermfg=white  ctermbg=Green  guifg=Green  guibg=white
 hi Search                 guibg=white guifg=#000000 guibg=#00ff00 gui=bold
