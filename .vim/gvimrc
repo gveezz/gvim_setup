@@ -166,7 +166,7 @@ augroup BufWinIn
    " autocmd BufNew,BufEnter,BufRead * normal! zR
    autocmd BufEnter *  if ((&ft != "help") 
                       \ && (&ft != "netrw")
-                      \ && (&ft != "vaffle")) |  
+                      \ && (&ft != "vimfm")) |  
                       \ startinsert |  
                       \ endif
    autocmd BufAdd,BufCreate,BufNewFile * silent! :call AddFtDict()
