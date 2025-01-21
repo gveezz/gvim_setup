@@ -23,6 +23,8 @@ function! s:set_up_default_mappings() abort
   call s:map_default('n', 'x',       'fill-cmdline',     '<buffer> <silent>')
   call s:map_default('n', 'm',       'move-selected',    '<buffer> <silent>')
   call s:map_default('n', '<CR>',    'open-selected',    '<buffer> <silent>')
+  call s:map_default('n', '<2-LeftMouse>',    'open-selected',    '<buffer> <silent>')
+  call s:map_default('n', '<C-LeftMouse>',    'open-parent',    '<buffer> <silent>')
   call s:map_default('n', '<Right>', 'open-selected',    '<buffer> <silent>')
   call s:map_default('n', 'r',       'rename-selected',  '<buffer> <silent>')
   " Operations for a item on cursor
