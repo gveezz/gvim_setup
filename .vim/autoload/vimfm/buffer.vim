@@ -32,7 +32,7 @@ function! s:set_up_default_mappings() abort
   call s:map_default('n', 't',       'open-current-tab', '<buffer> <nowait> <silent>')
   " Misc
   call s:map_default('n', 'd',       'mkdir',            '<buffer> <silent>')
-  call s:map_default('n', 'i',       'new-file',         '<buffer> <silent>')
+  call s:map_default('n', 'a',       'new-file',         '<buffer> <silent>')
   call s:map_default('n', '~',       'open-home',        '<buffer> <silent>')
   call s:map_default('n', '<Left>',  'open-parent',      '<buffer> <silent>')
   call s:map_default('n', '-',       'open-parent',      '<buffer> <silent>')
