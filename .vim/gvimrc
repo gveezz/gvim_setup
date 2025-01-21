@@ -21,6 +21,8 @@ let g:skip_defaults_vim=1
 """ let g:netrw_altfile = 1
 """ let g:netrw_keepj = "keepj"
 
+let g:vimfm_force_delete = 1
+
 helptags $MYVIMDIR/doc
 set nocompatible  
 set viminfofile=NONE
