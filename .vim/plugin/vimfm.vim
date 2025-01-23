@@ -13,9 +13,10 @@ augroup END
 
 function! s:set_up_default_config()
   let config_dict = {
-        \   'vimfm_auto_cd': 0,
-        \   'vimfm_force_delete': 0,
-        \   'vimfm_show_hidden_files': 0,
+        \   'vimfm_auto_cd': 1,
+        \   'vimfm_force_delete': 1,
+        \   'vimfm_linkid_str': '>',
+        \   'vimfm_show_hidden_files': 1,
         \   'vimfm_use_default_mappings': 1,
         \   'vimfm_open_current_split_position': 'topleft',
         \   'vimfm_open_current_vsplit_position': 'rightbelow',

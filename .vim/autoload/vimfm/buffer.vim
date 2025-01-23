@@ -49,23 +49,28 @@ function! s:set_up_default_mappings() abort
   " nmap <buffer> <silent> <Esc>      <Plug>(vimfm-quit)
 endfunction
 
+" function! s:generate_unique_bufname(path) abort
+"   let bufname = ''
+"   let index = 0
+" 
+"   while 1
+"     " Add index to avoid duplicated buffer name
+"     let bufname = fnameescape(printf('vimfm://%d/%s',
+"           \ index,
+"           \ a:path))
+"     if bufnr(bufname) < 0
+"       break
+"     endif
+" 
+"     let index += 1
+"   endwhile
+" 
+"   return bufname
+" endfunction
+
 function! s:generate_unique_bufname(path) abort
-  let bufname = ''
-  let index = 0
-
-  while 1
-    " Add index to avoid duplicated buffer name
-    let bufname = fnameescape(printf('vimfm://%d/%s',
-          \ index,
-          \ a:path))
-    if bufnr(bufname) < 0
-      break
-    endif
-
-    let index += 1
-  endwhile
-
-  return bufname
+   let bufname = fnamemodify(a:path, ':.')
+   return bufname
 endfunction
 
 function! s:perform_auto_cd_if_needed(path) abort

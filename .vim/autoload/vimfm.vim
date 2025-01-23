@@ -1,6 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+" let g:vimfm_show_hidden_files = 1
 let g:vimfm_linkid_str = '>'
 let w:vimfm_last_bufnr = -1
 
@@ -122,7 +123,6 @@ function! vimfm#init(...) abort
           \ 'E37: No write since last change')
     return
   endtry
-  call vimfm#toggle_hidden()
 endfunction
 
 
@@ -204,7 +204,7 @@ endfunction
 
 function! vimfm#open_parent() abort
   let filer = vimfm#buffer#get_filer()
-  let parent_dir = fnameescape(fnamemodify(filer.dir, ':h'))
+  let parent_dir = fnameescape(fnamemodify(filer.dir, ':h:p'))
   call vimfm#open(parent_dir)
 endfunction
 
