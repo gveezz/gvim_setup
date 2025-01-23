@@ -31,8 +31,8 @@ endfunction
 
 call s:set_up_default_config()
 
-command! -bar -nargs=? -complete=dir Vimfm call vimfm#init(<f-args>)
-command! -bar -nargs=? -complete=dir VimfmCurDir call vimfm#init(expand("%:p:h"))
+command! -bar -nargs=? -complete=dir Vimfm if &ft != 'vimfm' | call vimfm#init(<f-args>) | endif
+command! -bar -nargs=? -complete=dir VimfmCurDir if &ft != 'vimfm' | call vimfm#init(expand("%:p:h")) | endif
 
 nnoremap <silent> <Plug>(vimfm-returnto-buffer)      :<C-u>call vimfm#returnto_buffer()<CR>
 " Toggle

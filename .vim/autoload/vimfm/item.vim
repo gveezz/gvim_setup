@@ -8,6 +8,12 @@ function! vimfm#item#create(path, is_dir) abort
   let item.is_dir = a:is_dir
   let item.is_link = vimfm#item#is_link(a:path)
   let item.link_path = vimfm#util#get_last_component(vimfm#item#link_path(a:path), a:is_dir)
+  if fnamemodify(item.link_path, ':p:h') == fnamemodify(item.path, ':p:h')
+     let item.link_path = './'.item.link_path
+  endif
+  if isdirectory(item.link_path)
+      let item.link_path = item.link_path.'/'
+  endif
   let item.selected = 0
   let item.basename = vimfm#util#get_last_component(a:path, a:is_dir)
   return item

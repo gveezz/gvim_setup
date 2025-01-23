@@ -9,7 +9,7 @@ function! vimfm#renderer#render_item(item) abort
           \ a:item.basename . (a:item.is_dir ? '/' : ''))
   else
     if a:item.is_link
-      return printf('%s%s /@/ %s',
+      return printf('%s%s > %s',
             \ a:item.selected ? '*' : '',
             \ a:item.basename . (a:item.is_dir ? '/' : ''),
             \ a:item.link_path)

@@ -1,5 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
+
+let g:vimfm_linkid_str = '>'
 let w:vimfm_last_bufnr = -1
 
 function! s:keep_buffer_singularity() abort
@@ -71,8 +73,8 @@ endfunction
 " a:000[1]: should_overwrite
 function! vimfm#init(...) abort
 
-  " Save las buffer number
-  if (&ft != 'vimfm')
+  if &ft != 'vimfm'
+    " Save las buffer number
      let w:vimfm_last_bufnr = bufnr()
   end
   
