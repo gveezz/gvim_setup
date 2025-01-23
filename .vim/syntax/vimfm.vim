@@ -9,7 +9,7 @@ syn match vimfmSelected '^*.\+$'
 syn match vimfmNoItems '^(no items)$'
 exec "syn match vimfmLink \'^.*\\ze\\s".g:vimfm_linkid_str."'"
 exec "syn match vimfmLinkId '".g:vimfm_linkid_str."'"
-syn match vimfmLinkPathDir '\zs\.\/.*\/$'
+syn match vimfmLinkPathDir '\zs\/.*\/$'
 
 hi! def link vimfmDirectory Directory
 hi! def link vimfmHidden HiddenDirectory

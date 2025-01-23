@@ -7,13 +7,19 @@ function! vimfm#item#create(path, is_dir) abort
   let item.path = vimfm#util#normalize_path(a:path)
   let item.is_dir = a:is_dir
   let item.is_link = vimfm#item#is_link(a:path)
-  let item.link_path = vimfm#util#get_last_component(vimfm#item#link_path(a:path), a:is_dir)
-  if fnamemodify(item.link_path, ':p:h') == fnamemodify(item.path, ':p:h')
-     let item.link_path = './'.item.link_path
-  endif
-  if isdirectory(item.link_path)
+  
+  let item.link_path = ''
+  if item.is_link
+    let item.link_path = vimfm#item#link_path(a:path)
+    if isdirectory(item.link_path)
       let item.link_path = item.link_path.'/'
+    endif
+    
+    if fnamemodify(item.link_path, ':h:p') == fnamemodify(a:path, ':h:p')
+      let item.link_path = fnamemodify(item.link_path, ':.')
+    endif
   endif
+  
   let item.selected = 0
   let item.basename = vimfm#util#get_last_component(a:path, a:is_dir)
   return item
@@ -24,11 +30,7 @@ function! vimfm#item#is_link(path)
 endfunction
 
 function! vimfm#item#link_path(path)
-   if a:path != resolve(a:path)
-      return resolve(a:path)
-   else
-      return ''
-   endif
+   return resolve(a:path)
 endfunction
 
 function! vimfm#item#from_path(path) abort
