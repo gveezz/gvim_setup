@@ -3,11 +3,7 @@ set cpoptions&vim
 
 
 function! s:map_default(mode, lhs, vimfm_command, sp_args) abort
-  execute printf('%smap %s %s <Plug>(vimfm-%s)',
-        \ a:mode,
-        \ a:sp_args,
-        \ a:lhs,
-        \ a:vimfm_command)
+  execute a:mode."map ".a:sp_args." ".a:lhs." <Plug>(vimfm-".a:vimfm_command.")"
 endfunction
 
 
@@ -49,25 +45,6 @@ function! s:set_up_default_mappings() abort
   " nmap <buffer> <silent> <Esc>      <Plug>(vimfm-quit)
 endfunction
 
-" function! s:generate_unique_bufname(path) abort
-"   let bufname = ''
-"   let index = 0
-" 
-"   while 1
-"     " Add index to avoid duplicated buffer name
-"     let bufname = fnameescape(printf('vimfm://%d/%s',
-"           \ index,
-"           \ a:path))
-"     if bufnr(bufname) < 0
-"       break
-"     endif
-" 
-"     let index += 1
-"   endwhile
-" 
-"   return bufname
-" endfunction
-
 function! s:generate_unique_bufname(path) abort
    let bufname = fnamemodify(a:path, ':.')
    return bufname
@@ -101,8 +78,8 @@ endfunction
 function! vimfm#buffer#init(filer) abort
   " Give unique name to buffer to avoid unwanted sync
   " between different windows
-  execute printf('silent keepalt file %s',
-        \ s:generate_unique_bufname(a:filer.dir))
+  execute 'silent keepalt file '.
+        \ s:generate_unique_bufname(a:filer.dir)
 
   if g:vimfm_use_default_mappings
     call s:set_up_default_mappings()

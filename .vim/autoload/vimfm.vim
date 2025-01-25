@@ -66,7 +66,7 @@ function! s:clean_up_outdated_buffers() abort
         \ all_bufnrs,
         \ 's:should_wipe_out(v:val)')
   for bufnr in outdated_bufnrs
-    execute printf('silent bwipeout %d', bufnr)
+    execute 'silent bwipeout '.bufnr
   endfor
 endfunction
 
@@ -97,7 +97,7 @@ function! vimfm#init(...) abort
     " Open new directory buffer and overwrite it
     " (will be initialized by vimfm#event#on_bufenter)
     let dir = fnamemodify(path, ':h')
-    execute printf('edit %s', fnameescape(dir))
+    execute 'edit '.fnameescape(dir)
 
     call vimfm#buffer#move_cursor_to_path(
           \ fnamemodify(path, ':p'))
@@ -278,7 +278,7 @@ function! vimfm#quit() abort
   " the case where cur == alt is when there are no other
   " buffers except for vimfm
   if bufexists(alt) && cur != alt
-    execute printf('buffer! %d', alt) 
+    execute 'buffer! '.alt
     return
   endif
 
@@ -296,8 +296,8 @@ function! vimfm#delete_selected() abort
   endif
 
   let message = (len(items) == 1)
-        \ ? printf('Delete ''%s'' (y/N)? ', items[0].basename)
-        \ : printf('Delete %d selected files (y/N)? ', len(items))
+        \ ? "Delete '".items[0].basename."' (y/N)? "
+        \ : "Delete ".len(items)." selected files (y/N)? "
   let yn = input(message)
   echo "\n"
   if empty(yn) || yn ==? 'n'
@@ -325,8 +325,8 @@ function! vimfm#move_selected() abort
   endif
 
   let message = (len(items) == 1)
-        \ ? printf('Move ''%s'' to: ', items[0].basename)
-        \ : printf('Move %d selected files to: ', len(items))
+        \ ? "Move '".items[0].basename."' to: "
+        \ : "Move ".len(items)." selected files to: "
   let dst_name = input(message, '', 'dir')
   echo "\n"
   if empty(dst_name)
@@ -442,9 +442,7 @@ function! vimfm#fill_cmdline() abort
   endif
 
   let paths = map(items, 'fnameescape(v:val.path)')
-  let cmdline =printf(
-        \ ": %s\<Home>",
-        \ join(paths, ' '))
+  let cmdline = ": ".join(paths, ' ')."\<Home>"
   call feedkeys(cmdline)
 endfunction
 
@@ -452,12 +450,12 @@ function! vimfm#chdir(path) abort
   call s:keep_buffer_singularity()
 
   try
-    execute printf('lcd %s', fnameescape(a:path))
+    execute 'lcd '.fnameescape(a:path)
   catch /:E472:/
     " E472: Command failed
     " Permission denied, etc.
     call vimfm#util#echo_error(
-          \ printf('Changing directory failed: ''%s''', a:path))
+          \ "Changing directory failed: '".a:path."'")
   endtry
 endfunction
 

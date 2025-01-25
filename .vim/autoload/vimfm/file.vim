@@ -31,9 +31,9 @@ function! s:open_single(item, open_mode) abort
   let open_cmd = get(s:open_mode_to_cmd_single_map,
         \ a:open_mode,
         \ 'edit')
-  execute printf('keepalt %s %s',
-        \ open_cmd,
-        \ fnameescape(a:item.path))
+  execute 'keepalt '
+        \ .open_cmd.' '
+        \ .fnameescape(a:item.path)
 endfunction
 
 function! s:open_multiple(items, open_mode) abort
@@ -42,9 +42,9 @@ function! s:open_multiple(items, open_mode) abort
         \ 'split')
 
   for item in a:items
-    execute printf('keepalt %s %s',
-          \ open_cmd,
-          \ fnameescape(item.path))
+   execute 'keepalt '
+        \ .open_cmd.' '
+        \ .fnameescape(item.path)
   endfor
 endfunction
 
@@ -88,46 +88,38 @@ function! vimfm#file#delete(items) abort
           \ : (item.is_dir ? 'd' : '')
     if delete(item.path, flag) < 0
       call vimfm#util#echo_error(
-            \ printf('Cannot delete file: ''%s''', item.basename))
+            \ "Cannot delete file: '".item.basename."'")
     else
-      echo printf('Deleted file: ''%s''',
-            \ item.basename)
+      echo "Deleted file: '".item.basename."'"
     endif
   endfor
 endfunction
 
 function! vimfm#file#mkdir(filer, name) abort
-  let path = vimfm#util#normalize_path(printf('%s/%s',
-        \ a:filer.dir,
-        \ a:name))
+  let path = vimfm#util#normalize_path(a:filer.dir.'/'a:name)
 
   if filereadable(path) || isdirectory(path)
     call vimfm#util#echo_error(
-          \ printf('File already exists: ''%s''', a:name))
+          \ "File already exists: '".a:name."'")
     return
   endif
 
   call mkdir(path, '')
 
-  echo printf('Created new directory: ''%s''',
-        \ a:name)
+  echo "Created new directory: '".a:name."'"
 endfunction
 
 function! vimfm#file#edit(filer, name) abort
-  let path = vimfm#util#normalize_path(printf('%s/%s',
-        \ a:filer.dir,
-        \ a:name))
-  execute printf('edit %s', fnameescape(path))
+  let path = vimfm#util#normalize_path(a:filer.dir.'/'.a:name)
+  execute 'edit '.fnameescape(path)
 endfunction
 
 function! vimfm#file#move(filer, items, dst_name) abort
-  let dst_dir = vimfm#util#normalize_path(printf('%s/%s',
-        \ a:filer.dir,
-        \ a:dst_name))
+  let dst_dir = vimfm#util#normalize_path(a:filer.dir.'/'.a:dst_name)
 
   if !isdirectory(dst_dir)
     call vimfm#util#echo_error(
-          \ printf('Destination is not a directory: ''%s''', dst_dir))
+          \ "Destination is not a directory: '".dst_dir."'")
     return
   endif
 
@@ -135,21 +127,17 @@ function! vimfm#file#move(filer, items, dst_name) abort
     let basename = vimfm#util#get_last_component(
           \ item.path,
           \ item.is_dir)
-    let dst_path = vimfm#util#normalize_path(printf('%s/%s',
-          \ dst_dir,
-          \ basename))
+    let dst_path = vimfm#util#normalize_path(dst_dir.'/'.basename)
 
     if filereadable(dst_path) || isdirectory(dst_path)
       call vimfm#util#echo_error(
-            \ printf('File already exists. Skipped: ''%s''', dst_path))
+            \ "File already exists. Skipped: '".dst_path."'")
       continue
     endif
 
     call rename(item.path, dst_path)
 
-    echo printf('Moved file: ''%s'' -> ''%s''',
-          \ item.basename,
-          \ dst_path)
+    echo "Moved file: '".item.basename."' -> '".dst_path."'"
   endfor
 endfunction
 
@@ -161,23 +149,19 @@ function! vimfm#file#rename(filer, items, new_basenames) abort
 
   for item in a:items
     let new_basename = a:new_basenames[index]
-    let new_path = vimfm#util#normalize_path(printf('%s/%s',
-          \ cwd,
-          \ new_basename))
+    let new_path = vimfm#util#normalize_path(cwd.'/'.new_basename)
     let index += 1
 
     if filereadable(new_path) || isdirectory(new_path)
       call add(renamed_paths, '')
       call vimfm#util#echo_error(
-            \ printf('File already exists, skipped: ''%s''', new_path))
+            \ "File already exists, skipped: '".new_path."'")
       continue
     endif
 
     call rename(item.path, new_path)
     call add(renamed_paths, new_path)
-    echo printf('Renamed file: ''%s'' -> ''%s''',
-          \ item.basename,
-          \ new_basename)
+    echo "Renamed file: '".item.basename."' -> '".new_basename."'"
   endfor
 
   return renamed_paths

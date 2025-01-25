@@ -10,9 +10,10 @@ function! s:set_up_syntax(items) abort
 
   let lnum = 1
   for item in a:items
-    execute printf('syntax match vimfmNotRenamed ''^\%%%dl%s$''',
-          \ lnum,
-          \ item.basename)
+    " execute printf('syntax match vimfmNotRenamed ''^\%%%dl%s$''',
+    "       \ lnum,
+    "       \ item.basename)
+    execute "syntax match vimfmNotRenamed ''^\%%".lnum."l".item.basename."$''"
     let lnum += 1
   endfor
 
@@ -59,7 +60,7 @@ function! vimfm#rename_buffer#new(items) abort
   let bufnr = bufnr(s:buffer_name)
   if bufnr >= 0
     " Close existing rename buffer if exists
-    execute printf('bwipeout %d', bufnr)
+    execute 'bwipeout '.bufnr
   endif
 
   let parent_filer = vimfm#buffer#get_filer()
