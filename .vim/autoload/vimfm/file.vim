@@ -96,7 +96,7 @@ function! vimfm#file#delete(items) abort
 endfunction
 
 function! vimfm#file#mkdir(filer, name) abort
-  let path = vimfm#util#normalize_path(a:filer.dir.'/'a:name)
+  let path = vimfm#util#normalize_path(a:filer.dir.'/'.a:name)
 
   if filereadable(path) || isdirectory(path)
     call vimfm#util#echo_error(
