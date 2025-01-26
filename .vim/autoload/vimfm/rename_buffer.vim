@@ -13,7 +13,7 @@ function! s:set_up_syntax(items) abort
     " execute printf('syntax match vimfmNotRenamed ''^\%%%dl%s$''',
     "       \ lnum,
     "       \ item.basename)
-    execute "syntax match vimfmNotRenamed ''^\%%".lnum."l".item.basename."$''"
+    execute "syntax match vimfmNotRenamed '^\%%".lnum."l".item.basename."$'"
     let lnum += 1
   endfor
 
