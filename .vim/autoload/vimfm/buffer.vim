@@ -24,8 +24,8 @@ function! s:set_up_default_mappings() abort
   call s:map_default('n', '<Right>', 'open-selected',    '<buffer> <silent>')
   call s:map_default('n', 'r',       'rename-selected',  '<buffer> <silent>')
   " Operations for a item on cursor
-  call s:map_default('n', 'l',       'open-current',     '<buffer> <silent>')
-  call s:map_default('n', 't',       'open-current-tab', '<buffer> <nowait> <silent>')
+  " call s:map_default('n', 'l',       'open-current',     '<buffer> <silent>')
+  " call s:map_default('n', 't',       'open-current-tab', '<buffer> <nowait> <silent>')
   " Misc
   call s:map_default('n', 'd',       'mkdir',            '<buffer> <silent>')
   call s:map_default('n', 'a',       'new-file',         '<buffer> <silent>')
@@ -46,8 +46,8 @@ function! s:set_up_default_mappings() abort
 endfunction
 
 function! s:generate_unique_bufname(path) abort
-   let bufname = fnamemodify(a:path, ':.')
-   return bufname
+   let l:bufname = fnamemodify(a:path, ':')
+   return l:bufname
 endfunction
 
 function! s:perform_auto_cd_if_needed(path) abort
@@ -78,8 +78,7 @@ endfunction
 function! vimfm#buffer#init(filer) abort
   " Give unique name to buffer to avoid unwanted sync
   " between different windows
-  execute 'silent keepalt file '.
-        \ s:generate_unique_bufname(a:filer.dir)
+  execute 'silent keepalt file '.fnamemodify(a:filer.dir, ':.')
 
   if g:vimfm_use_default_mappings
     call s:set_up_default_mappings()
@@ -93,9 +92,7 @@ function! vimfm#buffer#init(filer) abort
   setlocal nowrap
 
   call vimfm#buffer#set_filer(a:filer)
-
   call vimfm#buffer#redraw()
-
   call s:perform_auto_cd_if_needed(a:filer.dir)
 endfunction
 

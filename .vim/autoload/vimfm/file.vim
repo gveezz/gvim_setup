@@ -31,7 +31,7 @@ function! s:open_single(item, open_mode) abort
   let open_cmd = get(s:open_mode_to_cmd_single_map,
         \ a:open_mode,
         \ 'edit')
-  execute 'keepalt '
+  execute 'silent! keepalt '
         \ .open_cmd.' '
         \ .fnameescape(a:item.path)
 endfunction
