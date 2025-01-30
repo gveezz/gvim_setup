@@ -62,19 +62,19 @@ command! -nargs=0 AddMultiLineCommentI call AddMultiLineComment(line("."),line('
 command! -nargs=0 AddMultiLineCommentV call AddMultiLineComment(line("'<"),line("'>"))
 command! -nargs=0 PromptAlignV call PromptAlign(line("'<"),line("'>"))
 
-command!-nargs=0 AlignAssignmentV callAlignAssignment(line("'<"),line("'>"))
-command!-nargs=0 VAlignCommentV callVAlignComment(line("'<"),line("'>"))
-command!-nargs=0 AlignCommentV callAlignComment(line("'<"),line("'>"))
-command!-nargs=0 AlignDeclarationsV callAlignDeclarations(line("'<"),line("'>"))
-command!-nargs=0 AlignParamsV callAlignParams(line("'<"),line("'>"))
-command!-nargs=0 AlignIoInstanceV callAlignIoInstance(line("'<"),line("'>"))
-command!-nargs=0 AutoAlignIoInstanceV callAutoAlignIoInstance(line("'<"),line("'>"))
-command!-nargs=0 RplcSemicolonToDotV callRplcSemicolonToDot(line("'<"),line("'>"))
-command!-nargs=0 InsertDotV callInsertDot(line("'<"),line("'>"))
-command!-nargs=0 AppendCommaV callAppendComma(line("'<"),line("'>"))
-command!-nargs=0 AppendSemicolonV callAppendSemicolon(line("'<"),line("'>"))
-command!-nargs=0 FormatIoInstanceV callFormatIoInstance(line("'<"),line("'>"))
-command!-nargs=0 MultiLineCommentV callMultiLineComment(line("'<"),line("'>"))
+command!-nargs=0 AlignAssignmentV call AlignAssignment(line("'<"),line("'>"))
+command!-nargs=0 VAlignCommentV call VAlignComment(line("'<"),line("'>"))
+command!-nargs=0 AlignCommentV call AlignComment(line("'<"),line("'>"))
+command!-nargs=0 AlignDeclarationsV call AlignDeclarations(line("'<"),line("'>"))
+command!-nargs=0 AlignParamsV call AlignParams(line("'<"),line("'>"))
+command!-nargs=0 AlignIoInstanceV call AlignIoInstance(line("'<"),line("'>"))
+command!-nargs=0 AutoAlignIoInstanceV call AutoAlignIoInstance(line("'<"),line("'>"))
+command!-nargs=0 RplcSemicolonToDotV call RplcSemicolonToDot(line("'<"),line("'>"))
+command!-nargs=0 InsertDotV call InsertDot(line("'<"),line("'>"))
+command!-nargs=0 AppendCommaV call AppendComma(line("'<"),line("'>"))
+command!-nargs=0 AppendSemicolonV call AppendSemicolon(line("'<"),line("'>"))
+command!-nargs=0 FormatIoInstanceV call FormatIoInstance(line("'<"),line("'>"))
+command!-nargs=0 MultiLineCommentV call MultiLineComment(line("'<"),line("'>"))
 
 function! AddLineComment()
    if len(getline('.')) > 0
@@ -178,8 +178,9 @@ endfunction
 function! FormatIoInstance(fline, lline) range
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//normal! I."
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/,$/( ),/g"
-   silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\/\|,/normal! A( )"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/$/,/g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\&(),/s/,$/( ),/g"
+   "silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\/\|,/normal! A( )"
    silent! exec ":".a:lline."s/,//g"
    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0}"
    " close above /)

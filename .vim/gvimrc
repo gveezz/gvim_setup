@@ -371,7 +371,7 @@ nnoremap <silent> <nowait> <C-RightMouse> <nop>
 inoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <silent> <nowait> <S-Del> <nop>
 
-" inoremap <expr> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : "<CR>"
+inoremap <expr> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-n>" : "<Tab>"
