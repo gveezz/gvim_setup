@@ -43,6 +43,11 @@ function! GetCWD()
    return substitute(l:cwd, $HOME."/", "~/", "g")
 endfunction
 
+function! GetPWD()
+   let l:pwd = execute(':pwd')
+   return l:pwd.'/'
+endfunction
+
 function! GetCWDRelFPath()
    let l:fpath = expand("%:p")
    return substitute(l:fpath, getcwd()."/", "", "g")
