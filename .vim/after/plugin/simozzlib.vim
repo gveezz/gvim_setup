@@ -35,7 +35,7 @@ function! AdjTemplate ()
 endfunction
 
 function! SetPWD(path)
-   silent! exec ":cd ".a:path
+   silent! exec ":cd! ".a:path
 endfunction
 
 function! GetCWD()
@@ -974,7 +974,6 @@ function! ScrollWheelDown(scroll)
 
    let l:cLine = line('.')
    let l:cCol = col('.')
-   let l:winheight = winheight('.')
    let l:winheight = winheight('.')
 
    let l:lastvline = line('w$')

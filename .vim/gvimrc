@@ -41,10 +41,10 @@ syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
 " set updatetime=100
-set timeout
-set ttimeout
-set timeoutlen=100
-set ttimeoutlen=100
+set notimeout
+set nottimeout
+set timeoutlen=0
+set ttimeoutlen=-1
 " set tags=tags;/
 " set tags=./tags,tags;
 set tags=./tags;,tags
@@ -90,7 +90,7 @@ set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
-set statusline+=\ %=%{GetCWD()}\ %{GetCWDRelFPath()}\ %y\ %m%r
+set statusline+=\ %=%{bufname()}\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
 set backspace=indent,eol,start
@@ -124,8 +124,8 @@ set colorcolumn=0
 " set wrap
 set linebreak
 " note trailing space at end of next line
-set columns=150
-set lines=35
+set columns=999
+set lines=999
 " set history=1000
 " set wc=<Tab>
 set wildmenu
@@ -351,9 +351,11 @@ inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
 vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
 
-inoremap <C-j> <C-o><C-w><C-]>
+inoremap <C-j> <C-o><C-]>
+inoremap <C-LeftRelease> <LeftMouse><C-o><C-]>
 nnoremap <C-j> <C-w><C-]>
-vnoremap <C-j> <C-w><C-]>
+nnoremap <C-LeftRelease> <LeftMouse><C-]>
+vnoremap <C-j> <C-]>
 
 " C-c: command line mode
 inoremap <nowait> <M-x> <C-o>:
@@ -392,9 +394,9 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>"
-snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
-cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>zz
+xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
+snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n
+cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
 inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
@@ -447,9 +449,17 @@ nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
 xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
 snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
 
-inoremap <nowait> <C-b> <C-o>:b 
-nnoremap <nowait> <C-b> :b 
-vnoremap <nowait> <C-b> <Esc>:b 
+inoremap <nowait> <C-b> <C-o>:b
+nnoremap <nowait> <C-b> :b
+vnoremap <nowait> <C-b> <Esc>:b
+
+inoremap <nowait> <C-M-b> <C-o>:b<Space>
+nnoremap <nowait> <C-M-b> :b<Space>
+vnoremap <nowait> <C-M-b> <Esc>:b<Space>
+
+inoremap <nowait> <M-b> <C-o>:bprev<CR>
+nnoremap <nowait> <M-b> :bprev<CR>
+vnoremap <nowait> <M-b> <Esc>:bprev<CR>
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
@@ -485,25 +495,6 @@ vnoremap <silent> <nowait> <C-e> <Esc><C-c>:enew!<CR>
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
 nnoremap <silent> <nowait> <C-a> ggVG
 
-" M-Up: switch to the upper window
-inoremap <silent> <nowait> <M-Up> <C-o><C-w><Up>
-nnoremap <silent> <nowait> <M-Up> <C-w><Up>
-xnoremap <silent> <nowait> <M-Up> <Esc><C-w><Up>
-
-" " M-Left: switch to the upper window
-inoremap <silent> <nowait> <M-Left> <C-o><C-w><Left>
-nnoremap <silent> <nowait> <M-Left> <C-w><Left>
-xnoremap <silent> <nowait> <M-Left> <Esc><C-w><Left>
-
-inoremap <silent> <nowait> <M-Right> <C-o><C-w><Right>
-nnoremap <silent> <nowait> <M-Right> <C-w><Right>
-xnoremap <silent> <nowait> <M-Right> <Esc><C-w><Right>
-
-" M-Down
-inoremap <silent> <nowait> <M-Down> <C-o><C-w><Down>
-nnoremap <silent> <nowait> <M-Down> <C-w><Down>
-xnoremap <silent> <nowait> <M-Down> <Esc><C-w><Down>
-
 " C-n
 inoremap <silent> <nowait> <C-n> <C-o>:vsplit<CR>
 nnoremap <silent> <nowait> <C-n> :vsplit<CR>
@@ -518,12 +509,18 @@ xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:split<CR>
 " inoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
 " nnoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>"
 " xnoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<Esc>:call GoToPrevWin()<CR>" : "<Esc>:tabprev<CR>"
+inoremap <silent> <nowait> <C-PageUp> <C-o>:call GoToPrevWin()<CR>
+nnoremap <silent> <nowait> <C-PageUp> :call GoToPrevWin()<CR>
+xnoremap <silent> <nowait> <C-PageUp> <Esc>:call GoToPrevWin()<CR>
 cnoremap <silent> <nowait> <C-PageUp> <C-c>
 
 " C-PageDown: switch to previous window or tab
 " inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR>"
 " nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>"
 " nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<Esc>:call GoToNextWin()<CR>" : "<Esc>:tabnext<CR>"
+inoremap <silent> <nowait> <C-PageDown> <C-o>:call GoToNextWin()<CR>
+nnoremap <silent> <nowait> <C-PageDown> :call GoToNextWin()<CR>
+xnoremap <silent> <nowait> <C-PageDown> <Esc>:call GoToNextWin()<CR>
 cnoremap <silent> <nowait> <C-PageDown> <C-c>
 
 " inoremap <silent> <nowait> <M-w> <C-o>:call GoToWin()<CR>
@@ -592,12 +589,12 @@ snoremap <silent> <nowait> <End> <Esc>$
 xnoremap <silent> <nowait> <End> $
 
 " <ScrollWheelUp> <ScrollWheelDown>
-inoremap <silent> <nowait> <ScrollWheelUp> <C-o>:call ScrollWheelUp(10)<CR>
-inoremap <silent> <nowait> <ScrollWheelDown> <C-o>:call ScrollWheelDown(10)<CR>
-nnoremap <silent> <nowait> <ScrollWheelUp> :call ScrollWheelUp(10)<CR>
-nnoremap <silent> <nowait> <ScrollWheelDown> :call ScrollWheelDown(10)<CR>
-xnoremap <silent> <nowait> <ScrollWheelUp> <C-c>:call ScrollWheelUp(10)<CR>
-xnoremap <silent> <nowait> <ScrollWheelDown> <C-c>:call ScrollWheelUp(10)<CR>
+inoremap <silent> <nowait> <ScrollWheelUp> <C-o>:call ScrollWheelUp(winheight('.')/3)<CR>
+inoremap <silent> <nowait> <ScrollWheelDown> <C-o>:call ScrollWheelDown(winheight('.')/3)<CR>
+nnoremap <silent> <nowait> <ScrollWheelUp> :call ScrollWheelUp(winheight('.')/3)<CR>
+nnoremap <silent> <nowait> <ScrollWheelDown> :call ScrollWheelDown(winheight('.')/3)<CR>
+xnoremap <silent> <nowait> <ScrollWheelUp> <C-c>:call ScrollWheelUp(winheight('.')/3)<CR>
+xnoremap <silent> <nowait> <ScrollWheelDown> <C-c>:call ScrollWheelUp(winheight('.')/3)<CR>
 
 vnoremap <silent> <nowait> <M-v> <nop>
 xnoremap <silent> <nowait> <Up> k
