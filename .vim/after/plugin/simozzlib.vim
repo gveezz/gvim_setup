@@ -609,6 +609,10 @@ function! FeedCompletePopUp()
    return "\<C-N>\<C-P>"
 endfunction
 
+function! ShowCompletePopUp()
+   call feedkeys("\<C-N>\<C-P>", "n")
+endfunction
+
 function! AutoCompleteInoremap()
 
   let s:keysMappingDriven = [
@@ -1227,8 +1231,12 @@ function! HighlightCursorMatch()
     endtry
 endfunction
 
+function! IsWordUnderCursor()
+   return getline(".")[col(".")-1] =~# '\w'
+endfunction
+
 function! HighlightWordUnderCursor()
-   if getline(".")[col(".")-1] =~# '\w'
+   if IsWordUnderCursor()
       exec 'match HighCW /\<'.expand('<cword>').'\>/'
    else 
       match none 
