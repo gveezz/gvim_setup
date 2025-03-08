@@ -375,6 +375,7 @@ inoremap <silent> <nowait> <S-Del> <nop>
 cnoremap <silent> <nowait> <S-Del> <nop>
 
 inoremap <expr> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : "<CR>"
+inoremap <expr> <silent> <nowait> <LeftMouse> pumvisible() ? "<C-y>" : "<LeftMouse>"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
 inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-n>" : "<Tab>"
@@ -648,5 +649,3 @@ inoremap <silent> <nowait> <C-S-Left>  <S-Left>b<C-g>
 vnoremap <expr> <silent> <nowait> <C-S-Right> getline('.')[col('.')-1] == ' ' ? "w" : "e"
 vnoremap <expr> <silent> <nowait> <C-S-Left> getline('.')[col('.')-2] == ' ' ? "gel" : "b"
 
-inoremap <silent> <nowait> <C-2-LeftRelease> <C-c>viw<C-g>
-nnoremap <silent> <nowait> <C-2-LeftRelease> viw
