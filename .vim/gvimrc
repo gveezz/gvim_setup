@@ -265,6 +265,7 @@ nnoremap <silent> <nowait> <C-c> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o>:call CloseBuffer()<CR><C-o><C-w>c
+nnoremap <silent> <nowait> <C-S-w> :call CloseBuffer()<CR><C-w>c
 
 " M-w: Change window
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
