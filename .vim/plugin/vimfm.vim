@@ -20,6 +20,7 @@ function! s:set_up_default_config()
         \   'vimfm_use_default_mappings': 1,
         \   'vimfm_open_current_split_position': 'topleft',
         \   'vimfm_open_current_vsplit_position': 'rightbelow',
+        \   'vimfm_goes_up_pwd': 0,
         \ }
 
   for var_name in keys(config_dict)

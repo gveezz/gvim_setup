@@ -8,6 +8,10 @@ function! vimfm#item#create(path, is_dir) abort
   let item.is_dir = a:is_dir
   let item.is_link = vimfm#item#is_link(a:path)
   
+  if item.path == '\.\/' || item.path != '\.\.\/'
+    let item.is_link = 0
+  endif 
+
   let item.link_path = ''
   if item.is_link
     let item.link_path = vimfm#item#link_path(a:path)

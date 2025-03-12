@@ -86,7 +86,7 @@ set breakindent
 set browsedir=current
 set smarttab
 set number relativenumber
-set guifont=Monospace\ 11
+set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
@@ -125,7 +125,7 @@ set colorcolumn=0
 set linebreak
 " note trailing space at end of next line
 set columns=999
-set lines=999
+set lines=40
 " set history=1000
 " set wc=<Tab>
 set wildmenu
@@ -294,17 +294,23 @@ nnoremap <silent> <nowait> <S-F2> :call SmallerFont()<CR>
 inoremap <nowait> <M-d> <C-o>:vert diffsplit 
 nnoremap <nowait> <M-d> <C-o>:vert diffsplit 
 
-" S-F4: diffoff
+" M-S-d: diffoff
 inoremap <silent> <nowait> <M-S-d> <C-o>:diffoff<CR>
 nnoremap <silent> <nowait> <M-S-d> <C-o>:diffoff<CR>
 
 " F5: increase vertical resize by 5 units
-inoremap <silent> <nowait> <F5> <C-o>:vertical resize +5<CR>
-nnoremap <silent> <nowait> <F5> :vertical resize +5<CR>
+" inoremap <silent> <nowait> <F5> <C-o>:vertical resize +5<CR>
+" nnoremap <silent> <nowait> <F5> :vertical resize +5<CR>
+
+" inoremap <silent> <nowait> <F5> <C-o>:vertical resize +5<CR>
+" nnoremap <silent> <nowait> <F5> :vertical resize +5<CR>
+
+inoremap <silent> <nowait> <F5> <C-o>:source ${MYGVIMRC}<CR><C-o>:redraw<CR>
+nnoremap <silent> <nowait> <F5> :source ${MYGVIMRC}<CR>:redraw<CR>
 
 " S-F5: descrease vertical resize by 5 units
-inoremap <silent> <nowait> <S-F5> <C-o>:vertical resize -5<CR>
-nnoremap <silent> <nowait> <S-F5> :vertical resize -5<CR>
+" inoremap <silent> <nowait> <S-F5> <C-o>:vertical resize -5<CR>
+" nnoremap <silent> <nowait> <S-F5> :vertical resize -5<CR>
 
 " F6: Turn off hlsearch highlight
 inoremap <silent> <nowait> <F6> <C-o>:set nohlsearch<CR>
@@ -460,9 +466,9 @@ inoremap <nowait> <C-M-b> <C-o>:b<Space>
 nnoremap <nowait> <C-M-b> :b<Space>
 vnoremap <nowait> <C-M-b> <Esc>:b<Space>
 
-inoremap <nowait> <M-b> <C-o>:bprev<CR>
-nnoremap <nowait> <M-b> :bprev<CR>
-vnoremap <nowait> <M-b> <Esc>:bprev<CR>
+inoremap <nowait> <M-b> <C-o><C-6>
+nnoremap <nowait> <M-b> <C-6>
+vnoremap <nowait> <M-b> <Esc><C-6>
 
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
