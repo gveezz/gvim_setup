@@ -40,7 +40,7 @@ filetype plugin on
 syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
-set updatetime=0
+set updatetime=2000
 set notimeout
 set nottimeout
 set timeoutlen=0
