@@ -85,7 +85,7 @@ set shiftwidth=3
 set breakindent
 set browsedir=current
 set smarttab
-set number relativenumber
+set number 
 set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
@@ -542,10 +542,11 @@ inoremap <silent> <nowait> <M-o> <C-o>:browse confirm e<CR>
 nnoremap <silent> <nowait> <M-o> :browse confirm e<CR>
                             
 " Better advance or reverse page
-inoremap <silent> <nowait> <PageDown> <C-o>:call PageDown()<CR>
+inoremap <expr> <silent> <nowait> <PageDown> pumvisible() ? "<Down>" : "<C-o>:call PageDown()<CR>"
 nnoremap <silent> <nowait> <PageDown> :call PageDown()<CR>
 snoremap <silent> <nowait> <PageDown> <C-o>:call PageDown()<CR>
-inoremap <silent> <nowait> <PageUp> <C-o>:call PageUp()<CR>
+
+inoremap <expr> <silent> <nowait> <PageUp> pumvisible() ? "<Up>" : "<C-o>:call PageUp()<CR>"
 nnoremap <silent> <nowait> <PageUp> :call PageUp()<CR>
 snoremap <silent> <nowait> <PageUp> <C-o>:call PageUp()<CR>
 
