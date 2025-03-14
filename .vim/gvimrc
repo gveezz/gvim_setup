@@ -423,7 +423,8 @@ nnoremap <silent> <nowait> <C-.> zczz
 xnoremap <silent> <nowait> <C-.> <Esc><C-c>zFzz
 snoremap <silent> <nowait> <C-.> <C-o>zFzz
 
-" C-h: 
+" Copy
+vnoremap <silent> <nowait> <C-c> <C-o>:setreg('+', getreg('*'))<CR>
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
@@ -619,11 +620,7 @@ vnoremap <silent> <nowait> <C-z> u
 vnoremap <silent> <nowait> <Tab> >gv
 vnoremap <silent> <nowait> <S-Tab> <gv
 
-vnoremap <silent> <nowait> <C-c> "+ygv
 " tnoremap <silent> <nowait> <C-c> <C-\><C-n><C-w>N<C-\><C-n>
-
-vnoremap <silent> <nowait> y "+ygv
-vnoremap <silent> <nowait> <C-v> "+P
 
 vnoremap <silent> <nowait> <C-k> Vd
 vnoremap <silent> <nowait> <M-o> <nop>
