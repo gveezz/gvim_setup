@@ -256,12 +256,11 @@ nnoremap <silent> <nowait> <C-o> <nop>
 inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc><Right>"
 nnoremap <silent> <nowait> <Esc> i
+inoremap <silent> <nowait> <C-c> <nop>
 
 inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
-
-inoremap <silent> <nowait> <expr> <C-c> col('.')== 1? "<C-c>" : "<C-c><Right>"
-nnoremap <silent> <nowait> <C-c> i
+nnoremap <silent> <nowait> <C-M-Space> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o>:call CloseBuffer()<CR><C-o><C-w>c
