@@ -407,6 +407,11 @@ snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
+inoremap <nowait> <C-S-f> <C-o>:find **/
+nnoremap <nowait> <C-S-f> :find **/
+vnoremap <nowait> <C-S-f> <Esc>:find **/
+cnoremap <nowait> <C-S-f> :find **/
+
 inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
 nnoremap <nowait> <M-f> :%s/<C-r><C-w>/
 vnoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>
