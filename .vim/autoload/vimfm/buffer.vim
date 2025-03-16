@@ -46,7 +46,20 @@ function! s:set_up_default_mappings() abort
 endfunction
 
 function! s:generate_unique_bufname(path) abort
-   let l:bufname = fnamemodify(a:path, ':')
+
+  let bufname = ''
+  let index = 0
+
+  while 1
+    " Add index to avoid duplicated buffer name
+    let bufname = fnamemodify(a:path, ':').'vimfm_'.index
+    if bufnr(bufname) < 0
+      break
+    endif
+
+    let index += 1
+  endwhile
+
    return l:bufname
 endfunction
 

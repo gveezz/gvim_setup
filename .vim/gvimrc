@@ -423,7 +423,7 @@ xnoremap <silent> <nowait> <C-.> <Esc><C-c>zFzz
 snoremap <silent> <nowait> <C-.> <C-o>zFzz
 
 " Copy
-vnoremap <silent> <nowait> <C-c> <C-o>:setreg('+', getreg('*'))<CR>
+vnoremap <silent> <nowait> <C-c> "+ygv
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
