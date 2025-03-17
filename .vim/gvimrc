@@ -403,7 +403,7 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
-snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n
+snoremap <nowait> <C-f> <Esc>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
@@ -433,8 +433,10 @@ vnoremap <silent> <nowait> <C-c> "+ygv
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
 nnoremap <nowait> <C-v> <C-r><C-o>+
-vnoremap <nowait> <C-v> <C-r><C-o>+
+" vnoremap <nowait> <C-v> <C-r><C-o>+
 cnoremap <nowait> <C-v> <C-r>+
+
+vnoremap <silent> <nowait> <C-v> "+P
 
 inoremap <nowait> <C-M-v> <C-r>+
 nnoremap <nowait> <C-M-v> <C-r>+
@@ -450,7 +452,7 @@ inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname
 nnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? ":w " : ":w!<CR>" : ""
 xnoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<Esc>:w " : "<Esc>:w!<CR>" : ""
 snoremap <nowait> <C-s> <Esc>
-cnoremap <nowait> <C-s> <C-c>
+cnoremap <nowait> <C-s> <Esc>
 
 " C-k: delete line
 inoremap <silent> <nowait> <C-k> <C-o>dd
@@ -478,8 +480,8 @@ vnoremap <nowait> <M-b> <Esc><C-6>
 " C-z: undo changes
 inoremap <silent> <nowait> <C-z> <C-o>:undo<CR>
 nnoremap <silent> <nowait> <C-z> :undo<CR>
-snoremap <silent> <nowait> <C-z> <Esc><C-c>:undo<CR>
-vnoremap <silent> <nowait> <C-z> <Esc><C-c>:undo<CR>
+snoremap <silent> <nowait> <C-z> <Esc><Esc>:undo<CR>
+vnoremap <silent> <nowait> <C-z> <Esc><Esc>:undo<CR>
 
 " C-y: redo changes
 inoremap <silent> <nowait> <C-y> <C-o>:redo<CR>
@@ -492,7 +494,7 @@ nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
 " M-s: select inner word
-inoremap <silent> <nowait> <M-s> <C-c>viw
+inoremap <silent> <nowait> <M-s> <Esc>viw
 nnoremap <silent> <nowait> <M-s> viw
 xnoremap <silent> <nowait> <M-s> iw
 snoremap <silent> <nowait> <M-s> <C-g>iw<C-g>
@@ -503,7 +505,7 @@ xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>
-vnoremap <silent> <nowait> <C-e> <Esc><C-c>:enew!<CR>
+vnoremap <silent> <nowait> <C-e> <Esc><Esc>:enew!<CR>
 
 " C-a: select all
 inoremap <silent> <nowait> <C-a> <Esc>ggVG
@@ -526,7 +528,7 @@ xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:split<CR>
 inoremap <silent> <nowait> <C-PageUp> <C-o>:call GoToPrevWin()<CR>
 nnoremap <silent> <nowait> <C-PageUp> :call GoToPrevWin()<CR>
 xnoremap <silent> <nowait> <C-PageUp> <Esc>:call GoToPrevWin()<CR>
-cnoremap <silent> <nowait> <C-PageUp> <C-c>
+cnoremap <silent> <nowait> <C-PageUp> <Esc>
 
 " C-PageDown: switch to previous window or tab
 " inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR>"
@@ -535,7 +537,7 @@ cnoremap <silent> <nowait> <C-PageUp> <C-c>
 inoremap <silent> <nowait> <C-PageDown> <C-o>:call GoToNextWin()<CR>
 nnoremap <silent> <nowait> <C-PageDown> :call GoToNextWin()<CR>
 xnoremap <silent> <nowait> <C-PageDown> <Esc>:call GoToNextWin()<CR>
-cnoremap <silent> <nowait> <C-PageDown> <C-c>
+cnoremap <silent> <nowait> <C-PageDown> <Esc>
 
 " inoremap <silent> <nowait> <M-w> <C-o>:call GoToWin()<CR>
 " nnoremap <silent> <nowait> <M-w> :call GoToWin()<CR>
