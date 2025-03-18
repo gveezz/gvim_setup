@@ -65,7 +65,7 @@ set clipboard=unnamed
 " set guioptions+=e
 " set guioptions=-l
 set guioptions=""
-set guioptions+=aepi
+set guioptions+=aepilLrR
 set noscrollfocus
 set virtualedit=onemore
 set whichwrap=<,>,[,],b,s
@@ -121,7 +121,7 @@ set ttimeoutlen=0
 
 set textwidth=0
 set colorcolumn=0
-" set wrap
+set nowrap
 set linebreak
 " note trailing space at end of next line
 set columns=999
@@ -412,10 +412,11 @@ nnoremap <nowait> <C-S-f> :find **/
 vnoremap <nowait> <C-S-f> <Esc>:find **/
 cnoremap <nowait> <C-S-f> :find **/
 
-inoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r><C-w>/
-nnoremap <nowait> <M-f> :%s/<C-r><C-w>/
-vnoremap <nowait> <M-f> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>
-cnoremap <silent> <nowait> <M-f> <C-c>
+inoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r><C-w>/
+nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
+vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>
+cnoremap <silent> <nowait> <C-h> <C-c>
+
 cnoremap <nowait> <C-w> <C-r><C-w>
 
 vnoremap <nowait> <C-S-f> <C-o>?<CR>
