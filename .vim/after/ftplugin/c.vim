@@ -10,7 +10,7 @@ setlocal expandtab
 
 setlocal cinkeys-=0#
 setlocal cindent
-setlocal cinwords+="{,},;,#"
+setlocal cinwords+="{,;,#"
 setlocal indentkeys-=0#
 
 inoremap <silent> <nowait> <buffer> <M-c> <C-o>:Dox<CR>
