@@ -86,7 +86,7 @@ set breakindent
 set browsedir=current
 set smarttab
 set number 
-set guifont=Monospace\ 10
+set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
@@ -98,7 +98,7 @@ set guicursor=n:ver100-blinkoff0-nCursor
 set guicursor+=o:ver100-blinkon250-blinkoff250-nCursor
 set guicursor+=i:ver25-blinkoff0-iCursor
 set guicursor+=v:ver25-blinkoff0-vCursor
-set guicursor+=c-ci:ver25-blinkoff0-cCursor
+set guicursor+=c-ci-cr:ver25-blinkoff0-cCursor
 
 set noignorecase
 set formatoptions=tcj
@@ -403,7 +403,7 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
-snoremap <nowait> <C-f> <Esc>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n
+snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
 
@@ -416,6 +416,11 @@ inoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r><C-w>/
 nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
 vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>
 cnoremap <silent> <nowait> <C-h> <C-c>
+
+inoremap <silent> <nowait> <C-M-h> <C-o>:call setreg('/', '')<CR>
+nnoremap <silent> <nowait> <C-M-h> :call setreg('/', '')<CR>
+vnoremap <silent> <nowait> <C-M-h> <Esc><C-c>:call setreg('/', '')<CR>
+cnoremap <silent> <nowait> <C-M-h> <C-c>:call setreg('/', '')<CR>
 
 cnoremap <nowait> <C-w> <C-r><C-w>
 
@@ -461,10 +466,10 @@ nnoremap <silent> <nowait> <C-k> dd
 vnoremap <silent> <nowait> <C-k> <Delete>
 
 " C-g: go to line and column
-inoremap <silent> <nowait> <C-g> <C-o>:call GoToLine()<CR>
-nnoremap <silent> <nowait> <C-g> :call GoToLine()<CR>
-xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
-snoremap <silent> <nowait> <C-g> <Esc>:call GoToLine()<CR>
+inoremap <silent> <nowait> <C-g> <C-o>:call GoToLineIntractv()<CR>
+nnoremap <silent> <nowait> <C-g> :call GoToLineIntractv()<CR>
+xnoremap <silent> <nowait> <C-g> <Esc>:call GoToLineIntractv()<CR>
+snoremap <silent> <nowait> <C-g> <Esc>:call GoToLineIntractv()<CR>
 
 inoremap <nowait> <C-b> <C-o>:b
 nnoremap <nowait> <C-b> :b
@@ -523,22 +528,22 @@ nnoremap <silent> <nowait> <C-M-n> :split<CR>
 xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:split<CR>
 
 " C-PageUp: switch to next window or tab
-" inoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
-" nnoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>"
-" xnoremap <silent> <nowait> <C-PageUp> winnr() > 1 ? "<Esc>:call GoToPrevWin()<CR>" : "<Esc>:tabprev<CR>"
-inoremap <silent> <nowait> <C-PageUp> <C-o>:call GoToPrevWin()<CR>
-nnoremap <silent> <nowait> <C-PageUp> :call GoToPrevWin()<CR>
-xnoremap <silent> <nowait> <C-PageUp> <Esc>:call GoToPrevWin()<CR>
-cnoremap <silent> <nowait> <C-PageUp> <Esc>
+inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? ":call GoToPrevWin()<CR>" : ":tabprev<CR>"
+xnoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<Esc>:call GoToPrevWin()<CR>" : "<Esc>:tabprev<CR>"
+" inoremap <silent> <nowait> <C-PageUp> <C-o>:call GoToPrevWin()<CR>
+" nnoremap <silent> <nowait> <C-PageUp> :call GoToPrevWin()<CR>
+" xnoremap <silent> <nowait> <C-PageUp> <Esc>:call GoToPrevWin()<CR>
+" cnoremap <silent> <nowait> <C-PageUp> <Esc>
 
 " C-PageDown: switch to previous window or tab
-" inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR>"
-" nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>"
-" nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<Esc>:call GoToNextWin()<CR>" : "<Esc>:tabnext<CR>"
-inoremap <silent> <nowait> <C-PageDown> <C-o>:call GoToNextWin()<CR>
-nnoremap <silent> <nowait> <C-PageDown> :call GoToNextWin()<CR>
-xnoremap <silent> <nowait> <C-PageDown> <Esc>:call GoToNextWin()<CR>
-cnoremap <silent> <nowait> <C-PageDown> <Esc>
+inoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<C-o>:call GoToNextWin()<CR>" : "<C-o>:tabnext<CR>"
+nnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? ":call GoToNextWin()<CR>" : ":tabnext<CR>"
+xnoremap <expr> <silent> <nowait> <C-PageDown> winnr() < winnr('$') ? "<Esc>:call GoToNextWin()<CR>" : "<Esc>:tabnext<CR>"
+" inoremap <silent> <nowait> <C-PageDown> <C-o>:call GoToNextWin()<CR>
+" nnoremap <silent> <nowait> <C-PageDown> :call GoToNextWin()<CR>
+" xnoremap <silent> <nowait> <C-PageDown> <Esc>:call GoToNextWin()<CR>
+" cnoremap <silent> <nowait> <C-PageDown> <Esc>
 
 " inoremap <silent> <nowait> <M-w> <C-o>:call GoToWin()<CR>
 " nnoremap <silent> <nowait> <M-w> :call GoToWin()<CR>
@@ -587,10 +592,10 @@ vnoremap <silent> <nowait> - <C-x>
 vnoremap <silent> <nowait> <kMinus> <C-x>
 
 " C-t: open new tab
-inoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<C-o>:tabnew<CR>" : "<C-o>:tabnew %<CR>"
-nnoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? ":tabnew<CR>" : ":tabnew %<CR>"
-snoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
-vnoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
+inoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<C-o>:tabnew<CR>" : "<C-o>:tabnew %<CR>"
+nnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? ":tabnew<CR>" : ":tabnew %<CR>"
+snoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
+vnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
 
 " C-Del
 inoremap <expr> <silent> <nowait> <C-Del> (col('.')-1)==strlen(getline('.')) ? "<Del>" : "<C-o>dw"

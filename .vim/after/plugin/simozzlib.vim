@@ -638,54 +638,54 @@ function! GoToLine()
    " silent! redraw
 endfunction
 
-" function! GoToLine()
-" 
-"    let l:line = line('.')
-"    let l:col = col('.')
-" 
-"    let l:idx = 0
-"    let l:strIn = ""
-"    let l:cInEnter = 13
-"    let l:cInEsc = 27
-"    let l:cIn = 0
-"    echon "Line: ".l:strIn
-" 
-"    while l:cIn != l:cInEnter
-"       let l:cIn = getchar()
-"       let l:cInCh = nr2char(l:cIn)
-" 
-"       " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
-"       if l:cIn =~# '\d'
-"          let l:strIn = l:strIn.l:cInCh
-"          let l:idx = l:idx + 1
-"       elseif l:cIn == "\<Backspace>"
-"          if l:idx > 0
-"             let l:idx = l:idx - 1
-"             let l:strIn = strpart(l:strIn, 0, l:idx)
-"          else
-"             let l:idx = 0
-"             let l:strIn = ""
-"          endif
-"       endif
-" 
-"       if l:cIn != l:cInEsc
-"          if strlen(l:strIn) > 0
-"             call cursor(str2nr(l:strIn), l:col)
-"          else
-"             call cursor(1, l:col)
-"          endif
-" 
-"          silent! zz
-"          redraw!
-"          
-"          echon "Line: ".l:strIn
-"       else
-"          let l:cIn = l:cInEnter
-"          call cursor(l:line, l:col)
-"       endif
-"    endwhile
-"    
-" endfunction
+function! GoToLineIntractv()
+
+   let l:line = line('.')
+   let l:col = col('.')
+
+   let l:idx = 0
+   let l:strIn = ""
+   let l:cInEnter = 13
+   let l:cInEsc = 27
+   let l:cIn = 0
+   echon "Line: ".l:strIn
+
+   while l:cIn != l:cInEnter
+      let l:cIn = getchar()
+      let l:cInCh = nr2char(l:cIn)
+
+      " if char2nr(l:cIn) >= char2nr('0') && char2nr(l:cIn) <= char2nr('9')
+      if l:cIn =~# '\d'
+         let l:strIn = l:strIn.l:cInCh
+         let l:idx = l:idx + 1
+      elseif l:cIn == "\<Backspace>"
+         if l:idx > 0
+            let l:idx = l:idx - 1
+            let l:strIn = strpart(l:strIn, 0, l:idx)
+         else
+            let l:idx = 0
+            let l:strIn = ""
+         endif
+      endif
+
+      if l:cIn != l:cInEsc
+         if strlen(l:strIn) > 0
+            call cursor(str2nr(l:strIn), l:col)
+         else
+            call cursor(1, l:col)
+         endif
+
+         silent! zz
+         silent! redraw
+         
+         echon "Line: ".l:strIn
+      else
+         let l:cIn = l:cInEnter
+         call cursor(l:line, l:col)
+      endif
+   endwhile
+   
+endfunction
 
 " function! GoToLineCol()
 "
@@ -1009,43 +1009,30 @@ function! GotoTab()
 endfunction
 
 function! GoToFirstWin()
-
    exec "normal! 1\<C-w>w"
-
 endfunction
 
 function! GoToLastWin()
-
    let l:lastWin = winnr('$')
    silent! exec "normal! ".l:lastWin."\<C-w>w"
-
 endfunction
 
 function! GoToPrevWin()
-
-   let l:currWin = winnr()
-   if l:currWin > 1
-      let l:prevWin = l:currWin-1
-      exec "normal! ".l:prevWin."\<C-w>w"
-   endif
-
+   let l:prevWin = winnr()-1
+   call EchoYellowMsg(bufname(winbufnr(l:prevWin)))
+   exec "normal! ".l:prevWin."\<C-w>w"
 endfunction
 
 function! GoToNextWin()
-
-   let l:currWin = winnr()
-   let l:nextWin = l:currWin
-   if l:currWin < winnr('$')
-      let l:nextWin = l:currWin+1
-      silent! exec "normal! ".l:nextWin."\<C-w>w"
-   end
-
+   let l:nextWin = winnr()+1
+   call EchoYellowMsg(bufname(winbufnr(l:nextWin)))
+   exec "normal! ".l:nextWin."\<C-w>w"
 endfunction
 
 function! GoToWin()
 
    let l:win = input("Go to win #")
-   silent! exec "normal! ".l:win."\<C-w>w"
+   exec l:win."\<C-w>w"
 
 endfunction
 

@@ -8,10 +8,10 @@ setlocal shiftwidth=2
 setlocal softtabstop=0
 setlocal expandtab
 
-setlocal cinkeys-=0#
 setlocal cindent
-setlocal cinwords+="{,;,#"
+setlocal cinwords+="{,;,#,break"
 setlocal indentkeys-=0#
+setlocal cinkeys-=0#
 
 inoremap <silent> <nowait> <buffer> <M-c> <C-o>:Dox<CR>
 
