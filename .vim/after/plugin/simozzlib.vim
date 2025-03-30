@@ -1388,9 +1388,10 @@ function! SetIndentMarks ()
 endfunction
 
 function! InsTxtFromFile(path)
+   let l:vbckp = getreg('v')
    let @v=join(readfile(a:path), "\n") 
    silent! :put v
-   let @v=""
+   let @v=l:vbckp
 endfunction
 
 " highlight the visual selection after pressing enter.
