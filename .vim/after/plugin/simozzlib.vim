@@ -658,6 +658,8 @@ function! GoToLineIntractv()
       if l:cIn =~# '\d'
          let l:strIn = l:strIn.l:cInCh
          let l:idx = l:idx + 1
+      elseif l:cIn == '$'
+         silent! :$
       elseif l:cIn == "\<Backspace>"
          if l:idx > 0
             let l:idx = l:idx - 1
@@ -990,7 +992,7 @@ function! ScrollWheelDown(scroll)
    end
 endfunction
 
-function! GotoTab()
+function! GoToTab()
    $tabmove
    let bufnr = tabpagebuflist()[0]
    let tabnr = tabpagenr()
