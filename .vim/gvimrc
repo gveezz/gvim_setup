@@ -258,9 +258,14 @@ inoremap <silent> <nowait> <Esc> <C-o><Esc>
 nnoremap <silent> <nowait> <Esc> i
 inoremap <silent> <nowait> <C-c> <nop>
 
-inoremap <expr> <silent> <nowait> <C-M-Space> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <C-M-Space> <Esc><Esc>
-nnoremap <silent> <nowait> <C-M-Space> i
+" C-M-Enter: start visual block mode
+inoremap <silent> <nowait> <C-Space> <C-o>v
+nnoremap <silent> <nowait> <C-Space> v
+xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
+
+inoremap <expr> <silent> <nowait> <C-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+vnoremap <silent> <nowait> <C-Enter> <Esc><Esc>
+nnoremap <silent> <nowait> <C-Enter> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o>:call CloseBuffer()<CR><C-o><C-w>c
@@ -504,10 +509,6 @@ inoremap <silent> <nowait> <M-s> <Esc>viw
 nnoremap <silent> <nowait> <M-s> viw
 xnoremap <silent> <nowait> <M-s> iw
 snoremap <silent> <nowait> <M-s> <C-g>iw<C-g>
-
-" C-Space: start visual block mode
-inoremap <silent> <nowait> <C-Space> <C-o>v
-xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <silent> <nowait> <C-e> <C-o>:enew!<CR>
 nnoremap <silent> <nowait> <C-e> :enew!<CR>
