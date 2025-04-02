@@ -1355,6 +1355,8 @@ endfunction
 function! VSearchStrSub()
    " echo "0 Str is: ".getreg('*') | 2sleep
    let l:srchstr = substitute(@*, '\/', '\\\/', 'g')
+   let l:srchstr = substitute(l:srchstr, '\[', '\\\[', 'g')
+   let l:srchstr = substitute(l:srchstr, '\]', '\\\]', 'g')
    let l:srchstr = substitute(l:srchstr, '\n', '\\n', 'g')
    " echo "1 Str is: ".getreg('*') | 2sleep
    return l:srchstr
@@ -1392,7 +1394,7 @@ endfunction
 function! InsTxtFromFile(path)
    let l:vbckp = getreg('v')
    let @v=join(readfile(a:path), "\n") 
-   silent! :put v
+   silent! :-1put v
    let @v=l:vbckp
 endfunction
 
