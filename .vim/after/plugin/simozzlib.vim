@@ -658,8 +658,6 @@ function! GoToLineIntractv()
       if l:cIn =~# '\d'
          let l:strIn = l:strIn.l:cInCh
          let l:idx = l:idx + 1
-      elseif l:cIn == '$'
-         silent! :$
       elseif l:cIn == "\<Backspace>"
          if l:idx > 0
             let l:idx = l:idx - 1
@@ -672,7 +670,11 @@ function! GoToLineIntractv()
 
       if l:cIn != l:cInEsc
          if strlen(l:strIn) > 0
-            call cursor(str2nr(l:strIn), l:col)
+            if l:strIn == '$'
+               silent! :$
+            else
+               call cursor(str2nr(l:strIn), l:col)
+            endif
          else
             call cursor(1, l:col)
          endif
@@ -1391,10 +1393,10 @@ function! SetIndentMarks ()
    exec ":setlocal listchars+=leadmultispace:".l:leadSpace
 endfunction
 
-function! InsTxtFromFile(path)
+function! InsTxtFromFile(path, line)
    let l:vbckp = getreg('v')
    let @v=join(readfile(a:path), "\n") 
-   silent! :-1put v
+   silent! exec ":".a:line."put v"
    let @v=l:vbckp
 endfunction
 
