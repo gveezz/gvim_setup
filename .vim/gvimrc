@@ -203,6 +203,14 @@ augroup Vim
    "" autocmd DirChanged * if filereadable(GetCWD().'tags') | exec 'set tags+='.GetCWD().'/tags' | endif
    autocmd VimEnter,ModeChanged * call SetCursorLineMode() | call SetStatusLineMode()
    autocmd CursorMoved,CursorMovedI * silent! call HighlightWordUnderCursor()
+
+   " Trigger relative number when entering visual mode,
+   " Trigger norelative number when leaving visual mode
+   autocmd ModeChanged [vV\x16]*:* let &l:rnu = mode() =~# '^[vV\x16]'
+   autocmd ModeChanged *:[vV\x16]* let &l:rnu = mode() =~# '^[vV\x16]'
+   autocmd WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
+
+
 augroup END
 
 augroup AutoFoldColumn
