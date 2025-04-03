@@ -208,7 +208,7 @@ augroup Vim
    " Trigger norelative number when leaving visual mode
    autocmd ModeChanged [vV\x16]*:* let &l:rnu = mode() =~# '^[vV\x16]'
    autocmd ModeChanged *:[vV\x16]* let &l:rnu = mode() =~# '^[vV\x16]'
-   autocmd WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
+   " autocmd WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
 
 
 augroup END
