@@ -109,7 +109,7 @@ set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
 set lazyredraw
 set scrolloff=0
-" set splitright
+set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
 set completeopt+=menuone
