@@ -379,42 +379,45 @@ function! BufferList()
 
    let l:blistshw = []
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-   echohl StatusLineLB
-   echo "Buffer list (current buffer \# not shown):\n"
-   echohl None
+   
    for l:nbuff in l:blist
-      if l:nbuff != bufnr()
-         let l:blstnmitem = {'fname' : substitute(fnamemodify(bufname(nbuff), ':p:t'), ' ', '_', 'g'), 'fpath' : fnamemodify(bufname(nbuff), ':p:h')."/", 'bnum': l:nbuff}
-         call add(l:blistshw, l:blstnmitem)
-      endif
+      let l:blstnmitem = {'fname' : substitute(fnamemodify(bufname(nbuff), ':p:t'), ' ', '_', 'g'), 'fpath' : fnamemodify(bufname(nbuff), ':p:h')."/", 'bnum': l:nbuff}
+      call add(l:blistshw, l:blstnmitem)
    endfor
-   echohl None
-
+   
    call sort(l:blistshw, 'BufferListSort')
    
    let l:idx = 0
    while l:idx < len(l:blistshw)
-      if l:blistshw[l:idx]['bnum'] != bufnr()
-         echohl StatusLineY
-         echon "[".l:blistshw[l:idx]['bnum']."] "
-         echohl None
-         echohl StatusLineW
-         echon l:blistshw[l:idx]['fpath']
-         echohl None
+      if l:blistshw[l:idx]['bnum'] == bufnr()
          echohl StatusLineG
-         echon l:blistshw[l:idx]['fname']."\n"
-         echohl None
-         let l:idx = l:idx + 1
-      endif
+      else
+         echohl StatusLineY
+      endif   
+      echon "[".l:blistshw[l:idx]['bnum']."] "
+      echohl None
+      echohl StatusLineW
+      echon l:blistshw[l:idx]['fpath']
+      echohl None
+      echohl StatusLineG
+      echon l:blistshw[l:idx]['fname']."\n"
+      echohl None
+      let l:idx = l:idx + 1
    endwhile
    
+   call inputrestore()
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
+   call inputsave()
    if stridx(l:cmd, 'd') == 0
-      exec ":b".l:cmd
+      exec ":bd"
    elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
    else
-      exec ":b ".l:cmd
+      "exec ":b ".l:cmd
+      let winList = win_findbuf(str2nr(l:cmd))
+      if len(winList) > 0
+         call win_gotoid(winList[0])
+       endif
    endif
    
    "" call inputrestore()
