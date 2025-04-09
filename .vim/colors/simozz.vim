@@ -69,7 +69,8 @@ hi StatusLine             ctermfg=15  guifg=#F3C81B guibg=#4900B8 gui=bold cterm
 hi StatusLineNC           ctermfg=249 guifg=#000000 guibg=#AAAAAA gui=bold ctermbg=239 cterm=bold
 
 hi StatusLineM            ctermfg=15  guifg=#9700ff guibg=yellow gui=bold ctermbg=239 cterm=bold
-hi StatusLineG            ctermfg=15  guifg=#00ff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
+hi StatusLineG            ctermfg=15  guifg=#00ff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold
+hi StatusLineGR           ctermfg=15  guifg=gray guibg=#222222 gui=bold ctermbg=239 cterm=bold 
 hi StatusLineR            ctermfg=15  guifg=#ff0000 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
 hi StatusLineY            ctermfg=15  guifg=#ffff00 guibg=#222222 gui=bold ctermbg=239 cterm=bold 
 hi StatusLineLB           ctermfg=15  guifg=#6b9bf3 guibg=#222222 gui=bold ctermbg=239 cterm=bold 

@@ -331,47 +331,113 @@ function! PopupBufferChoose(id, result)
    silent! exec ":b ".a:result
 endfunction
 
+" function! BufferList()
+" 
+"    let l:blstnm = []
+"    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+"    echohl StatusLineLB
+"    echo "Buffer list (current buffer \# not shown)\n"
+"    echohl None
+"    for l:nbuff in l:blist
+"       if l:nbuff != bufnr() 
+"          " let l:menuitem = bufname(nbuff)
+"          let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
+"          let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
+"          echohl StatusLineY
+"          echon "[".l:nbuff."] "
+"          echohl None
+"          echohl StatusLineW
+"          echon fnamemodify(bufname(nbuff), ':p:h')."/"
+"          echohl None
+"          echohl StatusLineG
+"          echon l:menuitem."\n"
+"          echohl None
+"          " echohl StatusLineY
+"          " echon "[".l:nbuff."]\n"
+"          " echohl None
+" 
+"          " echom "[".l:nbuff."] ".l:menuitem
+"       endif
+"    endfor
+"    echohl None
+"    
+"    let l:cmd = input("Type a buffer cmd [d => delete]: ")
+"    if stridx(l:cmd, 'd') == 0
+"       exec ":b".l:cmd
+"    elseif stridx(l:cmd, '*') == 0
+"       exec ":%bwipeout!"
+"    else
+"       exec ":b ".l:cmd
+"    endif
+" endfunction
+
+function! BufferListSort(i1, i2) abort
+   return a:i1['fname'] == a:i2['fname'] ? 0 : a:i1['fname'] > a:i2['fname'] ? 1 : -1
+endfunction
+
 function! BufferList()
 
-   let l:blstnm = []
+   let l:blistshw = []
    let l:blist = filter(range(1, bufnr('$')), 'buflisted(v:val)')
    echohl StatusLineLB
-   echo "Buffer list (current buffer \# not shown)\n"
+   echo "Buffer list (current buffer \# not shown):\n"
    echohl None
    for l:nbuff in l:blist
-      if l:nbuff != bufnr() 
-         " let l:menuitem = bufname(nbuff)
-         let l:menuitem = fnamemodify(bufname(nbuff), ':p:t')
-         let l:menuitem = substitute(l:menuitem, ' ', '_', 'g')
-         echohl StatusLineY
-         echon "[".l:nbuff."] "
-         echohl None
-         echohl StatusLineW
-         echon fnamemodify(bufname(nbuff), ':p:h')."/"
-         echohl None
-         echohl StatusLineG
-         echon l:menuitem."\n"
-         echohl None
-         " echohl StatusLineY
-         " echon "[".l:nbuff."]\n"
-         " echohl None
-
-         " echom "[".l:nbuff."] ".l:menuitem
+      if l:nbuff != bufnr() || fnamemodify(bufname(nbuff), ':p:t') != 'help.vim'
+         let l:blstnmitem = {'fname' : substitute(fnamemodify(bufname(nbuff), ':p:t'), ' ', '_', 'g'), 'fpath' : fnamemodify(bufname(nbuff), ':p:h')."/", 'bnum': l:nbuff}
+         call add(l:blistshw, l:blstnmitem)
       endif
    endfor
    echohl None
+
+   call sort(l:blistshw, 'BufferListSort')
    
-   let l:cmd = input("Type a buffer cmd [d => delete]: ")
-   if stridx(l:cmd, 'd') == 0
-      exec ":b".l:cmd
-   elseif stridx(l:cmd, '*') == 0
+   let l:idx = 0
+   while l:idx < len(l:blistshw)
+      echohl StatusLineY
+      echon "[".l:idx."] "
+      echohl None
+      echohl StatusLineW
+      echon l:blistshw[l:idx]['fpath']
+      echohl None
+      echohl StatusLineG
+      echon l:blistshw[l:idx]['fname']."\n"
+      echohl None
+
+      let l:idx = l:idx + 1
+   endwhile
+   
+   call inputrestore()
+   let l:cmdstr = input("d(elete)[*], o(pen), v(split), s(plit) <idx>: ")
+   call inputsave()
+   
+   if strlen(l:cmdstr) == 0
+      return
+   endif
+
+   let l:cmdstrsplt = split(l:cmdstr, " ")
+   let l:cmd = l:cmdstrsplt[0]
+   let l:idx = l:cmdstrsplt[1]
+
+   if l:idx >= len(l:blistshw)
+      let l:idx = len(l:blistshw)-1
+   endif
+
+   if l:cmd == 'd'
+
+      exec ":bd! ".l:blistshw[l:idx]['bnum']
+   elseif l:cmd == 'd*'
       exec ":%bwipeout!"
-   else
-      exec ":b ".l:cmd
+   elseif l:cmd == 'v'
+      exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+   elseif l:cmd == 's'
+      exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+   elseif l:cmd == 'o'
+      exec ":b ".l:blistshw[l:idx]['bnum']
+   else 
+      call EchoYellowMsg("command not supported")
    endif
 endfunction
-
-
 
 function! TabsList()
    :tabs
