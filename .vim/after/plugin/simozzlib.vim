@@ -413,11 +413,14 @@ function! BufferList()
    elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
    else
-      "exec ":b ".l:cmd
-      let winList = win_findbuf(str2nr(l:cmd))
-      if len(winList) > 0
-         call win_gotoid(winList[0])
-       endif
+      if bufexists(str2nr(l:cmd))
+         let winList = win_findbuf(str2nr(l:cmd))
+         if len(winList) > 0
+            call win_gotoid(winList[0])
+         else
+            silent! exec ":b ".l:cmd
+         endif
+      endif
    endif
    
    "" call inputrestore()
