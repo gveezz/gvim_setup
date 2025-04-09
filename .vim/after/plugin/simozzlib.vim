@@ -409,7 +409,7 @@ function! BufferList()
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    call inputsave()
    if stridx(l:cmd, 'd') == 0
-      exec ":bd"
+      exec ":b".l:cmd
    elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
    else
