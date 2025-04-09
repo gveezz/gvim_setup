@@ -383,7 +383,7 @@ function! BufferList()
    echo "Buffer list (current buffer \# not shown):\n"
    echohl None
    for l:nbuff in l:blist
-      if l:nbuff != bufnr() || fnamemodify(bufname(nbuff), ':p:t') != 'help.vim'
+      if l:nbuff != bufnr()
          let l:blstnmitem = {'fname' : substitute(fnamemodify(bufname(nbuff), ':p:t'), ' ', '_', 'g'), 'fpath' : fnamemodify(bufname(nbuff), ':p:h')."/", 'bnum': l:nbuff}
          call add(l:blistshw, l:blstnmitem)
       endif
@@ -394,49 +394,60 @@ function! BufferList()
    
    let l:idx = 0
    while l:idx < len(l:blistshw)
-      echohl StatusLineY
-      echon "[".l:idx."] "
-      echohl None
-      echohl StatusLineW
-      echon l:blistshw[l:idx]['fpath']
-      echohl None
-      echohl StatusLineG
-      echon l:blistshw[l:idx]['fname']."\n"
-      echohl None
-
-      let l:idx = l:idx + 1
+      if l:blistshw[l:idx]['bnum'] != bufnr()
+         echohl StatusLineY
+         echon "[".l:blistshw[l:idx]['bnum']."] "
+         echohl None
+         echohl StatusLineW
+         echon l:blistshw[l:idx]['fpath']
+         echohl None
+         echohl StatusLineG
+         echon l:blistshw[l:idx]['fname']."\n"
+         echohl None
+         let l:idx = l:idx + 1
+      endif
    endwhile
    
-   call inputrestore()
-   let l:cmdstr = input("d(elete)[*], o(pen), v(split), s(plit) <idx>: ")
-   call inputsave()
-   
-   if strlen(l:cmdstr) == 0
-      return
-   endif
-
-   let l:cmdstrsplt = split(l:cmdstr, " ")
-   let l:cmd = l:cmdstrsplt[0]
-   let l:idx = l:cmdstrsplt[1]
-
-   if l:idx >= len(l:blistshw)
-      let l:idx = len(l:blistshw)-1
-   endif
-
-   if l:cmd == 'd'
-
-      exec ":bd! ".l:blistshw[l:idx]['bnum']
-   elseif l:cmd == 'd*'
+   let l:cmd = input("Type a buffer cmd [d => delete]: ")
+   if stridx(l:cmd, 'd') == 0
+      exec ":b".l:cmd
+   elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
-   elseif l:cmd == 'v'
-      exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-   elseif l:cmd == 's'
-      exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-   elseif l:cmd == 'o'
-      exec ":b ".l:blistshw[l:idx]['bnum']
-   else 
-      call EchoYellowMsg("command not supported")
+   else
+      exec ":b ".l:cmd
    endif
+   
+   "" call inputrestore()
+   "" let l:cmdstr = input("d(elete)[*], o(pen), v(split), s(plit) <idx>: ")
+   "" call inputsave()
+   "" 
+   "" if strlen(l:cmdstr) == 0
+   ""    return
+   "" endif
+
+   "" let l:cmdstrsplt = split(l:cmdstr, " ")
+   "" let l:cmd = l:cmdstrsplt[0]
+   "" let l:idx = l:cmdstrsplt[1]
+
+   "" if l:idx >= len(l:blistshw)
+   ""    let l:idx = len(l:blistshw)-1
+   "" endif
+
+   "" if l:cmd =~ '\d'
+   ""    exec ":b ".l:blistshw[str2nr(l:cmd)]['bnum']
+   "" elseif l:cmd == 'd'
+   ""    exec ":bd! ".l:blistshw[l:idx]['bnum']
+   "" elseif l:cmd == 'd*'
+   ""    exec ":%bwipeout!"
+   "" elseif l:cmd == 'v'
+   ""    exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+   "" elseif l:cmd == 's'
+   ""    exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+   "" elseif l:cmd == 'o'
+   ""    exec ":b ".l:blistshw[l:idx]['bnum']
+   "" else 
+   ""    call EchoYellowMsg("command not supported")
+   "" endif
 endfunction
 
 function! TabsList()
