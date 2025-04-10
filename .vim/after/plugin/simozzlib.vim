@@ -1443,6 +1443,7 @@ function! VSearchStrSub()
    let l:srchstr = substitute(l:srchstr, '\[', '\\\[', 'g')
    let l:srchstr = substitute(l:srchstr, '\]', '\\\]', 'g')
    let l:srchstr = substitute(l:srchstr, '\n', '\\n', 'g')
+   let l:srchstr = substitute(l:srchstr, '\*', '\\*', 'g')
    " echo "1 Str is: ".getreg('*') | 2sleep
    return l:srchstr
 endfunction
