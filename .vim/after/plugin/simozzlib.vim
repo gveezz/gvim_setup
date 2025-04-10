@@ -394,7 +394,8 @@ function! BufferList()
       else
          echohl StatusLineY
       endif   
-      echon "[".l:blistshw[l:idx]['bnum']."] "
+      " echon "[".l:blistshw[l:idx]['bnum']."] "
+      echon "[".l:idx."] "
       echohl None
       echohl StatusLineW
       echon l:blistshw[l:idx]['fpath']
@@ -409,16 +410,16 @@ function! BufferList()
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    call inputsave()
    if stridx(l:cmd, 'd') == 0
-      exec ":b".l:cmd
+      exec ":d ".l:blistshw[l:cmd]['bnum']
    elseif stridx(l:cmd, '*') == 0
       exec ":%bwipeout!"
    else
-      if bufexists(str2nr(l:cmd))
-         let winList = win_findbuf(str2nr(l:cmd))
+      if bufexists(str2nr(l:blistshw[l:cmd]['bnum']))
+         let winList = win_findbuf(str2nr(l:blistshw[l:cmd]['bnum']))
          if len(winList) > 0
             call win_gotoid(winList[0])
          else
-            silent! exec ":b ".l:cmd
+            silent! exec ":b ".l:blistshw[l:cmd]['bnum']
          endif
       endif
    endif
