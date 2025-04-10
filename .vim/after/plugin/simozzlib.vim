@@ -1,4 +1,3 @@
-" CUSTOM FUNCTIONS
 
 function! ReloadVimRc ()
    if has('gui') && filereadable($MYGVIMRC)
@@ -409,17 +408,28 @@ function! BufferList()
    call inputrestore()
    let l:cmd = input("Type a buffer cmd [d => delete]: ")
    call inputsave()
-   if stridx(l:cmd, 'd') == 0
-      exec ":d ".l:blistshw[l:cmd]['bnum']
-   elseif stridx(l:cmd, '*') == 0
+
+   if l:cmd == ""
+      return
+   endif
+
+   let l:cmdsplit = split(l:cmd, " ")
+   if cmdsplit[0] == 'd' || cmdsplit[0] == 'd!'
+      let l:nbuffstr = ""
+      for l:idxstr in l:cmdsplit[1:]
+         let l:nbuffstr = l:nbuffstr.' '.l:blistshw[str2nr(l:idxstr)]['bnum']
+      endfor
+      exec ":bd! ".l:nbuffstr
+   elseif cmdsplit[0] == 'd*'
       exec ":%bwipeout!"
-   else
-      if bufexists(str2nr(l:blistshw[l:cmd]['bnum']))
-         let winList = win_findbuf(str2nr(l:blistshw[l:cmd]['bnum']))
+   elseif cmdsplit[0] =~ '\d'
+      let l:idx = str2nr(cmdsplit[0])
+      if bufexists(l:blistshw[l:idx]['bnum'])
+         let winList = win_findbuf(l:blistshw[l:idx]['bnum']))
          if len(winList) > 0
             call win_gotoid(winList[0])
          else
-            silent! exec ":b ".l:blistshw[l:cmd]['bnum']
+            silent! exec ":b ".l:blistshw[l:idx]['bnum']
          endif
       endif
    endif
