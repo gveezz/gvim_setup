@@ -90,7 +90,7 @@ set guifont=Monospace\ 11
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
-set statusline+=\ %=%{bufname()}\ %y\ %m%r
+set statusline+=\ %=%{expand('%:.')}\ %y\ %m%r
 set statusline+=\ b#%n,\ w#%{winnr()},\ t#%{tabpagenr()}
 set statusline+=\ (%l\/\%L,\%c)\ 
 set backspace=indent,eol,start
@@ -133,7 +133,7 @@ set wildmode=full
 set wildoptions=
 set showtabline=1
 set guitabtooltip=%F
-set guitablabel=%m\ %{expand('%:t')}
+set guitablabel=%m\ %{getcwd()}
 " set splitbelow
 " set splitright
 " tab sball

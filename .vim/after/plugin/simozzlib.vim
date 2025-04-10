@@ -425,7 +425,7 @@ function! BufferList()
    elseif cmdsplit[0] =~ '\d'
       let l:idx = str2nr(cmdsplit[0])
       if bufexists(l:blistshw[l:idx]['bnum'])
-         let winList = win_findbuf(l:blistshw[l:idx]['bnum']))
+         let winList = win_findbuf(l:blistshw[l:idx]['bnum'])
          if len(winList) > 0
             call win_gotoid(winList[0])
          else
