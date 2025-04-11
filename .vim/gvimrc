@@ -416,7 +416,8 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
-xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
+" xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
+xnoremap <nowait> <C-f> /
 snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
