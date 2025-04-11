@@ -393,20 +393,22 @@ function! BufferList()
       else
          echohl StatusLineY
       endif   
-      " echon "[".l:blistshw[l:idx]['bnum']."] "
       echon "[".l:idx."] "
       echohl None
       echohl StatusLineW
       echon l:blistshw[l:idx]['fpath']
       echohl None
       echohl StatusLineG
-      echon l:blistshw[l:idx]['fname']."\n"
+      echon l:blistshw[l:idx]['fname']
+      echohl None
+      echohl StatusLineGR
+      echon " b#".l:blistshw[l:idx]['bnum']."\n"
       echohl None
       let l:idx = l:idx + 1
    endwhile
    
    call inputrestore()
-   let l:cmd = input("Type a buffer cmd [d => delete]: ")
+   let l:cmd = input("<d,d!,d*,v,s> <list idx>: ")
    call inputsave()
 
    if l:cmd == ""
@@ -432,39 +434,13 @@ function! BufferList()
             silent! exec ":b ".l:blistshw[l:idx]['bnum']
          endif
       endif
+   elseif cmdsplit[0] == 'v'
+      let l:idx = str2nr(cmdsplit[1])
+      exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+   elseif cmdsplit[0] == 's'
+      let l:idx = str2nr(cmdsplit[1])
+      exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
    endif
-   
-   "" call inputrestore()
-   "" let l:cmdstr = input("d(elete)[*], o(pen), v(split), s(plit) <idx>: ")
-   "" call inputsave()
-   "" 
-   "" if strlen(l:cmdstr) == 0
-   ""    return
-   "" endif
-
-   "" let l:cmdstrsplt = split(l:cmdstr, " ")
-   "" let l:cmd = l:cmdstrsplt[0]
-   "" let l:idx = l:cmdstrsplt[1]
-
-   "" if l:idx >= len(l:blistshw)
-   ""    let l:idx = len(l:blistshw)-1
-   "" endif
-
-   "" if l:cmd =~ '\d'
-   ""    exec ":b ".l:blistshw[str2nr(l:cmd)]['bnum']
-   "" elseif l:cmd == 'd'
-   ""    exec ":bd! ".l:blistshw[l:idx]['bnum']
-   "" elseif l:cmd == 'd*'
-   ""    exec ":%bwipeout!"
-   "" elseif l:cmd == 'v'
-   ""    exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-   "" elseif l:cmd == 's'
-   ""    exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-   "" elseif l:cmd == 'o'
-   ""    exec ":b ".l:blistshw[l:idx]['bnum']
-   "" else 
-   ""    call EchoYellowMsg("command not supported")
-   "" endif
 endfunction
 
 function! TabsList()
