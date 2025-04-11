@@ -402,7 +402,10 @@ function! BufferList()
       echon l:blistshw[l:idx]['fname']
       echohl None
       echohl StatusLineGR
-      echon " b#".l:blistshw[l:idx]['bnum']."\n"
+      echon " b#".l:blistshw[l:idx]['bnum']." "
+      echohl None
+      echohl StatusLineY
+      echon "[".l:idx."]\n"
       echohl None
       let l:idx = l:idx + 1
    endwhile
