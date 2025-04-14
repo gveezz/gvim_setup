@@ -411,7 +411,7 @@ function! BufferList()
    endwhile
    
    call inputrestore()
-   let l:cmd = input("<d,d!,d*,v,s> <list idx>: ")
+   let l:cmd = input("[d,d!,d* &| idx v,s,w]: ")
    call inputsave()
 
    if l:cmd == ""
@@ -419,7 +419,7 @@ function! BufferList()
    endif
 
    let l:cmdsplit = split(l:cmd, " ")
-   if cmdsplit[0] == 'd' || cmdsplit[0] == 'd!'
+   if l:cmdsplit[0] == 'd' || cmdsplit[0] == 'd!'
       let l:nbuffstr = ""
       for l:idxstr in l:cmdsplit[1:]
          let l:nbuffstr = l:nbuffstr.' '.l:blistshw[str2nr(l:idxstr)]['bnum']
@@ -430,19 +430,28 @@ function! BufferList()
    elseif cmdsplit[0] =~ '\d'
       let l:idx = str2nr(cmdsplit[0])
       if bufexists(l:blistshw[l:idx]['bnum'])
-         let winList = win_findbuf(l:blistshw[l:idx]['bnum'])
-         if len(winList) > 0
-            call win_gotoid(winList[0])
+         if len(l:cmdsplit) == 1
+            let l:bufintab = 0
+            " check for existing window in current tab
+            let l:winList = win_id2tabwin(join(win_findbuf(l:blistshw[l:idx]['bnum'])))
+            if len(l:winList) > 0 && winList[0] == tabpagenr()
+               call win_gotoid(l:winList[1])
+            else
+               silent! exec ":b ".l:blistshw[l:idx]['bnum']
+            endif
          else
-            silent! exec ":b ".l:blistshw[l:idx]['bnum']
+            if l:cmdsplit[1] == 'v'
+               exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+            elseif l:cmdsplit[1] == 's'
+               exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
+            elseif l:cmdsplit[1] == 'w'
+               let l:winList = win_findbuf(l:blistshw[l:idx]['bnum'])
+               if len(l:winList) > 0
+                  call win_gotoid(l:winList[0])
+               endif
+            endif
          endif
       endif
-   elseif cmdsplit[0] == 'v'
-      let l:idx = str2nr(cmdsplit[1])
-      exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-   elseif cmdsplit[0] == 's'
-      let l:idx = str2nr(cmdsplit[1])
-      exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
    endif
 endfunction
 

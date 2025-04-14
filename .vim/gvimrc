@@ -372,11 +372,11 @@ inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
 vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
 
-inoremap <C-j> <C-o><C-]>
-inoremap <C-LeftRelease> <LeftMouse><C-o><C-]>
+inoremap <C-j> <C-o><C-w><C-]>
+inoremap <C-LeftRelease> <LeftMouse><C-o><C-w><C-]>
 nnoremap <C-j> <C-w><C-]>
-nnoremap <C-LeftRelease> <LeftMouse><C-]>
-vnoremap <C-j> <C-]>
+nnoremap <C-LeftRelease> <LeftMouse><C-w><C-]>
+vnoremap <C-j> <C-w><C-]>
 
 " C-c: command line mode
 inoremap <nowait> <M-x> <C-o>:
@@ -467,6 +467,13 @@ vnoremap <nowait> <C-M-v> <C-r>+
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 nnoremap <nowait> <C-l> :call BufferList()<CR>
 snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
+" inoremap <nowait> <C-l> <C-o>:FuzzyBuffers<CR>
+" nnoremap <nowait> <C-l> :FuzzyBuffers<CR>
+" snoremap <nowait> <C-l> <C-o>:FuzzyBuffers<CR>
+
+inoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
+nnoremap <nowait> <M-l> :FuzzyFiles<CR>
+snoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
 
 " C-s: save
 inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:w " : "<C-o>:w!<CR>" : ""
