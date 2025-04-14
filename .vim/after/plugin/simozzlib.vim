@@ -431,13 +431,17 @@ function! BufferList()
       let l:idx = str2nr(cmdsplit[0])
       if bufexists(l:blistshw[l:idx]['bnum'])
          if len(l:cmdsplit) == 1
-            let l:bufintab = 0
             " check for existing window in current tab
-            let l:winList = win_id2tabwin(join(win_findbuf(l:blistshw[l:idx]['bnum'])))
-            if len(l:winList) > 0 && winList[0] == tabpagenr()
-               call win_gotoid(l:winList[1])
-            else
-               silent! exec ":b ".l:blistshw[l:idx]['bnum']
+            let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
+            if len(l:winIdList) > 0
+               let l:winIdTabList = win_id2tabwin(join(winIdList))
+               if len(l:winIdTabList) > 0 && winIdTabList[0] == tabpagenr()
+                  echom "Switch to win"
+                  call win_gotoid(l:winIdList[0])
+               else
+                  echom "Switch buff"
+                  silent! exec ":b ".l:blistshw[l:idx]['bnum']
+               endif
             endif
          else
             if l:cmdsplit[1] == 'v'
@@ -445,9 +449,9 @@ function! BufferList()
             elseif l:cmdsplit[1] == 's'
                exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
             elseif l:cmdsplit[1] == 'w'
-               let l:winList = win_findbuf(l:blistshw[l:idx]['bnum'])
-               if len(l:winList) > 0
-                  call win_gotoid(l:winList[0])
+               let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
+               if len(l:winIdList) > 0
+                  call win_gotoid(l:winIdList[0])
                endif
             endif
          endif
