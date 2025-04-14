@@ -436,12 +436,10 @@ function! BufferList()
             if len(l:winIdList) > 0
                let l:winIdTabList = win_id2tabwin(join(winIdList))
                if len(l:winIdTabList) > 0 && winIdTabList[0] == tabpagenr()
-                  echom "Switch to win"
                   call win_gotoid(l:winIdList[0])
-               else
-                  echom "Switch buff"
-                  silent! exec ":b ".l:blistshw[l:idx]['bnum']
                endif
+            else
+               silent! exec ":b ".l:blistshw[l:idx]['bnum']
             endif
          else
             if l:cmdsplit[1] == 'v'
