@@ -276,8 +276,8 @@ vnoremap <silent> <nowait> <C-Enter> <Esc><Esc>
 nnoremap <silent> <nowait> <C-Enter> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
-inoremap <silent> <nowait> <C-S-w> <C-o>:call CloseBuffer()<CR><C-o><C-w>c
-nnoremap <silent> <nowait> <C-S-w> :call CloseBuffer()<CR><C-w>c
+inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
+nnoremap <silent> <nowait> <C-S-w> <C-w>c
 
 " M-w: Change window
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
@@ -538,12 +538,14 @@ nnoremap <silent> <nowait> <C-a> ggVG
 " C-n
 inoremap <silent> <nowait> <C-n> <C-o>:vsplit<CR>
 nnoremap <silent> <nowait> <C-n> :vsplit<CR>
-xnoremap <silent> <nowait> <C-n> <Esc><C-o>:vsplit<CR>
+vnoremap <silent> <nowait> <C-n> <Esc>:vsplit<CR><Esc>
+"snoremap <silent> <nowait> <C-n> <Esc><C-o>:vsplit<CR>
 
 " C-M-n
 inoremap <silent> <nowait> <C-M-n> <C-o>:split<CR>
 nnoremap <silent> <nowait> <C-M-n> :split<CR>
-xnoremap <silent> <nowait> <C-M-n> <Esc><C-o>:split<CR>
+vnoremap <silent> <nowait> <C-M-n> <Esc>:split<CR><Esc>
+"snoremap <silent> <nowait> <C-n> <C-o>:split<CR>
 
 " C-PageUp: switch to next window or tab
 inoremap <expr> <silent> <nowait> <C-PageUp> winnr() > 1 ? "<C-o>:call GoToPrevWin()<CR>" : "<C-o>:tabprev<CR>"
