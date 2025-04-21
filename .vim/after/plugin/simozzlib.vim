@@ -430,29 +430,30 @@ function! BufferList()
    elseif cmdsplit[0] =~ '\d'
       let l:idx = str2nr(cmdsplit[0])
       if bufexists(l:blistshw[l:idx]['bnum'])
-         if len(l:cmdsplit) == 1
-            " check for existing window in current tab
-            let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
-            if len(l:winIdList) > 0
-               let l:winIdTabList = win_id2tabwin(join(winIdList))
-               if len(l:winIdTabList) > 0 && winIdTabList[0] == tabpagenr()
-                  call win_gotoid(l:winIdList[0])
-               endif
-            else
-               silent! exec ":b ".l:blistshw[l:idx]['bnum']
-            endif
-         else
-            if l:cmdsplit[1] == 'v'
-               exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
-            elseif l:cmdsplit[1] == 's'
-               exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
-            elseif l:cmdsplit[1] == 'w'
-               let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
-               if len(l:winIdList) > 0
-                  call win_gotoid(l:winIdList[0])
-               endif
-            endif
-         endif
+         silent! exec ":b ".l:blistshw[l:idx]['bnum']
+         "" if len(l:cmdsplit) == 1
+         ""    " check for existing window in current tab
+         ""    let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
+         ""    if len(l:winIdList) > 0
+         ""       let l:winIdTabList = win_id2tabwin(join(winIdList))
+         ""       if len(l:winIdTabList) > 0 && winIdTabList[0] == tabpagenr()
+         ""          call win_gotoid(l:winIdList[0])
+         ""       endif
+         ""    else
+         ""       silent! exec ":b ".l:blistshw[l:idx]['bnum']
+         ""    endif
+         "" else
+         ""    if l:cmdsplit[1] == 'v'
+         ""       exec ":vsplit ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']
+         ""    elseif l:cmdsplit[1] == 's'
+         ""       exec ":split ".l:blistshw[l:idx]['fpath'].l:blistshw[l:idx]['fname']   
+         ""    elseif l:cmdsplit[1] == 'w'
+         ""       let l:winIdList = win_findbuf(l:blistshw[l:idx]['bnum'])
+         ""       if len(l:winIdList) > 0
+         ""          call win_gotoid(l:winIdList[0])
+         ""       endif
+         ""    endif
+         "" endif
       endif
    endif
 endfunction

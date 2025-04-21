@@ -265,10 +265,11 @@ inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc><Right>"
 nnoremap <silent> <nowait> <Esc> i
 inoremap <silent> <nowait> <C-c> <nop>
+cnoremap <expr> <silent> <nowait> <CR> getcmdtype() == '/' ? "<CR>zz" : "<CR>"
 
 " C-M-Enter: start visual block mode
-inoremap <silent> <nowait> <C-Space> <C-o>v
-nnoremap <silent> <nowait> <C-Space> v
+inoremap <silent> <nowait> <C-Space> <C-o>viw
+nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <expr> <silent> <nowait> <C-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
