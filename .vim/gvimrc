@@ -387,9 +387,9 @@ xnoremap <nowait> <M-x> <C-c>:'<,'>
 " tnoremap <silent> <nowait> <Esc> <C-\><C-n>
 cnoremap <nowait> <M-x> <C-c>:
 
-inoremap <silent> <nowait> <C-LeftMouse> <nop>
+inoremap <silent> <nowait> <C-LeftMouse> <C-o><C-w><C-]>
 inoremap <silent> <nowait> <C-RightMouse> <nop>
-nnoremap <silent> <nowait> <C-LeftMouse> <nop>
+nnoremap <silent> <nowait> <C-LeftMouse> <LeftMouse><C-w><C-]>
 nnoremap <silent> <nowait> <C-RightMouse> <nop>
 
 " S-Del
