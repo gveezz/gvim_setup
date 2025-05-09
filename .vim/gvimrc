@@ -124,8 +124,7 @@ set colorcolumn=0
 set nowrap
 set linebreak
 " note trailing space at end of next line
-set columns=999
-set lines=40
+
 " set history=1000
 " set wc=<Tab>
 set wildmenu
@@ -190,6 +189,7 @@ augroup END
 
 augroup Vim
    autocmd!
+   autocmd VimEnter * set lines=30 | set columns=999
    autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
                       \ call SetPWD($PWD) | :Vimfm |
                       \ elseif (isdirectory(argv(0))) |

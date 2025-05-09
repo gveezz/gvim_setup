@@ -196,8 +196,8 @@ function! HasWireRegDeclaration()
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
    else
-      return stridx(getline('.'), 'reg') >= 0 ||
-             \ stridx(getline('.'), 'wire') >= 0
+      return stridx(getline('.'), 'reg ') >= 0 ||
+           \ stridx(getline('.'), 'wire ') >= 0
    fi
 endfunction
 
@@ -205,9 +205,9 @@ function! HasIODeclaration()
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
    else
-      return stridx(getline('.'), 'input') >= 0 || 
-             \ stridx(getline('.'), 'output') >= 0 ||
-             \ stridx(getline('.'), 'inout') >= 0
+      return stridx(getline('.'), 'input ') >= 0 || 
+           \ stridx(getline('.'), 'output ') >= 0 ||
+           \ stridx(getline('.'), 'inout ') >= 0
 
    fi
 endfunction
@@ -216,7 +216,7 @@ function! HasParamDeclaration()
    if stridx(getline('.')[:col('.')-1], '//') >= 0
       return 0
    else
-      return stridx(getline('.'), 'parameter') >= 0
+      return stridx(getline('.'), 'parameter ') >= 0
    fi
 endfunction
 
