@@ -18,6 +18,7 @@ else
 end
 endcase
 endfunction
+endgenerate
 endmodule
 endprimitive
 endspecify
@@ -29,6 +30,7 @@ for
 force
 forever
 function
+generate
 highz0
 highz1
 if
