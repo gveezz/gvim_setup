@@ -86,9 +86,9 @@ endfunction
 
 function! AddMultiLineComment(fline, lline) range
 
-   silent! exec ":".a:fline.",".a:lline."v/^\\s\\+\\/\\//s/$/ \\/\\/ /g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\s\\+\\/\\/EasyAlign /\\s\\/\\/ / {'lm':0,'rm':0}"
-   silent! exec ":".a:fline.",".a:lline."g/\\/\\//s/\\/\\/$/\\/\\/ /g"
+   silent! exec ":".a:fline.",".a:lline."v/\\/\\//s/$/ \\/\\/ /g"
+   " silent! exec ":".a:fline.",".a:lline."v/^\\s\\+\\/\\/EasyAlign /\\s\\/\\/ / {'lm':0,'rm':0}"
+   " silent! exec ":".a:fline.",".a:lline."g/\\/\\//s/\\/\\/$/\\/\\/ /g"
 
 endfunction
 
