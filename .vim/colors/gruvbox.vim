@@ -688,8 +688,8 @@ hi! link EasyMotionShade Comment
 " }}}
 " Sneak: {{{
 
-hi! link Sneak Search
-hi! link SneakLabel Search
+autocmd ColorScheme gruvbox hi! link Sneak Search
+autocmd ColorScheme gruvbox hi! link SneakLabel Search
 
 " }}}
 " Indent Guides: {{{
@@ -1391,4 +1391,3 @@ endfunction
 " }}}
 
 " vim: set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker:
-

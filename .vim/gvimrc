@@ -121,7 +121,7 @@ set ttimeoutlen=0
 
 set textwidth=0
 set colorcolumn=0
-set nowrap
+set wrap
 set linebreak
 " note trailing space at end of next line
 
@@ -158,6 +158,12 @@ set diffopt=internal,filler,closeoff
 
 set list
 set listchars=tab:>\  
+
+" set tabpanelopt=columns:16,align:right
+" set tabpanelopt=vert,align:right
+" set tabpanelopt=columns:16
+" set tabpanel=%!TestTabBuflist()
+" set showtabpanel=1
 
 let g:bclose_multiple = 0
 let g:searchString = ""

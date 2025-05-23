@@ -179,7 +179,7 @@ function! TestTabBuflist()
    let tabn = tabpagenr()
 
    let buflist = tabpagebuflist(tabn)
-   echom join(bufname(buflist))
+   return join(bufname(buflist))
    " let winnr = tabpagewinnr(tabn)
    " return bufname(buflist[winnr - 1])
 endfunction

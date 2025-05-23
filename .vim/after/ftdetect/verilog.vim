@@ -3,7 +3,10 @@ augroup Verilog
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.v,*vbkp*,*.vams,*.vh,*.vinc,*.vf set filetype=verilog
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.sv*,*.svh*,*.svinc,*.svf set filetype=systemverilog
 
-   autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.v,*.vams,*.sv* if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | if stridx(expand('%:t'), 'tb') == -1 | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtemplate.v', line('$')) | else | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtbtemplate.v', line('$')) | endif | call AdjTemplate() | endif
+   autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.v,*.vams if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | if stridx(expand('%:t'), 'tb') == -1 | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtemplate.v', line('$')) | else | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtbtemplate.v', line('$')) | endif | call AdjTemplate() | endif
+   
+   autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.sv if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | if stridx(expand('%:t'), 'tb') == -1 | call InsTxtFromFile($HOME.'/.vim/templates/verilog/svtemplate.v', line('$')) | else | call InsTxtFromFile($HOME.'/.vim/templates/verilog/svtbtemplate.v', line('$')) | endif | call AdjTemplate() | endif
+
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vh,*.svh if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtemplate.vh', line('$')) | :call AdjTemplate() | endif
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vinc,*.svinc if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtemplate.vinc', line('$')) | :call AdjTemplate() | endif
    autocmd BufReadPost,BufWritePost,BufNewFile,BufRead *.vf,*.svf if line('$') == 1 && getline(1) == '' | call InsTxtFromFile($HOME.'/.vim/templates/kd/kdheader.txt', -1) | call InsTxtFromFile($HOME.'/.vim/templates/verilog/vtemplate.vf', line('$')) | :call AdjTemplate() | endif

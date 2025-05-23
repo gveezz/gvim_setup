@@ -54,8 +54,8 @@ inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("."),
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment(line("'<"),line("'>"))<CR>
 
-inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
-inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
+" inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
+" inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
 
 command! -nargs=0 AddLineComment call AddLineComment()
 command! -nargs=0 AddMultiLineCommentI call AddMultiLineComment(line("."),line('.'))
