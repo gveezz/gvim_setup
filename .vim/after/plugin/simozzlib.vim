@@ -653,6 +653,7 @@ function! AddFtDict()
    let l:ftdictpath = $MYVIMDIR."dictionary/".&ft.".txt"
    if filereadable(l:ftdictpath) > 0
       exec "setlocal dict+=".l:ftdictpath
+      exec "setlocal complete+=k".l:ftdictpath
    endif
 endfunction
 
