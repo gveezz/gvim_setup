@@ -132,7 +132,7 @@ set wildmode=full
 set wildoptions=
 set showtabline=1
 set guitabtooltip=%F
-set guitablabel=%m\ %{getcwd()}
+set guitablabel=%m\ %F
 " set splitbelow
 " set splitright
 " tab sball
