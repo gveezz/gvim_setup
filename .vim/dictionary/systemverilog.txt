@@ -6,6 +6,7 @@ always_latch
 assert
 assume
 before
+begin
 bind
 bins
 binsof
@@ -29,6 +30,7 @@ coverpoint
 cross
 dist
 do
+end
 endcase
 endchecker
 endclass
@@ -39,6 +41,7 @@ endpackage
 endprogram
 endproperty
 endsequence
+endtask
 enum
 eventually
 expect
@@ -101,6 +104,7 @@ super
 sync_accept_on
 sync_reject_on
 tagged
+task
 this
 throughout
 timeprecision
