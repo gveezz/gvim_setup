@@ -6,16 +6,16 @@ module $COMPONENT_NAME
 (
    // System interface
    // -- inputs
-   SClk,
-   Reset_n,
-   SyncRst,
+   input logic SClk,
+   input logic Reset_n,
+   input logic SyncRst,
    // Data interface
    // --inputs
-   DataInVal,
-   DataIn,
+   input logic DataInVal,
+   input logic DataIn,
    // --outputs
-   DataOutVal,
-   DataOut
+   output logic DataOutVal,
+   output logic DataOut
 );
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,14 +34,6 @@ module $COMPONENT_NAME
 ////////////////////////////////////////////////////////////////////////////////
 // Module I/O
 ////////////////////////////////////////////////////////////////////////////////
-
-input  logic SClk;       // COMMENT
-input  logic Reset_n;    // COMMENT
-input  logic SyncRst;    // COMMENT
-input  logic DataInVal;  // COMMENT
-input  logic DataIn;     // COMMENT
-output logic DataOutVal; // COMMENT
-output logic DataOut;    // COMMENT
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal parameters (localparams)
