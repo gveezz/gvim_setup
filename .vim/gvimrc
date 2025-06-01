@@ -278,9 +278,9 @@ inoremap <silent> <nowait> <C-Space> <C-o>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <C-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <C-Enter> <Esc><Esc>
-nnoremap <silent> <nowait> <C-Enter> i
+inoremap <expr> <silent> <nowait> <M-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+vnoremap <silent> <nowait> <M-Enter> <Esc><Esc>
+nnoremap <silent> <nowait> <M-Enter> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
@@ -466,9 +466,9 @@ cnoremap <nowait> <C-v> <C-r>+
 
 vnoremap <silent> <nowait> <C-v> "+P
 
-inoremap <nowait> <C-M-v> <C-r>+
-nnoremap <nowait> <C-M-v> <C-r>+
-vnoremap <nowait> <C-M-v> <C-r>+
+inoremap <nowait> <C-M-v> <C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>
+nnoremap <nowait> <C-M-v> :set paste<CR><C-r>+:set nopaste<CR
+vnoremap <nowait> <C-M-v> <Esc>:set paste<CR><C-r>+:set nopaste<CR
 
 " C-l: prompt replace
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
@@ -478,9 +478,9 @@ snoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
 " nnoremap <nowait> <C-l> :FuzzyBuffers<CR>
 " snoremap <nowait> <C-l> <C-o>:FuzzyBuffers<CR>
 
-inoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
-nnoremap <nowait> <M-l> :FuzzyFiles<CR>
-snoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
+" inoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
+" nnoremap <nowait> <M-l> :FuzzyFiles<CR>
+" snoremap <nowait> <M-l> <C-o>:FuzzyFiles<CR>
 
 " C-s: save
 inoremap <expr> <nowait> <C-s> (&ft != 'netrw' && &ft != 'help') ? empty(bufname('%')) ? "<C-o>:w " : "<C-o>:w!<CR>" : ""
