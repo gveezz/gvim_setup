@@ -112,7 +112,7 @@ set scrolloff=0
 set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
-set completeopt+=menuone
+set completeopt+=menuone,preview,preinsert
 set hidden
 set hlsearch
 set incsearch
@@ -183,6 +183,8 @@ augroup END
 
 augroup Insert
    autocmd!
+   autocmd InsertEnter * set nohlsearch
+   autocmd InsertLeave * set hlsearch
    " autocmd KeyInputPre * if v:char == 28 | let v:char = 92 | endif
    " autocmd InsertLeave * set iminsert=0
    " autocmd InsertEnter * set iminsert=1
@@ -467,8 +469,8 @@ cnoremap <nowait> <C-v> <C-r>+
 vnoremap <silent> <nowait> <C-v> "+P
 
 inoremap <nowait> <C-M-v> <C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>
-nnoremap <nowait> <C-M-v> :set paste<CR><C-r>+:set nopaste<CR
-vnoremap <nowait> <C-M-v> <Esc>:set paste<CR><C-r>+:set nopaste<CR
+nnoremap <nowait> <C-M-v> :set paste<CR><C-r>+:set nopaste<CR>
+vnoremap <nowait> <C-M-v> <Esc>:set paste<CR><C-r>+:set nopaste<CR>
 
 " C-l: prompt replace
 inoremap <nowait> <C-l> <C-o>:call BufferList()<CR>
