@@ -112,7 +112,7 @@ set scrolloff=0
 set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
-set completeopt+=menuone,preview,preinsert
+set completeopt+=menuone,preview,longest
 set hidden
 set hlsearch
 set incsearch
@@ -197,6 +197,7 @@ augroup END
 
 augroup Vim
    autocmd!
+   autocmd VimEnter * packloadall!
    "autocmd VimEnter * set lines=30 | set columns=999
    autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
                       \ call SetPWD($PWD) | :Vimfm |
