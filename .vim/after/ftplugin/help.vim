@@ -1,3 +1,3 @@
 setlocal bufhidden=wipe
-noremap <silent> <buffer> <F1> :bd!<CR>
-noremap <silent> <buffer> <Esc> :bd!<CR>
+nmap <silent> <buffer> <F1> :bd!<CR>
+nmap <silent> <buffer> <Esc> :bd!<CR>
