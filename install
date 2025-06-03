@@ -44,7 +44,8 @@ if [ "${GET}" -eq 1 ]; then
       rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${VIMDIR} .
    else
       echo "Getting local setup"
-      cp -a ~/${VIMDIR} .
+      rm -fr ${PWD}/${VIMDIR}
+      cp -a ${HOME}/${VIMDIR} .
    fi
 else
    if [ ${REMOTE} -eq 1 ]; then
