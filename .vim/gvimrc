@@ -282,8 +282,8 @@ nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
 inoremap <expr> <silent> <nowait> <Esc><Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <Esc><Esc> <Esc><Esc>
-nnoremap <silent> <nowait> <Esc><Esc> i
+vnoremap <silent> <nowait> <Esc> <Esc><Esc>
+nnoremap <silent> <nowait> <Esc> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
