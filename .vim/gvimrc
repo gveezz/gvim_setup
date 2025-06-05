@@ -40,9 +40,9 @@ filetype plugin on
 syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
-set updatetime=500
-set timeout
-set ttimeout
+set updatetime=50
+set notimeout
+set nottimeout
 set timeoutlen=50
 set ttimeoutlen=50
 " set tags=tags;/
@@ -281,9 +281,9 @@ inoremap <silent> <nowait> <C-Space> <C-o>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <M-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <M-Enter> <Esc><Esc>
-nnoremap <silent> <nowait> <M-Enter> i
+inoremap <expr> <silent> <nowait> <Esc><Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+vnoremap <silent> <nowait> <Esc><Esc> <Esc><Esc>
+nnoremap <silent> <nowait> <Esc><Esc> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
