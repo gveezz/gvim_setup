@@ -40,7 +40,7 @@ filetype plugin on
 syntax enable
 " set syntax=auto
 " set timeout timeoutlen=10 ttimeoutlen=1
-set updatetime=50
+set updatetime=4000
 set notimeout
 set nottimeout
 set timeoutlen=50
@@ -112,7 +112,7 @@ set scrolloff=0
 set splitright
 set splitbelow
 set complete=.,t,w,b,d,k
-set completeopt+=menuone,preview,longest
+set completeopt+=menuone,preview
 set hidden
 set hlsearch
 set incsearch
@@ -277,12 +277,12 @@ inoremap <silent> <nowait> <C-c> <nop>
 cnoremap <expr> <silent> <nowait> <CR> getcmdtype() == '/' ? "<CR>zz" : "<CR>"
 
 " C-M-Enter: start visual block mode
-inoremap <silent> <nowait> <C-Space> <C-o>viw
+inoremap <silent> <nowait> <C-Space> <Esc>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <Esc><Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
-vnoremap <silent> <nowait> <Esc> <Esc><Esc>
+inoremap <expr> <silent> <nowait> <M-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+vnoremap <silent> <nowait> <Esc> <Esc>i
 nnoremap <silent> <nowait> <Esc> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
