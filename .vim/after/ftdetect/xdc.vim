@@ -1,5 +1,2 @@
-augroup XDC
-   autocmd!
-   autocmd BufRead,BufNewFile *.xdc set filetype=tcl
-augroup END
-
+" xdc
+autocmd BufNewFile,BufRead *.xdc setfiletype xdc
