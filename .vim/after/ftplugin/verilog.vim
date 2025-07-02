@@ -50,6 +50,10 @@ inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("."),
 snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance(line("'<"),line("'>"))<CR>
 
+inoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance(line("."),line("."))<CR>
+snoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance(line("'<"),line("'>"))<CR>
+xnoremap <buffer> <silent> <nowait> <M-9> :call CloseIoInstance(line("'<"),line("'>"))<CR>
+
 inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("."),line("."))<CR>
 snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("'<"),line("'>"))<CR>
 xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment(line("'<"),line("'>"))<CR>
@@ -187,6 +191,11 @@ function! FormatIoInstance(fline, lline) range
    "silent! exec ":".a:lline."s/,//g"
    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0}"
    " close above /)
+endfunction
+
+function! CloseIoInstance(fline, lline) range
+   silent! exec ":".a:fline.",".a:lline."s/\\\s)/)/g"
+   silent! exec ":".a:fline.",".a:lline."s/\\\s\\\+)/)/g"
 endfunction
 
 function! MultiLineComment(fline, lline) range

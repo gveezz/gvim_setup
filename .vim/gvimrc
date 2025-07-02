@@ -86,7 +86,7 @@ set breakindent
 set browsedir=current
 set smarttab
 set number 
-set guifont=Monospace\ 11
+set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
@@ -281,7 +281,7 @@ inoremap <silent> <nowait> <C-Space> <Esc>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <M-Enter> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+inoremap <expr> <silent> <nowait> <M-Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <Esc> <Esc>i
 nnoremap <silent> <nowait> <Esc> i
 
@@ -383,9 +383,9 @@ nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
 vnoremap <silent> <nowait> <M-p> <Esc><C-c>:exec ":cd ".expand("%:h")<CR>
 
 inoremap <C-j> <C-o><C-w><C-]>
-inoremap <C-LeftRelease> <LeftMouse><C-o><C-w><C-]>
+inoremap <C-2-LeftMouse> <LeftMouse><C-o><C-w><C-]>
 nnoremap <C-j> <C-w><C-]>
-nnoremap <C-LeftRelease> <LeftMouse><C-w><C-]>
+nnoremap <C-2-LeftMouse> <LeftMouse><C-w><C-]>
 vnoremap <C-j> <C-w><C-]>
 
 " C-c: command line mode

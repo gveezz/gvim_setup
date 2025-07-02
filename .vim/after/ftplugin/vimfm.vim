@@ -5,5 +5,7 @@ setlocal number relativenumber
 
 nmap <silent> <nowait> <S-Tab> <Left>
 nmap <silent> <nowait> <Tab> <Right>
+nmap <silent> <nowait> <Space> <Down>
+nmap <silent> <nowait> <S-Space> <Up>
 
 nmap <nowait> <C-S-f> :find **/
