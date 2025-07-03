@@ -771,7 +771,9 @@ function! GoToLineIntractv()
          echon "Line: ".l:strIn
       else
          let l:cIn = l:cInEnter
-         call cursor(l:line, l:col)
+         " call cursor(l:line, l:col)
+         silent! exec ":".l:line
+         silent! exec "|".l:col
       endif
    endwhile
    
