@@ -396,7 +396,7 @@ function! BufferList()
       echon "[".l:idx."] "
       echohl None
       echohl StatusLineW
-      echon l:blistshw[l:idx]['fpath']
+      echon substitute(l:blistshw[l:idx]['fpath'], $HOME, '~', 'g')
       echohl None
       echohl StatusLineG
       echon l:blistshw[l:idx]['fname']
