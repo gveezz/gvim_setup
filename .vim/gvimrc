@@ -282,9 +282,10 @@ inoremap <silent> <nowait> <C-Space> <Esc>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <M-Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+inoremap <expr> <silent> <nowait> <M-n> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <Esc> <Esc>i
 nnoremap <silent> <nowait> <Esc> i
+nnoremap <silent> <nowait> <M-n> i
 
 inoremap <silent> <nowait> <C-w> <C-o><C-w>
 inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
