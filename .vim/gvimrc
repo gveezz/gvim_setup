@@ -428,7 +428,7 @@ inoremap <silent> <nowait> <C-q> <C-o><C-q>
 inoremap <nowait> <C-f> <Esc>/
 nnoremap <nowait> <C-f> /
 " xnoremap <expr> <nowait> <C-f> mode() == '<C-v>' ? ":call EchoYellowMsg(\"Visual Block search not used\")<CR>" : "<C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR><CR>n"
-xnoremap <nowait> <C-f> /
+xnoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 snoremap <nowait> <C-f> <C-c>:%s/<C-r>=VSearchStrSub()<CR>//gn<CR>
 cnoremap <silent> <nowait> <C-f> /<C-r>/<CR>nzz
 cnoremap <nowait> <C-w> <C-r><C-w>
@@ -623,10 +623,10 @@ vnoremap <silent> <nowait> - <C-x>
 vnoremap <silent> <nowait> <kMinus> <C-x>
 
 " C-t: open new tab
-inoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<C-o>:tabnew<CR>" : "<C-o>:tabnew %<CR>"
-nnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? ":tabnew<CR>" : ":tabnew %<CR>"
-snoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
-vnoremap <expr> <silent> <nowait> <C-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
+inoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<C-o>:tabnew<CR>" : "<C-o>:tabnew %<CR>"
+nnoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? ":tabnew<CR>" : ":tabnew %<CR>"
+snoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
+vnoremap <expr> <silent> <nowait> <C-S-t> expand('%') == '' ? "<Esc>:tabnew<CR>" : "<Esc>:tabnew %<CR>"
 
 " C-Del
 inoremap <expr> <silent> <nowait> <C-Del> (col('.')-1)==strlen(getline('.')) ? "<Del>" : "<C-o>dw"
