@@ -9,11 +9,11 @@ module $COMPONENT_NAME #(
    input Reset_n,
    // Data interface
    // --inputs
-   input DataIValid,
-   input DataI,
+   input DataInVal,
+   input DataIn,
    // --outputs
-   output DataOValid,
-   DataOut
+   output DataOutVal,
+   output DataOut
 );
 
 // External functions and tasks
