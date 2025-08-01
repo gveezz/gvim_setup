@@ -96,9 +96,9 @@ set statusline+=\ (%l\/\%L,\%c)\
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkoff0-nCursor
 set guicursor+=o:ver100-blinkon250-blinkoff250-nCursor
-set guicursor+=i:ver25-blinkoff0-iCursor
-set guicursor+=v:ver25-blinkoff0-vCursor
-set guicursor+=c-ci-cr:ver25-blinkoff0-cCursor
+set guicursor+=i:ver35-blinkoff0-iCursor
+set guicursor+=v:ver35-blinkoff0-vCursor
+set guicursor+=c-ci-cr:ver35-blinkoff0-cCursor
 
 set noignorecase
 set formatoptions=tcj
@@ -271,9 +271,9 @@ snoremap <silent> <nowait> <C-M-ScrollWheelDown> <C-o>10zl
 nnoremap <silent> <nowait> <C-o> <nop>
 
 " Esc: return to normal mode if insert mode, or viceversa
-inoremap <silent> <nowait> <Esc> <C-o><Esc>
+" inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc><Right>"
-nnoremap <silent> <nowait> <Esc> i
+nnoremap <silent> <nowait> <Esc> a
 inoremap <silent> <nowait> <C-c> <nop>
 cnoremap <expr> <silent> <nowait> <CR> getcmdtype() == '/' ? "<CR>zz" : "<CR>"
 
@@ -282,7 +282,7 @@ inoremap <silent> <nowait> <C-Space> <Esc>viw
 nnoremap <silent> <nowait> <C-Space> viw
 xnoremap <expr> <silent> <nowait> <C-Space> mode() == "v" ? "V" : "v"
 
-inoremap <expr> <silent> <nowait> <M-n> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
+inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <Esc> <Esc>i
 nnoremap <silent> <nowait> <Esc> i
 nnoremap <silent> <nowait> <M-n> i

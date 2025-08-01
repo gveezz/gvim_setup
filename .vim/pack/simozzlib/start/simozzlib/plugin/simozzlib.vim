@@ -503,7 +503,7 @@ function! SetStatusLineMode()
    if l:mode == 'n'
       hi StatusLine guifg=#ffffff guibg=#0007ff
    elseif l:mode == 'i'
-      hi StatusLine guifg=#F3C81B guibg=#4900B8
+      hi StatusLine guifg=#FFFF00 guibg=#4900B8
    elseif l:mode == 'v' 
       hi StatusLine guifg=#1c5dff guibg=#F3C81B
    elseif l:mode == 'V'

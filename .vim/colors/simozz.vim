@@ -40,14 +40,14 @@ hi Cursor                 guibg=#0000ff guifg=#000000 cterm=bold
 hi nCursor                guibg=#007cff guifg=#000000 cterm=bold
 " hi cCursor              guibg=#b8b8b8 guifg=#000000 cterm=bold
 hi cCursor                guibg=#00ff00 cterm=bold
-hi iCursor                guibg=#00FF00 guifg=#000000 cterm=bold 
+hi iCursor                guibg=#FFFF00 guifg=#ffffff cterm=bold 
 hi vCursor                guibg=#ab46ff guifg=#000000 cterm=bold
 
 hi MsgArea                term=bold,reverse cterm=bold guibg=#222222 gui=bold ctermbg=black ctermfg=lightgray
 
 hi Comment                term=bold  cterm=bold ctermfg=yellow guifg=Yellow gui=bold
 hi Constant               term=underline  cterm=bold ctermfg=magenta guifg=#ED762E gui=bold
-hi Special                term=bold  cterm=bold ctermfg=LightYellow guifg=#f7aa1b gui=bold
+hi Special                term=bold  cterm=bold ctermfg=LightYellow guifg=#f7aa1b guibg=#222222 gui=bold
 hi Identifier             term=underline   ctermfg=brown  guifg=#40ffff
 hi Statement              term=bold  cterm=bold ctermfg=yellow  gui=bold  guifg=#B0B0FF
 hi PreProc                term=underline  ctermfg=darkmagenta   guifg=#E179FF gui=bold
