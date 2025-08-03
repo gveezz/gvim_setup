@@ -1,12 +1,12 @@
-setlocal colorcolumn=80
+" setlocal colorcolumn=80
 setlocal wrap
 " setlocal comments="/*,\/\/"
 setlocal formatoptions=joqmtcrn
-setlocal wrapmargin=80
-setlocal textwidth=80
+" setlocal wrapmargin=80
+" setlocal textwidth=80
 setlocal linebreak
-setlocal tabstop=3
-setlocal shiftwidth=3
+setlocal tabstop=4
+setlocal shiftwidth=4
 setlocal softtabstop=0
 setlocal expandtab
 " stop annoying with positioning # to the beginning of the line

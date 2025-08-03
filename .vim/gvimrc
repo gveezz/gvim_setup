@@ -96,7 +96,7 @@ set statusline+=\ (%l\/\%L,\%c)\
 set backspace=indent,eol,start
 set guicursor=n:ver100-blinkoff0-nCursor
 set guicursor+=o:ver100-blinkon250-blinkoff250-nCursor
-set guicursor+=i:ver35-blinkoff0-iCursor
+set guicursor+=i:ver35-blinkon125-blinkoff125-iCursor
 set guicursor+=v:ver35-blinkoff0-vCursor
 set guicursor+=c-ci-cr:ver35-blinkoff0-cCursor
 
@@ -286,10 +286,6 @@ inoremap <expr> <silent> <nowait> <Esc> col('.') != 1 ? "<Esc><Right>" : "<Esc>"
 vnoremap <silent> <nowait> <Esc> <Esc>i
 nnoremap <silent> <nowait> <Esc> i
 nnoremap <silent> <nowait> <M-n> i
-
-inoremap <silent> <nowait> <C-w> <C-o><C-w>
-inoremap <silent> <nowait> <C-S-w> <C-o><C-w>c
-nnoremap <silent> <nowait> <C-S-w> <C-w>c
 
 " M-w: Change window
 inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
@@ -617,6 +613,10 @@ nnoremap <expr> <silent> <nowait> <C-Left> getline('.')[col('.')-2] == ' ' ? "ge
 inoremap <silent> <nowait> <C-x> <C-o>:call CloseBuffer()<CR>
 nnoremap <silent> <nowait> <C-x> :call CloseBuffer()<CR>
 " tnoremap <silent> <nowait> <C-x> exit<CR>
+
+inoremap <silent> <nowait> <C-w> <C-o><C-w>
+inoremap <silent> <nowait> <C-S-x> <C-o><C-w>c
+nnoremap <silent> <nowait> <C-S-x> <C-w>c
 
 vnoremap <silent> <nowait> + <C-a>
 vnoremap <silent> <nowait> <kPlus> <C-a>
