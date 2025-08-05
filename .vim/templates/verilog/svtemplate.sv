@@ -21,7 +21,7 @@ module $COMPONENT_NAME
 
 // Configurable parameters
 
-// Internal parameters (localparams) that affect ports
+// Internal parameters (localparams)
 
 // Module I/O
 

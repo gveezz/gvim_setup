@@ -1,4 +1,3 @@
 // Macro defines
-`define 
-
+`define
 // end of $COMPONENT_NAME

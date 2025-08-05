@@ -1,15 +1,13 @@
 // Headers include
 
-module $COMPONENT_NAME ();
+module $COMPONENT_NAME # (
+    // Configurable parameters
+) (
+
+);
 
 // External functions and tasks
 // Miscellaneous parameter task and functions
-
-// Configurable parameters
-
-// Internal parameters (localparams) that affect ports
-
-// Module I/O
 
 // Internal parameters (localparams)
 

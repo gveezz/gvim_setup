@@ -1,6 +1,7 @@
 // Headers include
 
 module $COMPONENT_NAME #(
+   // Configurable parameters
    
 ) (
    // System interface
@@ -20,7 +21,7 @@ module $COMPONENT_NAME #(
 
 // localparams
 
-// Sequential regs
+// output regs
 reg DataOutVal; 
 reg DataOut;    
 
@@ -31,7 +32,6 @@ reg DataOut;
 // Wires assignments
 
 // Module functionality
-
 always @(posedge SClk or negedge Reset_n) begin
    if (!Reset_n) begin
       DataOutVal <= 0;
