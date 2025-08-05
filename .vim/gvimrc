@@ -273,7 +273,6 @@ nnoremap <silent> <nowait> <C-o> <nop>
 " Esc: return to normal mode if insert mode, or viceversa
 " inoremap <silent> <nowait> <Esc> <C-o><Esc>
 " inoremap <silent> <nowait> <expr> <Esc> col('.')== 1? "<Esc>" : "<Esc><Right>"
-nnoremap <silent> <nowait> <Esc> a
 inoremap <silent> <nowait> <C-c> <nop>
 cnoremap <expr> <silent> <nowait> <CR> getcmdtype() == '/' ? "<CR>zz" : "<CR>"
 
@@ -461,7 +460,7 @@ vnoremap <silent> <nowait> <C-c> "+ygv
 
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
-nnoremap <nowait> <C-v> <C-r><C-o>+
+nnoremap <nowait> <C-v> i<C-r><C-o>+
 " vnoremap <nowait> <C-v> <C-r><C-o>+
 cnoremap <nowait> <C-v> <C-r>+
 

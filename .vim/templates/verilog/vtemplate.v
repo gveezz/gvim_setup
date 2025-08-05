@@ -2,7 +2,7 @@
 
 module $COMPONENT_NAME #(
    // Configurable parameters
-   
+   parameter DATA_W = 8
 ) (
    // System interface
    // -- inputs
@@ -11,10 +11,10 @@ module $COMPONENT_NAME #(
    // Data interface
    // --inputs
    input DataInVal,
-   input DataIn,
+   input [DATA_W-1:0] DataIn,
    // --outputs
    output DataOutVal,
-   output DataOut
+   output [DATA_W-1:0] DataOut
 );
 
 // External functions and tasks

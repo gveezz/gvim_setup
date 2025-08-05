@@ -1,7 +1,9 @@
 // Headers include
 
-module $COMPONENT_NAME
-(
+module $COMPONENT_NAME #(
+   // Configurable parameters
+   parameter DATA_W = 8
+) (
    // System interface
    // -- inputs
    input logic SClk,
@@ -10,10 +12,10 @@ module $COMPONENT_NAME
    // Data interface
    // --inputs
    input logic DataInVal,
-   input logic DataIn,
+   input logic [DATA_W-1:0] DataIn,
    // --outputs
    output logic DataOutVal,
-   output logic DataOut
+   output logic [DATA_W-1:0] DataOut
 );
 
 // External functions and tasks
