@@ -1,3 +1,4 @@
+// $COMPONENT_NAME
 `timescale 1ns/1ps
 // Headers include
 

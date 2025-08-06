@@ -1,3 +1,4 @@
+// $COMPONENT_NAME
 // Headers include
 
 module $COMPONENT_NAME # (

@@ -1,3 +1,4 @@
+// $COMPONENT_NAME
 // Includes
 
 // Variables
