@@ -1,4 +1,3 @@
-// $COMPONENT_NAME
 `timescale 1ns/1ps
 // Headers include
 
@@ -33,5 +32,5 @@ initial begin
    #0 ; 
 end
 
-endmodule 
-// end of $COMPONENT_NAME
+endmodule
+

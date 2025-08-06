@@ -1,4 +1,3 @@
-// $COMPONENT_NAME
 // Verilog includes
 `include
-// end of $COMPONENT_NAME
+

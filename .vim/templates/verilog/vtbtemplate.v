@@ -1,4 +1,3 @@
-// $COMPONENT_NAME
 // Headers include
 
 module $COMPONENT_NAME # (
@@ -35,4 +34,4 @@ initial begin
 end
 
 endmodule 
-// end of $COMPONENT_NAME
+

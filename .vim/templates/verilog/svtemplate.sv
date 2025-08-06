@@ -1,4 +1,3 @@
-// $COMPONENT_NAME
 // Headers include
 
 module $COMPONENT_NAME #(
@@ -63,4 +62,4 @@ always_ff @(posedge SClk or negedge Reset_n) begin
 end
 
 endmodule 
-// end of $COMPONENT_NAME
+

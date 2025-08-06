@@ -1,4 +1,3 @@
-
 function! ReloadVimRc ()
    if has('gui') && filereadable($MYGVIMRC)
       silent! source $MYGVIMRC
@@ -29,6 +28,9 @@ function! AdjTemplate ()
    silent! exec ":%s/$EMAIL/".l:corpemail."/g"
    silent! exec ":%s/$COMPONENT_NAME/".l:component."/g"
    silent! exec ":%s/$MACRO/".toupper(l:component)."/g"
+   silent! exec ":%s/$DATE/".strftime("%d-%m-%Y %H:%M")."/g"
+   silent! exec ":%s/$USER/".$USER."/g"
+   silent! exec ":%s/$FILE/".expand("%:t")."/g"
    silent! :1
 
 endfunction

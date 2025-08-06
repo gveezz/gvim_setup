@@ -1,4 +1,3 @@
-// $COMPONENT_NAME
 #ifndef $MACRO_H
 #define $MACRO_H
 
@@ -21,4 +20,4 @@ extern "C" {
 #endif
 
 #endif
-// end of $COMPONENT_NAME 
+
