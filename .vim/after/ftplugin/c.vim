@@ -1,7 +1,7 @@
 " setlocal colorcolumn=80
 setlocal foldignore=#
-" setlocal wrapmargin=80
-" setlocal textwidth=80
+setlocal wrapmargin=0
+setlocal textwidth=0
 setlocal linebreak
 setlocal tabstop=4
 setlocal shiftwidth=4
