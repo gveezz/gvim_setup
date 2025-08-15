@@ -23,7 +23,7 @@ let g:skip_defaults_vim=1
 
 let g:vimfm_force_delete = 1
 
-helptags $MYVIMDIR/doc
+" helptags $MYVIMDIR/doc
 
 set modelines=0
 set nocompatible  
@@ -198,7 +198,8 @@ augroup END
 augroup Vim
    autocmd!
    autocmd VimEnter * packloadall!
-   "autocmd VimEnter * set lines=30 | set columns=999
+   autocmd GUIEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r '.v:windowid)
+   " autocmd VimEnter * set lines=1920 | set columns=1080
    autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
                       \ call SetPWD($PWD) | :Vimfm |
                       \ elseif (isdirectory(argv(0))) |
