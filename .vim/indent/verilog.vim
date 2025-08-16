@@ -6,13 +6,13 @@
 
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
-    finish
+    "  finish
 endif
 let b:did_indent = 1
 
 " Only define the function once.
 if exists("*GetVerilogIndent")
-    finish
+    "  finish
 endif
 
 setlocal indentexpr=GetVerilogIndent()
@@ -39,7 +39,7 @@ function! GetVerilogIndent()
     " Set keywords and identifiers
     " -----------------------------------------------------------------------
 
-    let block_open    = '\(:\s*$\|foreach\|repeat\|reg\|wire\|logic\|while\|always_comb\|always_ff\|if\|else\|@\|always\|initial\|\/\/\)' "Do not inclue for (handled separately)
+    let block_open    = '\(:\s*$\|foreach\|repeat\|reg\|wire\|logic\|while\|always_comb\|always_ff\|if\|else\|@\|always\|initial\)' "Do not inclue for (handled separately)
     let section_open  = '\(class\|package\|clocking\|interface\|`ifdef\|`ifndef\|`elsif\|`else\|module\|task\|function\|generate\|case\%[[(A-Z-a-z)-zx]]\|specify\|fork\|,\)'
     let section_close = '\(endclass\|endpackage\|endclocking\|endinterface\|`endif\|`elsif\|`else\|endmodule\|endtask\|endfunction\|endgenerate\|endcase\|endspecify\|join_none\|join_all\|join_any\|join\)'
     let list_open     = '\({\|(\|#\s*(\)'
