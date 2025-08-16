@@ -435,9 +435,9 @@ nnoremap <nowait> <C-S-f> :find **/
 vnoremap <nowait> <C-S-f> <Esc>:find **/
 cnoremap <nowait> <C-S-f> :find **/
 
-inoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r><C-w>/<C-r><C-w>
-nnoremap <nowait> <C-h> :%s/<C-r><C-w>/<C-r><C-w>/
-vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/<C-r>=VSearchStrSub()<CR>
+inoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r><C-w>/
+nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
+vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
 cnoremap <silent> <nowait> <C-h> <C-c>
 
 inoremap <silent> <nowait> <C-M-h> <C-o>:call setreg('/', '')<CR>
