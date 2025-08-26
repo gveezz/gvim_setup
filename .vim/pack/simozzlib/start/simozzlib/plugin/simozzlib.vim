@@ -1318,7 +1318,8 @@ endfunction
 
 function! HighlightWordUnderCursor()
    if IsWordUnderCursor()
-      exec 'match HighCW /\<'.expand('<cword>').'\>/'
+      " exec 'match HighCW /\<'.expand('<cword>').'\>/'
+      exec 'match HighCW /'.expand('<cword>').'/'
    else 
       match none 
    endif
