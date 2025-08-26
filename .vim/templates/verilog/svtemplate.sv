@@ -7,7 +7,6 @@ module $COMPONENT_NAME #(
    // System interface
    // -- inputs
    input logic SClk,
-   input logic Reset_n,
    input logic SyncRst,
    // Data interface
    // --inputs
@@ -49,15 +48,13 @@ always_comb begin
 
 end
 
-always_ff @(posedge SClk or negedge Reset_n) begin
-   if (!Reset_n) begin
-      DataOutVal <= 0;
-      DataOut    <= 0;
+always_ff @(posedge SClk) begin
+   if (!SyncRst) begin
+        DataOutVal <= 0;
+        DataOut    <= 0;
    end else begin
-      if (SyncRst) begin
-         DataOutVal <= 0;
-         DataOut    <= 0;
-      end
+        DataOutVal <= DataInVal;
+        DataOut    <= DataIn;
    end
 end
 

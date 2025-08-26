@@ -7,7 +7,7 @@ module $COMPONENT_NAME #(
    // System interface
    // -- inputs
    input SClk,
-   input Reset_n,
+   input SyncRst,
    // Data interface
    // --inputs
    input DataInVal,
@@ -32,15 +32,13 @@ reg DataOut;
 // Wires assignments
 
 // Module functionality
-always @(posedge SClk or negedge Reset_n) begin
-   if (!Reset_n) begin
-      DataOutVal <= 0;
-      DataOut    <= 0;
+always @(posedge SClk) begin
+   if (!SyncRst) begin
+        DataOutVal <= 0;
+        DataOut    <= 0;
    end else begin
-      if (SyncRst) begin
-         DataOutVal <= 0;
-         DataOut    <= 0;
-      end
+        DataOutVal <= DataInVal;
+        DataOut    <= DataOut;
    end
 end
 
