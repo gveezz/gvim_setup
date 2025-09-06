@@ -115,7 +115,7 @@ function! GetVerilogIndent()
 
         " Do nothing if the section is immediately closed
         if last_line !~ prefix . section_open . anything . section_close . postfix
-            let ind = ind " + offset
+            let ind = ind + offset
             if vverb | echo vverb_str "Indent after section statement." | endif
         else
             if vverb | echo vverb_str "Do not indent after this section statement." | endif
@@ -138,10 +138,10 @@ function! GetVerilogIndent()
 
 
         " Indent after a 'begin' statement
-    elseif last_line =~ prefix . 'begin' . postfix
+    elseif last_line =~ 'begin' . postfix 
 
         if last_line !~ prefix . 'begin' . anything . 'end' . postfix
-            let ind = ind " + offset
+            let ind = ind + offset
             if vverb | echo vverb_str "Indent after a begin statement." | endif
          else
             if vverb | echo vverb_str "Do not indent after this begin statement." | endif
