@@ -104,7 +104,7 @@ function! vimfm#file#mkdir(filer, name) abort
     return
   endif
 
-  call mkdir(path, '')
+  call mkdir(path, 'p')
 
   echo "Created new directory: '".a:name."'"
 endfunction
