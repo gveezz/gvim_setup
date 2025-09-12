@@ -1,0 +1,626 @@
+abort
+about dialog
+above
+absolute file name
+access
+access mode
+access point
+access position
+add
+alias
+alloc
+allocation
+alpha
+anchor
+anchor position
+anonymous function
+antialiasing
+appearance
+append
+application
+application name
+application-specific initialization
+architecture
+argument
+arguments
+arithmetic
+array
+aspect ratio
+assign
+association
+asynchronous event
+asynchronous I/O
+atom
+attributes
+auto-exec
+auto-load
+auto-loading
+auto_mkindex
+background
+background error
+backslash
+backslash substitution
+beep
+bell
+below
+beta
+bevel
+bgerror
+binary
+binary code
+binary library
+bind
+binding
+bisque
+bitmap
+blocking
+boolean
+boolean value
+border
+box
+braces
+break
+buffer
+buffered I/O
+buffering
+butt
+button
+byte array
+bytecode
+cache
+callback
+cancel
+canvas
+cap style
+caret
+carriage return
+case
+case conversion
+catch
+cell
+center
+centimeters
+channel
+channel closing
+channel driver
+channel registration
+channel type
+character
+check
+checkbutton
+child
+children
+choice
+class
+classification
+cleanup
+clear
+client
+clientData
+clipboard
+clock
+close
+color
+color selection dialog
+colormap
+command
+command line
+command substitution
+command-line arguments
+commands
+compare
+compiler
+complete command
+compression
+concat
+concatenate
+condition variable
+conditional
+configuration
+configuration option
+configuration options
+configure
+connection
+console
+container
+containing
+context
+continue
+conversion
+conversion specifier
+convert
+coordinates
+copy files
+cpu architecture
+create
+ctype
+current directory
+cursor
+custom
+dash
+data
+database
+date
+dde
+debug
+default
+defer
+deferred creation
+define
+deiconify
+delay
+delete
+delete files
+delete image
+deletion procedure
+depressed
+depth
+destroy
+detach
+dialog
+dict
+dict object
+dictionary
+dictionary object
+directory
+display
+domain name
+double
+double object
+double type
+double-precision
+dynamic loading
+dynamic string
+element
+element names
+else
+embedding
+encoding
+end application
+end of file
+end of line
+ensemble
+entry
+environment
+equal
+errno
+error
+error code
+error message
+error messages
+evaluate
+event
+event handler
+event queue
+event sources
+events
+exception
+executable file
+execute
+exist
+exit
+exported
+exposed commands
+expression
+false
+fatal
+file
+file events
+file handle
+file name
+file selection dialog
+filename
+filesystem
+fill
+filter
+floating-point
+flush
+flushing
+focus
+focus model
+font
+for
+foreach
+format
+frame
+free
+fuzzy comparison
+geometry
+geometry management
+geometry manager
+get
+get variable
+glob
+global
+global variables
+grab
+graphics context
+grid
+group
+groupbox
+grow box
+handle
+handler
+hash table
+height
+hidden commands
+history
+home directory
+host
+hostname
+i18n
+icon
+iconify
+identifier
+idle
+idle callback
+if
+illumination
+image
+image file
+image manager
+image name
+image size changes
+image type
+images
+inactive
+inches
+increment
+increments
+index
+information
+initialization
+initialization procedure
+initialized
+input
+insert
+insertion cursor
+instance
+integer
+integer object
+integer type
+intensity
+interactive
+internal
+internal representation
+join
+join style
+justification
+justify
+key
+keyboard
+keyboard events
+keyboard traversal
+keysym
+l10n
+label
+labelframe
+length
+level
+library
+limit
+line
+linemode
+link
+linked variable
+list
+list box
+list object
+list type
+listbox
+lists
+load
+loading
+localization
+location
+lookup
+loop
+looping
+lower
+main loop
+main program
+main window
+major
+malloc
+managed
+map
+mapped
+margins
+master
+master interpreter
+match
+mathematical function
+measurement
+memory
+menu
+menubutton
+merge
+message
+message box
+millimeters
+minor
+miter
+modal
+modal timeout
+modules
+move files
+multiple
+mutex
+name
+namespace
+nesting depth
+network address
+newline
+non-blocking
+non-existent command
+nonblocking
+nonblocking
+notifier
+object
+object creation
+object result
+object type
+obscure
+offset
+open
+operating system
+operator
+option
+option menu
+options
+order
+output
+output channels
+own
+pack
+package
+packer
+padding
+palette
+pane
+panedwindow
+parcel
+parent
+parse
+parsing
+partial command
+patchlevel
+path
+path name
+pattern
+permissions
+photo
+photo image
+pipeline
+pixel
+pixel value
+pixels
+pixmap
+pixmap theme
+place
+platform
+platform-specific
+pointer events
+points
+polygon
+popup
+portability
+position
+precision
+present
+priority
+procedure
+process
+process identifier
+projecting
+prompt
+propagation
+provide
+pwd
+quoting
+radiobutton
+raise
+raised
+range
+rc file
+read
+read-only
+readable
+real
+realloc
+record
+recursion
+redirection
+redisplay
+reference count
+reference counting
+reflection
+region
+register
+registry
+regular expression
+relative file name
+release
+relief
+remote execution
+remove
+rename
+rename files
+replace
+reporting
+request
+requested size
+require
+resource
+resource identifier
+restriction
+result
+retrieve
+return
+return value
+reverse
+ring
+root window
+round
+rubber sheet
+safe
+safe interpreter
+safe interpreter
+scalar
+scale
+scan
+screen
+screen distance
+screen units
+script
+script file
+scrollbar
+scrolling command
+search
+security
+security policy
+seek
+seeking
+selection
+selection anchor
+selection owner
+selection retrieval
+send
+send command
+separator
+serial
+server
+service mode
+set
+shadow
+shared library
+shell
+signal
+signal numbers
+signals
+size
+sizegrip
+slave
+slave interpreter
+sleep
+slider
+socket
+sort
+source
+spinbox
+split
+splitting
+sprintf
+stack
+stack frame
+stacking order
+standard channel
+standard channels
+standard error
+standard input
+standard option
+standard output
+stat
+state
+static linking
+sticky
+stipple
+storage
+string
+string object
+string representation
+string type
+strings
+stubs
+style
+subexpression
+sublist
+subprocess
+substitute
+substitution
+switch
+synonym
+tab
+table lookup
+tag
+target
+tcp
+test
+test harness
+test suite
+text
+text box
+text field
+theme
+thread
+thread local storage
+threads
+three-dimensional effect
+tilde
+time
+timer
+title
+tk_strictMotif variable
+tkvars
+toggle
+token
+tolower
+toolkit
+top-level
+top-level window
+toplevel
+totitle
+toupper
+trace
+traces
+translate
+translation
+traversal highlight
+trough
+true
+type
+type conversion
+type manager
+types of images
+uid
+unicode
+unique identifier
+units
+unknown
+unloading
+unmanaged
+unmap
+unset
+update
+upvar
+user
+utf
+value
+variable
+variable substitution
+variables
+version
+vfs
+virtual
+virtual event
+virtual root
+visibility
+visual
+volume-relative file name
+wait
+while
+whitespace
+widget
+width
+window
+window manager
+windows
+word
+working directory
+writable.
+write
+wrong number of arguments
+x
+xview
+y
+yview
