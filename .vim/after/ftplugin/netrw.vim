@@ -1,3 +1,4 @@
+stopinsert
 setlocal bufhidden=wipe
 setlocal foldcolumn=0
 
