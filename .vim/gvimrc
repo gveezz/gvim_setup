@@ -20,6 +20,7 @@ let g:netrw_preview = 1
 let g:netrw_alto = 0
 let g:netrw_altfile = 1
 let g:netrw_keepj = "keepj"
+let g:netrw_sort_options = "i"
 
 let g:vimfm_force_delete = 1
 
@@ -200,10 +201,8 @@ augroup Vim
    autocmd VimEnter * packloadall!
    autocmd GUIEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r '.v:windowid)
    " autocmd VimEnter * set lines=1920 | set columns=1080
-   autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
-                      \ call SetPWD($PWD) | :Vimfm |
-                      \ elseif (isdirectory(argv(0))) |
-                      \ call SetPWD(argv(0)) | 
+   autocmd VimEnter * if (argv(0)=="" || isdirectory(argv(0))) |
+                      \ call SetPWD($PWD) | :Explore |
                       \ else |
                       \ call SetPWD(expand("%:h")) |
                       \ endif
@@ -292,11 +291,11 @@ inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-d> <C-c>:VimfmCurDir<CR>
-nnoremap <silent> <nowait> <C-d> :VimfmCurDir<CR>
-vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
-snoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
-cnoremap <silent> <nowait> <C-d> <C-c>:Vimfm<CR>
+inoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
+nnoremap <silent> <nowait> <C-d> :Explore!<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
+cnoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
 " nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "
