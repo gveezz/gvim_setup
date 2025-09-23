@@ -18,7 +18,7 @@ usage () {
    exit 1
 }
 
-while getopts "Hrgd:u:h:" o; do
+while getopts "UHrgd:u:h:" o; do
    case "${o}" in
       r) REMOTE=1
          ;;
