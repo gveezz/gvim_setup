@@ -295,11 +295,11 @@ inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-d> <C-c>:Vimfm<CR>
-nnoremap <silent> <nowait> <C-d> :Vimfm<CR>
-vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
-snoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
-cnoremap <silent> <nowait> <C-d> <C-c>:Vimfm<CR>
+inoremap <silent> <nowait> <C-d> <C-c>:VimfmCurDir<CR>
+nnoremap <silent> <nowait> <C-d> :VimfmCurDir<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-o>:VimfmCurDir<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-o>:VimfmCurDir<CR>
+cnoremap <silent> <nowait> <C-d> <C-c>:VimfmCurDir<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
 " nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "
