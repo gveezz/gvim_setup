@@ -1,28 +1,30 @@
 let g:skip_defaults_vim=1
 
-" let g:netrw_sort_sequence=""
-let g:netrw_special_syntax=1
-" Netrw setting
-let g:netrw_mousemaps= 0
-" hide netrw menu
-let g:netrw_banner = 0
-" tree listing
-let g:netrw_liststyle = 1
-" open files in new tab
-let g:netrw_browse_split = 0
-let g:netrw_bufsettings="noma nomod nobl nowrap ro nu rnu"
-let g:netrw_fastbrowse = 0
-let g:netrw_list_hide = '^\.\.\/,^\.\/,^.svn/,^.git/'
-let g:netrw_hide = 1
-let g:netrw_dirhistmax = -1
-let g:netrw_winsize = 25
-let g:netrw_preview = 1
-let g:netrw_alto = 0
-let g:netrw_altfile = 1
-let g:netrw_keepj = "keepj"
-let g:netrw_sort_options = "i"
+"" " let g:netrw_sort_sequence=""
+"" let g:netrw_special_syntax=1
+"" " Netrw setting
+"" let g:netrw_mousemaps= 0
+"" " hide netrw menu
+"" let g:netrw_banner = 0
+"" " tree listing
+"" let g:netrw_liststyle = 1
+"" " open files in new tab
+"" let g:netrw_browse_split = 0
+"" let g:netrw_bufsettings="noma nomod nobl nowrap ro nu rnu"
+"" let g:netrw_fastbrowse = 0
+"" let g:netrw_list_hide = '^\.\.\/,^\.\/,^.svn/,^.git/'
+"" let g:netrw_hide = 1
+"" let g:netrw_dirhistmax = -1
+"" let g:netrw_winsize = 25
+"" let g:netrw_preview = 1
+"" let g:netrw_alto = 0
+"" let g:netrw_altfile = 1
+"" let g:netrw_keepj = "keepj"
+"" let g:netrw_sort_options = "i"
 
 let g:vimfm_force_delete = 1
+let g:vimfm_show_hidden_files = 1
+let g:vimfm_linkid_str = '>'
 
 " helptags $MYVIMDIR/doc
 
@@ -201,8 +203,12 @@ augroup Vim
    autocmd VimEnter * packloadall!
    autocmd GUIEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r '.v:windowid)
    " autocmd VimEnter * set lines=1920 | set columns=1080
-   autocmd VimEnter * if (argv(0) == "" || isdirectory(argv(0))) |
-                      \ call SetPWD(expand("%:h")) | :Explore |
+   autocmd VimEnter * if (argv(0)=="" || argv(0) == '.') |
+                      \ call SetPWD($PWD) | :Vimfm |
+                      \ elseif (isdirectory(argv(0))) |
+                      \ call SetPWD(argv(0)) | 
+                      \ else |
+                      \ call SetPWD(expand("%:h")) |
                       \ endif
    autocmd VimEnter * call AutoCompleteInoremap()
    autocmd TabNew * :$tabmove
@@ -289,11 +295,11 @@ inoremap <silent> <nowait> <M-w> <C-o><C-w><C-w>
 nnoremap <silent> <nowait> <M-w> <C-w><C-w>
 
 " C-d: open netrw in a new tab 
-inoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
-nnoremap <silent> <nowait> <C-d> :Explore!<CR>
-vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-snoremap <silent> <nowait> <C-d> <Esc><C-o>:Explore!<CR>
-cnoremap <silent> <nowait> <C-d> <C-c>:Explore!<CR>
+inoremap <silent> <nowait> <C-d> <C-c>:Vimfm<CR>
+nnoremap <silent> <nowait> <C-d> :Vimfm<CR>
+vnoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
+snoremap <silent> <nowait> <C-d> <Esc><C-o>:Vimfm<CR>
+cnoremap <silent> <nowait> <C-d> <C-c>:Vimfm<CR>
 
 " inoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? "<C-c>:h <C-r><C-w><CR>" : "<C-c>:h "
 " nnoremap <expr> <nowait> <F1> len(expand('<cword>')) > 0 ? ":h <C-r><C-w><CR>" : ":h "
