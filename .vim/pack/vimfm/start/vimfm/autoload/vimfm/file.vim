@@ -53,8 +53,10 @@ function! vimfm#file#create_items_from_dir(dir, includes_hidden_files) abort
   let paths = vimfm#compat#glob_list(escaped_dir . '*')
   if a:includes_hidden_files
     let hidden_paths = vimfm#compat#glob_list(escaped_dir . '.*')
-    " Exclude '.' & '..'
-    call filter(hidden_paths, 'match(v:val, ''\(/\|\\\)\.\.\?$'') < 0')
+    " Exclude '.' & '..
+    if g:vimfm_hide_cur_parent_dir_dots == 1
+      call filter(hidden_paths, 'match(v:val, ''\(/\|\\\)\.\.\?$'') < 0')
+    endif
     call extend(paths, hidden_paths)
   end
 
