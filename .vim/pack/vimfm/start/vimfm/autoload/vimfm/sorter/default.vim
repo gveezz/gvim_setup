@@ -7,7 +7,7 @@ function! vimfm#sorter#default#compare(r1, r2) abort
   "    return 0
   " endif
   
-  if a:r1.is_dir > a:r2.is_dir
+  if a:r1.is_dir < a:r2.is_dir
     " Show directory in first
     return a:r1.is_dir ? -1 : +1
   endif

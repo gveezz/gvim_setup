@@ -121,6 +121,7 @@ get_libs
 -max
 -min
 -library
+-source
 set_clock_gating_check
 set_clock_transition
 set_ideal_latency
