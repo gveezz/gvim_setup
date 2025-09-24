@@ -179,6 +179,24 @@ function! AppendSemicolon(fline, lline) range
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//normal! A;"
 endfunction
 
+" function! FormatIoInstance(fline, lline) range
+"    " insert a dot at the beginning of IOs
+"    " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\|/normal! I."
+"    silent! exec ":".a:fline.",".a:lline."s/\\#//g"
+"    silent! exec ":".a:fline.",".a:lline."s/\\=.*//g"
+"    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|\\(\\|\\)/s/module \\|module \\\s\\\+\\|parameter \\|parameter \\\s\\\+\\|input \\|input \\s\\\+\\|output \\|output \\s\\\+\\|reg \\|logic \\|\\[.*\\] //g"
+"    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|\\(\\|\\)/normal! I."
+"    silent! exec ":".a:fline.",".a:lline."EasyAlign /./ {'lm':0,'rm':0}"
+"    silent! exec ":".a:fline.",".a:lline."g/\./normal! I\<Tab>"
+"    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|\\(\\|\\)/s/\\\s\\\+$//g"
+"    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|\\(\\|\\)/s/,/(),/g"
+"    "silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\&(),/s/,$/( ),/g"
+"    silent! exec ":".a:lline."v/\\\/\\\/\|\\(\\|\\),/normal! A( )"
+"    "silent! exec ":".a:lline."s/,//g"
+"    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0}"
+"    " close above /)
+" endfunction
+
 function! FormatIoInstance(fline, lline) range
    " insert a dot at the beginning of IOs
    " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\|/normal! I."
