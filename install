@@ -44,24 +44,24 @@ shift $((OPTIND-1))
 
 if [ ${GIT_UPDATE} -eq 1 ]; then
    git fetch --all && git pull
-fi
-
-if [ "${GET}" -eq 1 ]; then
-   if [ ${REMOTE} -eq 1 ]; then
-      echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:"
-      rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${VIMDIR} .
+else 
+   if [ "${GET}" -eq 1 ]; then
+      if [ ${REMOTE} -eq 1 ]; then
+         echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:"
+         rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${VIMDIR} .
+      else
+         echo "Getting local setup"
+         rm -fr ${PWD}/${VIMDIR}
+         cp -a ${HOME}/${VIMDIR} .
+      fi
    else
-      echo "Getting local setup"
-      rm -fr ${PWD}/${VIMDIR}
-      cp -a ${HOME}/${VIMDIR} .
-   fi
-else
-   if [ ${REMOTE} -eq 1 ]; then
-      echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:"
-      rsync -avzh ${VIMDIR} ${REMOTE_USER}@${REMOTE_HOST}:
-   else
-      echo "Setting local setup"
-      rm -fr ${HOME}/${VIMDIR}
-      cp -a ${VIMDIR} ${HOME}/
+      if [ ${REMOTE} -eq 1 ]; then
+         echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:"
+         rsync -avzh ${VIMDIR} ${REMOTE_USER}@${REMOTE_HOST}:
+      else
+         echo "Setting local setup"
+         rm -fr ${HOME}/${VIMDIR}
+         cp -a ${VIMDIR} ${HOME}/
+      fi
    fi
 fi
