@@ -3,7 +3,7 @@
 VIMDIR=.vim
 REMOTE_HOST=""
 REMOTE_USER=${USER}
-REMOTE_DIR=""
+REMOTE_DIR="${HOME}/${VIMDIR}"
 REMOTE=0
 GET=0
 GIT_UPDATE=0
@@ -47,8 +47,9 @@ if [ ${GIT_UPDATE} -eq 1 ]; then
 else 
    if [ "${GET}" -eq 1 ]; then
       if [ ${REMOTE} -eq 1 ]; then
-         echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:"
-         rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${VIMDIR} .
+         rm -fr ${PWD}/${VIMDIR}
+         echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
+         rsync -avzh ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR} .
       else
          echo "Getting local setup"
          rm -fr ${PWD}/${VIMDIR}
@@ -56,8 +57,8 @@ else
       fi
    else
       if [ ${REMOTE} -eq 1 ]; then
-         echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:"
-         rsync -avzh ${VIMDIR} ${REMOTE_USER}@${REMOTE_HOST}:
+         echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
+         rsync -avzh ${VIMDIR} ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}
       else
          echo "Setting local setup"
          rm -fr ${HOME}/${VIMDIR}
