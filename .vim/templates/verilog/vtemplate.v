@@ -1,3 +1,5 @@
+`default_nettype none
+
 // Headers include
 
 module $COMPONENT_NAME #(

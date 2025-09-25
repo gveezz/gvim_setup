@@ -90,6 +90,7 @@ randcase
 randsequence
 ref
 reject_on
+repeat
 restrict
 return
 s_always
