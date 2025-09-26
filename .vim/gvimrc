@@ -81,9 +81,9 @@ set autoindent
 " set smartindent
 " set cindent
 " set copyindent
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 " set indentexpr=
 set breakindent
 set browsedir=current
@@ -410,7 +410,7 @@ inoremap <expr> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : "<CR>"
 inoremap <expr> <silent> <nowait> <LeftMouse> pumvisible() ? "<C-y>" : "<LeftMouse>"
 
 " Tab: advance completition selection if pumvisible, Tab otherwise
-inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-n>" : "<Tab>"
+inoremap <expr> <silent> <nowait> <Tab> pumvisible() != 0 ? "<C-n>" : getline('.') == "" ? "<C-o>:call JumpToPrevIndent()<CR>" : "<Tab>"
 nnoremap <silent> <nowait> <Tab> >>
 
 " S-Tab: de-advance completition selection if pumvisible, inverse Tab otherwise
