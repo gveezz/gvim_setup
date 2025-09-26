@@ -373,11 +373,10 @@ snoremap <silent> <nowait> <F12> <nop>
 
 " <Home>: jump before the first non-blank of the current line, or at the first
 " column
-" inoremap <expr> <silent> <nowait> <Home> col('.') == 1 ? "<C-o>^" : col('.') != 1 ? "<C-o>0" : "<C-o>^"
-inoremap <expr> <silent> <nowait> <Home> indent(line(".")) != (col('.')-1) ? "<C-o>^" : "<C-o>0"
-nnoremap <expr> <silent> <nowait> <Home> indent(line(".")) != (col('.')-1) ? "^" : "0"
-vnoremap <expr> <silent> <nowait> <Home> indent(line(".")) != (col('.')-1) ? "^" : "0"
-snoremap <expr> <silent> <nowait> <S-Home> indent(line(".")) != (col('.')-1) ? "<C-o>^" : "<C-o>0"
+inoremap <expr> <silent> <nowait> <Home> col('.') == 1 ? "<C-o>^" : "<C-o>0"
+nnoremap <expr> <silent> <nowait> <Home> col('.') == 1 ? "^" : "0"
+vnoremap <expr> <silent> <nowait> <Home> col('.') == 1 ? "^" : "0"
+snoremap <expr> <silent> <nowait> <S-Home> col('.') == 1 ? "<C-o>^" : "<C-o>0"
 
 inoremap <silent> <nowait> <M-p> <C-o>:exec ":cd ".expand("%:h")<CR>
 nnoremap <silent> <nowait> <M-p> :exec ":cd ".expand("%:h")<CR>
