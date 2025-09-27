@@ -460,7 +460,6 @@ snoremap <silent> <nowait> <C-.> <C-o>zFzz
 
 " Copy
 vnoremap <silent> <nowait> <C-c> "+ygv
-vnoremap <silent> <nowait> <C-c> "+ygv
 " C-v: Paste
 inoremap <nowait> <C-v> <C-r><C-o>+
 nnoremap <nowait> <C-v> i<C-r><C-o>+<Esc>
