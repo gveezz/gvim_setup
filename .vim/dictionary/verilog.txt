@@ -11,6 +11,7 @@ casez
 cmos
 deassign
 default
+default_nettype
 defparam
 disable
 edge
@@ -47,6 +48,7 @@ module
 nand
 negedge
 nmos
+none
 nor
 not
 notif0

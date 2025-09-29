@@ -3,20 +3,20 @@
 // Headers include
 
 module $COMPONENT_NAME #(
-   // Configurable parameters
-   parameter DATA_W = 8
+    // Configurable parameters
+    parameter DATA_W = 8
 ) (
-   // System interface
-   // -- inputs
-   input SClk,
-   input SyncRst,
-   // Data interface
-   // --inputs
-   input DataInVal,
-   input [DATA_W-1:0] DataIn,
-   // --outputs
-   output DataOutVal,
-   output [DATA_W-1:0] DataOut
+    // System interface
+    // -- inputs
+    input SClk,
+    input SyncRst,
+    // Data interface
+    // --inputs
+    input DataInVal,
+    input [DATA_W-1:0] DataIn,
+    // --outputs
+    output DataOutVal,
+    output [DATA_W-1:0] DataOut
 );
 
 // External functions and tasks
@@ -35,13 +35,13 @@ reg DataOut;
 
 // Module functionality
 always @(posedge SClk) begin
-   if (!SyncRst) begin
+    if (!SyncRst) begin
         DataOutVal <= 0;
         DataOut    <= 0;
-   end else begin
+    end else begin
         DataOutVal <= DataInVal;
         DataOut    <= DataOut;
-   end
+    end
 end
 
 endmodule 
