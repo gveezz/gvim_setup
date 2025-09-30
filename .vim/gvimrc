@@ -89,7 +89,7 @@ set breakindent
 set browsedir=current
 set smarttab
 set number 
-set guifont=Monospace\ 11
+set guifont=Monospace\ 12
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}

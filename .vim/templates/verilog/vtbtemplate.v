@@ -29,7 +29,9 @@ module $COMPONENT_NAME # (
 // Testbench functionality
 
 initial begin
-    #0 ;
+
+   #0 ;
+   
 end
 
 endmodule 

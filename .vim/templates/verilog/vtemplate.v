@@ -15,19 +15,17 @@ module $COMPONENT_NAME #(
     input DataInVal,
     input [DATA_W-1:0] DataIn,
     // --outputs
-    output DataOutVal,
-    output [DATA_W-1:0] DataOut
+    output reg DataOutVal,
+    output reg [DATA_W-1:0] DataOut
 );
 
 // External functions and tasks
 
 // localparams
 
-// output regs
-reg DataOutVal; 
-reg DataOut;    
-
 // combinational regs
+
+// internal regs
 
 // Wires
 

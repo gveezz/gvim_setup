@@ -4,7 +4,7 @@
 module $COMPONENT_NAME # (
     // Configurable parameters
 ) ( 
- 
+
 );
 
 // External functions and tasks
@@ -29,7 +29,7 @@ module $COMPONENT_NAME # (
 // Testbench functionality
 
 initial begin
-    #0 ; 
+   #0 ; 
 end
 
 endmodule

@@ -28,8 +28,6 @@ cover
 covergroup
 coverpoint
 cross
-default
-default_nettype
 dist
 do
 end
@@ -76,8 +74,7 @@ longint
 matches
 modport
 new
-nexttime
-none
+nexttime 
 null
 package
 packed
