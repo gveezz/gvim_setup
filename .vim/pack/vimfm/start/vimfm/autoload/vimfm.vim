@@ -326,7 +326,7 @@ function! vimfm#move_selected() abort
         \ : "Move ".len(items)." selected files to: "
   let dst_name = input(message, '', 'dir')
   if empty(dst_name)
-    echo 'Cancelled.'
+    vimfm#util#echo("Cancelled.")
     return
   endif
 

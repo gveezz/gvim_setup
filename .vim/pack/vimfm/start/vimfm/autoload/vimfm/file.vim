@@ -88,10 +88,12 @@ function! vimfm#file#delete(items) abort
           \ ? 'rf'
           \ : (item.is_dir ? 'd' : '')
     if delete(item.path, flag) < 0
+      redraw
       call vimfm#util#echo_error(
             \ "Cannot delete file: '".item.basename."'")
     else
-      echo "Deleted file: '".item.basename."'"
+      redraw
+      vimfm#util#echo("Deleted file: '".item.basename."'")
     endif
   endfor
 endfunction
@@ -106,8 +108,7 @@ function! vimfm#file#mkdir(filer, name) abort
   endif
 
   call mkdir(path, 'p')
-
-  echo "Created new directory: '".a:name."'"
+  vimfm#util#echo("Created new directory: '".a:name."'")
 endfunction
 
 function! vimfm#file#edit(filer, name) abort
@@ -137,8 +138,8 @@ function! vimfm#file#move(filer, items, dst_name) abort
     endif
 
     call rename(item.path, dst_path)
-
-    echo "Moved file: '".item.basename."' -> '".dst_path."'"
+    redraw 
+    vimfm#util#echo("Moved file: '".item.basename."' -> '".dst_path."'")
   endfor
 endfunction
 
@@ -162,7 +163,7 @@ function! vimfm#file#rename(filer, items, new_basenames) abort
 
     call rename(item.path, new_path)
     call add(renamed_paths, new_path)
-    echo "Renamed file: '".item.basename."' -> '".new_basename."'"
+    vimfm#util#echo("Renamed file: '".item.basename."' -> '".new_basename."'")
   endfor
 
   return renamed_paths

@@ -20,9 +20,15 @@ function! vimfm#util#get_last_component(path, is_dir) abort
 endfunction
 
 function! vimfm#util#echo_error(message) abort
+  redraw
   echohl Error
   echomsg a:message
   echohl None
+endfunction
+
+function! vimfm#util#echo(message) abort
+  redraw
+  echo a:message 
 endfunction
 
 let &cpoptions = s:save_cpo

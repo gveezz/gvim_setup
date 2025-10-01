@@ -1,9 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-
 let s:buffer_name = 'vimfm [rename]'
-
 
 function! s:set_up_syntax(items) abort
   syntax match vimfmRenamed '^.\+$'
