@@ -132,7 +132,7 @@ set linebreak
 " set wc=<Tab>
 set wildmenu
 set wildmode=full
-set wildoptions=
+set wildoptions+=pum
 set showtabline=1
 set guitabtooltip=%F
 set guitablabel=%m\ %F

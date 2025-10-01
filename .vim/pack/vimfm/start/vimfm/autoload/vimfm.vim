@@ -297,7 +297,6 @@ function! vimfm#delete_selected() abort
         \ ? "Delete '".items[0].basename."' (y/N)? "
         \ : "Delete ".len(items)." selected files (y/N)? "
   let yn = input(message)
-  echo "\n"
   if empty(yn) || yn ==? 'n'
     echo 'Cancelled.'
     return
@@ -326,7 +325,6 @@ function! vimfm#move_selected() abort
         \ ? "Move '".items[0].basename."' to: "
         \ : "Move ".len(items)." selected files to: "
   let dst_name = input(message, '', 'dir')
-  echo "\n"
   if empty(dst_name)
     echo 'Cancelled.'
     return
@@ -341,9 +339,8 @@ endfunction
 
 function! vimfm#mkdir() abort
   call s:keep_buffer_singularity()
-
+   
   let name = input('New directory name: ')
-  echo "\n"
   if empty(name)
     echo 'Cancelled.'
     return
@@ -360,7 +357,6 @@ function! vimfm#new_file() abort
   call s:keep_buffer_singularity()
 
   let name = input('New file name: ')
-  echo "\n"
   if empty(name)
     echo 'Cancelled.'
     return
@@ -385,7 +381,6 @@ function! vimfm#rename_selected() abort
     let def_name = vimfm#util#get_last_component(
           \ items[0].path, items[0].is_dir)
     let new_basename = input('New file name: ', def_name)
-    echo "\n"
     if empty(new_basename)
       echo 'Cancelled.'
       return
