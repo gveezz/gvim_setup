@@ -106,7 +106,7 @@ set guicursor+=c-ci-cr:ver35-blinkoff0-cCursor
 set noignorecase
 set formatoptions=tcj
 set mouse=ar
-set mousehide
+" set mousehide
 " set mousefocus
 set mouseshape=n:arrow,v:beam,i:beam
 set mousemodel=popup
