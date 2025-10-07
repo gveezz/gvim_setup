@@ -1,3 +1,3 @@
 // Macro defines
-`define
+`define XXX
 

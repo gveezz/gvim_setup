@@ -28,7 +28,7 @@ endfunction
 
 function! vimfm#util#echo(message) abort
   redraw
-  echo a:message 
+  echo a:message
 endfunction
 
 let &cpoptions = s:save_cpo

@@ -53,10 +53,10 @@ end
 always_ff @(posedge SClk) begin
     if (!SyncRst) begin
         DataOutVal <= 0;
-        DataOut    <= 0;
+        DataOut <= 0;
     end else begin
         DataOutVal <= DataInVal;
-        DataOut    <= DataIn;
+        DataOut <= DataIn;
     end
 end
 

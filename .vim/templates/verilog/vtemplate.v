@@ -35,10 +35,10 @@ module $COMPONENT_NAME #(
 always @(posedge SClk) begin
     if (!SyncRst) begin
         DataOutVal <= 0;
-        DataOut    <= 0;
+        DataOut <= 0;
     end else begin
         DataOutVal <= DataInVal;
-        DataOut    <= DataOut;
+        DataOut <= DataOut;
     end
 end
 
