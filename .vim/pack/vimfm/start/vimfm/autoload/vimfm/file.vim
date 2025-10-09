@@ -92,7 +92,7 @@ function! vimfm#file#delete(items) abort
       call vimfm#util#echo_error("Cannot delete file: '".item.basename."'")
     else
       redraw
-      vimfm#util#echo("Deleted file: '".item.basename."'")
+      call vimfm#util#echo("Deleted file: '".item.basename."'")
     endif
   endfor
 endfunction
@@ -135,7 +135,7 @@ function! vimfm#file#move(filer, items, dst_name) abort
 
     call rename(item.path, dst_path)
     redraw 
-    vimfm#util#echo("Moved file: '".item.basename."' -> '".dst_path."'")
+    call vimfm#util#echo("Moved file: '".item.basename."' -> '".dst_path."'")
   endfor
 endfunction
 
@@ -152,14 +152,13 @@ function! vimfm#file#rename(filer, items, new_basenames) abort
 
     if filereadable(new_path) || isdirectory(new_path)
       call add(renamed_paths, '')
-      call vimfm#util#echo_error(
-            \ "File already exists, skipped: '".new_path."'")
+      call vimfm#util#echo_error("File already exists, skipped: '".new_path."'")
       continue
     endif
 
     call rename(item.path, new_path)
     call add(renamed_paths, new_path)
-    vimfm#util#echo("Renamed file: '".item.basename."' -> '".new_basename."'")
+    call vimfm#util#echo("Renamed file: '".item.basename."' -> '".new_basename."'")
   endfor
 
   return renamed_paths
