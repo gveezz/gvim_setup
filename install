@@ -64,7 +64,7 @@ else
             echo "Full local directory is: ${DST_DIR}"
             echo "Setting local setup"
             rm -fr ${DST_DIR}${VIMDIR}
-            cp -a ${VIMDIR} DST_DIR}${VIMDIR}
+            cp -a ${VIMDIR} ${DST_DIR}${VIMDIR}
         fi
     fi
 fi
