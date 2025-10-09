@@ -297,7 +297,7 @@ function! vimfm#delete_selected() abort
         \ : "Delete ".len(items)." selected files (y/N)? "
   let yn = input(message)
   if empty(yn) || yn ==? 'n'
-    echo 'Cancelled.'
+    call vimfm#util#echo('Cancelled.')
     return
   endif
 
@@ -341,7 +341,7 @@ function! vimfm#mkdir() abort
    
   let name = input('New directory name: ')
   if empty(name)
-    call vimfm#util#echo_error('Cancelled.')
+    call vimfm#util#echo('Cancelled.')
     return
   endif
 
@@ -357,7 +357,7 @@ function! vimfm#new_file() abort
 
   let name = input('New file name: ')
   if empty(name)
-    call vimfm#util#echo("Cancelled.")
+    call vimfm#util#echo('Cancelled.')
     return
   endif
 
@@ -381,7 +381,7 @@ function! vimfm#rename_selected() abort
           \ items[0].path, items[0].is_dir)
     let new_basename = input('New file name: ', def_name)
     if empty(new_basename)
-      echo 'Cancelled.'
+      call vimfm#util#echo('Cancelled.')
       return
     endif
 

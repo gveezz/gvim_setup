@@ -1,9 +1,9 @@
 #!/bin/sh
 
 VIMDIR=.vim
-REMOTE_HOST=""
+REMOTE_HOST=
 REMOTE_USER=${USER}
-DST_DIR=""
+DST_DIR=
 REMOTE=0
 GET=0
 GIT_UPDATE=0
@@ -64,7 +64,6 @@ else
     else
         echo "Full local directory is: ${DST_DIR}"
         echo "Setting local setup"
-        rm -fr ${DST_DIR}${VIMDIR}
-        cp -a ${VIMDIR} ${DST_DIR}${VIMDIR}
+        cp -a ${VIMDIR} ${DST_DIR}
     fi
 fi
