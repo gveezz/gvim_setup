@@ -341,7 +341,7 @@ function! vimfm#mkdir() abort
    
   let name = input('New directory name: ')
   if empty(name)
-    echo 'Cancelled.'
+    call vimfm#util#echo_error('Cancelled.')
     return
   endif
 
@@ -357,7 +357,7 @@ function! vimfm#new_file() abort
 
   let name = input('New file name: ')
   if empty(name)
-    echo 'Cancelled.'
+    call vimfm#util#echo("Cancelled.")
     return
   endif
 
@@ -446,8 +446,7 @@ function! vimfm#chdir(path) abort
   catch /:E472:/
     " E472: Command failed
     " Permission denied, etc.
-    call vimfm#util#echo_error(
-          \ "Changing directory failed: '".a:path."'")
+    call vimfm#util#echo_error("Changing directory failed: '".a:path."'")
   endtry
 endfunction
 
