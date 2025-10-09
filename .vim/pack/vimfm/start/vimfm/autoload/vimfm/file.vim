@@ -89,8 +89,7 @@ function! vimfm#file#delete(items) abort
           \ : (item.is_dir ? 'd' : '')
     if delete(item.path, flag) < 0
       redraw
-      call vimfm#util#echo_error(
-            \ "Cannot delete file: '".item.basename."'")
+      call vimfm#util#echo_error("Cannot delete file: '".item.basename."'")
     else
       redraw
       vimfm#util#echo("Deleted file: '".item.basename."'")
@@ -102,13 +101,12 @@ function! vimfm#file#mkdir(filer, name) abort
   let path = vimfm#util#normalize_path(a:filer.dir.'/'.a:name)
 
   if filereadable(path) || isdirectory(path)
-    call vimfm#util#echo_error(
-          \ "File already exists: '".a:name."'")
+    call vimfm#util#echo_error("File already exists: '".a:name."'")
     return
   endif
 
   call mkdir(path, 'p')
-  vimfm#util#echo("Created new directory: '".a:name."'")
+  call vimfm#util#echo("Created new directory: '".a:name."'")
 endfunction
 
 function! vimfm#file#edit(filer, name) abort
@@ -120,8 +118,7 @@ function! vimfm#file#move(filer, items, dst_name) abort
   let dst_dir = vimfm#util#normalize_path(a:filer.dir.'/'.a:dst_name)
 
   if !isdirectory(dst_dir)
-    call vimfm#util#echo_error(
-          \ "Destination is not a directory: '".dst_dir."'")
+    call vimfm#util#echo_error("Destination is not a directory: '".dst_dir."'")
     return
   endif
 
@@ -132,8 +129,7 @@ function! vimfm#file#move(filer, items, dst_name) abort
     let dst_path = vimfm#util#normalize_path(dst_dir.'/'.basename)
 
     if filereadable(dst_path) || isdirectory(dst_path)
-      call vimfm#util#echo_error(
-            \ "File already exists. Skipped: '".dst_path."'")
+      call vimfm#util#echo_error("File already exists. Skipped: '".dst_path."'")
       continue
     endif
 
