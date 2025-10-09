@@ -117,8 +117,7 @@ function! vimfm#init(...) abort
 
     call vimfm#buffer#init(filer)
   catch /:E37:/
-    call vimfm#util#echo_error(
-          \ 'E37: No write since last change')
+    call vimfm#util#echo_error('E37: No write since last change')
     return
   endtry
 endfunction
@@ -326,7 +325,7 @@ function! vimfm#move_selected() abort
         \ : "Move ".len(items)." selected files to: "
   let dst_name = input(message, '', 'dir')
   if empty(dst_name)
-    vimfm#util#echo("Cancelled.")
+    call vimfm#util#echo("Cancelled.")
     return
   endif
 
