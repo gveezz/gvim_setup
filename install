@@ -13,7 +13,8 @@ GIT_UPDATE=0
 usage () {
     echo "Args:"
     echo "-r: remote install"
-    echo "-g: get setup (set otherwise)"
+    echo "-g: get setup"
+    echo "-g: set setup"
     echo "-d: remote dir"
     echo "-u: remote user"
     echo "-h: remote host"
@@ -21,7 +22,7 @@ usage () {
     exit 1
 }
 
-while getopts "UHrgd:u:h:" o; do
+while getopts "UHrgsd:u:h:" o; do
     case "${o}" in
         r) REMOTE=1
             ;;
