@@ -7,6 +7,7 @@ REMOTE_DIR="" # assume remote home
 DST_DIR=${HOME}
 REMOTE=0
 GET=0
+SET=0
 GIT_UPDATE=0
 
 usage () {
@@ -25,6 +26,8 @@ while getopts "UHrgd:u:h:" o; do
         r) REMOTE=1
             ;;
         g) GET=1
+            ;;
+        s) SET=1
             ;;
         d) DST_DIR="${OPTARG}/"
             ;;
@@ -47,7 +50,7 @@ if [ ${GIT_UPDATE} -eq 1 ]; then
     git fetch --all && git pull
 fi
 
-if [ "${GET}" -eq 1 ]; then
+if [ ${GET} -eq 1 ]; then
     if [ ${REMOTE} -eq 1 ]; then
         rm -fr ${PWD}/${VIMDIR}
         echo "Getting setup from ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
@@ -57,7 +60,7 @@ if [ "${GET}" -eq 1 ]; then
         rm -fr ${PWD}/${VIMDIR}
         cp -a ${HOME}/${VIMDIR} .
     fi
-else
+elif [ ${SET} -eq 1 ]; then
     if [ ${REMOTE} -eq 1 ]; then
         echo "Full remote directory is: $REMOTE_DIR"
         echo "Setting setup to ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}${VIMDIR}"

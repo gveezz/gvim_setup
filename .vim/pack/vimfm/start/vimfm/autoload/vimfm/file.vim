@@ -88,10 +88,8 @@ function! vimfm#file#delete(items) abort
           \ ? 'rf'
           \ : (item.is_dir ? 'd' : '')
     if delete(item.path, flag) < 0
-      redraw
       call vimfm#util#echo_error("Cannot delete file: '".item.basename."'")
     else
-      redraw
       call vimfm#util#echo("Deleted file: '".item.basename."'")
     endif
   endfor
@@ -134,7 +132,6 @@ function! vimfm#file#move(filer, items, dst_name) abort
     endif
 
     call rename(item.path, dst_path)
-    redraw 
     call vimfm#util#echo("Moved file: '".item.basename."' -> '".dst_path."'")
   endfor
 endfunction

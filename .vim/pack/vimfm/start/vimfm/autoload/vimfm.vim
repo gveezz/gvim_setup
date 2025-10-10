@@ -292,6 +292,7 @@ function! vimfm#delete_selected() abort
     return
   endif
 
+  " pending setting (Y/n)
   let message = (len(items) == 1)
         \ ? "Delete '".items[0].basename."' (y/N)? "
         \ : "Delete ".len(items)." selected files (y/N)? "
