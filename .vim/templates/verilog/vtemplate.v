@@ -8,12 +8,12 @@ module $COMPONENT_NAME #(
 ) (
     // System interface
     // -- inputs
-    input SClk,
-    input SyncRst,
+    input wire SClk,
+    input wire SyncRst,
     // Data interface
     // --inputs
-    input DataInVal,
-    input [DATA_W-1:0] DataIn,
+    input wire DataInVal,
+    input wire [DATA_W-1:0] DataIn,
     // --outputs
     output reg DataOutVal,
     output reg [DATA_W-1:0] DataOut
