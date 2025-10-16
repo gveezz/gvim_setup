@@ -1474,6 +1474,16 @@ function! GetDate()
    return l:date
 endfunction
 
+function! InsHeader()
+    exec ":-1r ".$MYVIMDIR."/templates/header/header.txt"
+    call AdjTemplate()
+endfunction
+
+function! InsFooter()
+    exec ":$r ".$MYVIMDIR."/templates/header/footer.txt"
+    call AdjTemplate()
+endfunction
+
 function! MakePatch(afile, bfile)
    EchoYellowMsg("Nothing to do")
 endfunction
@@ -1508,4 +1518,4 @@ command! -nargs=+ HiSet call HighlightSet(<f-args>)
 command! -bang -nargs=0 InsDate :normal! i<C-r>=GetDate()<CR>
 command! -nargs=0 SetIMarks :call SetIndentMarks()
 command! ClearBufferList :call ClearBufferList()
-
+command! InsHeader :call InsHeader()

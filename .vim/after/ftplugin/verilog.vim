@@ -201,7 +201,7 @@ function! FormatIoInstance(fline, lline) range
    " insert a dot at the beginning of IOs
    " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\|/normal! I."
    silent! exec ":"a:lline."v/^\\\s\\+\\\/\\\//s///g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/input \\|output \\|reg \\|logic \\|\\[.*\\] //g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/input \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\//normal! I."
    silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/,/(),/g"
