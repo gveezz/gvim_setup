@@ -356,7 +356,7 @@ endfunction
 function! vimfm#new_file() abort
   call s:keep_buffer_singularity()
 
-  let name = input('New file name: ')
+  let name = input('New file name: ', '', 'file')
   if empty(name)
     call vimfm#util#echo('Cancelled.')
     return
@@ -380,7 +380,7 @@ function! vimfm#rename_selected() abort
   if len(items) == 1
     let def_name = vimfm#util#get_last_component(
           \ items[0].path, items[0].is_dir)
-    let new_basename = input('New file name: ', def_name)
+    let new_basename = input('New file name: ', def_name, 'file')
     if empty(new_basename)
       call vimfm#util#echo('Cancelled.')
       return
