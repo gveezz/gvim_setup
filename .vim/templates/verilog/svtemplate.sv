@@ -8,14 +8,14 @@ module $COMPONENT_NAME #(
 ) (
     // System interface
     // -- inputs
-    input logic SClkIn,
-    input logic SyncRstIn,
+    input logic SClk,
+    input logic SyncRst,
     // Data interface
     // --inputs
-    input logic DataVldIn,
+    input logic DataInVal,
     input logic [DATA_W-1:0] DataIn,
     // --outputs
-    output logic DataVldOut,
+    output logic DataOutVal,
     output logic [DATA_W-1:0] DataOut
 );
 
@@ -50,12 +50,12 @@ always_comb begin
 
 end
 
-always_ff @(posedge SClkIn) begin
-    if (!SyncRstIn) begin
-        DataVldOut <= 0;
+always_ff @(posedge SClk) begin
+    if (!SyncRst) begin
+        DataOutVal <= 0;
         DataOut <= 0;
     end else begin
-        DataVldOut <= DataVldIn;
+        DataOutVal <= DataInVal;
         DataOut <= DataIn;
     end
 end

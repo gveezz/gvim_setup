@@ -1475,7 +1475,7 @@ function! GetDate()
 endfunction
 
 function! InsHeader()
-    exec ":-1r ".$MYVIMDIR."/templates/header/header.txt"
+    exec ":0r ".$MYVIMDIR."/templates/header/header.txt"
     call AdjTemplate()
 endfunction
 

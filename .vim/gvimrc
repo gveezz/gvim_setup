@@ -89,7 +89,7 @@ set breakindent
 set browsedir=current
 set smarttab
 set number 
-set guifont=Monospace\ 12
+set guifont=Monospace\ 10
 set background=dark
 set laststatus=2
 set statusline=\ %{GetMode()}
@@ -388,6 +388,11 @@ inoremap <C-2-LeftMouse> <LeftMouse><C-o><C-w><C-]>
 nnoremap <C-j> <C-w><C-]>
 nnoremap <C-2-LeftMouse> <LeftMouse><C-w><C-]>
 vnoremap <C-j> <C-w><C-]>
+
+" Indent code
+inoremap <nowait> <M-i> <C-o>:call Indent()<CR>
+nnoremap <nowait> <M-i> :call Indent()<CR>
+snoremap <nowait> <M-i> <C-o>:call Indent()<CR>
 
 " C-c: command line mode
 inoremap <nowait> <M-x> <C-o>:

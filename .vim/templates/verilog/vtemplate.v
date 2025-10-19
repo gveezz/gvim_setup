@@ -8,14 +8,14 @@ module $COMPONENT_NAME #(
 ) (
     // System interface
     // -- inputs
-    input SClkIn,
-    input SyncRstIn,
+    input wire SClk,
+    input wire SyncRst,
     // Data interface
     // --inputs
-    input DataVldIn,
-    input [DATA_W-1:0] DataIn,
+    input wire DataInVal,
+    input wire [DATA_W-1:0] DataIn,
     // --outputs
-    output reg DataVldOut,
+    output reg DataOutVal,
     output reg [DATA_W-1:0] DataOut
 );
 
@@ -32,12 +32,12 @@ module $COMPONENT_NAME #(
 // Wires assignments
 
 // Module functionality
-always @(posedge SClkIn) begin
-    if (!SyncRstIn) begin
-        DataVldOut <= 0;
+always @(posedge SClk) begin
+    if (!SyncRst) begin
+        DataOutVal <= 0;
         DataOut <= 0;
     end else begin
-        DataVldOut <= DataVldIn;
+        DataOutVal <= DataInVal;
         DataOut <= DataOut;
     end
 end
