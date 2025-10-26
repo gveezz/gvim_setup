@@ -68,7 +68,7 @@ set clipboard=unnamed
 " set guioptions+=e
 " set guioptions=-l
 set guioptions=""
-set guioptions+=aepiLR
+set guioptions+=aepilr
 set noscrollfocus
 set virtualedit=onemore
 set whichwrap=<,>,[,],b,s
