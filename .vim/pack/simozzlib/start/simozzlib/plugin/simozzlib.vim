@@ -1318,8 +1318,10 @@ endfunction
 
 function! HighlightWordUnderCursor()
    if IsWordUnderCursor()
+      let l:currw = winnr()
       " exec 'match HighCW /\<'.expand('<cword>').'\>/'
-      exec 'match HighCW /'.expand('<cword>').'/'
+      execute('windo match HighCW /'.expand('<cword>').'/')
+      silent! exec "normal! ".l:currw."\<C-w>w" 
    else 
       match none 
    endif
