@@ -8,37 +8,47 @@ module $COMPONENT_NAME #(
 ) (
     // System interface
     // -- inputs
-    input wire SClk,
-    input wire SyncRst,
+    input wire SClkIn,
+    input wire AsyncRstIn,
+    input wire SyncRstIn,
     // Data interface
     // --inputs
-    input wire DataInVal,
+    input wire DataVldIn,
     input wire [DATA_W-1:0] DataIn,
     // --outputs
-    output reg DataOutVal,
+    output reg DataVldOut,
     output reg [DATA_W-1:0] DataOut
 );
 
-// External functions and tasks
+// External functions and tasks includes
 
-// localparams
+// Internal parameters (localparams)
 
-// combinational regs
+// Registered outputs
 
-// internal regs
+// Combinational regs
 
-// Wires
+// Internal registers
+
+// Internal wires
 
 // Wires assignments
 
+// Modules instantiations
+
 // Module functionality
-always @(posedge SClk) begin
-    if (!SyncRst) begin
-        DataOutVal <= 0;
+always @(posedge SClkIn or negedge AsyncRstIn) begin
+    if (!AsyncRstIn) begin
+        DataVldOut <= 0;
         DataOut <= 0;
     end else begin
-        DataOutVal <= DataInVal;
+        DataVldOut <= DataVldIn;
         DataOut <= DataOut;
+
+        if (!SyncRstIn) begin
+            DataVldOut <= 0;
+            DataOut <= 0;
+        end    
     end
 end
 

@@ -8,35 +8,27 @@ module $COMPONENT_NAME #(
 ) (
     // System interface
     // -- inputs
-    input logic SClk,
-    input logic SyncRst,
+    input logic SClkIn,
+    input logic AsyncRstIn,
+    input logic SyncRstIn,
     // Data interface
     // --inputs
-    input logic DataInVal,
+    input logic DataVldIn,
     input logic [DATA_W-1:0] DataIn,
     // --outputs
-    output logic DataOutVal,
+    output logic DataVldOut,
     output logic [DATA_W-1:0] DataOut
 );
 
-// External functions and tasks
-// Miscellaneous parameter task and functions
-
-// Configurable parameters
-
-// Internal parameters (localparams)
-
-// Module I/O
+// External functions and tasks includes
 
 // Internal parameters (localparams)
 
 // Registered outputs
 
-// Virtually registered output (combinational regs)
+// Combinational regs
 
 // Internal registers
-
-// Internal virtual registers (combinational regs)
 
 // Internal wires
 
@@ -45,18 +37,22 @@ module $COMPONENT_NAME #(
 // Modules instantiations
 
 // Module functionality
-
 always_comb begin
 
 end
 
-always_ff @(posedge SClk) begin
-    if (!SyncRst) begin
-        DataOutVal <= 0;
+always_ff @(posedge SClkIn or negedge AsyncRstIn) begin
+    if (!AsyncRstIn) begin
+        DataVldOut <= 0;
         DataOut <= 0;
     end else begin
-        DataOutVal <= DataInVal;
-        DataOut <= DataIn;
+        DataVldOut <= DataVldIn;
+        DataOut <= DataOut;
+
+        if (!SyncRstIn) begin
+            DataVldOut <= 0;
+            DataOut <= 0;
+        end    
     end
 end
 
