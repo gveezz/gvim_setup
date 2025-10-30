@@ -1518,14 +1518,17 @@ endfunction
 
 function! Replace(str)
     let l:cursor_pos = getpos(".")
-    
-    exec ":match Search /".a:str."/"
     call inputrestore()
-    let l:rplc = input("Replace: ".a:str." to: ")
+    let l:rplc = input("Replace: ".a:str." to: ", a:str)
     call inputsave()
-    let l:rplc = ReformatStr(l:rplc)
-    silent! exec ":%s/".a:str."/".l:rplc."/g"
-
+    if strlen(l:rplc) > 0
+        redraw
+        let l:rplc = ReformatStr(l:rplc)
+        silent! exec ":%s/".a:str."/".l:rplc."/g"
+        echohl StatusLineY
+        echo "Replaced ".a:str." to: ".a:str
+        echohl None
+    endif
     call setpos(".", cursor_pos)
 endfunction
 
