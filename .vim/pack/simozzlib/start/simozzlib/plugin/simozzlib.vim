@@ -1507,6 +1507,28 @@ function! JumpToPrevIndent()
    exec "normal! ".l:prevcol."A "
 endfunction
 
+function! ReformatStr(str) 
+   let l:str = substitute(a:str, '\/', '\\\/', 'g')
+   let l:str = substitute(l:str, '\[', '\\\[', 'g')
+   let l:str = substitute(l:str, '\]', '\\\]', 'g')
+   let l:str = substitute(l:str, '\n', '\\n', 'g')
+   let l:str = substitute(l:str, '\*', '\\*', 'g')
+   return l:str
+endfunction
+
+function! Replace(str)
+    let l:cursor_pos = getpos(".")
+    
+    exec ":match Search /".a:str."/"
+    call inputrestore()
+    let l:rplc = input("Replace: ".a:str." to: ")
+    call inputsave()
+    let l:rplc = ReformatStr(l:rplc)
+    silent! exec ":%s/".a:str."/".l:rplc."/g"
+
+    call setpos(".", cursor_pos)
+endfunction
+
 " highlight the visual selection after pressing enter.
 "snoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 " vnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
