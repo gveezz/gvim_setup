@@ -448,7 +448,7 @@ cnoremap <nowait> <C-S-f> :find **/
 " vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
 " cnoremap <silent> <nowait> <C-h> <C-c>
 
-inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>")<CR>
+inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>")<CR>gi
 nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>")<CR>
 vnoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'))<CR>
 cnoremap <silent> <nowait> <C-h> <C-c>
