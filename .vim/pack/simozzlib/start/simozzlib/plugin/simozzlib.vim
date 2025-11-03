@@ -1521,12 +1521,12 @@ function! Replace(str, mode)
     call inputrestore()
     let l:rplc = input("Replace: ".a:str." to: ", a:str)
     call inputsave()
-    if strlen(l:rplc) > 0
+    " if strlen(l:rplc) > 0
         redraw
         let l:rplc = ReformatStr(l:rplc)
         silent! exec ":%s/".a:str."/".l:rplc."/g | normal! g``"
         echo "Replaced ".a:str." to: ".a:str
-    endif
+    " endif
     if (a:mode == 'i' || a:mode == 's' || a:mode == 'S')
         startinsert
     endif
