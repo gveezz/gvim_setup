@@ -1516,20 +1516,21 @@ function! ReformatStr(str)
    return l:str
 endfunction
 
-function! Replace(str)
-    let l:cursor_pos = getpos(".")
+function! Replace(str, mode)
+    " let l:cursor_pos = getpos(".")
     call inputrestore()
     let l:rplc = input("Replace: ".a:str." to: ", a:str)
     call inputsave()
     if strlen(l:rplc) > 0
         redraw
         let l:rplc = ReformatStr(l:rplc)
-        silent! exec ":%s/".a:str."/".l:rplc."/g"
-        echohl StatusLineY
+        silent! exec ":%s/".a:str."/".l:rplc."/g | normal! g``"
         echo "Replaced ".a:str." to: ".a:str
-        echohl None
     endif
-    call setpos(".", cursor_pos)
+    if (a:mode == 'i' || a:mode == 's' || a:mode == 'S')
+        startinsert
+    endif
+    " call setpos(".", cursor_pos)
 endfunction
 
 " highlight the visual selection after pressing enter.

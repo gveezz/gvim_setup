@@ -26,7 +26,7 @@ let g:vimfm_force_delete = 1
 let g:vimfm_show_hidden_files = 1
 let g:vimfm_linkid_str = '>'
 
-silent! helptags ALL
+helptags ALL
 
 set modelines=0
 set nocompatible  
@@ -448,9 +448,10 @@ cnoremap <nowait> <C-S-f> :find **/
 " vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
 " cnoremap <silent> <nowait> <C-h> <C-c>
 
-inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>")<CR>gi
-nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>")<CR>
-vnoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'))<CR>
+inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>", 'i')<CR>
+nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>", 'n')<CR>
+xnoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'), 'v')<CR>
+snoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'), 's')<CR>
 cnoremap <silent> <nowait> <C-h> <C-c>
 
 inoremap <silent> <nowait> <C-M-h> <C-o>:call setreg('/', '')<CR>
