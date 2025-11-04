@@ -443,15 +443,15 @@ nnoremap <nowait> <C-S-f> :find **/
 vnoremap <nowait> <C-S-f> <Esc>:find **/
 cnoremap <nowait> <C-S-f> :find **/
 
-" inoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r><C-w>/
+" inoremap <nowait> <C-h> <C-o>:%s/<C-r><C-w>/
 " nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
 " vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
 " cnoremap <silent> <nowait> <C-h> <C-c>
 
-inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>", 'i')<CR>
-nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>", 'n')<CR>
-xnoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'), 'v')<CR>
-snoremap <nowait> <C-h> <Esc><C-c>:call Replace(getreg('*'), 's')<CR>
+inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>", 1)<CR>
+nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>")<CR>
+xnoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
+snoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
 cnoremap <silent> <nowait> <C-h> <C-c>
 
 inoremap <silent> <nowait> <C-M-h> <C-o>:call setreg('/', '')<CR>

@@ -1516,21 +1516,39 @@ function! ReformatStr(str)
    return l:str
 endfunction
 
-function! Replace(str, mode)
-    " let l:cursor_pos = getpos(".")
-    call inputrestore()
-    let l:rplc = input("Replace: ".a:str." to: ", a:str)
+function! Replace(str, iret)
     call inputsave()
-    " if strlen(l:rplc) > 0
-        redraw
-        let l:rplc = ReformatStr(l:rplc)
-        silent! exec ":%s/".a:str."/".l:rplc."/g | normal! g``"
-        echo "Replaced ".a:str." to: ".a:str
-    " endif
-    if (a:mode == 'i' || a:mode == 's' || a:mode == 'S')
+    let l:rplc = input("Replace: ".a:str." to: ", a:str)
+    call inputrestore()
+    redraw
+    let l:rplc = ReformatStr(l:rplc)
+    silent! exec ":%s/".a:str."/".l:rplc."/g | normal! g``"
+    echo "Replaced ".a:str." to: ".l:rplc
+    
+    if (a:iret)
         startinsert
     endif
-    " call setpos(".", cursor_pos)
+endfunction
+
+function! CmdCrHandle() 
+  if getcmdtype() == '/'
+        return "\<CR>zz"
+  endif
+
+  let l:substitutions = []
+  call add(l:substitutions, ['\C\v^\%(s%[substitution])>([^|]*)', "\\0 | normal! g``"])
+  let g:substitutions = l:substitutions
+
+  let l:command = getcmdline()
+  for l:substitution in l:substitutions
+    if matchstr(l:command, l:substitution[0]) != ''
+      let l:command = substitute(l:command, l:substitution[0], l:substitution[1], '')
+      return "\<End>\<C-u>" . l:command . "\<CR>"
+    endif
+  endfor
+   
+  return "\<CR>" 
+    
 endfunction
 
 " highlight the visual selection after pressing enter.

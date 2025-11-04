@@ -8,21 +8,24 @@ module $COMPONENT_NAME # (
 );
 
 // External functions and tasks
-// Miscellaneous parameter task and functions
 
-// Internal parameters (localparams)
+// Localparams
+
+// Specparams
 
 // Registered outputs
 
-// Virtually registered output (combinational regs)
+// Internal combinational regs
 
 // Internal registers
-
-// Internal virtual registers (combinational regs)
 
 // Internal wires
 
 // Wires assignments
+
+// Logic
+
+// Real
 
 // Modules instantiations
 
