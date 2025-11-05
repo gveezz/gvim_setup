@@ -243,6 +243,13 @@ snoremap <silent> <nowait> <C-\> \
 vnoremap <silent> <nowait> <C-\> \
 cnoremap <nowait> <C-\> \
 
+inoremap <expr> <silent> <nowait> <Down> pumvisible() ? "<Down>" : "<C-o>gj"
+inoremap <expr> <silent> <nowait> <Up> pumvisible() ? "<Up>" : "<C-o>gk"
+nnoremap <silent> <nowait> j gj
+nnoremap <silent> <nowait> <Down> gj
+nnoremap <silent> <nowait> k gk
+nnoremap <silent> <nowait> <Up> gk
+
 "inoremap <silent> <nowait> <expr> <Backspace> getline('.')[col('.')-2] == '\s\+' ? "<Backspace><Backspace><Backspace>" : "<Backspace>"
 
 inoremap <silent> <nowait> <C-ScrollWheelUp> <C-o>:call LargerFont()<CR>
