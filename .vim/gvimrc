@@ -225,7 +225,7 @@ augroup Vim
    autocmd CmdlineLeavePre * echon ''
    " autocmd WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
 
-
+    autocmd CmdlineLeavePre * if getcmdtype() == ':' && getcmdline()[0:1] == '%s' | call setcmdline(getcmdline().' | normal! g``') | end
 augroup END
 
 augroup AutoFoldColumn
@@ -450,16 +450,16 @@ nnoremap <nowait> <C-S-f> :find **/
 vnoremap <nowait> <C-S-f> <Esc>:find **/
 cnoremap <nowait> <C-S-f> :find **/
 
-" inoremap <nowait> <C-h> <C-o>:%s/<C-r><C-w>/
-" nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
-" vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
-" cnoremap <silent> <nowait> <C-h> <C-c>
-
-inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>", 1)<CR>
-nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>")<CR>
-xnoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
-snoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
+inoremap <nowait> <C-h> <C-o>:%s/<C-r><C-w>/
+nnoremap <nowait> <C-h> :%s/<C-r><C-w>/
+vnoremap <nowait> <C-h> <Esc><C-c>:%s/<C-r>=VSearchStrSub()<CR>/
 cnoremap <silent> <nowait> <C-h> <C-c>
+
+" inoremap <nowait> <C-h> <C-o>:call Replace("<C-r><C-w>", 1)<CR>
+" nnoremap <nowait> <C-h> :call Replace("<C-r><C-w>")<CR>
+" xnoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
+" snoremap <nowait> <C-h> <C-c>:call Replace(getreg('*'), 0)<CR>
+" cnoremap <silent> <nowait> <C-h> <C-c>
 
 inoremap <silent> <nowait> <C-M-h> <C-o>:call setreg('/', '')<CR>
 nnoremap <silent> <nowait> <C-M-h> :call setreg('/', '')<CR>
