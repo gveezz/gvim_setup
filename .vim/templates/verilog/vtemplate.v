@@ -1,4 +1,6 @@
-`default_nettype none
+`ifdef DEF_NET_NONE
+    `default_nettype none
+`endif 
 
 // Headers include
 
