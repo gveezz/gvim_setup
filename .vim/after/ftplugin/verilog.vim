@@ -200,7 +200,7 @@ endfunction
 function! FormatIoInstance(fline, lline) range
    " insert a dot at the beginning of IOs
    " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\|/normal! I."
-   silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\//s///g"
+   " silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\//s///g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//g/parameter /s/ = /(/g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//g/parameter .*,$/s/,$/),/g"
    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|,/g/parameter /normal! A)"
@@ -211,7 +211,8 @@ function! FormatIoInstance(fline, lline) range
    "silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\&(),/s/,$/( ),/g"
    silent! exec ":".a:lline."v/\\\/\\\/\\|,/normal! A( )"
    "silent! exec ":".a:lline."s/,//g"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\./ {'lm':0,'rm':0}"
+   echo ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\./ {'lm':0,'rm':0}"
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
    " close above /)
 endfunction
 
