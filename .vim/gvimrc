@@ -222,10 +222,13 @@ augroup Vim
    " Trigger norelative number when leaving visual mode
    autocmd ModeChanged [nvV\x16]*:* let &l:rnu = mode() =~# '^[nvV\x16]'
    autocmd ModeChanged *:[nvV\x16]* let &l:rnu = mode() =~# '^[nvV\x16]'
-   autocmd CmdlineLeavePre * echon ''
    " autocmd WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
-
-    autocmd CmdlineLeavePre * if getcmdtype() == ':' && getcmdline()[0:1] == '%s' | call setcmdline(getcmdline().' | normal! g``') | end
+   autocmd CmdlineLeavePre * if char2nr(v:char) == 13 && 
+                             \ getcmdtype() == ':' && 
+                             \ getcmdline()[0:1] == '%s' && 
+                             \ stridx(getcmdline(), ' | normal! g``') == -1 | 
+                             \ call setcmdline(getcmdline().' | normal! g``') | end
+   autocmd CmdwinLeave * call substitute(@:, ' | normal! g``', '', 'g')
 augroup END
 
 augroup AutoFoldColumn

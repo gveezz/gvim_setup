@@ -42,6 +42,7 @@ input
 integer
 join
 large
+localparam
 macromodule
 medium
 module

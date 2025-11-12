@@ -200,15 +200,18 @@ endfunction
 function! FormatIoInstance(fline, lline) range
    " insert a dot at the beginning of IOs
    " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\|/normal! I."
-   silent! exec ":"a:lline."v/^\\\s\\+\\\/\\\//s///g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/input \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
-   silent! exec ":".a:fline.",".a:lline."v/\\\/\\\//normal! I."
-   silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/,/(),/g"
+   silent! exec ":".a:lline."v/^\\\s\\+\\\/\\\//s///g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//g/parameter /s/ = /(/g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//g/parameter .*,$/s/,$/),/g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|,/g/parameter /normal! A)"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/input \\|parameter \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
+   silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|).*(/normal! I."
+   silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\/\\|(\\|)/s/\\\s\\\+$//g"
+   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|(\\|)/s/,/(),/g"
    "silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\&(),/s/,$/( ),/g"
-   silent! exec ":".a:lline."v/\\\/\\\/\|,/normal! A( )"
+   silent! exec ":".a:lline."v/\\\/\\\/\\|,/normal! A( )"
    "silent! exec ":".a:lline."s/,//g"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0}"
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\./ {'lm':0,'rm':0}"
    " close above /)
 endfunction
 
