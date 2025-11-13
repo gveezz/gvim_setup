@@ -140,9 +140,12 @@ function! AlignParams(fline, lline) range
 endfunction
 
 function! AlignIoInstance(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0 }"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\s\\+)/)/g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s\+$//g"
+   " silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0 }"
+   " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\s\\+)/)/g"
+   " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s\+$//g"
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /\./ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
+   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
+   
 endfunction
 
 function! AutoAlignIoInstance()
@@ -211,7 +214,7 @@ function! FormatIoInstance(fline, lline) range
    "silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\&(),/s/,$/( ),/g"
    silent! exec ":".a:lline."v/\\\/\\\/\\|,/normal! A( )"
    "silent! exec ":".a:lline."s/,//g"
-   echo ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\./ {'lm':0,'rm':0}"
+   " echo ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\./ {'lm':0,'rm':0}"
    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
    " close above /)
 endfunction

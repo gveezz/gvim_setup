@@ -1445,14 +1445,12 @@ function! StrSub(astr)
    return l:str
 endfunction
 
-function! VSearchStrSub()
-   " echo "0 Str is: ".getreg('*') | 2sleep
-   let l:srchstr = substitute(@*, '\/', '\\\/', 'g')
+function! AdjStr(reg)
+   let l:srchstr = substitute(getreg(a:reg), '\/', '\\\/', 'g')
    let l:srchstr = substitute(l:srchstr, '\[', '\\\[', 'g')
    let l:srchstr = substitute(l:srchstr, '\]', '\\\]', 'g')
    let l:srchstr = substitute(l:srchstr, '\n', '\\n', 'g')
    let l:srchstr = substitute(l:srchstr, '\*', '\\*', 'g')
-   " echo "1 Str is: ".getreg('*') | 2sleep
    return l:srchstr
 endfunction
 
