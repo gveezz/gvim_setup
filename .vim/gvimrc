@@ -155,7 +155,7 @@ set foldnestmax=20
 set foldcolumn=0
 set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:\ ,diff:-
 
-set diffopt=internal,filler,closeoff
+set diffopt=internal,filler,closeoff,vertical
 
 " set undodir=/tmp/
 " set undofile
@@ -240,6 +240,10 @@ nnoremap <silent> <nowait> <C-\> \
 snoremap <silent> <nowait> <C-\> \
 vnoremap <silent> <nowait> <C-\> \
 cnoremap <nowait> <C-\> \
+
+snoremap <silent> <nowait> <kPlus> i
+snoremap <silent> <nowait> <kMinus> <Esc>-
+
 
 inoremap <expr> <silent> <nowait> <Down> pumvisible() ? "<Down>" : "<C-o>gj"
 inoremap <expr> <silent> <nowait> <Up> pumvisible() ? "<Up>" : "<C-o>gk"
@@ -480,7 +484,8 @@ vnoremap <silent> <nowait> <C-c> "+ygv
 inoremap <nowait> <C-v> <C-r><C-o>+
 nnoremap <nowait> <C-v> i<C-r><C-o>+<Esc>
 " vnoremap <nowait> <C-v> <C-r><C-o>+
-cnoremap <nowait> <C-v> <C-r>=AdjStr('+')<CR>
+cnoremap <nowait> <C-v> <C-r>+
+cnoremap <nowait> <C-S-v> <C-r>=AdjStr('+')<CR>
 
 vnoremap <silent> <nowait> <C-v> "+P
 
@@ -547,7 +552,7 @@ nnoremap <silent> <nowait> <MiddleMouse> <nop>
 vnoremap <silent> <nowait> <MiddleMouse> <nop>
 
 " M-s: select inner word
-inoremap <silent> <nowait> <M-s> <Esc>viw
+inoremap <silent> <nowait> <M-s> <Esc>viw<C-g>
 nnoremap <silent> <nowait> <M-s> viw
 xnoremap <silent> <nowait> <M-s> iw
 snoremap <silent> <nowait> <M-s> <C-g>iw<C-g>
