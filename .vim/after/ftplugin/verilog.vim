@@ -183,20 +183,19 @@ function! AppendSemicolon(fline, lline) range
 endfunction
 
 function! FormatIoInstance(fline, lline) range
-
     " Substitute = with ( when parameter is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter /s/ = /(/g"
-    " Substitute , with ), when parameter is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter .*,$/s/,$/),/g"
-    " Append ) when last parameter of the list is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|,\\|^$/g/parameter /normal! A)"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\\s\\\+\\|input \\\s\\\+\\|parameter \\\s\\\+\\|integer \\\s\\\+\\|wire \\\s\\\+\\|output \\\s\\\+\\|reg \\\s\\\+\\|logic \\\s\\\+\\|\\[.*\\]\\\s\\\+ //g"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\|input \\|parameter \\|integer \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
-    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|).*(\\|);\\|#(\\|^$/normal! I."
-    silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/\\\s\\\+$//g"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/,/(),/g"
-    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|#(\\|(.*)\\|);\\|).*(\\|^$/normal! A()"
-    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter /s/ = /(/g"
+    " Substitute , with ), when parameter is found
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter .*,$/s/,$/),/g"
+    " Append ) when last parameter of the list is found
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|,\\|^$/g/parameter /normal! A)"
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\\s\\\+\\|input \\\s\\\+\\|parameter \\\s\\\+\\|integer \\\s\\\+\\|wire \\\s\\\+\\|output \\\s\\\+\\|reg \\\s\\\+\\|logic \\\s\\\+\\|\\[.*\\]\\\s\\\+ //g"
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\|input \\|parameter \\|integer \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
+    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|).*(\\|);\\|#(\\|^$/normal! I."
+    silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/\\\s\\\+$//g"
+    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/,/(),/g"
+    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|#(\\|(.*)\\|);\\|).*(\\|^$/normal! A()"
+    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
     " close above /)
 endfunction
 
