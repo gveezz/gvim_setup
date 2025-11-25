@@ -1,7 +1,7 @@
 " setlocal colorcolumn=80
 setlocal wrap
 " setlocal comments="/*,\/\/"
-setlocal formatoptions=joqmtcrn
+setlocal formatoptions=joqmtcn
 setlocal wrapmargin=0
 setlocal textwidth=0
 " setlocal linebreak
