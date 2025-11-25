@@ -16,13 +16,3 @@ setlocal cinwords+="begin,end,;,#"
 setlocal indentkeys-=0#
 " setlocal smartindent
 " setlocal formatoptions-=cro
-
-inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance(line("'<"),line("'>"))<CR>
-
-function! FormatIoInstance(fline, lline) range
-    " Substitute = with ( when parameter is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//g/\\\a\\\s\\+\\\/\\\//|normal! f/y$d$O\<C-c>P^>>"
-    " close above /)
-endfunction
