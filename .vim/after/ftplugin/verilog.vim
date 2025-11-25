@@ -23,62 +23,40 @@ let b:verilog_indent_modules=1
 " inoremap <expr> <buffer> <silent> <nowait> <CR> pumvisible() ? "<C-y>" : substitute(getline('.'), '\s', '', 'g')[0] == '.' ? "<CR><C-o>:call  AutoAlignIoInstance()<CR>" : "<CR>"
 
 inoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddLineComment()<CR><End>
-snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-c> :call AddMultiLineComment(line("'<"),line("'>"))<CR>
+snoremap <buffer> <silent> <nowait> <M-c> <C-o>:call AddMultiLineComment()<CR>
+xnoremap <buffer> <silent> <nowait> <M-c> :call AddMultiLineComment()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-a> <C-o>:call PromptAlign(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call PromptAlign(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-a> :call PromptAlign(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-a> <C-o>:call PromptAlign()<CR>
+snoremap <buffer> <silent> <nowait> <M-a> <C-o>:call PromptAlign()<CR>
+xnoremap <buffer> <silent> <nowait> <M-a> :call PromptAlign()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-.> :call InsertDot(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot()<CR>
+snoremap <buffer> <silent> <nowait> <M-.> <C-o>:call InsertDot()<CR>
+xnoremap <buffer> <silent> <nowait> <M-.> :call InsertDot()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-,> :call AppendComma(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma()<CR>
+snoremap <buffer> <silent> <nowait> <M-,> <C-o>:call AppendComma()<CR>
+xnoremap <buffer> <silent> <nowait> <M-,> :call AppendComma()<CR>
 
-" inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("."),line("."))<CR>
-" snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
-" xnoremap <buffer> <silent> <nowait> <M-s> :call RplcSemicolonToDot(line("'<"),line("'>"))<CR>
+" inoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot()<CR>
+" snoremap <buffer> <silent> <nowait> <M-s> <C-o>:call RplcSemicolonToDot()<CR>
+" xnoremap <buffer> <silent> <nowait> <M-s> :call RplcSemicolonToDot()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-;> :call AppendSemicolon(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon()<CR>
+snoremap <buffer> <silent> <nowait> <M-;> <C-o>:call AppendSemicolon()<CR>
+xnoremap <buffer> <silent> <nowait> <M-;> :call AppendSemicolon()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance()<CR>
+snoremap <buffer> <silent> <nowait> <M-8> <C-o>:call FormatIoInstance()<CR>
+xnoremap <buffer> <silent> <nowait> <M-8> :call FormatIoInstance()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-9> :call CloseIoInstance(line("'<"),line("'>"))<CR>
+inoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance()<CR>
+snoremap <buffer> <silent> <nowait> <M-9> <C-o>:call CloseIoInstance()<CR>
+xnoremap <buffer> <silent> <nowait> <M-9> :call CloseIoInstance()<CR>
 
-inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("."),line("."))<CR>
-snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment(line("'<"),line("'>"))<CR>
-xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment(line("'<"),line("'>"))<CR>
-
-" inoremap <expr> <silent> <nowait> , HasIODeclaration() ? ",<Space>//<Space>COMMENT<C-S-Left>" : ","
-" inoremap <expr> <silent> <nowait> ; HasDeclaration() ? ";<Space>//<Space>COMMENT<C-S-Left>" : ";"
-
-command! -nargs=0 AddLineComment call AddLineComment()
-command! -nargs=0 AddMultiLineCommentI call AddMultiLineComment(line("."),line('.'))
-command! -nargs=0 AddMultiLineCommentV call AddMultiLineComment(line("'<"),line("'>"))
-command! -nargs=0 PromptAlignV call PromptAlign(line("'<"),line("'>"))
-
-command!-nargs=0 AlignAssignmentV call AlignAssignment(line("'<"),line("'>"))
-command!-nargs=0 VAlignCommentV call VAlignComment(line("'<"),line("'>"))
-command!-nargs=0 AlignCommentV call AlignComment(line("'<"),line("'>"))
-command!-nargs=0 AlignDeclarationsV call AlignDeclarations(line("'<"),line("'>"))
-command!-nargs=0 AlignParamsV call AlignParams(line("'<"),line("'>"))
-command!-nargs=0 AlignIoInstanceV call AlignIoInstance(line("'<"),line("'>"))
-command!-nargs=0 AutoAlignIoInstanceV call AutoAlignIoInstance(line("'<"),line("'>"))
-command!-nargs=0 RplcSemicolonToDotV call RplcSemicolonToDot(line("'<"),line("'>"))
-command!-nargs=0 InsertDotV call InsertDot(line("'<"),line("'>"))
-command!-nargs=0 AppendCommaV call AppendComma(line("'<"),line("'>"))
-command!-nargs=0 AppendSemicolonV call AppendSemicolon(line("'<"),line("'>"))
-command!-nargs=0 FormatIoInstanceV call FormatIoInstance(line("'<"),line("'>"))
-command!-nargs=0 MultiLineCommentV call MultiLineComment(line("'<"),line("'>"))
+inoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
+snoremap <buffer> <silent> <nowait> <M-j> <C-o>:call MultiLineComment()<CR>
+xnoremap <buffer> <silent> <nowait> <M-j> :call MultiLineComment()<CR>
 
 function! AddLineComment()
    if len(getline('.')) > 0
@@ -88,63 +66,60 @@ function! AddLineComment()
    endif
 endfunction
 
-function! AddMultiLineComment(fline, lline) range
+function! AddMultiLineComment() range
 
-   silent! exec ":".a:fline.",".a:lline."v/\\/\\//s/$/ \\/\\/ /g"
-   " silent! exec ":".a:fline.",".a:lline."v/^\\s\\+\\/\\/EasyAlign /\\s\\/\\/ / {'lm':0,'rm':0}"
-   " silent! exec ":".a:fline.",".a:lline."g/\\/\\//s/\\/\\/$/\\/\\/ /g"
+   silent! exec ":".a:firstline.",".a:lastline."v/\\/\\//s/$/ \\/\\/ /g"
+   " silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/EasyAlign /\\s\\/\\/ / {'lm':0,'rm':0}"
+   " silent! exec ":".a:firstline.",".a:lastline."g/\\/\\//s/\\/\\/$/\\/\\/ /g"
 
 endfunction
 
 " Pending fix
-function! PromptAlign(fline, lline) range
+function! PromptAlign() range
    call inputrestore()
    let l:sel = input("Select alignment: [a]ssignment -  [c]omment - [d]eclaration - [p]arams - [io] instance: ")
    call inputsave()
 
    "echom "'<,'>= ".line("'<")." ".line("'>") | 2sleep
    if l:sel == 'a'
-      call AlignAssignment(a:fline, a:lline)
+      call AlignAssignment()
    elseif l:sel == 'c'
-      call AlignComment(a:fline, a:lline)
+      call AlignComment()
    elseif l:sel == 'd'
-      call AlignDeclarations(a:fline, a:lline)
-      call AlignComment(a:fline, a:lline)
+      call AlignDeclarations()
+      call AlignComment()
    elseif l:sel == 'p'
-      call AlignParams(a:fline, a:lline)
+      call AlignParams()
    elseif l:sel == 'io'
-      call AlignIoInstance(a:fline, a:lline)
+      call AlignIoInstance()
    endif
 endfunction
 
-function! AlignAssignment(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /=/ {'lm':1,'rm':1}"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /<=/ {'lm':1,'rm':1}"
-   silent! exec ":".a:fline.",".a:lline."s/\\\s=/=/g"
+function! AlignAssignment() range
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /=/ {'lm':1,'rm':1}"
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /<=/ {'lm':1,'rm':1}"
+   silent! exec ":".a:firstline.",".a:lastline."s/\\\s=/=/g"
 endfunction
 
-function! AlignComment(fline, lline) 
-   silent! exec ":".a:fline.",".a:lline."EasyAlign \\  {'f': 'v/^\\s\\+\\/\\//\\s\\/\\//'}"
+function! AlignComment() 
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /\/\//  'v/^\\s\\+\\/\\//"
 endfunction
 
-function! AlignDeclarations(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."s# \+# #g"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /\s\a/ {'lm':0,'rm':0}"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /\\gn\\\// {'lm':0,'rm':0}"
+function! AlignDeclarations() range
+   silent! exec ":".a:firstline.",".a:lastline."s# \+# #g"
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /\s\a/ {'lm':0,'rm':0}"
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /\\gn\\\// {'lm':0,'rm':0}"
 endfunction
 
-function! AlignParams(fline, lline) range
-  silent! exec ":".a:fline.",".a:lline."s# \+# #g"
-  silent! exec ":".a:fline.",".a:lline."EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}"
-  silent! exec ":".a:fline.",".a:lline."EasyAlign /=/ {'lm':1,'rm':1}"
+function! AlignParams() range
+  silent! exec ":".a:firstline.",".a:lastline."s# \+# #g"
+  silent! exec ":".a:firstline.",".a:lastline."EasyAlign /\s[A-Z]/ {'lm':0,'rm':0}"
+  silent! exec ":".a:firstline.",".a:lastline."EasyAlign /=/ {'lm':1,'rm':1}"
 endfunction
 
-function! AlignIoInstance(fline, lline) range
-   " silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ {'lm':0,'rm':0 }"
-   " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\s\\+)/)/g"
-   " silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\s\+$//g"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /\./ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
-   silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
+function! AlignIoInstance() range
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /\./ g/\\s\\+\\./ {'lm':0,'rm':0}"
+   silent! exec ":".a:firstline.",".a:lastline."EasyAlign /(/ g/\\s\\+\\./ {'lm':0,'rm':0}"
    
 endfunction
 
@@ -164,49 +139,49 @@ function! AutoAlignIoInstance()
    call cursor(l:cline, col('$'))
 endfunction
 
-function! RplcSemicolonToDot(fline, lline)
-   silent! exec ":".a:fline.",".a:lline."s/,/;/g"
+function! RplcSemicolonToDot()
+   silent! exec ":".a:firstline.",".a:lastline."s/,/;/g"
 endfunction
 
-function! InsertDot(fline, lline) range
-   exec ":".a:fline.",".a:lline."v/^\\gn^\\\//normal! I."
+function! InsertDot() range
+   exec ":".a:firstline.",".a:lastline."v/^\\gn^\\\//normal! I."
 endfunction
 
-function! AppendComma(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\//normal! A,"
+function! AppendComma() range
+   silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\//s/\\\s\\\+$//g"
+   silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\//normal! A,"
 endfunction
 
-function! AppendSemicolon(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//s/\\\s\\\+$//g"
-   silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\gn\\\//normal! A;"
+function! AppendSemicolon() range
+   silent! exec ":".a:firstline.",".a:lastline."v/^\\\s\\+\\gn\\\//s/\\\s\\\+$//g"
+   silent! exec ":".a:firstline.",".a:lastline."v/^\\\s\\+\\gn\\\//normal! A;"
 endfunction
 
-function! FormatIoInstance(fline, lline) range
+function! FormatIoInstance() range
+    echo a:firstline.",".a:lastline 
     " Substitute = with ( when parameter is found
-    silent! exec ":".a:fline.",".a:lline."g/,.*\\\/\\\//|normal! f/y$d$O\<C-c>P^>>"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter /s/ = /(/g"
-    " Substitute , with ), when parameter is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter .*,$/s/,$/),/g"
-    " Append ) when last parameter of the list is found
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|,\\|^$/g/parameter /normal! A)"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\\s\\\+\\|input \\\s\\\+\\|parameter \\\s\\\+\\|integer \\\s\\\+\\|wire \\\s\\\+\\|output \\\s\\\+\\|reg \\\s\\\+\\|logic \\\s\\\+\\|\\[.*\\]\\\s\\\+ //g"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/s/module \\|input \\|parameter \\|integer \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
-    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|).*(\\|);\\|#(\\|^$/normal! I."
-    silent! exec ":".a:fline.",".a:lline."v/\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/\\\s\\\+$//g"
-    silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|(\\|)\\|^$/s/,/(),/g"
-    silent! exec ":".a:fline.",".a:lline."v/\\\/\\\/\\|#(\\|(.*)\\|);\\|).*(\\|^$/normal! A()"
-    silent! exec ":".a:fline.",".a:lline."EasyAlign /(/ g/\\\s\\+\\\./ {'lm':0,'rm':0}"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/parameter /s/ = /(/g"
+    " Substitute , with ), when paramater is found
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/parameter .*,$/s/,$/),/g"
+    " Append ) when last parameter ofathe list is found
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|,\\|^$/g/parameter /normal! A)"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\\s\\+\\/\\/\\|^$/s/module \\s\\+\\|input \\s\\+\\|parameter \\s\\+\\|integer \\s\\+\\|wire \\s\\+\\|output \\s\\+\\|reg \\s\\+\\|logic \\s\\+\\|\\[.*\\]\\s\\+ //g"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/s/module \\|input \\|parameter \\|integer \\|wire \\|output \\|reg \\|logic \\|\\[.*\\] //g"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|).*(\\|);\\|#(\\|^$/normal! I."
+    silent! exec ":".a:firstline.",".a:lastline."v/\\s\\+\\/\\/\\|(\\|)\\|^$/s/\\s\\+$//g"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|(\\|)\\|^$/s/,/(),/g"
+    silent! exec ":".a:firstline.",".a:lastline."v/\\/\\/\\|#(\\|(.*)\\|);\\|).*(\\|^$/normal! A()"
+    silent! exec ":".a:firstline.",".a:lastline."EasyAlign /(/ g/\\s\\+\\./ {'lm':0,'rm':0}"
     " close above /)
 endfunction
 
-function! CloseIoInstance(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."s/\\\s)/)/g"
-   silent! exec ":".a:fline.",".a:lline."s/\\\s\\\+)/)/g"
+function! CloseIoInstance() range
+   silent! exec ":".a:firstline.",".a:lastline."s/\\s)/)/g"
+   silent! exec ":".a:firstline.",".a:lastline."s/\\s\\\+)/)/g"
 endfunction
 
-function! MultiLineComment(fline, lline) range
-   silent! exec ":".a:fline.",".a:lline."normal! I// "
+function! MultiLineComment() range
+   silent! exec ":".a:firstline.",".a:lastline."normal! I// "
 endfunction
 
 function! HasWireRegDeclaration()

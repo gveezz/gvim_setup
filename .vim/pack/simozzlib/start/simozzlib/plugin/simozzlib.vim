@@ -1,3 +1,7 @@
+function! TestRange() range
+    echo a:firstline.' - '.a:lastline
+endfunction
+
 function! ReloadVimRc ()
    if has('gui') && filereadable($MYGVIMRC)
       silent! source $MYGVIMRC
