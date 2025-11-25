@@ -184,6 +184,7 @@ endfunction
 
 function! FormatIoInstance(fline, lline) range
     " Substitute = with ( when parameter is found
+    silent! exec ":".a:fline.",".a:lline."g/,.*\\\/\\\//|normal! f/y$d$O\<C-c>P^>>"
     silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter /s/ = /(/g"
     " Substitute , with ), when parameter is found
     silent! exec ":".a:fline.",".a:lline."v/^\\\s\\+\\\/\\\/\\|^$/g/parameter .*,$/s/,$/),/g"

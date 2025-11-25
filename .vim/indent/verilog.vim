@@ -160,7 +160,11 @@ function! GetVerilogIndent()
 
         " Indent after list opener
     elseif last_line =~ list_open
-
+         
+        if last_line =~ "^\$"
+            exec "normal! dd"
+        endif 
+        
         if last_line !~ list_open . '.*' . list_close
             let ind = ind + offset
             if vverb | echo vverb_str "Indent after a list opener." | endif
