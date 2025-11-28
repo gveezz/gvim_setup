@@ -160,6 +160,8 @@ endfunction
 function! FormatIoInstance() range
     echo a:firstline.",".a:lastline 
     " Substitute = with ( when parameter is found
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/).*\\/\\*/s/).*\\/\\*/)/g"
+    silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/\\*\\/.*(/s/\\*\\/.*(/(/g"
     silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/parameter /s/ = /(/g"
     " Substitute , with ), when paramater is found
     silent! exec ":".a:firstline.",".a:lastline."v/^\\s\\+\\/\\/\\|^$/g/parameter .*,$/s/,$/),/g"

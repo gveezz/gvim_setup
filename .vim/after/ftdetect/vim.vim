@@ -1,1 +1,4 @@
-autocmd BufWritePost,BufNewFile,BufRead *.vim silent! set filetype=vim
+augroup Vim
+   autocmd!
+   autocmd FileType vim call SetIndentMarks() | call AddFtDict()
+augroup END

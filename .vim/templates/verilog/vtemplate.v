@@ -7,7 +7,7 @@
 module $COMPONENT_NAME #(
     // Configurable parameters
     parameter DATA_W = 8
-) (
+) /* i_$COMPONENT_NAME */ (
     // System interface
     // -- inputs
     input wire SClkIn,
