@@ -32,6 +32,8 @@ module $COMPONENT_NAME # (
 // Testbench functionality
 
 initial begin
+    $dumpfile ("$COMPONENT_NAME.vcd");
+    $dumpvars (0, $COMPONENT_NAME);
     #0 ; 
 end
 
