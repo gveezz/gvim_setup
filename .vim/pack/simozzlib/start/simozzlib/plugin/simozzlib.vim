@@ -1532,25 +1532,34 @@ function! Replace(str, iret)
     endif
 endfunction
 
-function! CmdCrHandle() 
-  if getcmdtype() == '/'
-        return "\<CR>zz"
-  endif
+" function! CmdCrHandle() 
+"   if getcmdtype() == '/'
+"         return "\<CR>zz"
+"   endif
+" 
+"   let l:substitutions = []
+"   call add(l:substitutions, ['\C\v^\%(s%[substitution])>([^|]*)', "\\0 | normal! g``"])
+"   let g:substitutions = l:substitutions
+" 
+"   let l:command = getcmdline()
+"   for l:substitution in l:substitutions
+"     if matchstr(l:command, l:substitution[0]) != ''
+"       let l:command = substitute(l:command, l:substitution[0], l:substitution[1], '')
+"       return "\<End>\<C-u>" . l:command . "\<CR>"
+"     endif
+"   endfor
+"    
+"   return "\<CR>" 
+"     
+" endfunction
 
-  let l:substitutions = []
-  call add(l:substitutions, ['\C\v^\%(s%[substitution])>([^|]*)', "\\0 | normal! g``"])
-  let g:substitutions = l:substitutions
-
-  let l:command = getcmdline()
-  for l:substitution in l:substitutions
-    if matchstr(l:command, l:substitution[0]) != ''
-      let l:command = substitute(l:command, l:substitution[0], l:substitution[1], '')
-      return "\<End>\<C-u>" . l:command . "\<CR>"
-    endif
-  endfor
-   
-  return "\<CR>" 
+function! SwapStr (a, b) range
+    let l:rand = string(rand())
+    let l:a_rnd = a:a."_".l:rand
     
+    silent! exec a:firstline.",".a:lastline."s/".a:a."/".l:a_rnd."/g"
+    silent! exec a:firstline.",".a:lastline."s/".a:b."/".a:a."/g"
+    silent! exec a:firstline.",".a:lastline."s/".l:a_rnd."/".a:b."/g"
 endfunction
 
 " highlight the visual selection after pressing enter.
@@ -1559,6 +1568,7 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 command! -nargs=1 ClearReg call setreg(<f-args>, "")
 command! -nargs=1 Diffsplit :vertical diffsplit <args>
+command! -range -nargs=+ SwapStr :<line1>,<line2>call SwapStr (<f-args>)
 " command! -nargs=2 MakePatch :call MakePatch(<f-args>)<CR>
 command! -nargs=+ HiSet call HighlightSet(<f-args>)
 command! -bang -nargs=0 InsDate :normal! i<C-r>=GetDate()<CR>
