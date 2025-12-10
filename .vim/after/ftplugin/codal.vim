@@ -16,3 +16,5 @@ setlocal cinwords+="begin,end,;,#"
 setlocal indentkeys-=0#
 " setlocal smartindent
 " setlocal formatoptions-=cro
+
+inoremap <silent> <nowait> <buffer> <expr> { stridx(getline('.'), 'case') != -1 ? "" : "{" 
