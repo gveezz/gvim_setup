@@ -1,6 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:bufnametag = 'vimfm//'
 
 function! s:map_default(mode, lhs, vimfm_command, sp_args) abort
   execute a:mode."map ".a:sp_args." ".a:lhs." <Plug>(vimfm-".a:vimfm_command.")"
@@ -45,22 +46,18 @@ function! s:set_up_default_mappings() abort
   " nmap <buffer> <silent> <Esc>      <Plug>(vimfm-quit)
 endfunction
 
-function! s:generate_unique_bufname(path) abort
+function! s:generate_unique_bufnr() abort
 
-  let bufname = ''
-  let index = 0
+    let index = 0
+    while 1
+        " Add index to avoid duplicated buffer name
+        if bufnr(index) < 0
+            break
+        endif
+        let index = index + 1
+    endwhile
 
-  while 1
-    " Add index to avoid duplicated buffer name
-    let bufname = fnamemodify(a:path, ':').'vimfm_'.index
-    if bufnr(bufname) < 0
-      break
-    endif
-
-    let index += 1
-  endwhile
-
-   return l:bufname
+    return l:index
 endfunction
 
 function! s:perform_auto_cd_if_needed(path) abort
@@ -91,7 +88,7 @@ endfunction
 function! vimfm#buffer#init(filer) abort
   " Give unique name to buffer to avoid unwanted sync
   " between different windows
-  execute 'silent keepalt file '.fnamemodify(a:filer.dir, ':.')
+  " execute 'silent keepalt file '.s:generate_unique_bufnr()
 
   if g:vimfm_use_default_mappings
     call s:set_up_default_mappings()
@@ -110,13 +107,13 @@ function! vimfm#buffer#init(filer) abort
 endfunction
 
 function! vimfm#buffer#extract_path_from_bufname(bufname) abort
-  let matches = matchlist(a:bufname, '^vimfm://\d\+/\(.*\)$')
-  return get(matches, 1, '')
+"   let matches = matchlist(a:bufname, s:bufnametag.'_\d')
+"   return get(matches, 1, '')
 endfunction
 
 function! vimfm#buffer#is_for_vimfm(bufnr) abort
   let bufname = bufname(a:bufnr)
-  return !empty(vimfm#buffer#extract_path_from_bufname(bufname))
+  " return !empty(vimfm#buffer#extract_path_from_bufname(bufname))
 endfunction
 
 function! vimfm#buffer#redraw() abort

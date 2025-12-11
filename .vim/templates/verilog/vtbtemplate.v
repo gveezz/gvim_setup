@@ -10,7 +10,7 @@ module $COMPONENT_NAME # (
 // External functions and tasks
 // Miscellaneous parameter task and functions
 
-// Internal parameters (localparams)
+// Localparams
 
 // Registered outputs
 

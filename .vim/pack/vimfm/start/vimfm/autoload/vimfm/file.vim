@@ -60,9 +60,7 @@ function! vimfm#file#create_items_from_dir(dir, includes_hidden_files) abort
     call extend(paths, hidden_paths)
   end
 
-  let items =  map(
-        \ copy(paths),
-        \ 'vimfm#item#from_path(v:val)')
+  let items = map(copy(paths), 'vimfm#item#from_path(v:val)')
   call sort(items, 'vimfm#sorter#default#compare')
 
   let index = 0

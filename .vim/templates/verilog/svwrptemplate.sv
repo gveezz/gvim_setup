@@ -24,7 +24,7 @@ module $COMPONENT_NAME #(
 
 // External functions and tasks includes
 
-// Internal parameters (localparams)
+// Localparams
 
 // Registered outputs
 
