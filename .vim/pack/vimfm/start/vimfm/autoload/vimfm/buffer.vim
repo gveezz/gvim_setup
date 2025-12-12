@@ -1,12 +1,11 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:bufnametag = 'vimfm//'
-
 function! s:map_default(mode, lhs, vimfm_command, sp_args) abort
   execute a:mode."map ".a:sp_args." ".a:lhs." <Plug>(vimfm-".a:vimfm_command.")"
 endfunction
 
+let s:bufnameid = ' v'
 
 function! s:set_up_default_mappings() abort
   call s:map_default('n', '<Esc>', 'returnto-buffer',   '<buffer> <silent>')
@@ -46,18 +45,18 @@ function! s:set_up_default_mappings() abort
   " nmap <buffer> <silent> <Esc>      <Plug>(vimfm-quit)
 endfunction
 
-function! s:generate_unique_bufnr() abort
+function! s:generate_unique_name(path) abort
 
-    let index = 0
-    while 1
-        " Add index to avoid duplicated buffer name
-        if bufnr(index) < 0
-            break
-        endif
-        let index = index + 1
-    endwhile
+    " let l:index = 0
+    " while 1
+    "     " Add index to avoid duplicated buffer name
+    "     if bufnr(l:index) < 0
+    "         break
+    "     endif
+    "     let l:index = l:index + 1
+    " endwhile
 
-    return l:index
+    return fnameescape(a:path.s:bufnameid.'#b'.bufnr().'#w'.winnr())
 endfunction
 
 function! s:perform_auto_cd_if_needed(path) abort
@@ -88,7 +87,7 @@ endfunction
 function! vimfm#buffer#init(filer) abort
   " Give unique name to buffer to avoid unwanted sync
   " between different windows
-  " execute 'silent keepalt file '.s:generate_unique_bufnr()
+  execute 'silent keepalt file '.s:generate_unique_name(a:filer.dir)
 
   if g:vimfm_use_default_mappings
     call s:set_up_default_mappings()
@@ -106,14 +105,14 @@ function! vimfm#buffer#init(filer) abort
   call s:perform_auto_cd_if_needed(a:filer.dir)
 endfunction
 
-function! vimfm#buffer#extract_path_from_bufname(bufname) abort
-"   let matches = matchlist(a:bufname, s:bufnametag.'_\d')
-"   return get(matches, 1, '')
+function! vimfm#buffer#extract_path_from_bufname(bufnr) abort
+   let matches = matchlist(a:bufnr, s:bufnameid.'#b\d#w\d')
+   return get(matches, 1, '')
 endfunction
 
 function! vimfm#buffer#is_for_vimfm(bufnr) abort
-  let bufname = bufname(a:bufnr)
-  " return !empty(vimfm#buffer#extract_path_from_bufname(bufname))
+  "let bufname = bufname(a:bufnr)
+  return !empty(vimfm#buffer#extract_path_from_bufname(a:bufnr))
 endfunction
 
 function! vimfm#buffer#redraw() abort
