@@ -28,8 +28,11 @@ cover
 covergroup
 coverpoint
 cross
+display
 dist
 do
+dumpfile
+dumpvar
 end
 endcase
 endchecker
@@ -73,12 +76,14 @@ logic
 longint
 matches
 modport
+monitor
 new
 nexttime 
 null
 package
 packed
 parameter
+plusargs
 priority
 program
 property
@@ -103,6 +108,7 @@ shortreal
 solve
 static
 string
+strobe
 strong
 struct
 super
@@ -110,6 +116,7 @@ sync_accept_on
 sync_reject_on
 tagged
 task
+test
 this
 throughout
 timeprecision

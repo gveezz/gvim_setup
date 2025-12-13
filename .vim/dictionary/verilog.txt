@@ -14,6 +14,7 @@ default
 default_nettype
 defparam
 disable
+display
 edge
 else
 end
@@ -46,6 +47,8 @@ localparam
 macromodule
 medium
 module
+monitor
+
 nand
 negedge
 nmos
@@ -79,6 +82,7 @@ scalared
 small
 specify
 specparam
+strobe
 strong0
 strong1
 supply0
