@@ -26,13 +26,11 @@ module $COMPONENT_NAME #(
 
 // Localparams
 
-// Registered outputs
+// Sequerntial logic
 
-// Combinational regs
+// Combinational logic
 
-// Internal registers
-
-// Internal wires
+// Wires
 
 // Wires assignments
 

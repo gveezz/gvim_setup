@@ -14,7 +14,7 @@ module $COMPONENT_NAME #(
     input wire AsyncRstIn,
     input wire SyncRstIn,
     // Data interface
-    // --inputs
+    // -- inputs
     input wire DataVldIn,
     input wire [DATA_W-1:0] DataIn,
     // --outputs
@@ -26,13 +26,11 @@ module $COMPONENT_NAME #(
 
 // Localparams
 
-// Registered outputs
+// Sequerntial logic
 
-// Combinational regs
+// Combinational logic
 
-// Internal registers
-
-// Internal wires
+// Wires
 
 // Wires assignments
 

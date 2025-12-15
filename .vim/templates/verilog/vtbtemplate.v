@@ -12,15 +12,11 @@ module $COMPONENT_NAME # (
 
 // Localparams
 
-// Registered outputs
+// Sequerntial logic
 
-// Virtually registered output (combinational regs)
+// Combinational logic
 
-// Internal registers
-
-// Internal virtual registers (combinational regs)
-
-// Internal wires
+// Wires
 
 // Wires assignments
 
@@ -32,6 +28,8 @@ initial begin
     $dumpfile ("$COMPONENT_NAME.vcd");
     $dumpvars (0, $COMPONENT_NAME);
     #0 ;
+
+    #1000 $finish();
 end
 
 endmodule 

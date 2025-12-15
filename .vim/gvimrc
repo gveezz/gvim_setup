@@ -27,12 +27,13 @@ let g:vimfm_show_hidden_files = 1
 let g:vimfm_linkid_str = '>'
 
 silent! helptags ALL
-
 set modelines=0
 set nocompatible  
 set viminfofile=NONE
 colorscheme simozz
 syntax enable
+syntax sync fromstart
+
 "set insertmode
 set magic
 set noautochdir

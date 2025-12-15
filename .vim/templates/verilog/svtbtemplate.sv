@@ -1,11 +1,7 @@
 `timescale 1ns/1ps
 // Headers include
 
-module $COMPONENT_NAME # (
-    // Configurable parameters
-) ( 
-
-);
+module $COMPONENT_NAME ();
 
 // External functions and tasks
 
@@ -13,19 +9,15 @@ module $COMPONENT_NAME # (
 
 // Specparams
 
-// Registered outputs
+// Sequerntial logic
 
-// Internal combinational regs
+// Combinational logic
 
-// Internal registers
-
-// Internal wires
+// Wires
 
 // Wires assignments
 
-// Logic
-
-// Real
+// Integers and Reals
 
 // Modules instantiations
 
@@ -34,7 +26,9 @@ module $COMPONENT_NAME # (
 initial begin
     $dumpfile ("$COMPONENT_NAME.vcd");
     $dumpvars (0, $COMPONENT_NAME);
-    #0 ; 
+    #0 ;
+
+    #1000 $finish();
 end
 
 endmodule
