@@ -294,10 +294,10 @@ function! vimfm#delete_selected() abort
 
   " pending setting (Y/n)
   let message = (len(items) == 1)
-        \ ? "Delete '".items[0].basename."' (y/N)? "
+        \ ? "Delete '".items[0].basename."' (Y/n)? "
         \ : "Delete ".len(items)." selected files (y/N)? "
   let yn = input(message)
-  if empty(yn) || yn ==? 'n'
+  if yn == 'n' || yn == 'N'
     call vimfm#util#echo('Cancelled.')
     return
   endif
