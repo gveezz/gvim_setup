@@ -1,8 +1,16 @@
+-- Libraries
+Library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Entity declaration
 entity $COMPONENT_NAME is
 
 end entity $COMPONENT_NAME;
 
+-- Architecture
 architecture TB of $COMPONENT_NAME is
+    -- Signals declaration
     signal clock  : std_logic := '0';
     signal reset  : std_logic := '1';
     signal and_in : std_logic_vector(1 downto 0) := (others => '0');
