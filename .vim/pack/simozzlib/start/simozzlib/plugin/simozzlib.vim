@@ -203,7 +203,7 @@ function! Indent()
 
 endfunction
 
-function! GuiSave() range
+function! GuiSave()
 
    if (&ft == 'nerdtree')
       call EchoYellowMsg("Hey dude, you're in nerdtree window...")
@@ -1531,27 +1531,6 @@ function! Replace(str, iret)
         startinsert
     endif
 endfunction
-
-" function! CmdCrHandle() 
-"   if getcmdtype() == '/'
-"         return "\<CR>zz"
-"   endif
-" 
-"   let l:substitutions = []
-"   call add(l:substitutions, ['\C\v^\%(s%[substitution])>([^|]*)', "\\0 | normal! g``"])
-"   let g:substitutions = l:substitutions
-" 
-"   let l:command = getcmdline()
-"   for l:substitution in l:substitutions
-"     if matchstr(l:command, l:substitution[0]) != ''
-"       let l:command = substitute(l:command, l:substitution[0], l:substitution[1], '')
-"       return "\<End>\<C-u>" . l:command . "\<CR>"
-"     endif
-"   endfor
-"    
-"   return "\<CR>" 
-"     
-" endfunction
 
 function! SwapStr (a, b) range
     let l:rand = string(rand())
