@@ -17,7 +17,7 @@ module $COMPONENT_NAME #(
     // --inputs
     input logic DataVldIn,
     input logic [DATA_W-1:0] DataIn,
-    // --outputs
+    // -- outputs
     output logic DataVldOut,
     output logic [DATA_W-1:0] DataOut
 );

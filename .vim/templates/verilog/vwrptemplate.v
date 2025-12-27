@@ -17,7 +17,7 @@ module $COMPONENT_NAME #(
     // --inputs
     input wire DataVldIn,
     input wire [DATA_W-1:0] DataIn,
-    // --outputs
+    // -- outputs
     output wire DataVldOut,
     output wire [DATA_W-1:0] DataOut
 );

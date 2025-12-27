@@ -48,7 +48,6 @@ macromodule
 medium
 module
 monitor
-
 nand
 negedge
 nmos
@@ -67,6 +66,7 @@ pull0
 pull1
 pulldown
 pullup
+random
 rcmos
 real
 realtime
@@ -100,6 +100,8 @@ tri1
 triand
 trior
 trireg
+urandom
+urandom_range
 vectored
 wait
 wand

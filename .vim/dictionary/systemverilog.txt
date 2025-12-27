@@ -92,6 +92,7 @@ pure
 rand
 randc
 randcase
+random
 randsequence
 ref
 reject_on
@@ -130,6 +131,8 @@ unique0
 until
 until_with
 untypted
+urandom
+urandom_range
 var
 virtual
 void
